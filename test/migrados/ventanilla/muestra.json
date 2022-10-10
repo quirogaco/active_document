@@ -1,0 +1,180 @@
+{
+'_created_at': '2021-03-19T10: 48: 40',
+ '_organization_code': 'ESAP',
+ '_unit_code': 'ESAP',
+ '_updated_at': '2021-03-19T10: 48: 40',
+ 'actividad_id_inicial': '99D493AE-CF59-11E1-B849-D4AE52680BDD',
+ 'actividad_inicial': '160.3 - 01 - REVISAR Y O ASIGNAR',
+ 'address': 'None',
+ 'anexos': 'SIN ANEXOS',
+ 'archivos_anexos': [
+        {'creado_en': '2021-03-19T10: 48: 41',
+                      'versiones': [
+                {'descripcion': 'CORREO',
+                                     'filetype': 'pdf',
+                                     'idFile': '94e48e2e-88ca-11eb-95f2-00155dcc0c40',
+                                     'ocr': 0,
+                                     'path': 'E:/IMAGENES\\2021\\03\\E-2021-008297_942cfe00-88ca-11eb-a13d-00155dcc0c40_v0001.pdf',
+                                     'version': 1
+                }
+            ]
+        }
+    ],
+ 'asunto': 'SOLICITUD DE INFORMACIÓN SOBRE EXAMEN DE ADMISIÓN ',
+ 'cargo': 'None',
+ 'ciudad_id': '5E815D0F-A4F3-11E1-823F-D4AE52680BDD',
+ 'ciudad_name': 'BOGOTÁ [BOGOTA D.C.
+    ] [COLOMBIA
+    ]',
+ 'contestado_con': 'None',
+ 'copia_funcionarios': [],
+ 'copia_grupos': [],
+ 'copia_terceros': [],
+ 'copiamasivo': 'COPIAS',
+ 'departamento_id': '7F3F85F0-A4DE-11E1-8C23-D4AE52680BDD',
+ 'departamento_name': 'BOGOTA D.C.',
+ 'dependencia_id_inicial': 'CACD82C0-C161-11E1-99CB-D4AE52680BDD',
+ 'dependencia_inicial': '160.3 - GRUPO DE REGISTRO Y CONTROL ACADEMICO',
+ 'destinatario': 'MARIA DE JESUS MARTINEZ FARIAS ',
+ 'email': 'MILAGROQUINTEROOLIVEROS@GMAIL.COM',
+ 'enviadopor': 'MILAGRO DE JESUS OLIVEROS QUINTERO',
+ 'escaneada': 'S',
+ 'estado_label': 'ACTIVO',
+ 'expedientes': [
+        {'carpeta_id': 'b4a63d4f-6588-11e6-96f5-00155dcc0c40',
+                  'carpeta_numero': '2',
+                  'expediente_id': 'ba664ecf-6568-11e6-b4b1-00155dcc0c40',
+                  'expediente_name': '160.3.00.00 - DOCUMENTOS DE APOYO '
+                                     '[DOCUMENTOS DE APOYO
+            ] [
+                160.3 - GRUPO DE '
+                                     'REGISTRO Y CONTROL ACADEMICO
+            ]',
+                  'expediente_trd': '160.3.00.00',
+                  'tipo_id': 'a582dd80-6568-11e6-b8da-00155dcc0c40',
+                  'tipo_name': 'COMUNICACIONES'
+        }
+    ],
+ 'fecha_documento': '2021-03-17T00: 00: 00',
+ 'fecha_radicado': '2021-03-19T10: 48: 40',
+ 'fecha_recorrido': '2021-03-19T00: 00: 00',
+ 'folios': 1,
+ 'id': '93b81c21-88ca-11eb-bfc4-00155dcc0c40',
+ 'impreso': 0,
+ 'instancias': [
+        {'descripcion': 'Generado Por Radicado : E-2021-008297',
+                 'proceso_id': '8206FAC0-CF59-11E1-A02F-D4AE52680BDD',
+                 'proceso_name': '160.3 - GRUPO DE REGISTRO Y CONTROL '
+                                 'ACADEMICO',
+                 'tareas': [
+                {'actividad': '99D493AE-CF59-11E1-B849-D4AE52680BDD',
+                             'actividad_name': '160.3 - 01 - REVISAR Y O '
+                                               'ASIGNAR',
+                             'alertado': 'NO',
+                             'comentario': '[!!! DOCUMENTO FINALIZADO  '
+                                           '2021-04-01 21: 12: 11 !!!
+                    ]\n'
+                                           '|TRAMITE GESTIONADO CON '
+                                           'SEGUIMIENTO RESPUESTA PERTINENTE A '
+                                           'PROCESO DE INSCRIPCION. ',
+                             'dependencia_id': 'CACD82C0-C161-11E1-99CB-D4AE52680BDD',
+                             'dependencia_name': '160.3 - GRUPO DE REGISTRO Y '
+                                                 'CONTROL ACADEMICO',
+                             'enviaDep_id': 'E9BAE21E-EA48-11E2-ABBD-D4AE52680BDD',
+                             'enviaDep_name': '130.1 - GRUPO DE ARCHIVO Y '
+                                              'CORRESPONDENCIA',
+                             'envia_id': '24a56961-111f-11ea-beb5-00155dcc0c40',
+                             'envia_name': 'MARISOL VALERO BERNAL',
+                             'envia_tarea': [
+                        {'comentario': None,
+                                              'creado': '2021-03-19T10: 48: 46',
+                                              'de_ActividadId': '94b4cb9e-88ca-11eb-b7bf-00155dcc0c40',
+                                              'de_ActividadName': '160.3 - 01 '
+                                                                  '- REVISAR Y '
+                                                                  'O ASIGNAR'
+                        },
+                        {'comentario': '[!!! DOCUMENTO '
+                                                            'FINALIZADO  '
+                                                            '2021-04-01 '
+                                                            '21: 12: 04 !!!
+                            ]\n'
+                                                            '|TRAMITE '
+                                                            'GESTIONADO CON '
+                                                            'SEGUIMIENTO '
+                                                            'RESPUESTA '
+                                                            'PERTINENTE A '
+                                                            'PROCESO DE '
+                                                            'INSCRIPCION. ',
+                                              'creado': '2021-04-01T21: 12: 04',
+                                              'de_ActividadId': '94b4cb9e-88ca-11eb-b7bf-00155dcc0c40',
+                                              'de_ActividadName': '160.3 - 01 '
+                                                                  '- REVISAR Y '
+                                                                  'O ASIGNAR'
+                        },
+                        {'comentario': '[!!! DOCUMENTO '
+                                                            'FINALIZADO  '
+                                                            '2021-04-01 '
+                                                            '21: 12: 11 !!!
+                            ]\n'
+                                                            '|TRAMITE '
+                                                            'GESTIONADO CON '
+                                                            'SEGUIMIENTO '
+                                                            'RESPUESTA '
+                                                            'PERTINENTE A '
+                                                            'PROCESO DE '
+                                                            'INSCRIPCION. ',
+                                              'creado': '2021-04-01T21: 12: 11',
+                                              'de_ActividadId': '94b4cb9e-88ca-11eb-b7bf-00155dcc0c40',
+                                              'de_ActividadName': '160.3 - 01 '
+                                                                  '- REVISAR Y '
+                                                                  'O ASIGNAR'
+                        }
+                    ],
+                             'estado': 'FINALIZADO',
+                             'id': '94b4cb9e-88ca-11eb-b7bf-00155dcc0c40',
+                             'notificado': 'NO',
+                             'recibido_en': '2021-03-19T10: 48: 42',
+                             'responsable_id': '5214640F-C527-11E1-9A2D-D4AE52680BDD',
+                             'responsable_name': 'MARIA DE JESUS MARTINEZ '
+                                                 'FARIAS ',
+                             'vence_en': '2021-04-08T10: 48: 42',
+                             'wf_statusWItem': 'I'
+                }
+            ]
+        }
+    ],
+ 'medio_id': '7827f7b0-69e5-11e4-8877-00155dcc0c40',
+ 'medio_name': 'CORREOS ELECTRÓNICOS',
+ 'name': 'MILAGRO DE JESUS OLIVEROS QUINTERO',
+ 'nit': '106564518',
+ 'nro_guia': 'None',
+ 'nro_origen': 'None',
+ 'nro_radicado': 'E-2021-008297',
+ 'pais_id': 'B12B814F-2297-11E1-AA92-7071BC9AF584',
+ 'pais_name': 'COLOMBIA',
+ 'phone': 'None',
+ 'radicado_en': '0 - SEDE NACIONAL',
+ 'radicado_en_id': '07e13311-20ee-11e1-8f1a-7071bc9af584',
+ 'radicado_por': 'MARISOL VALERO BERNAL',
+ 'radicador_id': '24a56961-111f-11ea-beb5-00155dcc0c40',
+ 'recorrido': 0,
+ 'referenciados': 'None',
+ 'responsable_id_inicial': '5214640F-C527-11E1-9A2D-D4AE52680BDD',
+ 'responsable_inicial': 'MARIA DE JESUS MARTINEZ FARIAS ',
+ 'responsables_activos': [],
+ 'responsables_todos': [
+        {'dependencia_id': 'CACD82C0-C161-11E1-99CB-D4AE52680BDD',
+                         'dependencia_name': '160.3 - GRUPO DE REGISTRO Y '
+                                             'CONTROL ACADEMICO',
+                         'responsable_id': '5214640F-C527-11E1-9A2D-D4AE52680BDD',
+                         'responsable_name': 'MARIA DE JESUS MARTINEZ '
+                                             'FARIAS '
+        }
+    ],
+ 'sender': 'MILAGRO DE JESUS OLIVEROS QUINTERO',
+ 'sender_universal': 'MILAGRO DE JESUS OLIVEROS QUINTERO',
+ 'status': 'ACTIVO',
+ 'tiporecord': 'ENTRADA',
+ 'tramite_id_inicial': '8206FAC0-CF59-11E1-A02F-D4AE52680BDD',
+ 'tramite_inicial': '160.3 - GRUPO DE REGISTRO Y CONTROL ACADEMICO'
+}

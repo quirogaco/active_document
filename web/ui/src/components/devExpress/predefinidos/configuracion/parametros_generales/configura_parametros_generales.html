@@ -1,0 +1,152 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+        
+        <div class="col-10">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "configura_radicacion"
+                    :form-data = "parametros.datos"
+                    :col-count = 2
+                > 
+
+                    <DxGroupItem
+                        caption="Información de canales de comunicación"
+                    >
+                        <DxSimpleItem                
+                            data-field      = "canal_web"
+                            editor-type     = "dxSelectBox"
+                            :editor-options = "opciones_web"
+                        >
+                            <DxLabel text="Canal WEB "/>
+                            <DxRequiredRule message="Canal WEB es obligatorio"/>
+                        </DxSimpleItem>   
+
+                        <DxSimpleItem 
+                            data-field      = "plantillas_recorridos"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "opciones_recorridos"
+                        >
+                            <DxLabel text="Plantillas para recorridos interno"/>
+                        </DxSimpleItem>
+
+                    </DxGroupItem>
+
+                    <DxGroupItem
+                        caption="Información de correo de notificación"
+                    >
+
+                        <DxSimpleItem                
+                            data-field      = "notificacion_servidor_smtp"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "opciones_notificacion_servidor_smtp"
+                        >
+                            <DxLabel text="Servidor SMTP"/>
+                        </DxSimpleItem> 
+
+                        <DxSimpleItem                
+                            data-field      = "notificacion_puerto_smtp"
+                            editor-type     = "dxNumberBox"
+                            :editor-options = "opciones_notificacion_puerto_smtp"
+                        >
+                            <DxLabel text="Puerto SMTP"/>
+                        </DxSimpleItem> 
+
+                        <DxSimpleItem                
+                            data-field      = "notificacion_usuario_smtp"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "opciones_notificacion_usuario"
+                        >
+                            <DxLabel text="Cuenta de correo"/>
+                        </DxSimpleItem> 
+
+                        <DxSimpleItem                
+                            data-field      = "notificacion_clave_smtp"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "opciones_notificacion_clave"
+                        >
+                            <DxLabel text="Clave cuenta de correo"/>
+                        </DxSimpleItem> 
+
+                        <DxSimpleItem                
+                            data-field      = "correo_certificado"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "opciones_certificado_correo"
+                        >
+                            <DxLabel text="Cuenta de validación correo certificado (copiar a)"/>
+                        </DxSimpleItem> 
+
+                    </DxGroupItem>
+
+                    <DxGroupItem
+                        caption="Tiempo maximo de inactividad "
+                    >
+
+                        <DxSimpleItem            
+                            data-field      = "tiempo_inactividad"
+                            editor-type     = "dxNumberBox"
+                            :editor-options = "opciones_inactividad"
+                        >
+                            <DxLabel text="Tiempo maximo inactividad (minutos)"/>
+                        </DxSimpleItem> 
+
+                    </DxGroupItem>
+
+                    <DxGroupItem
+                        caption="Parametros de archivos "
+                    >
+
+                        <DxSimpleItem            
+                            data-field      = "prestamos_maximo"
+                            editor-type     = "dxNumberBox"
+                            :editor-options = "prestamos_maximo"
+                        >
+                            <DxLabel text="Tiempo maximo prestamo expedientes (dias)"/>
+                        </DxSimpleItem> 
+
+                        <DxSimpleItem            
+                            data-field      = "renovacion_maximo"
+                            editor-type     = "dxNumberBox"
+                            :editor-options = "renovacion_maximo"
+                        >
+                            <DxLabel text="Tiempo maximo renovación prestamo (dias)"/>
+                        </DxSimpleItem> 
+
+                        <DxSimpleItem            
+                            data-field      = "renovacion_numero"
+                            editor-type     = "dxNumberBox"
+                            :editor-options = "renovacion_numero"
+                        >
+                            <DxLabel text="Maximo número de renovaciones"/>
+                        </DxSimpleItem> 
+
+                    </DxGroupItem>
+                    
+                    <DxEmptyItem/>
+                    <DxEmptyItem/>  
+
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+
+                <div class="p-3"></div> 
+
+            </div>   
+        
+        </div> 
+            
+    </div> 
+    
+</div>  

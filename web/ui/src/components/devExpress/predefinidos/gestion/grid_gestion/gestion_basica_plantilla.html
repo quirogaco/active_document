@@ -1,0 +1,60 @@
+
+    <div class="shadow-sm p-1 mb-2">
+
+        <div class="text-center fs-3 ">{{basica.titulo_grid}}</div> 
+
+        <ventana_emergente                     
+            :opciones = "opciones_ventana"
+            :key      = "emergente_key"
+        />
+
+        <gestion_acciones 
+            @gridGestionMuestraVentanaEmergente = "muestra_ventana_emergente" 
+            @gridGestionMuestraVentanaEmergenteGrid = "muestra_ventana_emergente_grid" 
+            :opciones = "opciones_accion"
+        />
+            
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'multiple' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :columns                 = "columnas"
+            :word-wrap-enabled       = "true"
+            @row-dbl-click           = "dobleClick"
+        >
+
+            <DxSearchPanel
+                :visible                  = "true"                
+                :width                    = "300"
+                placeholder               = "Buscar"
+                :highlight-search-text    = "false"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :visible="true"
+                :allowed-page-sizes="pageSizes"
+                :display-mode="displayMode"
+                :show-page-size-selector="showPageSizeSelector"
+                :show-info="showInfo"
+                :show-navigation-buttons="showNavButtons"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <template #estado_vencimiento_plantilla="{ data }">
+                <div v-html="plantilla_columna_estado(data)"></div>
+            </template>
+        
+        </DxDataGrid>
+    
+    </div>

@@ -1,0 +1,29 @@
+<div class="container-fluid shadow p-3 mb-5 bg-body rounded min-vh-100">
+    <div class="col-12 shadow p-3 rounded">            
+        <div class="row ">
+
+            <div class="text-center fs-3 shadow-sm  bg-light rounded">{{basicas.titulo}}</div>            
+            <DxForm
+                ref               = "forma"
+                :id               = "basicas.forma_id"
+                :form-data        = "parametros.datos"
+                :col-count        = "basicas.columnas"
+                :items            = "elementos"
+                :validation-group = "validacion_grupo"
+                label-location    = "left" 
+            >
+
+                <template #contenido-template="{data, index}">                
+                    <p class="" v-html="data.editorOptions.value"></p>
+                </template>
+
+            </DxForm>
+
+            <DxToolbar
+                ref = "barra"
+                :items = "barra_botones"
+            />
+                                    
+        </div>             
+    </div>
+</div>  

@@ -1,0 +1,302 @@
+Delivered-To: quirogaco@gmail.com
+Received: by 2002:a05:6602:8ca:0:0:0:0 with SMTP id h10csp1452381ioz;
+        Thu, 16 Sep 2021 11:49:56 -0700 (PDT)
+X-Received: by 2002:a25:ad88:: with SMTP id z8mr853231ybi.387.1631818196495;
+        Thu, 16 Sep 2021 11:49:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1631818196; cv=none;
+        d=google.com; s=arc-20160816;
+        b=eStFShFdckdgngDN0rYn8J2wWpIOXZz0KuUFJcvFinoJwfgn8o7w5Nm+2qqpZ+bBy6
+         6M+InzIf3zdeXZqpkEKR4vnUFdPvwHlHtBA8AeyiplUSWG7qcsQW37mX6b35bPVdK411
+         9rN5l9+DVM8j0v/naucDw+7KT3pJ1ezRH0j7J63wQ+7+sPJcq2npOY+cKV2XaLbyvzIQ
+         5/7YBJdeO/n0jUvI7sfYQ9tiNHJgCVP9d+RliFgu96Pft3S/M+zOrqDByU+Jbe/h/wuf
+         WpzX7pcKxcBbPZE7Mzb9i5gB/lJDWGTN5Q9ex069l4tHS7VMvOz+5Et5J1nIYhBg2md0
+         rM3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:date:message-id:auto-submitted:reply-to
+         :mime-version:dkim-signature;
+        bh=+g9P3vwQ9GHDmZiCaNI2d1EgOa0cmim2XAXiSTHPAOc=;
+        b=w8ktk8MG5MiTAKkgknnBLn1Qxbu8Z4TxZ8DD7cvtQRr6hkatdBIYVs61NIFvP+kBsV
+         QmV1Dd0RrHQZd4PcrFBTBb6HHby+FZe+CEvb+1lMjtXiSoYr6csmUeA9FMdr5+h9XlZ8
+         e5PA1kaW06Gkf3nZVKym6rKsCKUn0t8ZLLevZJKA4ODn4JC6IzG3eBLgbLEB76jNFwjE
+         JzDOkDTtUuiqBJtl3dKe51EJzD+oEIa8cvPICtcGq4pVVWvZAbM89ngdZrRzUQWnIwDa
+         ofs5brhyIsN76mCs3rtjDsx4CdfAiE2CKGg7qfadGaHrnGPn5446h5rjbvsZmKKGUSfA
+         SK5A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=h0uyE5Ze;
+       spf=pass (google.com: domain of 305fdyqkjcrycg4da2wya28w47.ya8cg4da2wya28w47.ya8@calendar-server.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=305FDYQkJCRYCG4DA2wyA28w47.yA8CG4DA2wyA28w47.yA8@calendar-server.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <305FDYQkJCRYCG4DA2wyA28w47.yA8CG4DA2wyA28w47.yA8@calendar-server.bounces.google.com>
+Received: from mail-sor-f73.google.com (mail-sor-f73.google.com. [209.85.220.73])
+        by mx.google.com with SMTPS id v16sor1503548ybq.79.2021.09.16.11.49.56
+        for <quirogaco@gmail.com>
+        (Google Transport Security);
+        Thu, 16 Sep 2021 11:49:56 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 305fdyqkjcrycg4da2wya28w47.ya8cg4da2wya28w47.ya8@calendar-server.bounces.google.com designates 209.85.220.73 as permitted sender) client-ip=209.85.220.73;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20210112 header.b=h0uyE5Ze;
+       spf=pass (google.com: domain of 305fdyqkjcrycg4da2wya28w47.ya8cg4da2wya28w47.ya8@calendar-server.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=305FDYQkJCRYCG4DA2wyA28w47.yA8CG4DA2wyA28w47.yA8@calendar-server.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:reply-to:auto-submitted:message-id:date:subject:from
+         :to;
+        bh=+g9P3vwQ9GHDmZiCaNI2d1EgOa0cmim2XAXiSTHPAOc=;
+        b=h0uyE5Ze2IVo2b08Q6+RsgigrwvT1OfG4azR4NJuYoAByhx3steTjj+HeWxRjxeSU3
+         1QLgqoDyduXWW5y1h7Ollw2+Rp0Mii9KAD4o+SEibqc/JqpWKxdSPOzvMhcymv6koMR9
+         xToXskOgRZckInEm731I5eyWAG/hAlZGMXw4VHu5PdWZ0d3zZ2ELquwwr9PBMwr217+3
+         23TBAL2C+oU6+5WIUJ2R16D2Hm87TadVmKpT6m1YXMjakD7zJxxWncib18Z3/PIuQKDL
+         Pv483zEkojff9ZGs7/e0NgKBC2xkesMpFIHGS+m/IP25Ne7ZMFW1ludBJWpVujMiZxDn
+         o1nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:auto-submitted:message-id
+         :date:subject:from:to;
+        bh=+g9P3vwQ9GHDmZiCaNI2d1EgOa0cmim2XAXiSTHPAOc=;
+        b=b8nWNlDwmAAx5xYcC4srtuBbzH4CsXUkuxlBW42OneLlR/iLQfyS/DPJCr1ouiSC4S
+         /IaLKSryIy6PI/oTF9DJ3y+1/hLc5SyJ4xHNVF8J4KoOeb4Xd744DZwyCM7fx6OtFniG
+         9h6y1yXZui4vvKGAxDR6EPEXRlJeJfdB7zVrme/fv9gNjyM+yfMPvZRfRMNgvK8sRd8X
+         Ik4av278+A05CshorlLCvNg901E9/Ss6RnnnyZLRBUVW5FolWuwFNAaReve4+TL6gj7U
+         K2MEdi2O+qnBi+oMFn0alJwC5cLq7xLA5g22rAEOQSm6jsqkcD3h0q072E0E3ldWHWgN
+         d84w==
+X-Gm-Message-State: AOAM5324qhGIhDQ3mIr6pwEafvbl+OOEC0LelP9bVgwDTktJ0V2pPPz4
+	aPN3ZztqMsp1gxnx3xFR7WZu30gXNJwzE1ZmKcMk
+X-Google-Smtp-Source: ABdhPJxHwYZVnrgdfVNDyE595wZD3UxwMZfpxbIUwMrWys8Yu7/JGte6P5eJfHPbeQvx+aYnvL3XGhUsZzxqj0B6Im0t
+MIME-Version: 1.0
+X-Received: by 2002:a25:3894:: with SMTP id f142mr9794265yba.464.1631818195737;
+ Thu, 16 Sep 2021 11:49:55 -0700 (PDT)
+Reply-To: Edgar Eduardo Sierra Rojas <edgar.sierra@fondocolombiaenpaz.gov.co>
+Auto-Submitted: auto-generated
+Message-ID: <000000000000e5217e05cc2147ad@google.com>
+Date: Thu, 16 Sep 2021 18:49:55 +0000
+Subject: =?UTF-8?Q?Notificaci=C3=B3n=3A_Presentaci=C3=B3n_Software_G=2ED=2E_Protech_=2D?=
+	=?UTF-8?Q?_FCP_jue_16_de_sept_de_2021_14=3A00_=2D_15=3A00_=28COT=29_=28quirogaco=40g?=
+	=?UTF-8?Q?mail=2Ecom=29?=
+From: Google Calendar <calendar-notification@google.com>
+To: Juan Carlos Rodriguez <quirogaco@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000e5216805cc2147a7"
+
+--000000000000e5216805cc2147a7
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+RXN0YSBlcyB1bmEgbm90aWZpY2FjacOzbiBwYXJhOg0KDQpUw610dWxvOiBQcmVzZW50YWNpw7Nu
+IFNvZnR3YXJlIEcuRC4gUHJvdGVjaCAtIEZDUA0KDQoNCkN1w6FuZG86IGp1ZSAxNiBkZSBzZXB0
+IGRlIDIwMjEgMTQ6MDAg4oCTIDE1OjAwIEhvcmEgZXN0w6FuZGFyIGRlIENvbG9tYmlhDQpMdWdh
+cjogQ2FsbGUgMTAwIE5vLiA4IEEgLSA1NSBUb3JyZSBDIC8gT2ZpY2luYSA4MTUNCkNhbGVuZGFy
+aW86IHF1aXJvZ2Fjb0BnbWFpbC5jb20NClF1acOpbjoNCiAgICAgKiBFZGdhciBFZHVhcmRvIFNp
+ZXJyYSBSb2phcy0gb3JnYW5pemFkb3INCiAgICAgKiBxdWlyb2dhY29AZ21haWwuY29tLSBjcmVh
+ZG9yDQogICAgICogTWF1cmljaW8gUm9kcmlndWV6IEQuDQogICAgICogRGFuaSBVbWJhcmlsYSBD
+YWRlbmENCiAgICAgKiBEaWFuYSBNYXJjZWxhIEdpcmFsZG8gRGlheg0KICAgICAqIEp1YW4gRGFu
+aWVsIE1vbGFubyBDYXN0cm8NCiAgICAgKiBjb3Jwb3JhdGl2b0Bwcm90ZWNoaW5nZW5pZXJpYS5j
+b20NCiAgICAgKiBnZXJlbmNpYUBwcm90ZWNoaW5nZW5pZXJpYS5jb20NCiAgICAgKiBKdWxpYW4g
+RGF2aWQgVmFsZW5jaWEgUmlvcw0KICAgICAqIHRlY25pY28yQHByb3RlY2hpbmdlbmllcmlhLmNv
+bQ0KDQpEZXRhbGxlcyBkZWwgZXZlbnRvOiAgDQpodHRwczovL2NhbGVuZGFyLmdvb2dsZS5jb20v
+Y2FsZW5kYXIvZXZlbnQ/YWN0aW9uPVZJRVcmZWlkPVh6WXdjVE13WXpGbk5qQnZNekJsTVdrMk1H
+ODBZV014WnpZd2NtbzRaM0JzT0RoeWFqSmpNV2c0TkhNek5HZzVaell3Y3pNd1l6Rm5OakJ2TXpC
+ak1XYzRiMjgwT0djNWJ6WmpjbXBsWTJod09EVXdhemhrY0djMk5HOHpNR014WnpZd2J6TXdZekZu
+TmpCdk16QmpNV2MyTUc4ek1tTXhaell3YnpNd1l6Rm5OekJ5TkRSb01qVTRPVEpyT0dOaE1UWnNN
+VE5oYURsck5tZ3dhakJvYUdrNE5ISnFaMmc1YWpjMU1UTmpZMkUwTmpVek1DQnhkV2x5YjJkaFky
+OUFiUSZ0b2s9TXpnalpXUm5ZWEl1YzJsbGNuSmhRR1p2Ym1SdlkyOXNiMjFpYVdGbGJuQmhlaTVu
+YjNZdVkyODBZVFEwWXpFMVpUbGtPV0prTURsa1pETTROams1TURsbVptVTNaV1U1WWpSbE9HUXhP
+VFUwJmN0ej1BbWVyaWNhJTJGQm9nb3RhJmhsPWVzJmVzPTENCg0KSW52aXRhY2nDs24gZGUgR29v
+Z2xlIENhbGVuZGFyOiBodHRwczovL2NhbGVuZGFyLmdvb2dsZS5jb20vY2FsZW5kYXIvDQoNCkhh
+cyByZWNpYmlkbyBlc3RlIGNvcnJlbyBlbGVjdHLDs25pY28gZW4gbGEgZGlyZWNjacOzbiBxdWly
+b2dhY29AZ21haWwuY29tIGRlICANCmxhIGN1ZW50YSBwb3JxdWUgZXN0w6FzIHN1c2NyaXRvIHBh
+cmEgcmVjaWJpciBub3RpZmljYWNpb25lcyBkZWwgY2FsZW5kYXJpbyAgDQpxdWlyb2dhY29AZ21h
+aWwuY29tLg0KDQpTaSB5YSBubyBxdWllcmVzIHJlY2liaXIgZXN0b3MgY29ycmVvcywgaW5pY2lh
+IHNlc2nDs24gZW4gIA0KaHR0cHM6Ly9jYWxlbmRhci5nb29nbGUuY29tL2NhbGVuZGFyLyB5IGNh
+bWJpYSBsYSBjb25maWd1cmFjacOzbiBkZSBsYXMgIA0Kbm90aWZpY2FjaW9uZXMgcGFyYSBlc3Rl
+IGNhbGVuZGFyaW8uDQoNClNpIHJlZW52w61hcyBlc3RhIGludml0YWNpw7NuLCBsb3MgZGVzdGlu
+YXRhcmlvcyBwb2Ryw61hbiBlbnZpYXIgdW5hIHJlc3B1ZXN0YSAgDQphbCBvcmdhbml6YWRvciBw
+YXJhIHF1ZSBsb3MgYcOxYWRhIGEgbGEgbGlzdGEgZGUgaW52aXRhZG9zLCBvIGludml0YXIgYSAg
+DQpvdHJhcyBwZXJzb25hcyBpbmRlcGVuZGllbnRlbWVudGUgZGVsIGVzdGFkbyBkZSBzdSBwcm9w
+aWEgaW52aXRhY2nDs24sIG8gIA0KY2FtYmlhciB0dSByZXNwdWVzdGEgZGUgY29uZmlybWFjacOz
+biBkZSBhc2lzdGVuY2lhLiBNw6FzIGluZm9ybWFjacOzbiBlbiAgDQpodHRwczovL3N1cHBvcnQu
+Z29vZ2xlLmNvbS9jYWxlbmRhci9hbnN3ZXIvMzcxMzUjZm9yd2FyZGluZw0K
+--000000000000e5216805cc2147a7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<span itemscope itemtype=3D"http://schema.org/InformAction"><span style=3D"=
+display:none" itemprop=3D"about" itemscope itemtype=3D"http://schema.org/Th=
+ing/Notification"><meta itemprop=3D"description" content=3D"Notificaci=C3=
+=B3n"/></span><span itemprop=3D"object" itemscope itemtype=3D"http://schema=
+.org/Event"><div style=3D""><table cellspacing=3D"0" cellpadding=3D"8" bord=
+er=3D"0" summary=3D"" style=3D"width:100%;font-family:Arial,Sans-serif;bord=
+er:1px Solid #ccc;border-width:1px 2px 2px 1px;background-color:#fff;"><tr>=
+<td><meta itemprop=3D"eventStatus" content=3D"http://schema.org/EventSchedu=
+led"/><div style=3D"padding:2px"><span itemprop=3D"publisher" itemscope ite=
+mtype=3D"http://schema.org/Organization"><meta itemprop=3D"name" content=3D=
+"Google Calendar"/></span><meta itemprop=3D"eventId/googleCalendar" content=
+=3D"_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g8oo48g=
+9o6crjechp850k8dpg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g70r44h25892k8ca16=
+l13ah9k6h0j0hhi84rjgh9j7513cca46530"/><h3 style=3D"padding:0 0 6px 0;margin=
+:0;font-family:Arial,Sans-serif;font-size:16px;font-weight:bold;color:#222"=
+><span itemprop=3D"name">Presentaci=C3=B3n Software G.D. Protech - FCP</spa=
+n></h3><table style=3D"display:inline-table" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0" summary=3D"Informaci=C3=B3n del evento"><tr><td style=
+=3D"padding:0 1em 10px 0;font-family:Arial,Sans-serif;font-size:13px;color:=
+#888;white-space:nowrap" valign=3D"top"><div><i style=3D"font-style:normal"=
+>Cu=C3=A1ndo</i></div></td><td style=3D"padding-bottom:10px;font-family:Ari=
+al,Sans-serif;font-size:13px;color:#222" valign=3D"top"><time itemprop=3D"s=
+tartDate" datetime=3D"20210916T190000Z"></time><time itemprop=3D"endDate" d=
+atetime=3D"20210916T200000Z"></time>jue 16 de sept de 2021 14:00 =E2=80=93 =
+15:00 <span style=3D"color:#888">Hora est=C3=A1ndar de Colombia</span></td>=
+</tr><tr><td style=3D"padding:0 1em 10px 0;font-family:Arial,Sans-serif;fon=
+t-size:13px;color:#888;white-space:nowrap" valign=3D"top"><div><i style=3D"=
+font-style:normal">D=C3=B3nde</i></div></td><td style=3D"padding-bottom:10p=
+x;font-family:Arial,Sans-serif;font-size:13px;color:#222" valign=3D"top"><s=
+pan itemprop=3D"location" itemscope itemtype=3D"http://schema.org/Place"><s=
+pan itemprop=3D"name" class=3D"notranslate">Calle 100 No. 8 A - 55 Torre C =
+/ Oficina 815</span><span dir=3D"ltr"> (<a href=3D"https://www.google.com/m=
+aps/search/Calle+100+No.+8+A+-+55+Torre+C+%2F+Oficina+815?hl=3Des" style=3D=
+"color:#20c;white-space:nowrap" target=3D"_blank" itemprop=3D"map">mapa</a>=
+)</span></span></td></tr><tr><td style=3D"padding:0 1em 10px 0;font-family:=
+Arial,Sans-serif;font-size:13px;color:#888;white-space:nowrap" valign=3D"to=
+p"><div><i style=3D"font-style:normal">Calendario</i></div></td><td style=
+=3D"padding-bottom:10px;font-family:Arial,Sans-serif;font-size:13px;color:#=
+222" valign=3D"top">quirogaco@gmail.com</td></tr><tr><td style=3D"padding:0=
+ 1em 10px 0;font-family:Arial,Sans-serif;font-size:13px;color:#888;white-sp=
+ace:nowrap" valign=3D"top"><div><i style=3D"font-style:normal">Qui=C3=A9n</=
+i></div></td><td style=3D"padding-bottom:10px;font-family:Arial,Sans-serif;=
+font-size:13px;color:#222" valign=3D"top"><table cellspacing=3D"0" cellpadd=
+ing=3D"0"><tr><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;=
+font-size:13px;color:#222"><span style=3D"font-family:Courier New,monospace=
+">&#x2022;</span></td><td style=3D"padding-right:10px;font-family:Arial,San=
+s-serif;font-size:13px;color:#222"><div><div style=3D"margin:0 0 0.3em 0"><=
+span class=3D"notranslate">Edgar Eduardo Sierra Rojas</span><span itemprop=
+=3D"organizer" itemscope itemtype=3D"http://schema.org/Person"><meta itempr=
+op=3D"name" content=3D"Edgar Eduardo Sierra Rojas"/><meta itemprop=3D"email=
+" content=3D"edgar.sierra@fondocolombiaenpaz.gov.co"/></span><span style=3D=
+"font-size:11px;color:#888">- organizador</span></div></div></td></tr><tr><=
+td style=3D"padding-right:10px;font-family:Arial,Sans-serif;font-size:13px;=
+color:#222"><span style=3D"font-family:Courier New,monospace">&#x2022;</spa=
+n></td><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;font-si=
+ze:13px;color:#222"><div><div style=3D"margin:0 0 0.3em 0"><span itemprop=
+=3D"attendee" itemscope itemtype=3D"http://schema.org/Person"><span itempro=
+p=3D"name" class=3D"notranslate">quirogaco@gmail.com</span><meta itemprop=
+=3D"email" content=3D"quirogaco@gmail.com"/></span><span style=3D"font-size=
+:11px;color:#888">- creador</span></div></div></td></tr><tr><td style=3D"pa=
+dding-right:10px;font-family:Arial,Sans-serif;font-size:13px;color:#222"><s=
+pan style=3D"font-family:Courier New,monospace">&#x2022;</span></td><td sty=
+le=3D"padding-right:10px;font-family:Arial,Sans-serif;font-size:13px;color:=
+#222"><div><div style=3D"margin:0 0 0.3em 0"><span itemprop=3D"attendee" it=
+emscope itemtype=3D"http://schema.org/Person"><span itemprop=3D"name" class=
+=3D"notranslate">Mauricio Rodriguez D.</span><meta itemprop=3D"email" conte=
+nt=3D"administrativa@protechingenieria.com"/></span></div></div></td></tr><=
+tr><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;font-size:1=
+3px;color:#222"><span style=3D"font-family:Courier New,monospace">&#x2022;<=
+/span></td><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;fon=
+t-size:13px;color:#222"><div><div style=3D"margin:0 0 0.3em 0"><span itempr=
+op=3D"attendee" itemscope itemtype=3D"http://schema.org/Person"><span itemp=
+rop=3D"name" class=3D"notranslate">Dani Umbarila Cadena</span><meta itempro=
+p=3D"email" content=3D"dani.umbarila@fondocolombiaenpaz.gov.co"/></span></d=
+iv></div></td></tr><tr><td style=3D"padding-right:10px;font-family:Arial,Sa=
+ns-serif;font-size:13px;color:#222"><span style=3D"font-family:Courier New,=
+monospace">&#x2022;</span></td><td style=3D"padding-right:10px;font-family:=
+Arial,Sans-serif;font-size:13px;color:#222"><div><div style=3D"margin:0 0 0=
+.3em 0"><span itemprop=3D"attendee" itemscope itemtype=3D"http://schema.org=
+/Person"><span itemprop=3D"name" class=3D"notranslate">Diana Marcela Girald=
+o Diaz</span><meta itemprop=3D"email" content=3D"diana.giraldo@fondocolombi=
+aenpaz.gov.co"/></span></div></div></td></tr><tr><td style=3D"padding-right=
+:10px;font-family:Arial,Sans-serif;font-size:13px;color:#222"><span style=
+=3D"font-family:Courier New,monospace">&#x2022;</span></td><td style=3D"pad=
+ding-right:10px;font-family:Arial,Sans-serif;font-size:13px;color:#222"><di=
+v><div style=3D"margin:0 0 0.3em 0"><span itemprop=3D"attendee" itemscope i=
+temtype=3D"http://schema.org/Person"><span itemprop=3D"name" class=3D"notra=
+nslate">Juan Daniel Molano Castro</span><meta itemprop=3D"email" content=3D=
+"juan.molano@fondocolombiaenpaz.gov.co"/></span></div></div></td></tr><tr><=
+td style=3D"padding-right:10px;font-family:Arial,Sans-serif;font-size:13px;=
+color:#222"><span style=3D"font-family:Courier New,monospace">&#x2022;</spa=
+n></td><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;font-si=
+ze:13px;color:#222"><div><div style=3D"margin:0 0 0.3em 0"><span itemprop=
+=3D"attendee" itemscope itemtype=3D"http://schema.org/Person"><span itempro=
+p=3D"name" class=3D"notranslate">corporativo@protechingenieria.com</span><m=
+eta itemprop=3D"email" content=3D"corporativo@protechingenieria.com"/></spa=
+n></div></div></td></tr><tr><td style=3D"padding-right:10px;font-family:Ari=
+al,Sans-serif;font-size:13px;color:#222"><span style=3D"font-family:Courier=
+ New,monospace">&#x2022;</span></td><td style=3D"padding-right:10px;font-fa=
+mily:Arial,Sans-serif;font-size:13px;color:#222"><div><div style=3D"margin:=
+0 0 0.3em 0"><span itemprop=3D"attendee" itemscope itemtype=3D"http://schem=
+a.org/Person"><span itemprop=3D"name" class=3D"notranslate">gerencia@protec=
+hingenieria.com</span><meta itemprop=3D"email" content=3D"gerencia@protechi=
+ngenieria.com"/></span></div></div></td></tr><tr><td style=3D"padding-right=
+:10px;font-family:Arial,Sans-serif;font-size:13px;color:#222"><span style=
+=3D"font-family:Courier New,monospace">&#x2022;</span></td><td style=3D"pad=
+ding-right:10px;font-family:Arial,Sans-serif;font-size:13px;color:#222"><di=
+v><div style=3D"margin:0 0 0.3em 0"><span itemprop=3D"attendee" itemscope i=
+temtype=3D"http://schema.org/Person"><span itemprop=3D"name" class=3D"notra=
+nslate">Julian David Valencia Rios</span><meta itemprop=3D"email" content=
+=3D"julian.valencia@fondocolombiaenpaz.gov.co"/></span></div></div></td></t=
+r><tr><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;font-siz=
+e:13px;color:#222"><span style=3D"font-family:Courier New,monospace">&#x202=
+2;</span></td><td style=3D"padding-right:10px;font-family:Arial,Sans-serif;=
+font-size:13px;color:#222"><div><div style=3D"margin:0 0 0.3em 0"><span ite=
+mprop=3D"attendee" itemscope itemtype=3D"http://schema.org/Person"><span it=
+emprop=3D"name" class=3D"notranslate">tecnico2@protechingenieria.com</span>=
+<meta itemprop=3D"email" content=3D"tecnico2@protechingenieria.com"/></span=
+></div></div></td></tr></table></td></tr></table><div style=3D"float:right;=
+font-weight:bold;font-size:13px"> <a href=3D"https://calendar.google.com/ca=
+lendar/event?action=3DVIEW&amp;eid=3DXzYwcTMwYzFnNjBvMzBlMWk2MG80YWMxZzYwcm=
+o4Z3BsODhyajJjMWg4NHMzNGg5ZzYwczMwYzFnNjBvMzBjMWc4b280OGc5bzZjcmplY2hwODUwa=
+zhkcGc2NG8zMGMxZzYwbzMwYzFnNjBvMzBjMWc2MG8zMmMxZzYwbzMwYzFnNzByNDRoMjU4OTJr=
+OGNhMTZsMTNhaDlrNmgwajBoaGk4NHJqZ2g5ajc1MTNjY2E0NjUzMCBxdWlyb2dhY29AbQ&amp;=
+tok=3DMzgjZWRnYXIuc2llcnJhQGZvbmRvY29sb21iaWFlbnBhei5nb3YuY280YTQ0YzE1ZTlkO=
+WJkMDlkZDM4Njk5MDlmZmU3ZWU5YjRlOGQxOTU0&amp;ctz=3DAmerica%2FBogota&amp;hl=
+=3Des&amp;es=3D1" style=3D"color:#20c;white-space:nowrap" itemprop=3D"url">=
+m=C3=A1s detalles &raquo;</a><br></div><div style=3D"padding-bottom:15px;fo=
+nt-family:Arial,Sans-serif;font-size:13px;color:#222;white-space:pre-wrap!i=
+mportant;white-space:-moz-pre-wrap!important;white-space:-pre-wrap!importan=
+t;white-space:-o-pre-wrap!important;white-space:pre;word-wrap:break-word"><=
+span><br></span><meta itemprop=3D"description" content=3D"
+"/></div></div><p style=3D"color:#222;font-size:13px;margin:0"><span style=
+=3D"color:#888">=C2=BFAsistir=C3=A1s (quirogaco@gmail.com)?&nbsp;&nbsp;&nbs=
+p;</span><wbr><strong><a href=3D"https://calendar.google.com/calendar/event=
+?action=3DRESPOND&amp;eid=3DXzYwcTMwYzFnNjBvMzBlMWk2MG80YWMxZzYwcmo4Z3BsODh=
+yajJjMWg4NHMzNGg5ZzYwczMwYzFnNjBvMzBjMWc4b280OGc5bzZjcmplY2hwODUwazhkcGc2NG=
+8zMGMxZzYwbzMwYzFnNjBvMzBjMWc2MG8zMmMxZzYwbzMwYzFnNzByNDRoMjU4OTJrOGNhMTZsM=
+TNhaDlrNmgwajBoaGk4NHJqZ2g5ajc1MTNjY2E0NjUzMCBxdWlyb2dhY29AbQ&amp;rst=3D1&a=
+mp;tok=3DMzgjZWRnYXIuc2llcnJhQGZvbmRvY29sb21iaWFlbnBhei5nb3YuY280YTQ0YzE1ZT=
+lkOWJkMDlkZDM4Njk5MDlmZmU3ZWU5YjRlOGQxOTU0&amp;ctz=3DAmerica%2FBogota&amp;h=
+l=3Des&amp;es=3D1" style=3D"color:#20c;white-space:nowrap">S=C3=AD</a><span=
+ style=3D"margin:0 0.4em;font-weight:normal"> - </span><a href=3D"https://c=
+alendar.google.com/calendar/event?action=3DRESPOND&amp;eid=3DXzYwcTMwYzFnNj=
+BvMzBlMWk2MG80YWMxZzYwcmo4Z3BsODhyajJjMWg4NHMzNGg5ZzYwczMwYzFnNjBvMzBjMWc4b=
+280OGc5bzZjcmplY2hwODUwazhkcGc2NG8zMGMxZzYwbzMwYzFnNjBvMzBjMWc2MG8zMmMxZzYw=
+bzMwYzFnNzByNDRoMjU4OTJrOGNhMTZsMTNhaDlrNmgwajBoaGk4NHJqZ2g5ajc1MTNjY2E0NjU=
+zMCBxdWlyb2dhY29AbQ&amp;rst=3D3&amp;tok=3DMzgjZWRnYXIuc2llcnJhQGZvbmRvY29sb=
+21iaWFlbnBhei5nb3YuY280YTQ0YzE1ZTlkOWJkMDlkZDM4Njk5MDlmZmU3ZWU5YjRlOGQxOTU0=
+&amp;ctz=3DAmerica%2FBogota&amp;hl=3Des&amp;es=3D1" style=3D"color:#20c;whi=
+te-space:nowrap">Quiz=C3=A1s</a><span style=3D"margin:0 0.4em;font-weight:n=
+ormal"> - </span><a href=3D"https://calendar.google.com/calendar/event?acti=
+on=3DRESPOND&amp;eid=3DXzYwcTMwYzFnNjBvMzBlMWk2MG80YWMxZzYwcmo4Z3BsODhyajJj=
+MWg4NHMzNGg5ZzYwczMwYzFnNjBvMzBjMWc4b280OGc5bzZjcmplY2hwODUwazhkcGc2NG8zMGM=
+xZzYwbzMwYzFnNjBvMzBjMWc2MG8zMmMxZzYwbzMwYzFnNzByNDRoMjU4OTJrOGNhMTZsMTNhaD=
+lrNmgwajBoaGk4NHJqZ2g5ajc1MTNjY2E0NjUzMCBxdWlyb2dhY29AbQ&amp;rst=3D2&amp;to=
+k=3DMzgjZWRnYXIuc2llcnJhQGZvbmRvY29sb21iaWFlbnBhei5nb3YuY280YTQ0YzE1ZTlkOWJ=
+kMDlkZDM4Njk5MDlmZmU3ZWU5YjRlOGQxOTU0&amp;ctz=3DAmerica%2FBogota&amp;hl=3De=
+s&amp;es=3D1" style=3D"color:#20c;white-space:nowrap">No</a></strong>&nbsp;=
+&nbsp;&nbsp;&nbsp;<wbr><a href=3D"https://calendar.google.com/calendar/even=
+t?action=3DVIEW&amp;eid=3DXzYwcTMwYzFnNjBvMzBlMWk2MG80YWMxZzYwcmo4Z3BsODhya=
+jJjMWg4NHMzNGg5ZzYwczMwYzFnNjBvMzBjMWc4b280OGc5bzZjcmplY2hwODUwazhkcGc2NG8z=
+MGMxZzYwbzMwYzFnNjBvMzBjMWc2MG8zMmMxZzYwbzMwYzFnNzByNDRoMjU4OTJrOGNhMTZsMTN=
+haDlrNmgwajBoaGk4NHJqZ2g5ajc1MTNjY2E0NjUzMCBxdWlyb2dhY29AbQ&amp;tok=3DMzgjZ=
+WRnYXIuc2llcnJhQGZvbmRvY29sb21iaWFlbnBhei5nb3YuY280YTQ0YzE1ZTlkOWJkMDlkZDM4=
+Njk5MDlmZmU3ZWU5YjRlOGQxOTU0&amp;ctz=3DAmerica%2FBogota&amp;hl=3Des&amp;es=
+=3D1" style=3D"color:#20c;white-space:nowrap" itemprop=3D"url">M=C3=A1s opc=
+iones &raquo;</a></p></td></tr><tr><td style=3D"background-color:#f6f6f6;co=
+lor:#888;border-top:1px Solid #ccc;font-family:Arial,Sans-serif;font-size:1=
+1px"><p>Invitaci=C3=B3n de <a href=3D"https://calendar.google.com/calendar/=
+" target=3D"_blank" style=3D"">Google Calendar</a></p><p>Has recibido este =
+correo electr=C3=B3nico en la direcci=C3=B3n quirogaco@gmail.com de la cuen=
+ta porque est=C3=A1s suscrito para recibir notificaciones del calendario qu=
+irogaco@gmail.com.</p><p>Si ya no quieres recibir estos correos, inicia ses=
+i=C3=B3n en https://calendar.google.com/calendar/ y cambia la configuraci=
+=C3=B3n de las notificaciones para este calendario.</p><p>Si reenv=C3=ADas =
+esta invitaci=C3=B3n, los destinatarios podr=C3=ADan enviar una respuesta a=
+l organizador para que los a=C3=B1ada a la lista de invitados, o invitar a =
+otras personas independientemente del estado de su propia invitaci=C3=B3n, =
+o cambiar tu respuesta de confirmaci=C3=B3n de asistencia. <a href=3D"https=
+://support.google.com/calendar/answer/37135#forwarding">M=C3=A1s informaci=
+=C3=B3n</a>.</p></td></tr></table></div></span></span>
+--000000000000e5216805cc2147a7--

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:gestion="http://gestion" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="Gestion_proceso" isExecutable="true">
+    <bpmn2:startEvent id="Evento_inicial_1">
+      <bpmn2:outgoing>Flow_12uvt55</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="Asignacion_1" name="Asignacion_1" gestion:gestion_traslada_usuario_entidad="true" gestion:gestion_visto_bueno="true" gestion:accion_tipo="Asignacion" gestion:accion_finaliza="true">
+      <bpmn2:incoming>Flow_12uvt55</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1pebno1</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_12uvt55" sourceRef="Evento_inicial_1" targetRef="Asignacion_1" />
+    <bpmn2:userTask id="Gestion_2" name="Gestion_2" gestion:accion_tipo="Gestion">
+      <bpmn2:incoming>Flow_1pebno1</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0a2qjio</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_1pebno1" sourceRef="Asignacion_1" targetRef="Gestion_2" />
+    <bpmn2:exclusiveGateway id="Gateway_1d6elky">
+      <bpmn2:incoming>Flow_0a2qjio</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1uv8riq</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1wkhanj</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="Flow_0a2qjio" sourceRef="Gestion_2" targetRef="Gateway_1d6elky" />
+    <bpmn2:userTask id="Visto_bueno_3" name="Visto bueno_3" gestion:accion_tipo="Visto bueno">
+      <bpmn2:incoming>Flow_1uv8riq</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0b442i0</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_1uv8riq" sourceRef="Gateway_1d6elky" targetRef="Visto_bueno_3">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">juan=="genio_1"</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:userTask id="Radicacion_4" name="Radicacion_4" gestion:accion_tipo="Radicacion">
+      <bpmn2:incoming>Flow_0b442i0</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_18uz3c0</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_0b442i0" sourceRef="Visto_bueno_3" targetRef="Radicacion_4" />
+    <bpmn2:endEvent id="Event_09kzkd3">
+      <bpmn2:incoming>Flow_18uz3c0</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_18uz3c0" sourceRef="Radicacion_4" targetRef="Event_09kzkd3" />
+    <bpmn2:userTask id="Radicacion_5" name="Radicacion_5" gestion:accion_tipo="Radicacion">
+      <bpmn2:incoming>Flow_1wkhanj</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_03boftc</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_1wkhanj" sourceRef="Gateway_1d6elky" targetRef="Radicacion_5">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">juan=="genio_2"</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Event_18kelou">
+      <bpmn2:incoming>Flow_03boftc</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_03boftc" sourceRef="Radicacion_5" targetRef="Event_18kelou" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Gestion_proceso">
+      <bpmndi:BPMNEdge id="Flow_12uvt55_di" bpmnElement="Flow_12uvt55">
+        <di:waypoint x="236" y="68" />
+        <di:waypoint x="290" y="68" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pebno1_di" bpmnElement="Flow_1pebno1">
+        <di:waypoint x="390" y="68" />
+        <di:waypoint x="450" y="68" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a2qjio_di" bpmnElement="Flow_0a2qjio">
+        <di:waypoint x="550" y="68" />
+        <di:waypoint x="615" y="68" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uv8riq_di" bpmnElement="Flow_1uv8riq">
+        <di:waypoint x="665" y="68" />
+        <di:waypoint x="730" y="68" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b442i0_di" bpmnElement="Flow_0b442i0">
+        <di:waypoint x="830" y="68" />
+        <di:waypoint x="900" y="68" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18uz3c0_di" bpmnElement="Flow_18uz3c0">
+        <di:waypoint x="1000" y="68" />
+        <di:waypoint x="1072" y="68" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wkhanj_di" bpmnElement="Flow_1wkhanj">
+        <di:waypoint x="640" y="93" />
+        <di:waypoint x="640" y="180" />
+        <di:waypoint x="730" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03boftc_di" bpmnElement="Flow_03boftc">
+        <di:waypoint x="830" y="180" />
+        <di:waypoint x="902" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="Evento_inicial_1">
+        <dc:Bounds x="200" y="50" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Asignacion_1_di" bpmnElement="Asignacion_1">
+        <dc:Bounds x="290" y="28" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gestion_2_di" bpmnElement="Gestion_2">
+        <dc:Bounds x="450" y="28" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1d6elky_di" bpmnElement="Gateway_1d6elky" isMarkerVisible="true">
+        <dc:Bounds x="615" y="43" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Visto_bueno_3_di" bpmnElement="Visto_bueno_3">
+        <dc:Bounds x="730" y="28" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Radicacion_4_di" bpmnElement="Radicacion_4">
+        <dc:Bounds x="900" y="28" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_09kzkd3_di" bpmnElement="Event_09kzkd3">
+        <dc:Bounds x="1072" y="50" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Radicacion_5_di" bpmnElement="Radicacion_5">
+        <dc:Bounds x="730" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_18kelou_di" bpmnElement="Event_18kelou">
+        <dc:Bounds x="902" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

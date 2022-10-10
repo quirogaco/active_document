@@ -1,0 +1,24 @@
+{
+  "name"  : "Gestion",
+  "prefix": "gestion",
+  "uri"   : "http://gestion",
+  "xml"   : {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "AtributoGestion",
+      "extends": [
+        "bpmn:UserTask"
+      ],
+      "properties": [
+        {
+          "name": "tipo_accion",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    }
+  ]
+}

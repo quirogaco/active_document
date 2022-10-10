@@ -1,0 +1,95 @@
+
+<div class="container-fluid vh-90">
+
+    <ventana_emergente_trd                     
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <div class="shadow-sm p-1 mb-2">     
+
+        <div class="text-center fs-2 ">{{titulo}}</div> 
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :word-wrap-enabled       = "true"
+            :columns                 = "columnas"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @content-ready           = "onContentReady"
+            @row-dbl-click           = "dobleClick"            
+        >
+            <DxSearchPanel
+                :visible                  = "true"                
+                :width                    = "300"
+                placeholder               = "Buscar"
+                :highlight-search-text    = "false"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :visible="true"
+                :allowed-page-sizes="pageSizes"
+                :display-mode="displayMode"
+                :show-page-size-selector="showPageSizeSelector"
+                :show-info="showInfo"
+                :show-navigation-buttons="showNavButtons"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <template #crearButton>
+                <DxButton
+                    @click = "crear()"
+                    icon   = "fas fa-plus-square"
+                    text   = "Crear Tabla de Retención"
+                    type   = "success"  
+                />
+            </template>
+            
+            <template #importarButton>
+                <DxButton
+                    @click = "importar_trd()"
+                    icon   = "fas fa-upload"
+                    text   = "Importar trd"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #exportarButton>
+                <DxButton
+                    @click = "exportar()"
+                    icon   = "fas fa-file-export"
+                    text   = "Exportar información basica"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #exportarlogButton>
+                <DxButton
+                    @click = "exportar_log()"
+                    icon   = "fas fa-file-export"
+                    text   = "Exportar log"
+                    type   = "success"  
+                />
+            </template>
+        
+        </DxDataGrid>
+
+    </div>
+
+</div>

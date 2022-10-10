@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/components/devExpress/predefinidos/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules", 
+        "dist"
+    ]
+}

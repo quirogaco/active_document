@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.signavio.com/bpmn20" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <bpmndi:BPMNDiagram id="ide55563cb-e914-4952-a684-58c64a91915f" name="">
+    <bpmndi:BPMNPlane id="idcd4b5d7c-2d0d-44bd-bb2d-80d191db293a" bpmnElement="id94896cca-294e-4e7d-a556-5c36ea14ffe2">
+      <bpmndi:BPMNShape id="idba8f9813-5ef5-4bcb-9bd7-aaca4727c59f_gui" bpmnElement="idba8f9813-5ef5-4bcb-9bd7-aaca4727c59f">
+        <omgdc:Bounds width="100" height="100" x="200" y="250" />
+      </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="id7aebc665-9af1-4b59-a1c3-265f8fc9afb8_gui" bpmnElement="id7aebc665-9af1-4b59-a1c3-265f8fc9afb8">
+        <omgdc:Bounds width="100" height="100" x="500" y="50" />
+      </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="idd957ab46-c84e-4e39-aba5-ab386a20a161_gui" bpmnElement="idd957ab46-c84e-4e39-aba5-ab386a20a161">
+        <omgdc:Bounds width="100" height="100" x="500" y="450" />
+      </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="idc94f1d76-9dde-41e3-8437-ed0051aafe5c_gui" bpmnElement="idc94f1d76-9dde-41e3-8437-ed0051aafe5c">
+        <omgdc:Bounds width="100" height="100" x="350" y="250" />
+      </bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="id04fb144a-f9b6-4fa2-a1f4-3dc5c2457946_gui" bpmnElement="id04fb144a-f9b6-4fa2-a1f4-3dc5c2457946">
+        <omgdi:waypoint x="250" y="300" />
+      <omgdi:waypoint x="350" y="300" />
+      </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="id8cf066e3-68f1-4808-b1cf-24ad7cf90159_gui" bpmnElement="id8cf066e3-68f1-4808-b1cf-24ad7cf90159">
+        <omgdi:waypoint x="400" y="300" />
+      <omgdi:waypoint x="400" y="100" />
+      <omgdi:waypoint x="500" y="100" />
+      </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="id23999483-f603-4adc-a566-5aa1e84cedbb_gui" bpmnElement="id23999483-f603-4adc-a566-5aa1e84cedbb">
+        <omgdi:waypoint x="400" y="300" />
+      <omgdi:waypoint x="400" y="500" />
+      <omgdi:waypoint x="500" y="500" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+<process id="id94896cca-294e-4e7d-a556-5c36ea14ffe2" name="gestion" isClosed="false" isExecutable="true" processType="None">
+    <startEvent id="idba8f9813-5ef5-4bcb-9bd7-aaca4727c59f" name="iniciar" parallelMultiple="false" isInterrupting="true">
+      <outgoing>id04fb144a-f9b6-4fa2-a1f4-3dc5c2457946</outgoing>
+    </startEvent>
+  <endEvent id="id7aebc665-9af1-4b59-a1c3-265f8fc9afb8" name="finalizar">
+      <incoming>id8cf066e3-68f1-4808-b1cf-24ad7cf90159</incoming>
+    <terminateEventDefinition id="id3e769efe-7b5d-4cf9-bdaf-d29ccdc7f501" />
+    </endEvent>
+  <endEvent id="idd957ab46-c84e-4e39-aba5-ab386a20a161" name="finalizar2">
+      <incoming>id23999483-f603-4adc-a566-5aa1e84cedbb</incoming>
+    <terminateEventDefinition id="id3482cf51-c0e9-40a8-96c9-70fe4935b7ac" />
+    </endEvent>
+  <exclusiveGateway id="idc94f1d76-9dde-41e3-8437-ed0051aafe5c" name="aprobado" gatewayDirection="Unspecified">
+      <incoming>id04fb144a-f9b6-4fa2-a1f4-3dc5c2457946</incoming>
+    <outgoing>id8cf066e3-68f1-4808-b1cf-24ad7cf90159</outgoing>
+    <outgoing>id23999483-f603-4adc-a566-5aa1e84cedbb</outgoing>
+    </exclusiveGateway>
+  <sequenceFlow id="id04fb144a-f9b6-4fa2-a1f4-3dc5c2457946" name="revisa" sourceRef="idba8f9813-5ef5-4bcb-9bd7-aaca4727c59f" targetRef="idc94f1d76-9dde-41e3-8437-ed0051aafe5c" />
+  <sequenceFlow id="id8cf066e3-68f1-4808-b1cf-24ad7cf90159" name="finaliza" sourceRef="idc94f1d76-9dde-41e3-8437-ed0051aafe5c" targetRef="id7aebc665-9af1-4b59-a1c3-265f8fc9afb8">
+      <conditionExpression id="">${amount&gt;=1000}</conditionExpression>
+    </sequenceFlow>
+  <sequenceFlow id="id23999483-f603-4adc-a566-5aa1e84cedbb" name="finaliza2" sourceRef="idc94f1d76-9dde-41e3-8437-ed0051aafe5c" targetRef="idd957ab46-c84e-4e39-aba5-ab386a20a161">
+      <conditionExpression id="">${amount&lt;1000}</conditionExpression>
+    </sequenceFlow>
+  </process>
+</definitions>

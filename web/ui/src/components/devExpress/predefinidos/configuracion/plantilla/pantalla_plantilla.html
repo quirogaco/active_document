@@ -1,0 +1,91 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+        
+        <div class="col-10">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "plantilla"
+                    :form-data = "parametros.plantilla_datos"
+                >
+
+                    <DxSimpleItem
+                        :visible        = false
+                        data-field      = "id"
+                    />          
+
+                    <DxSimpleItem
+                        data-field  = "descripcion"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Descripción"/>
+                        <DxRequiredRule message="Descripción es obligatoria"/> 
+                        <DxStringLengthRule
+                            :max="255"
+                            message="Maximo 255 caracteres"
+                        />                      
+                    </DxSimpleItem>                           
+                    
+                    <DxSimpleItem                
+                        data-field      = "dependencia_id"
+                        editor-type     = "dxSelectBox"
+                        :editor-options = "opciones_dependencia"
+                    >
+                        <DxLabel text="Dependencia especifica"/>
+                    </DxSimpleItem>    
+                
+                    <DxSimpleItem
+                        :visible        = "archivo_visible"
+                        data-field      = "archivos" 
+                        editor-type     = "dxFileUploader"                        
+                        :editor-options = "opciones_anexo"
+                    >
+                        <DxLabel text="Archivo electrónico"/>
+                        <DxRequiredRule message="Archivo obligatorio"/>                                      
+                    </DxSimpleItem>         
+                    
+                    <DxEmptyItem/>
+                    <DxEmptyItem/>  
+
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+
+                <div class="p-3"></div> 
+
+                <DxScrollView
+                    width      = "100%"
+                    height     = "100%"
+                    direction  = "both"
+                    :useNative = "true"
+                > 
+                    <onlyoffice_editor 
+                        ref             = "editor"
+                        v-model:visible = "editor_visible"      
+                        :opciones       = "opciones_onlyoffice"
+                        :key            = "repintar_onlyoffice"
+                    />    
+
+                </DxScrollView>    
+
+
+
+            </div>   
+        
+        </div> 
+            
+    </div> 
+    
+</div>  

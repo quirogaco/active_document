@@ -1,0 +1,80 @@
+<div 
+    id      = "tramite_gestion" 
+    class   = "container-fluid shadow-sm p-3 mb-5 bg-body rounded  vh-100"      
+>
+
+    <ventana_emergente                     
+        :opciones = "opciones_emergente"
+        :key      = "opciones_emergente.emergente_key"
+    />
+
+    <div class="row">
+        <div class=" shadow-sm p-3 mb-1 rounded"> 
+            <DxToolbar
+                v-bind="barra_herramientas"
+            />
+        </div>
+    </div>
+
+    <div class="row bg-body border-5 rounded border-light">
+
+        <div
+            v-bind="atributos_datos"   
+            v-show="atributos_datos.show"
+        ></div>          
+       
+        <div 
+            v-bind="atributos_pdf"  
+            v-show="atributos_pdf.show" 
+        >
+            <pdf_componente 
+                ref          = "visor_pdf" 
+                :nombrePdf   = "opciones_pdf.nombrePdf" 
+                :buscarTexto = "opciones_pdf.buscarTexto" 
+                :operacion   = "opciones_pdf.operacion" 
+                :clase       = "opciones_pdf.clase" 
+                :descarga    = "opciones_pdf.descarga"
+                :datos       = "opciones_pdf.datos" 
+                :opciones    = "opciones_pdf.opciones"  
+                :key         = "repintar_pdf"                      
+            />
+        </div>
+            
+        <div 
+            v-bind="atributos_borrador" 
+            v-show="atributos_borrador.show"  
+        >
+            <onlyoffice_editor 
+                ref       = "editor"
+                :opciones = "opciones_editor"
+                :key      = "repintar_onlyoffice"
+            />     
+        </div>
+
+    </div>
+
+    <div class="row shadow-sm p-1 mb-1 rounded">
+        <div class="shadow p-1 mb-1 fondo_titulo_estado rounded col-sm negrilla ">
+            <i class="fas fa-cogs"></i>            
+            Tramite: <b class="fondo_estado rounded fw-bolder">{{tramite_detalle}}</b>
+        </div>
+
+        <div class="shadow p-1 mb-1 fondo_titulo_estado rounded col-sm negrilla ">
+            <i class="fas fa-thermometer-half"></i>     
+            Estado: <b class="fondo_estado rounded fw-bolder">{{tramite_estado_terminos}}</b>
+        </div>
+
+        <div class="shadow p-1 mb-1 fondo_titulo_estado rounded col-sm negrilla ">
+            <i class="fas fa-user-clock"></i>     
+            Dias Transcurridos: <b class="fondo_estado rounded fw-bolder">
+            ({{tramite_dias_transcurridos}}) -- {{tramite_inicio}}</b>
+        </div>
+
+        <div class="shadow p-1 mb-1 fondo_titulo_estado rounded col-sm negrilla ">
+            <i class="fas fa-clock"></i>     
+            Dias Para vencer: <b class="fondo_estado rounded fw-bolder">
+            ({{tramite_dias_vencer}}) -- {{tramite_vence_en}}</b>
+        </div>
+    </div>
+
+</div>

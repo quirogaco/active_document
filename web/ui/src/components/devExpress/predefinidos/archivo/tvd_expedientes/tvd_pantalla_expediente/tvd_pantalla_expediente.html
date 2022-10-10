@@ -1,0 +1,80 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+
+        <div class="col-8">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "pantalla_expediente_tvd"
+                    :form-data = "parametros.tvd_expediente_datos"
+                >
+
+                    <DxSimpleItem
+                        :visible        = false
+                        data-field      = "id"
+                    />                                     
+                    
+                    <DxSimpleItem                
+                        data-field      = "serie_id"
+                        editor-type     = "dxSelectBox"
+                        :editor-options = "opciones_serie"
+                    >
+                        <DxLabel text="Serie"/>
+                        <DxRequiredRule message="Serie es obligatorio"/>
+                    </DxSimpleItem>
+
+                    <DxSimpleItem                
+                        data-field      = "subserie_id"
+                        editor-type     = "dxSelectBox"
+                        :editor-options = "opciones_subserie"
+                    >
+                        <DxLabel text="SubSerie"/>
+                        <DxRequiredRule message="SubSerie es obligatorio"/>
+                    </DxSimpleItem>                
+
+                    <DxSimpleItem
+                        data-field  = "nombre"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Nombre expediente"/>
+                        <DxRequiredRule message="Nombre es obligatorio"/>   
+                        <DxStringLengthRule
+                            :max="250"
+                            message="Maximo 250 caracteres"
+                        />                 
+                    </DxSimpleItem>
+
+                    <DxEmptyItem/>  
+                
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+                
+            </div>          
+        
+        </div>
+
+        <div class="p-2 "></div>
+
+        <div class="col-12" v-if="expediente_archivos_visible">
+            <tvd_expediente_archivos    
+                ref = "expediente_archivos"         
+                :opciones = "opciones_expediente_archivos"
+            />
+        </div>  
+                
+    </div>  
+
+</div>  

@@ -1,0 +1,82 @@
+<div class="bg_tab_panel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+
+                <div class="dx-fieldset">
+                    <div class="dx-fieldset-header">Datos basicos</div>  
+                    <div class="dx-field">
+                        <div class="dx-field-label">Dependencia:</div>
+                        <div class="dx-field-value">
+                            <DxSelectBox
+                                :data-source    = "fuente"
+                                v-model:value   = "dependencia_id"
+                                display-expr    = "nombre_completo"
+                                value-expr      = "id"
+                                :showClearButton = "true"
+                            >
+                                <DxValidator>
+                                    <DxRequiredRule />                            
+                                </DxValidator>
+                            </DxSelectBox>
+                            
+                        </div>
+                    </div>
+
+                    <div class="dx-field">
+                        <div class="dx-field-label">Detalle:</div>
+                        <div class="dx-field-value">
+                            <DxTextBox
+                                v-model:value = "detalle"
+                            >
+                                <DxValidator>
+                                    <DxRequiredRule />                            
+                                </DxValidator>
+                            </DxTextBox>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>      
+        </div>
+
+        <div class="row">
+
+            <DxToolbar
+                :element-attr="toolbarAtributos"
+            >
+
+                        <DxItem
+                            :options="boton_salvar"
+                            widget="dxButton"
+                        />
+
+                        <DxItem
+                            v-model:options="boton_modificar"
+                            widget="dxButton"
+                        />
+
+                        <DxItem
+                            v-model:options="boton_borrar"
+                            widget="dxButton"
+                        />
+
+                        <DxItem
+                            v-model:options="boton_regresar"
+                            widget="dxButton"
+                        />
+
+            </DxToolbar>  
+
+        </div>    
+
+
+        <div class="container-fluid">
+            
+                <grid_destinatarios  />
+
+        </div>
+
+    </div>
+</div>

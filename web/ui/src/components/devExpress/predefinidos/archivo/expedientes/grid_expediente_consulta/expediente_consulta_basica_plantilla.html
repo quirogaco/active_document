@@ -1,0 +1,57 @@
+
+<div class="container-fluid">
+
+    <ventana_emergente_prestamo                  
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+    
+    <div class="shadow-sm p-1 mb-1 bg-light rounded">
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :word-wrap-enabled       = "true"
+            :columns                 = "columnas"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @content-ready           = "onContentReady"
+            @row-dbl-click           = "dobleClick"
+        >
+            <DxSearchPanel
+                :visible                  = "true"
+                :highlight-case-sensitive = "true"
+                placeholder               = "Buscar"
+                :width                    = "300"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :allowed-page-sizes="pageSizes"
+                :show-page-size-selector="true"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <template #prestamoButton>
+                <DxButton
+                    @click = "solicitar()"
+                    icon   = "fas fa-plus-square"
+                    text   = "Solicitar prestamo"
+                    type   = "success"  
+                />
+            </template>
+
+        
+        </DxDataGrid>
+    </div>
+</div>

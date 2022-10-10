@@ -1,0 +1,97 @@
+{
+    "name": "Gestion",
+    "prefix": "gestion",
+    "uri": "http://gestion",
+    "xml": {
+        "tagAlias": "lowerCase"
+    },
+    "associations": [],
+    "types": [
+        {
+            "name": "AtributoGestion",
+            "extends": [
+                "bpmn:UserTask"
+            ],
+            "properties": [ 
+                {
+                    "name": "gestion_asigna_responsable",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_traslada_usuario_dependencia",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_traslada_usuario_otra_dependencia",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_traslada_usuario_entidad",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_visto_bueno",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_aprobar",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_devolver",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_traslada_dependencia",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "gestion_traslada_dependencia_entidad",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+
+
+                {
+                    "name": "accion_tipo",
+                    "isAttr": true,
+                    "type": "String"
+                },                               
+                {
+                    "name": "accion_finaliza",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "accion_archivo_anexa",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "accion_archivo_elimina",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+
+                {
+                    "name": "accion_expediente",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "accion_borrador",
+                    "isAttr": true,
+                    "type": "Boolean"
+                }
+            ]
+        }
+    ]
+}

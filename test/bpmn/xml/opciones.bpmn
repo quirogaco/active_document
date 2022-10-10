@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1irc28g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="APROBACION" name="APROBACION" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1q505n1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1q505n1" sourceRef="StartEvent_1" targetRef="GESTION" />
+    <bpmn:userTask id="GESTION" name="GESTION">
+      <bpmn:incoming>Flow_1q505n1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ikxagi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="RADICA" name="RADICA">
+      <bpmn:incoming>Flow_1cgdsxr</bpmn:incoming>
+      <bpmn:outgoing>Flow_06ltniv</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="ARCHIVA" name="ARCHIVA">
+      <bpmn:incoming>Flow_1mht9ti</bpmn:incoming>
+      <bpmn:outgoing>Flow_08rrezb</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_1py2llm" name="aprueba">
+      <bpmn:incoming>Flow_1ikxagi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mht9ti</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1cgdsxr</bpmn:outgoing>
+      <bpmn:outgoing>BORRAR</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1mht9ti" name="NO" sourceRef="Gateway_1py2llm" targetRef="ARCHIVA">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${aprobado=="NO"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1cgdsxr" name="SI" sourceRef="Gateway_1py2llm" targetRef="RADICA">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${aprobado=="SI"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ikxagi" sourceRef="GESTION" targetRef="Gateway_1py2llm" />
+    <bpmn:sequenceFlow id="BORRAR" name="BORRAR" sourceRef="Gateway_1py2llm" targetRef="ELIMINA">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${aprobado=="BORRAR"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_18vai75">
+      <bpmn:incoming>Flow_0cr9sk1</bpmn:incoming>
+      <bpmn:incoming>Flow_06ltniv</bpmn:incoming>
+      <bpmn:incoming>Flow_08rrezb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0cr9sk1" sourceRef="ELIMINA" targetRef="Event_18vai75" />
+    <bpmn:sequenceFlow id="Flow_06ltniv" sourceRef="RADICA" targetRef="Event_18vai75" />
+    <bpmn:sequenceFlow id="Flow_08rrezb" sourceRef="ARCHIVA" targetRef="Event_18vai75" />
+    <bpmn:userTask id="ELIMINA" name="ELIMINA&#10;&#10;">
+      <bpmn:incoming>BORRAR</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cr9sk1</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="APROBACION">
+      <bpmndi:BPMNEdge id="Flow_1mht9ti_di" bpmnElement="Flow_1mht9ti">
+        <di:waypoint x="450" y="202" />
+        <di:waypoint x="450" y="430" />
+        <di:waypoint x="550" y="430" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="457" y="321" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cgdsxr_di" bpmnElement="Flow_1cgdsxr">
+        <di:waypoint x="450" y="152" />
+        <di:waypoint x="450" y="80" />
+        <di:waypoint x="550" y="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="460" y="115" width="11" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ikxagi_di" bpmnElement="Flow_1ikxagi">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="425" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q505n1_di" bpmnElement="Flow_1q505n1">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0079fdv_di" bpmnElement="BORRAR">
+        <di:waypoint x="450" y="202" />
+        <di:waypoint x="450" y="260" />
+        <di:waypoint x="550" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="480" y="238" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cr9sk1_di" bpmnElement="Flow_0cr9sk1">
+        <di:waypoint x="650" y="260" />
+        <di:waypoint x="822" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06ltniv_di" bpmnElement="Flow_06ltniv">
+        <di:waypoint x="650" y="80" />
+        <di:waypoint x="731" y="80" />
+        <di:waypoint x="731" y="260" />
+        <di:waypoint x="822" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08rrezb_di" bpmnElement="Flow_08rrezb">
+        <di:waypoint x="650" y="430" />
+        <di:waypoint x="730" y="430" />
+        <di:waypoint x="730" y="260" />
+        <di:waypoint x="822" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1py2llm_di" bpmnElement="Gateway_1py2llm" isMarkerVisible="true">
+        <dc:Bounds x="425" y="152" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="510" y="167" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0njdqo1_di" bpmnElement="GESTION">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0upk98g_di" bpmnElement="ARCHIVA">
+        <dc:Bounds x="550" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_18vai75_di" bpmnElement="Event_18vai75">
+        <dc:Bounds x="822" y="242" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15gzzfv_di" bpmnElement="RADICA">
+        <dc:Bounds x="550" y="40" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ee89em_di" bpmnElement="ELIMINA">
+        <dc:Bounds x="550" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

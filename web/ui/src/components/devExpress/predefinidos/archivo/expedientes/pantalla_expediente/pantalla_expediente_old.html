@@ -1,0 +1,299 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="text-center fs-4 ">{{titulo}} - {{parametros.expediente_datos.nombre}}</div>
+
+        <div class="col-12">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow-sm p-3 bg-light rounded border">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "pantalla_expediente_trd"
+                    :col-count = "3"
+                    :form-data = "parametros.expediente_datos"
+                >
+
+                    <DxGroupItem
+                        css-class = "p-3 mb-2 border border-primary"
+                    >
+                        <DxSimpleItem
+                            :visible        = false                            
+                            data-field      = "id"
+                        />    
+                        
+                        <DxSimpleItem
+                            data-field       = "dependencia_nombre"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Nombre dependencia"/>
+                        </DxSimpleItem>         
+                        
+                        <DxSimpleItem
+                            data-field  = "codigo"
+                            editor-type = "dxTextBox"
+                            :editor-options = "opciones_lectura"
+                        >
+                            <DxLabel text="Codigo expediente"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem                
+                            data-field      = "serie_id"
+                            editor-type     = "dxSelectBox"
+                            :editor-options = "opciones_serie"
+                        >
+                            <DxLabel text="Serie"/>
+                            <DxRequiredRule message="Serie es obligatorio"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem                
+                            data-field      = "subserie_id"
+                            editor-type     = "dxSelectBox"
+                            :editor-options = "opciones_subserie"
+                        >
+                            <DxLabel text="SubSerie"/>
+                            <DxRequiredRule message="SubSerie es obligatorio"/>
+                        </DxSimpleItem>                
+
+                        <DxSimpleItem
+                            data-field  = "nombre"
+                            editor-type = "dxTextBox"
+                        >
+                            <DxLabel text="Nombre expediente"/>
+                            <DxRequiredRule message="Nombre es obligatorio"/>   
+                            <DxStringLengthRule
+                                :max="250"
+                                message="Maximo 250 caracteres"
+                            />                 
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field  = "caja"
+                            editor-type = "dxNumberBox"
+                        >
+                            <DxLabel text="Caja"/> 
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field  = "ubicacion_topografica"
+                            editor-type = "dxTextBox"
+                        >
+                            <DxLabel text="Ubicación topografica"/>                          
+                            <DxStringLengthRule
+                                :max="50"
+                                message="Maximo 50 caracteres"
+                            />                 
+                        </DxSimpleItem>     
+                        
+                        <DxSimpleItem
+                            data-field  = "observacion"
+                            editor-type = "dxTextArea"
+                        >
+                            <DxLabel text="Observaciones"/>                          
+                            <DxStringLengthRule
+                                :max="500"
+                                message="Maximo 500 caracteres"
+                            />                 
+                        </DxSimpleItem>     
+
+                    </DxGroupItem>
+
+                    <DxGroupItem>
+
+                        <DxSimpleItem
+                            data-field       = "carpetas"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Carpetas"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "total_documentos"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Numero de registros"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "folios_fisicos"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Folios fisicos"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "folios_electronicos"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Folios electronicos"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "etapa"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Etapa de archivo"/>
+                        </DxSimpleItem>                   
+
+                        <DxSimpleItem
+                            data-field       = "estado"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Estado"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "acceso_modo"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Acceso"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "tipo_expediente"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Tipo de expediente"/>
+                        </DxSimpleItem>   
+                        
+                        <DxSimpleItem
+                            data-field       = "ubicacion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Ubicación expediente"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "disposicion_aplicada"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Disposición final"/>
+                        </DxSimpleItem>
+
+                    </DxGroupItem>
+
+                    <DxGroupItem>
+
+                        <DxSimpleItem
+                            data-field       = "fecha_inicial"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Fecha inicial"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "fecha_final"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Fecha final"/>
+                        </DxSimpleItem>                 
+
+                        <DxSimpleItem
+                            data-field       = "anos_gestion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Años en gestión"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "vence_gestion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Gestión vence"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "anos_central"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Años en Central"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "vence_central"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Central vence"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "seleccion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Selección"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "eliminacion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Eliminación"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "conservacion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Conservación"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem
+                            data-field       = "micro_digitalizacion"
+                            editor-type      = "dxTextBox"
+                            :editor-options  = "opciones_lectura"
+                        >
+                            <DxLabel text="Medio técnico"/>
+                        </DxSimpleItem>
+
+                    </DxGroupItem>
+                    
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+                
+            </div>       
+        
+        </div>
+
+        <div class="p-2 "></div>
+
+        <div class="col-12" v-if="expediente_archivos_visible">
+            <expediente_archivos    
+                ref         = "expediente_archivos"         
+                :parametros = "expediente_archivos_parametros"
+            />
+        </div>  
+                
+    </div>  
+
+</div>  

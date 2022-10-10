@@ -1,0 +1,93 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">    
+                            
+        <div class="container-fluid shadow p-3 mb-2  rounded"> 
+            
+            <DxForm
+                ref             = "forma"
+                col-count       = 4
+                id              = "reporte_diseno"
+                :form-data      = "datos_forma"
+            >
+            
+                <DxSimpleItem
+                    data-field      = "codigo"
+                    editor-type     = "dxTextBox"
+                    :label          = "opciones_codigo.label"
+                    :editor-options = "opciones_codigo"
+                >
+                </DxSimpleItem>
+            
+                <DxSimpleItem
+                    data-field      = "nombre"
+                    editor-type     = "dxTextBox"
+                    :label          = "opciones_nombre.label"
+                    :editor-options = "opciones_nombre"
+                >
+                </DxSimpleItem>
+
+                <DxSimpleItem            
+                    data-field      = "fuentes"
+                    editor-type     = "dxTextBox"
+                    :label          = "opciones_fuente.label"
+                    :editor-options = "opciones_fuente"
+                >
+                </DxSimpleItem>
+
+                <DxEmptyItem/>
+                <DxEmptyItem/>
+            
+            </DxForm>
+
+            <DxToolbar
+                ref = "barra"
+                :items = "barra_botones"
+            />
+                
+        
+        </div>
+
+        <div class="container-fluid shadow p-3 mb-5  rounded"> 
+            <DxButton
+                id="exportButton"
+                icon="exportpdf"
+                text="Exportar a PDF"
+                @click="exportar_pdf()"
+            />
+
+            <div class="row">
+                <div>
+
+                    <DxDataGrid
+                        ref="grid_reporte"
+                        :data-source             = "fuente_datos_grid"
+                        :selection               = "{ mode: 'single' }"
+                        :remote-operations       = "true"
+                        :allow-column-reordering = "true"
+                        :allow-column-resizing   = "true"
+                        :row-alternation-enabled = "true"
+                        :word-wrap-enabled       = "true"
+                        :show-borders            = "true"
+                        :columns                 = "columnas_grid"
+                        width                    = "100%"
+                    >
+                        <DxSearchPanel
+                            :visible                  = "true"
+                            :highlight-case-sensitive = "true"
+                            :width                    = "300"
+                        />
+
+                        <DxFilterRow 
+                            :visible="true" 
+                        />      
+
+                        <DxExport
+                            :enabled="true"
+                        />                     
+                    
+                    </DxDataGrid>   
+                
+                </div>  
+            </div>
+        </div>
+    
+</div> 

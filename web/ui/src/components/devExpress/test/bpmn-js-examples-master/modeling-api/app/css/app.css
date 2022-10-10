@@ -1,0 +1,159 @@
+:root {
+  --blue-base-65: #4d90ff;
+
+  --silver-base-97: #f8f8f8;
+  --silver-darken-94: #efefef;
+
+  --grey-lighten-56: #909090;
+  --grey-darken-23: #3b3b3b;
+
+  --orange-base-60: #ffa533;
+  --orange-lighten-85: #ffddb3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--grey-darken-23);
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.snippets {
+  width: 20%;
+  overflow-y: auto;
+}
+
+.snippets__list {
+  margin: 0;
+  padding: 0;
+}
+
+.snippets__list-item {
+  list-style: none;
+  padding: 10px;
+  user-select: none;
+  cursor: default;
+}
+
+.snippets__list-item-name {
+  margin: 0;
+  font-size: 16px;
+}
+
+.snippets__list-item-description {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.snippets__list-item:not(.snippets__list-item--active) .snippets__list-item-description {
+  /* display: none; */
+}
+
+.snippets__list-item:hover,
+.snippets__list-item--active {
+  background-color: var(--blue-base-65);
+  color: var(--silver-base-97);
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  color: var(--grey-darken-23);
+  background-color: var(--silver-darken-94);
+  padding: 10px;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--grey-lighten-56);
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: var(--blue-base-65);
+}
+
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: var(--blue-base-65);
+}
+
+.hljs-attribute {
+  color: var(--blue-base-65);
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: var(--blue-base-65);
+}
+
+.hljs-title,
+.hljs-section {
+  color: var(--blue-base-65);
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  color: var(--blue-base-65);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.snippet {
+  width: 40%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  font-size: 0;
+}
+
+.snippet__code {
+  height: 100%;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.modeler {
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+}

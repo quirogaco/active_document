@@ -1,0 +1,76 @@
+
+<DxResponsiveBox
+    :screen-by-width     = "screen"
+    single-column-screen = "sm"
+>
+
+    <ventana_emergente_envios                    
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <ventana_planilla                 
+        :opciones = "opciones_planilla"
+        :key      = "emergente_planilla_key"
+    />
+
+
+    <!-- FILAS -->
+    <!-- Fila 0 - Barr acciones -->
+    <DxRow :ratio="1"/>        
+    
+    <DxItem>
+        <DxLocation
+            :row="0"
+            :col="0"   
+        />
+
+        <div class="shadow p-1 mb-2 bg-light rounded">
+            <DxDataGrid
+                ref="grid"
+                :data-source             = "fuente_datos"
+                :selection               = "{ mode: 'multiple' }"
+                :show-borders            = "true"
+                :columns                 = "columnas"
+                :selected-row-keys       = "selectedItemKeys"
+                @selection-changed       = "selectionChanged" 
+                @toolbar-preparing       = "onToolbarPreparing"
+                @editor-preparing        = "onEditorPreparing"
+                @row-updated             = "onRowUpdated"
+            >
+                <DxEditing
+                    :allow-updating="true"
+                    :useIcons="true"
+                />
+
+                <template #addButton>
+                    <DxButton
+                        @click = "addRecords()"
+                        icon   = "fas fa-file-import"
+                        text   = "Adicionar salida(s)"
+                    />
+                </template>
+
+                <template #deleteButton>
+                    <DxButton
+                        @click    = "deleteRecords()"
+                        :disabled = "!selectedItemKeys.length"
+                        icon      = "fas fa-trash-alt"
+                        text      = "Borrar"
+                    />
+                </template>
+
+                <template #planillaButton>
+                    <DxButton
+                        @click    = "crear_planilla()"
+                        icon      = "fas fa-bars"
+                        text      = "Crear planilla"
+                    />
+                </template>
+
+            </DxDataGrid>
+        </div>
+        
+    </DxItem>
+
+</DxResponsiveBox>

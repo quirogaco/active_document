@@ -1,0 +1,39 @@
+
+    
+    <div class="shadow p-1 mb-2 bg-light rounded">
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :show-borders            = "true"
+            :columns                 = "columnas"    
+            :selection               = "{ mode: 'single' }"
+            @toolbar-preparing       = "onToolbarPreparing"
+            :selected-row-keys       = "selectedItemKeys"
+            @selection-changed       = "selectionChanged"
+            @row-updated             = "onRowUpdated"
+        >
+
+            <DxEditing
+                :allow-updating="false"
+                :useIcons="true"
+            />
+
+            <template #botonAprueba>
+                <DxButton
+                    @click    = "aprueba_anulacion()"
+                    icon      = "far fa-thumbs-up"
+                    text      = "Aprueba anulación"
+                />
+            </template>
+
+            <template #botonNiega>
+                <DxButton
+                    @click    = "niega_anulacion()"
+                    icon      = "far fa-thumbs-down"
+                    text      = "Niega anulación"
+                />
+            </template>
+
+        </DxDataGrid>
+    </div>
+

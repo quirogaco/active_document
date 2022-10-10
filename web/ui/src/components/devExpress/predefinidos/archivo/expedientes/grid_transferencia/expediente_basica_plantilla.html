@@ -1,0 +1,71 @@
+
+<div class="container-fluid ">
+
+    <div class="shadow-sm p-1 mb-2 bg-light rounded">
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :word-wrap-enabled       = "true"
+            :columns                 = "columnas"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @row-dbl-click           = "dobleClick"
+            @row-updating            = "onRowUpdating"
+        >
+            <DxEditing
+                :allow-updating="true"
+                :useIcons="true"
+            />
+
+            <DxSearchPanel
+                :visible                  = "true"
+                :highlight-case-sensitive = "true"
+                placeholder               = "Buscar"
+                :width                    = "300"
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :allowed-page-sizes="pageSizes"
+                :show-page-size-selector="true"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+            
+            <template #abrirButton>
+                <DxButton
+                    @click = "abrir()"
+                    icon   = "fas fa-door-open"
+                    text   = "Abrir"
+                    type   = "default"  
+                />
+            </template>
+
+            <template #fuidButton>
+                <DxButton
+                    @click = "fuid()"
+                    icon   = "fas fa-file-export"
+                    text   = "Fuid"
+                    type   = "success"  
+                />
+            </template>
+
+        
+        </DxDataGrid>
+    </div>
+
+</div>

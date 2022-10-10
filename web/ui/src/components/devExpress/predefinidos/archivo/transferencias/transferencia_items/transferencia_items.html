@@ -1,0 +1,62 @@
+
+<div class="container-fluid">
+
+    <ventana_emergente_expediente                   
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <div class="shadow p-3 bg-light rounded">
+
+        <DxDataGrid
+            ref="grid_archivos"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :word-wrap-enabled       = "true"
+            :show-borders            = "true"
+            :columns                 = "columnas"
+            width                    = "100%"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @cell-dbl-click          = "celda_doble_click"
+        >
+            <DxSearchPanel
+                :visible                  = "true"
+                :highlight-case-sensitive = "true"
+                placeholder               = "Buscar"
+                :width                    = "300"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :allowed-page-sizes="pageSizes"
+                :show-page-size-selector="true"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <template #crearButton>
+                <DxButton
+                    @click = "crear()"
+                    icon   = "fas fa-plus-square"
+                    text   = "Agregar Documento"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #tipo_icono_plantilla="{ data }">
+                <div v-html="plantilla_icono(data)"></div>
+            </template>
+        
+        </DxDataGrid>   
+    
+    </div>         
+
+</div>

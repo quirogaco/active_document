@@ -1,0 +1,56 @@
+<div class="container-fluid">
+
+        <ventana_emergente_tvd                     
+            :opciones = "opciones_ventana"
+            :key      = "emergente_key"
+        />
+
+        <div class="tw-my-3 tw-bg-gray-50">
+
+            <DxToolbar
+                ref    = "barra"
+                :items = "barra_elementos"
+            />
+            
+        </div>
+
+        <div class="shadow p-3 bg-light rounded">
+
+            <DxTreeList 
+                ref                    = "arbol"
+                id                     = "tvd_definicion"
+                :data-source           = "tvd_data"
+                :root-value            = "-1"
+                key-expr               = "id"
+                parent-id-expr         = "padre_id"
+                :allow-column-resizing = "true"
+                :column-auto-width     = "true"     
+                @selection-changed     = "seleccione_elemento"   
+                @rowDblClick           = "onRowDblClick"    
+            >
+
+                <DxColumn
+                    :width="200"
+                    data-field="codigo"
+                />
+                
+                <DxColumn
+                    :width="800"
+                    data-field="nombre"
+                />            
+
+                <DxColumn
+                    :width="200"
+                    data-field="tipo"
+                />
+
+                <DxSelection mode="single" />
+
+                <DxFilterRow :visible="true" />
+                <DxSearchPanel :visible="true" />
+
+            </DxTreeList>
+
+        </div>
+
+</div>

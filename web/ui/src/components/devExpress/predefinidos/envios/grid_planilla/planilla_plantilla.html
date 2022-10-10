@@ -1,0 +1,34 @@
+
+    
+    <div class="shadow p-1 mb-2 bg-light rounded">
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :show-borders            = "true"
+            :columns                 = "columnas"    
+            :selection               = "{ mode: 'single' }"
+            @toolbar-preparing       = "onToolbarPreparing"
+            :selected-row-keys       = "selectedItemKeys"
+            @selection-changed       = "selectionChanged"
+            @row-dbl-click           = "dobleClick"       
+        >
+
+            <template #planillaButton>
+                <DxButton
+                    @click    = "abre_planilla()"
+                    icon      = "fas fa-door-open"
+                    text      = "Abrir planilla"
+                />
+            </template>
+
+            <template #planillaImprime>
+                <DxButton
+                    @click    = "imprimir_planilla()"
+                    icon      = "fas fa-print"
+                    text      = "Imprimir planilla"
+                />
+            </template>
+
+        </DxDataGrid>
+    </div>
+

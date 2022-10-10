@@ -1,0 +1,31 @@
+
+    
+    <div class="shadow p-1 mb-2 bg-light rounded">
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :show-borders            = "true"
+            :columns                 = "columnas"    
+            :selection               = "{ mode: 'single' }"
+            @toolbar-preparing       = "onToolbarPreparing"
+            :selected-row-keys       = "selectedItemKeys"
+            @selection-changed       = "selectionChanged"
+            @row-updated             = "onRowUpdated"
+        >
+
+            <DxEditing
+                :allow-updating="false"
+                :useIcons="true"
+            />
+
+            <template #botonEnvio>
+                <DxButton
+                    @click    = "envio_salida()"
+                    icon      = "fas fa-paper-plane"
+                    text      = "Enviar por correo"
+                />
+            </template>
+
+        </DxDataGrid>
+    </div>
+

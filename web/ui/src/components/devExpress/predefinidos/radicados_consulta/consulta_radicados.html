@@ -1,0 +1,81 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+        
+        <div class="col-10">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "consulta radicados"
+                    :form-data = "parametros.datos"
+                >
+
+                    <DxSimpleItem
+                        data-field  = "nro_radicado"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Numero de radicado a consultar"/>
+                        <DxRequiredRule message="Numero de radicado es obligatorio"/> 
+                        <DxStringLengthRule
+                            :max="30"
+                            message="Maximo 30 caracteres"
+                        />                      
+                    </DxSimpleItem>  
+
+                    <DxGroupItem
+                        :visible="grupo_datos_visible"
+                    >
+
+                        <DxSimpleItem
+                            data-field      = "gestion_estado"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "campo_opciones"
+                        >
+                            <DxLabel text="Estado de la petición"/>
+                        </DxSimpleItem>  
+
+                        <DxSimpleItem
+                            data-field      = "gestion_inicio"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "campo_opciones"
+                        >
+                            <DxLabel text="Asignada en"/>
+                        </DxSimpleItem>  
+
+                        <DxSimpleItem
+                            data-field      = "gestion_dependencia_nombre"
+                            editor-type     = "dxTextBox"
+                            :editor-options = "campo_opciones"
+                        >
+                            <DxLabel text="Asignada a"/>
+                        </DxSimpleItem>  
+
+                    </DxGroupItem>  
+
+                    <DxEmptyItem/>
+                    <DxEmptyItem/>  
+
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+
+                <div class="p-3"></div> 
+
+            </div>   
+        
+        </div> 
+            
+    </div> 
+    
+</div>  

@@ -1,0 +1,37 @@
+<div class="container-fluid vh-100">
+
+    <div class="shadow p-1 mb-2 bg-light rounded">
+        <ventana_emergente_destinatarios                   
+            :opciones = "opciones_ventana"
+            :key      = "emergente_key"
+        />
+
+        
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :show-borders            = "true"
+            :columns                 = "columnas"    
+            :selection               = "{ mode: 'multiple'}"
+            @toolbar-preparing       = "onToolbarPreparing"
+        >
+
+            <DxEditing
+                :allow-updating = "true"
+                :allow-deleting = "true"
+                :allow-adding   = "true"            
+                :useIcons       = "true"
+                mode            = "row"
+            />
+
+            <template #botonBuscar>
+                <DxButton
+                    @click    = "buscar_terceros()"
+                    icon      = "fas fa-search"
+                    text      = "Buscar terceros"
+                />
+            </template>
+
+        </DxDataGrid>
+    </div>
+</div>

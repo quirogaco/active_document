@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0jxpwkn" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="randomNumberProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0lf4o2x</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0lf4o2x" sourceRef="StartEvent_1" targetRef="generate_random" />
+    <bpmn:endEvent id="Event_1u27pac">
+      <bpmn:incoming>Flow_19gwij7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_19gwij7" sourceRef="printNumber" targetRef="Event_1u27pac" />
+    <bpmn:serviceTask id="printNumber" name="Print number" camunda:type="external" camunda:topic="">
+      <bpmn:incoming>Flow_1soz5zr</bpmn:incoming>
+      <bpmn:outgoing>Flow_19gwij7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1soz5zr" sourceRef="generate_random" targetRef="printNumber" />
+    <bpmn:userTask id="generate_random" name="Generate random number">
+      <bpmn:incoming>Flow_0lf4o2x</bpmn:incoming>
+      <bpmn:outgoing>Flow_1soz5zr</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="randomNumberProcess">
+      <bpmndi:BPMNEdge id="Flow_19gwij7_di" bpmnElement="Flow_19gwij7">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="602" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lf4o2x_di" bpmnElement="Flow_0lf4o2x">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="230" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1soz5zr_di" bpmnElement="Flow_1soz5zr">
+        <di:waypoint x="330" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1u27pac_di" bpmnElement="Event_1u27pac">
+        <dc:Bounds x="602" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1c1te3b_di" bpmnElement="printNumber">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l4945i_di" bpmnElement="generate_random">
+        <dc:Bounds x="230" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,298 @@
+.blanco {
+    background-color: white;
+}
+
+.linea_blanco {
+    padding-top: 7px;
+    padding-bottom: 7px
+}
+
+.azul_claro {
+    background-color: #6FB4F3 !important;
+}
+
+.boton_accion {
+    font-weight: 600;
+}
+
+.boton_accion_font {
+    font-weight: 600;    
+}
+
+.h-10 {
+    height: 10% !important;
+}
+
+.h-5 {
+    height: 10% !important;
+}
+
+.vh-90 {
+    height: 90vh !important;
+}
+
+.vh-85 {
+    height: 85vh !important;
+}
+
+.vh-80 {
+    height: 80vh !important;
+}
+
+.vh-75 {
+    height: 75vh !important;
+}
+
+.vh-70 {
+    height: 70vh !important;
+}
+
+.vh-50 {
+    height: 50vh !important;
+}
+
+/*  Barra de herramientas tipo de letra  */ 
+.toolbar-label,
+.toolbar-label > b {
+    font-size: 20px;
+}
+
+/*  Barra de herramientas tipo de letra  */ 
+.long-title {
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/*  Herramientas */ 
+.separador {
+    margin-bottom: 10px;
+}
+
+.separador_izquierdo {
+    margin-left: 10px;
+}
+
+.centered  {  
+    margin: 0 auto;  
+    float: none !important;  
+    display: table;  
+}  
+
+.top_general {
+    top: 200
+}
+
+/* Modal de visor */
+.modal {
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+Devepoler express
+*/
+
+/* Panel global de tab */
+.bg_tab_panel {
+    background-color: #F8FCFF;
+}
+
+/* Barra del grid */
+.bg_barra_grid {  
+    color: black;  
+    background-color: white;
+    font-weight: 400;
+    font-size: 12px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+} 
+
+/* Pantalla de navegación */
+.bg_encabezado {
+    background-color:  white !important;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.bg_navegacion {
+    box-shadow:#7E85E7, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    height: 100vh;
+}
+
+.bg_navegacion1 {
+    background-color:  white !important;
+    height: 100vh;
+}
+
+/* Arbol de navegacion */ 
+.bg_arbol {      
+    color: red !important;  
+    font-weight: bold;
+    font-size: 14px;
+} 
+
+/* Fondo de pantalla */
+.bg_pantalla {
+    background-color:#f8f9fa !important;
+}
+
+bg-forma {
+    background-color:#f8f9fa !important;
+}
+
+
+/*
+Grilla
+*/  
+.dx-gridbase-container {
+    background-color: white;
+}
+
+/* Encabezado de la grilla */
+.dx-data-row {
+    color:black;  
+    font-weight: 600;
+    font-size: 14px
+}
+
+.dx-info {
+    color:black;  
+    font-weight: 600;
+    font-size: 14px
+}
+
+.dx-datagrid-header-panel {
+    background-color: rgba(240, 240, 240, 0.8); /* Needed for IEs */
+    -moz-box-shadow: 2px 2px 2px rgba(249, 249, 249, 0.6);
+    -webkit-box-shadow: 2px 2px 2px rgba(249, 249, 249, 0.6);
+    box-shadow: 2px 2px 2px rgba(249, 249, 249, 0.6);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+
+    border-color: #CFE2D8;
+    border-radius: 5px;
+    padding: 3px 3px 0px 0px;
+}
+
+.dx-datagrid-header-panel .dx-toolbar {            
+    background-color: rgba(240, 240, 240, 0.8); /* Needed for IEs */
+}
+
+.dx-datagrid-headers {
+    color: black;  
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #D9D9D9; 
+}
+
+/*
+.dx-header-row {
+    
+}
+*/
+
+/*
+FORMA
+*/
+
+/* Campos de consulta */
+.dx-state-disabled .dx-texteditor-input{  
+    color: black;  
+    font-weight: bold;
+    font-size: 13px;
+} 
+
+/* Ingreso de datos */
+.dx-texteditor-input{  
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+    color: black;  
+    font-weight: 700;
+    font-size: 13px;
+} 
+
+/* Lalbel de campos */
+.dx-field-item-label-text {
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+    font-weight: bold;
+    font-size: 14px;
+    color:black !important;  
+}
+
+/* Marca de requerido */
+.dx-field-item-required-mark {
+    font-weight: 750;
+}
+
+/* Grupo de forma */
+.bg_grupo {
+    background-color: #DBE5F6;
+}
+
+/* Iconos de panatlla de gestión */
+.fas {
+    background-color : silver; 
+}
+
+.fa-file-pdf1  {
+    background-color : silver; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.fa-file-word1  {
+    background-color : silver; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.fa-align-justify1  {
+    background-color : silver; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.fa-file-alt1  {
+    background-color : silver; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.dx-fileuploader-files-container {  
+    overflow-y: auto;  
+    max-height: 300px;  
+}
+
+.dx-fileuploader-upload-button {  
+    display: none;  
+}
+
+.dx-scrollbar-vertical .dx-scrollbar-hoverable {
+    width: 20px !important;
+    height: 100px !important;
+}
+
+.dx-scrollbar-vertical .dx-scrollable-scroll {
+    width: 20px !important;
+    height: 100px !important;
+    background-color : #D9D9D9;
+}
+
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable {
+    height: 12px !important;
+    background-color : #ffff; 
+}
+
+.dx-scrollbar-horizontal .dx-scrollable-scroll {
+    height: 12px !important;
+    background-color : #ffff; 
+}
+
+.dx-button .dx-icon {  
+    float: left; 
+}  
+
+.dx-button-has-text .dx-button-content {  
+    float: left; 
+}  
+

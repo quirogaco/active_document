@@ -1,0 +1,37 @@
+
+<DxResponsiveBox
+    :screen-by-width     = "screen"
+    single-column-screen = "sm"
+>
+
+    <!-- FILAS -->
+    <!-- Fila 0 - Barr acciones -->
+    <DxRow :ratio="1"/>        
+    
+    <DxItem>
+        <DxLocation
+            :row="0"
+            :col="0"   
+        />
+
+        <div class="shadow p-1 mb-2 bg-light rounded">
+            <DxDataGrid
+                ref="grid"
+                :data-source             = "fuente_datos"
+                :selection               = "{ mode: 'single' }"
+                :show-borders            = "true"
+                :columns                 = "columnas"
+                :selected-row-keys       = "selectedItemKeys"
+                @row-updated              ="onRowUpdated"
+            >
+                <DxEditing
+                    :allow-updating="true"
+                    :useIcons="true"
+                />
+
+            </DxDataGrid>
+        </div>
+        
+    </DxItem>
+
+</DxResponsiveBox>

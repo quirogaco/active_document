@@ -1,0 +1,53 @@
+<div class="container-fluid">
+
+    <div class="shadow-sm p-1 mb-2 ">
+
+        <div class="text-center fs-3 ">{{basica.titulo_grid}}</div> 
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :word-wrap-enabled       = "true"
+            :columns                 = "columnas"
+            :pager                   = "pager"
+            @cell-dbl-click          = "columna_doble_click"
+        >
+            <DxSearchPanel
+                :visible                  = "true"
+                :highlight-case-sensitive = "false"
+                placeholder               = "Buscar"
+                :width                    = "300"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <DxPager
+                :allowed-page-sizes="[10, 25, 50, 100]"
+                :show-page-size-selector="true"
+                :display-mode="full"
+                :show-info="true"
+                :show-navigation-buttons="true"
+                :show-pageSize-selector="true"
+                :visible="true"
+            />
+
+            <template #icono_pdf_template="{ data }">
+                <div v-html="icono_pdf_template(data)"></div>
+            </template>
+
+        </DxDataGrid>    
+
+    </div>
+
+</div>

@@ -1,0 +1,112 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+        
+        <div class="col-10">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    :id        = "forma_id"
+                    :form-data = "parametros.datos"
+                >
+
+                    <DxSimpleItem
+                        :visible        = false
+                        data-field      = "id"
+                    />          
+
+                    <DxSimpleItem
+                        data-field  = "descripcion"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Descripción"/>
+                        <DxRequiredRule message="Descripción es obligatorio"/> 
+                        <DxStringLengthRule
+                            :max="255"
+                            message="Maximo 120 caracteres"
+                        />                      
+                    </DxSimpleItem>                           
+                    
+                    <DxGroupItem
+                        caption="Autorizar a funcionarios y grupos"
+                    >
+                        <DxSimpleItem                
+                            data-field      = "usuarios"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "usuarios_opciones"
+                        >
+                            <DxLabel text="Usuarios autorizados"/>
+                        </DxSimpleItem>
+                        
+                        <DxSimpleItem                
+                            data-field      = "grupos"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "grupos_opciones"
+                        >
+                            <DxLabel text="Grupos autorizados"/>
+                        </DxSimpleItem>
+
+                    </DxGroupItem>
+
+                    <DxGroupItem
+                        caption="Autorizacion sobre expedientes"
+                    >
+                        <DxSimpleItem                
+                            data-field      = "territoriales"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "territoriales_opciones"
+                        >
+                            <DxLabel text="Territoriales expedientes"/>
+                        </DxSimpleItem>
+                        
+                        <DxSimpleItem                
+                            data-field      = "dependencias"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "dependencias_opciones"
+                        >
+                            <DxLabel text="Dependencias expedientes"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem                
+                            data-field      = "series"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "series_opciones"
+                        >
+                            <DxLabel text="Series expedientes"/>
+                        </DxSimpleItem>
+
+                        <DxSimpleItem                
+                            data-field      = "subseries"
+                            editor-type     = "dxTagBox"
+                            :editor-options = "subseries_opciones"
+                        >
+                            <DxLabel text="Subseries expedientes"/>
+                        </DxSimpleItem>
+
+                    </DxGroupItem>
+
+                    <DxEmptyItem/>
+                    <DxEmptyItem/>  
+
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+
+            </div>   
+        
+        </div> 
+            
+    </div> 
+    
+</div>  

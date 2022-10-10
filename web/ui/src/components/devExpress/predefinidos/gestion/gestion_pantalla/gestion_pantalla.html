@@ -1,0 +1,62 @@
+<div 
+    id      = "gestion_pantalla" 
+    class   = "container-fluid shadow p-3 mb-5 bg-body rounded vh-100"    
+>
+
+    <ventana_emergente                     
+       :opciones = "opciones_ventana"
+       :key      = "emergente_key"
+    />
+
+    <div class=" shadow p-3 mb-1  rounded"> 
+        <DxToolbar
+            :items = "barra_elementos_visuales"
+        />
+    </div>
+    
+    <div 
+        class="row"
+        height= "700"
+    >
+
+        <div class="text-center fs-3 shadow-sm  bg-light rounded">{{titulo_gestion}}</div> 
+
+        <div 
+            :class  ="clase_pdf"
+            :width  = "pdf_ancho"
+            :height = "pdf_alto"  
+            v-show  = "verPdf"
+        >                      
+        
+            <pdf_componente 
+                ref          = "visor_pdf" 
+                :nombrePdf   = "opciones_pdf.nombrePdf" 
+                :buscarTexto = "opciones_pdf.buscarTexto" 
+                :operacion   = "opciones_pdf.operacion" 
+                :clase       = "opciones_pdf.clase" 
+                :descarga    = "opciones_pdf.descarga"
+                :datos       = "opciones_pdf.datos" 
+                :opciones    = "opciones_pdf.opciones"  
+                :key         = "repintar_pdf"                      
+            />
+
+        </div>
+    
+        <div 
+            :class  = "clase_borrador"
+            :width  = "borrador_ancho"
+            :height = "borrador_alto"  
+            v-show  = "verBorrador"
+        >                    
+
+            <onlyoffice_editor 
+                ref       = "editor"
+                :opciones = "opciones_editor"
+                :key      = "repintar_onlyoffice"
+            />    
+
+        </div>
+
+    </div>        
+
+</div>

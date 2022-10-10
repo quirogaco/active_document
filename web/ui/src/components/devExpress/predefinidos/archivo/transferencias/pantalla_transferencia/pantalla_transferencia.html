@@ -1,0 +1,63 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+
+        <div class="col-8">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "pantalla_transferencia_trd"
+                    :form-data = "parametros.transferencia_datos"
+                >
+
+                    <DxSimpleItem                
+                        data-field      = "dependencia_id"
+                        editor-type     = "dxSelectBox"
+                        :editor-options = "opciones_dependencia"
+                    >
+                        <DxLabel text="Dependencia"/>
+                        <DxRequiredRule message="Dependencia es obligatoria"/>
+                    </DxSimpleItem>
+
+                    <DxSimpleItem
+                        data-field      = "fecha_transferencia"
+                        editor-type     = "dxDateBox"
+                        :editor-options = "opciones_fecha"    
+                    >
+                        <DxLabel text="Fecha de la transferencia"/>
+                        <DxRequiredRule message="Fecha es obligatoria"/> 
+                    </DxSimpleItem>
+
+                    <DxEmptyItem/>  
+                
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+                
+            </div>          
+        
+        </div>
+
+        <div class="p-2 "></div>
+
+        <div class="col-12" v-if="transferencia_items_visible">
+            <transferencia_items    
+                ref = "transferencia_items_expedientes"         
+                :opciones = "opciones_transferencia_items"
+            />
+        </div>  
+                
+    </div>  
+
+</div>  

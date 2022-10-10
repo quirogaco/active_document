@@ -1,0 +1,39 @@
+{
+    "name": "Gestion",
+    "prefix": "gestion",
+    "uri": "http://gestion",
+    "xml": {
+        "tagAlias": "lowerCase"
+    },
+    "associations": [],
+    "types": [
+        {
+            "name": "AtributoGestion",
+            "extends": [
+                "bpmn:UserTask"
+            ],
+            "properties": [
+                {
+                    "name": "accion_tipo",
+                    "isAttr": true,
+                    "type": "String"
+                },
+                {
+                    "name": "accion_finaliza",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "accion_archivo_anexa",
+                    "isAttr": true,
+                    "type": "Boolean"
+                },
+                {
+                    "name": "accion_archivo_elimina",
+                    "isAttr": true,
+                    "type": "Boolean"
+                }
+            ]
+        }
+    ]
+}

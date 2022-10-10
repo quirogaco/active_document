@@ -1,0 +1,35 @@
+<div class="container-fluid shadow-sm p-3 mb-5 rounded">  
+
+    <div class="row justify-content-center"> 
+        <div class="">
+            <DataForma     
+                ref         = "formRef"  
+                :attributes = "atributos_forma"
+                @mounted    = "dataFormaMounted"
+            />
+
+            <div class="linea_blanco"></div>            
+        </div>
+    </div>
+
+    <div class="row justify-content-center"> 
+        <div class="col-5">
+            <ToolBar    
+                ref         = "barraRef"  
+                :attributes = "atributos_barra"
+            />
+        </div>
+    </div>
+
+</div> 
+
+<div class="p-2 ">
+
+    <div v-if="arbol_visible">
+        <trd_arbol    
+            ref = "componente_arbol"         
+            :opciones = "opciones_arbol"
+        />
+    </div>
+
+</div>

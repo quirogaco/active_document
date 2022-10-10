@@ -1,0 +1,136 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+
+    <div class="row justify-content-center">
+        
+        <div class="col-10">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow p-3 bg-light rounded">
+
+                <DxForm
+                    ref        = "forma"
+                    id         = "pantalla_tvd"
+                    :form-data = "parametros.tvd_datos"
+                >
+
+                    <DxSimpleItem
+                        :visible        = false
+                        data-field      = "id"
+                    />                                     
+                    
+                    <DxSimpleItem                
+                        data-field      = "fondo_id"
+                        editor-type     = "dxSelectBox"
+                        :editor-options = "opciones_fondo"
+                    >
+                        <DxLabel text="Fondo documental"/>
+                        <DxRequiredRule message="Fondo es obligatorio"/>
+                    </DxSimpleItem>                
+
+                    <DxSimpleItem
+                        data-field  = "sigla"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Sigla"/>
+                        <DxRequiredRule message="Sigla es obligatoria"/>   
+                        <DxStringLengthRule
+                            :max="30"
+                            message="Maximo 30 caracteres"
+                        />                 
+                    </DxSimpleItem>
+
+                    <DxEmptyItem/>
+
+                    <DxSimpleItem
+                        data-field  = "nombre"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Descripción"/>
+                        <DxRequiredRule message="Descripción es obligatoria"/> 
+                        <DxStringLengthRule
+                            :max="200"
+                            message="Maximo 200 caracteres"
+                        />                      
+                    </DxSimpleItem>
+
+                    <DxEmptyItem/>
+
+                    <DxSimpleItem
+                        data-field  = "periodo"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Periodo"/>
+                        <DxRequiredRule message="Periodo es obligatoria"/>   
+                        <DxStringLengthRule
+                            :max="10"
+                            message="Maximo 10 caracteres"
+                        />                 
+                    </DxSimpleItem>
+
+                    <DxEmptyItem/>
+
+                    <DxSimpleItem
+                        data-field  = "fecha_periodo"
+                        editor-type = "dxDateBox"
+                        :editor-options = "opciones_fecha"                   
+                    >
+                        <DxLabel text="Fecha aprobación"/>
+                        <DxRequiredRule message="Fecha es obligatoria"/>                                   
+                    </DxSimpleItem>
+           
+                    <DxSimpleItem
+                        data-field  = "territorial_codigo"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Territorial codigo"/>
+                        <DxRequiredRule message="Territorial codigo es obligatorio"/>   
+                        <DxStringLengthRule
+                            :max="20"
+                            message="Maximo 20 caracteres"
+                        />                 
+                    </DxSimpleItem>
+
+                    <DxSimpleItem
+                        data-field  = "territorial_nombre"
+                        editor-type = "dxTextBox"
+                    >
+                        <DxLabel text="Territorial nombre"/>
+                        <DxRequiredRule message="Territorial nombre es obligatorio"/>   
+                        <DxStringLengthRule
+                            :max="200"
+                            message="Maximo 200 caracteres"
+                        />                 
+                    </DxSimpleItem>
+
+                    <DxEmptyItem/>
+                    <DxEmptyItem/>  
+
+                </DxForm>
+
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+
+            </div>   
+            
+    </div>                  
+
+    <div class="p-2 "></div>
+
+        <div v-if="arbol_visible">
+            <tvd_arbol    
+                ref = "componente_arbol"         
+                :opciones = "opciones_arbol"
+            />
+        </div>
+    
+    </div>  
+                
+
+</div>  

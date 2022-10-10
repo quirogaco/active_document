@@ -1,0 +1,87 @@
+
+<div class="container-fluid">
+    
+    <ventana_emergente_archivo                  
+        :opciones = "opciones_ventana_emergente_archivo"
+        :key      = "emergente_key"
+    />
+
+    <div class="shadow p-1 mb-2 bg-light rounded">
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :columns                 = "columnas"
+            :word-wrap-enabled       = "true"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @cell-dbl-click          = "columna_doble_click"
+        >
+            <DxSearchPanel
+                :visible                  = "true"                
+                :width                    = "300"
+                placeholder               = "BuscarSSSS"
+                :highlight-search-text    = "false"
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :visible="true"
+                :allowed-page-sizes="pageSizes"
+                :display-mode="displayMode"
+                :show-page-size-selector="showPageSizeSelector"
+                :show-info="showInfo"
+                :show-navigation-buttons="showNavButtons"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <template #radicarButton>
+                <DxButton
+                    @click = "radicar()"
+                    icon   = "fas fa-plus-square"
+                    text   = "Radicar"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #cargarAnexo>
+                <DxButton
+                    @click = "cargar_anexo()"
+                    icon   = "far fa-file"
+                    text   = "Cargar AnexosXXX"
+                    type   = "normal"  
+                />
+            </template>
+
+            <template #cargarDocumento>
+                <DxButton
+                    @click = "cargar_documento()"
+                    icon   = "fas fa-file"
+                    text   = "Cargar Pdf principal"
+                    type   = "normal"  
+                />
+            </template>     
+
+            <template #icono_pdf_template="{ data }">
+                <div v-html="icono_pdf_template(data)"></div>
+            </template>       
+        
+        </DxDataGrid>
+
+    </div>
+
+</div>

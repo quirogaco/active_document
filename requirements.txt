@@ -1,0 +1,43 @@
+SQLAlchemy               # Manejo de bases de datos SQL
+sqlalchemy-utils         # Utilidades Sqlalchemy
+cx_Oracle                # driver oracle
+pycamunda                # Bpmn camunda
+orjson                   # Json parser, para fastapi
+python-box               # Dicionarios dinamicos
+parent_import            # Importar modulos de directorios padres
+minio                    # Repositorios de objetos
+docx                     # Docx
+docxtpl                  # Plantillas word
+fleep                    # Detectos de tipos de archivo
+pillow                   # Manejo de imagenes
+fastapi                  # Servicios web de alto rendimiento
+uvicorn[standard]        # ASGI servidor
+requests                 # Consultas y peticiones REST
+requests-toolbelt        # Utilitarios request
+pdfminer.six             # Extrae texto de un pdf pagina a pagina
+pydantic                 # Clase para validación
+datamodel-code-generator # Generador de clases pydantic
+prefect                  # Herramienta para crear flujos de trabajo de datos
+sqlathanor               # Serializa sqlalchemy a dicionrios, json, csv
+redis                    # Cliente redis
+python-rapidjson         # Json parser para load datetime
+pandas                   # Pandas libreria de datos
+minio                    # Manejo de archivos
+python-dotenv            # Variables archivos .env
+nested-lookup            # Buscar en objetos anidados
+dict-deep                # Manja valores dentro de diccionario anidados
+PyPDF2                   # Manipulación archivos pdf
+elasticsearch[async]==7.17.4     # Elastisearch api
+elasticsearch-dsl==7.4.0         # Elastisearch DSL  api
+requests                 # Libreria para get  y post web
+celery                   # Manejo de colas de mensajeria y tareas
+prettytable              # Creacion de tablas
+shortuuid                # UUID cortico 
+python-multipart         # http mulitpart
+xlsxwriter               # Crea archivos excel
+Pillow                   # pillow
+python-barcode           # python-barcode
+pdfkit
+jinja2
+#python-ldap              # ladp conector
+python3-ldap

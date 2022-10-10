@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="4.5.0">
+  <process id="id752d064b-9ee0-47ae-ac46-ce773b3ce8a6" name="gestion" processType="None" isClosed="false" isExecutable="true">
+    <startEvent id="id5c2fa61b-db32-42c9-a741-66ec8f7acb02" name="iniciar">
+      <outgoing>id0172f528-7a30-4bf5-b26d-68b66ad1f905</outgoing>
+    </startEvent>
+    <endEvent id="id5125effe-24e0-4b7f-a404-6b2f138bf468" name="finalizar">
+      <incoming>id1e7fcb44-d7a5-479d-86f5-e58bcaf88140</incoming>
+      <terminateEventDefinition id="id76a85ba8-8937-4caa-99f1-c09fc81a3277" />
+    </endEvent>
+    <endEvent id="idad7b1af0-a23a-4c81-8e77-3dbe77b157a3" name="finalizar2">
+      <incoming>id9a83cb72-d7ad-4ebd-ae72-0cb71f652351</incoming>
+      <terminateEventDefinition id="id7c5d36ef-c5ec-457e-bb5c-0fd5f718719e" />
+    </endEvent>
+    <exclusiveGateway id="idde9f349f-6138-4ec4-9b74-c0204daf9ab2" name="aprobado">
+      <incoming>id0172f528-7a30-4bf5-b26d-68b66ad1f905</incoming>
+      <outgoing>id1e7fcb44-d7a5-479d-86f5-e58bcaf88140</outgoing>
+      <outgoing>id9a83cb72-d7ad-4ebd-ae72-0cb71f652351</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="id0172f528-7a30-4bf5-b26d-68b66ad1f905" name="revisa" sourceRef="id5c2fa61b-db32-42c9-a741-66ec8f7acb02" targetRef="idde9f349f-6138-4ec4-9b74-c0204daf9ab2" />
+    <sequenceFlow id="id1e7fcb44-d7a5-479d-86f5-e58bcaf88140" name="finaliza" sourceRef="idde9f349f-6138-4ec4-9b74-c0204daf9ab2" targetRef="id5125effe-24e0-4b7f-a404-6b2f138bf468">
+      <conditionExpression id="id371ffaa6-fcb6-4759-b396-c812fe25220e">${aprobado=="SI"}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="id9a83cb72-d7ad-4ebd-ae72-0cb71f652351" name="finaliza2" sourceRef="idde9f349f-6138-4ec4-9b74-c0204daf9ab2" targetRef="idad7b1af0-a23a-4c81-8e77-3dbe77b157a3">
+      <conditionExpression id="id83e81372-09de-4335-aa2e-5e8e6153b8f0">${aprobado=="NO"}</conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="idf11ecdea-87a1-48dd-b610-1fa23331cdad" name="">
+    <bpmndi:BPMNPlane id="ide4292b86-9dca-485c-888b-a90c46ff3dab" bpmnElement="id752d064b-9ee0-47ae-ac46-ce773b3ce8a6">
+      <bpmndi:BPMNEdge id="id9a83cb72-d7ad-4ebd-ae72-0cb71f652351_gui" bpmnElement="id9a83cb72-d7ad-4ebd-ae72-0cb71f652351">
+        <omgdi:waypoint x="400" y="300" />
+        <omgdi:waypoint x="400" y="500" />
+        <omgdi:waypoint x="500" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="id1e7fcb44-d7a5-479d-86f5-e58bcaf88140_gui" bpmnElement="id1e7fcb44-d7a5-479d-86f5-e58bcaf88140">
+        <omgdi:waypoint x="400" y="300" />
+        <omgdi:waypoint x="400" y="100" />
+        <omgdi:waypoint x="500" y="100" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="399" y="190" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="id0172f528-7a30-4bf5-b26d-68b66ad1f905_gui" bpmnElement="id0172f528-7a30-4bf5-b26d-68b66ad1f905">
+        <omgdi:waypoint x="250" y="300" />
+        <omgdi:waypoint x="350" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="id5c2fa61b-db32-42c9-a741-66ec8f7acb02_gui" bpmnElement="id5c2fa61b-db32-42c9-a741-66ec8f7acb02">
+        <omgdc:Bounds x="200" y="250" width="100" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="id5125effe-24e0-4b7f-a404-6b2f138bf468_gui" bpmnElement="id5125effe-24e0-4b7f-a404-6b2f138bf468">
+        <omgdc:Bounds x="500" y="50" width="100" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="idad7b1af0-a23a-4c81-8e77-3dbe77b157a3_gui" bpmnElement="idad7b1af0-a23a-4c81-8e77-3dbe77b157a3">
+        <omgdc:Bounds x="500" y="450" width="100" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="idde9f349f-6138-4ec4-9b74-c0204daf9ab2_gui" bpmnElement="idde9f349f-6138-4ec4-9b74-c0204daf9ab2" isMarkerVisible="true">
+        <omgdc:Bounds x="350" y="250" width="100" height="100" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,494 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+        
+    <div class="row">                 
+        <DataForma     
+            ref="forma_datos"
+            :attributes = "forma_datos_attributos"
+            @mounted    = "dataBaseFormaMounted"
+        />
+    </div> 
+
+    <!-- Barra de accion -->
+    <div class="row">      
+        <ToolBar    
+            ref         = "barraRef"  
+            :attributes = "elementos_barra"
+        />
+    </div> 
+
+    <!-- Definicion de formulario -->
+    <div v-show="en_definicion()" class="row">         
+        <div :class="clase_elementos" v-show="muestra_elementos">  
+            <div class="text-center fs-5 shadow-sm  bg-light rounded">Componentes Formulario</div>               
+            <br>
+            
+            <div class=" d-flex justify-content-center flex-nowrap"> 
+                <DxButtonGroup
+                    :items              = "campos_tipo"
+                    :on-content-ready   = "grupo_botones_listo"
+                    stylingMode         = "text"            
+                />
+            </div>  
+
+        </div>        
+
+        <div :class="clase_forma">   
+                <div class="text-center fs-3 shadow-sm bg-white rounded">Definición Formulario</div>               
+                <DxForm
+                    ref="forma_diseno"
+                    :on-content-ready  = "forma_lista"
+                    :element-attr      = "forma_attributos"   
+                    :scrolling-enabled = "true"             
+                    height = "60vh"
+                    width  = "100%"
+                    :items = "campos"
+                >         
+
+                    <template #campo_texto="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >                           
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxTextBox
+                                        :element-attr     = "data.editorOptions.elementAttr"
+                                        :name             = "data.editorOptions.name"
+                                        :mode             = "data.editorOptions.modo"
+                                        :buttons          = "data.editorOptions.botones"
+                                        :on-content-ready = "data.editorOptions.onContentReady"
+                                        :on-focus-in      = "data.editorOptions.onFocusIn"
+                                        :on-focus-out     = "data.editorOptions.onFocusOut"
+                                    >
+                                    </DxTextBox>
+
+                                </div> 
+                                
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data, index)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data, index)"
+                                    />
+                                </div> 
+                                
+                            </div> 
+
+                        </div> 
+                    </template>
+
+                    <template #campo_area="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                            
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxTextArea
+                                        :element-attr     = "data.editorOptions.elementAttr"
+                                        :name             = "data.editorOptions.name"
+                                        :buttons          = "data.editorOptions.botones"
+                                        :on-content-ready = "data.editorOptions.onContentReady"
+                                        :on-focus-in      = "data.editorOptions.onFocusIn"
+                                        :on-focus-out     = "data.editorOptions.onFocusOut"
+                                    >
+                                    </DxTextArea>
+                                </div> 
+                                
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div> 
+                                
+                            </div> 
+
+                        </div> 
+                    </template>
+
+                    <template #campo_numerico="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" > 
+
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxNumberBox
+                                        :element-attr     = "data.editorOptions.elementAttr"
+                                        :name             = "data.editorOptions.name"
+                                        :buttons          = "data.editorOptions.botones"
+                                        :on-content-ready = "data.editorOptions.onContentReady"
+                                        :on-focus-in      = "data.editorOptions.onFocusIn"
+                                        :on-focus-out     = "data.editorOptions.onFocusOut"
+                                    >
+                                    </DxNumberBox>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div> 
+                                
+                            </div> 
+
+                        </div> 
+                    </template>
+
+                    <template #campo_fecha="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >                      
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxDateBox
+                                        :element-attr              = "data.editorOptions.elementAttr"
+                                        :name                      = "data.editorOptions.name"
+                                        :buttons                   = "data.editorOptions.botones"
+                                        :on-content-ready          = "data.editorOptions.onContentReady"
+                                        :on-focus-in               = "data.editorOptions.onFocusIn"
+                                        :on-focus-out              = "data.editorOptions.onFocusOut"
+                                        :type                      = "data.editorOptions.type"
+                                        :open-on-field-click       = "data.editorOptions.openOnFieldClick"
+                                        :date-serialization-format = "data.editorOptions.dateSerializationFormat"  
+                                        :display-format            = "data.editorOptions.displayFormat"                   
+                                    >
+                                    </DxDateBox>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div> 
+                                
+                            </div> 
+
+                        </div> 
+                    </template>
+
+                    <template #campo_fecha_hora="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" > 
+                            <div class="row">
+                                <div class="col-10">   
+                                    <DxDateBox
+                                        :element-attr              = "data.editorOptions.elementAttr"
+                                        :name                      = "data.editorOptions.name"
+                                        :buttons                   = "data.editorOptions.botones"
+                                        :on-content-ready          = "data.editorOptions.onContentReady"
+                                        :on-focus-in               = "data.editorOptions.onFocusIn"
+                                        :on-focus-out              = "data.editorOptions.onFocusOut"
+                                        :type                      = "data.editorOptions.type"
+                                        :open-on-field-click       = "data.editorOptions.openOnFieldClick"
+                                        :date-serialization-format = "data.editorOptions.dateSerializationFormat" 
+                                        :display-format            = "data.editorOptions.displayFormat"                                   
+                                    >
+                                    </DxDateBox>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div> 
+
+                            </div> 
+
+                        </div> 
+                    </template>
+
+                    <template #campo_check="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxCheckBox
+                                        :element-attr     = "data.editorOptions.elementAttr"
+                                        :name             = "data.editorOptions.name"
+                                        :buttons          = "data.editorOptions.botones"
+                                        :on-content-ready = "data.editorOptions.onContentReady"
+                                        :on-focus-in      = "data.editorOptions.onFocusIn"
+                                        :on-focus-out     = "data.editorOptions.onFocusOut"
+                                        :text             = "data.editorOptions.text"
+                                    >
+                                    </DxCheckBox>                        
+                                </div>
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div>  
+                            </div>
+
+                        </div> 
+                    </template>
+
+                    <template #campo_opciones="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxRadioGroup
+                                        :element-attr     = "data.editorOptions.elementAttr"
+                                        :name             = "data.editorOptions.name"
+                                        :buttons          = "data.editorOptions.botones"
+                                        :on-content-ready = "data.editorOptions.onContentReady"
+                                        :on-focus-in      = "data.editorOptions.onFocusIn"
+                                        :on-focus-out     = "data.editorOptions.onFocusOut"
+                                        :items            = "data.editorOptions.items"
+                                    >
+                                    </DxRadioGroup>
+                                </div>
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div>  
+                            </div>
+
+                        </div> 
+                    </template>
+
+                    <template #campo_seleccion="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" > 
+                            <div class="row">
+                                <div class="col-10">  
+                                    <DxSelectBox
+                                        :element-attr          = "data.editorOptions.elementAttr"
+                                        :name                  = "data.editorOptions.name"
+                                        :buttons               = "data.editorOptions.botones"
+                                        :on-content-ready      = "data.editorOptions.onContentReady"
+                                        :on-focus-in           = "data.editorOptions.onFocusIn"
+                                        :on-focus-out          = "data.editorOptions.onFocusOut"
+                                        :items                 = "data.editorOptions.items"       
+                                        :show-clear-button     = "data.editorOptions.showClearButton"                          
+                                        :show-drop-down-button = "data.editorOptions.showDropDownButton"
+                                    >
+                                    </DxSelectBox>
+                                </div>
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div>  
+                            </div>
+
+                        </div> 
+                    </template>
+
+                    <template #campo_seleccion_multiple="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                            <div class="row">
+                                <div class="col-10">
+                                    <DxTagBox
+                                        :element-attr          = "data.editorOptions.elementAttr"
+                                        :name                  = "data.editorOptions.name"
+                                        :buttons               = "data.editorOptions.botones"
+                                        :on-content-ready      = "data.editorOptions.onContentReady"
+                                        :on-focus-in           = "data.editorOptions.onFocusIn"
+                                        :on-focus-out          = "data.editorOptions.onFocusOut"
+                                        :items                 = "data.editorOptions.items"       
+                                        :show-clear-button     = "data.editorOptions.showClearButton"                          
+                                        :show-drop-down-button = "data.editorOptions.showDropDownButton"
+                                    >
+                                    </DxTagBox>                                
+                                </div>  
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                </div> 
+                            </div> 
+
+                        </div> 
+                    </template>
+
+                    <template #campo_archivo="{ data, index }">       
+                        <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                            <div class="row">
+                                <div class="col-10">
+                                    <DxFileUploader
+                                        :element-attr  = "data.editorOptions.elementAttr"
+                                        :name          = "data.editorOptions.name"    
+                                        :multiple      = "data.editorOptions.multiple"   
+                                        :upload-method = "data.editorOptions.uploadMethod"      
+                                        :upload-mode   = "data.editorOptions.uploadMode"                
+                                    >
+                                    </DxFileUploader>
+                                </div>  
+
+                                <div class="col-2">
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-pen-square"
+                                        styling-mode = "contained"
+                                        @click       = "click_editar(data)"
+                                    />
+                                    <DxButton
+                                        :width = "40"
+                                        text   = ""
+                                        type   = "normal"
+                                        icon   = "fas fa-trash-alt"
+                                        styling-mode = "contained"
+                                        @click       = "click_borrar(data)"
+                                    />
+                                    </div>  
+                            </div>
+
+                        </div> 
+                    </template>
+
+                </DxForm>
+                
+        </div>   
+
+        <div 
+            :class="clase_atributos" 
+            v-show="muestra_atributos"
+        >  
+            <div class="text-center fs-5 shadow-sm  bg-light rounded">Atributos campo</div>            
+            <div class="text-center fs-4">{{opciones_atributo.datos.titulo}}</div>
+            <br>
+            <atributos_campos 
+                :opciones = "opciones_atributo"
+                :key      = "muestra_key"
+            />
+        </div>             
+
+    </div>    
+    
+    <!-- Prevista de formulario -->
+    <div v-if="en_prevista()" class="row"> 
+        <DataForma     
+            ref         = "formRef"  
+            :key        = "prevista_key"
+            :attributes = "atributos_forma"
+            @mounted    = "dataFormaMounted"
+        />
+    </div>
+
+
+    <!-- Consulta formulario -->
+    <div v-if="is_viewer()" class="row"> 
+        <DataForma    
+            ref         = "viewer_ref"  
+            :key        = "viewer_key"
+            :attributes = "viewer_attributes"
+            @mounted    = "viewer_mounted"
+        />
+    </div>
+    
+</div> 

@@ -1,0 +1,26 @@
+<div class="shadow p-1 mb-2 bg-light rounded">
+
+    <ventana_emergente_destinatarios                   
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <DxDataGrid
+        ref="grid"
+        :data-source             = "fuente_datos"
+        :show-borders            = "true"
+        :columns                 = "columnas"    
+        :selection               = "{ mode: 'multiple'}"
+        @toolbar-preparing       = "onToolbarPreparing"
+    >
+
+        <template #botonBuscar>
+            <DxButton
+                @click    = "buscar_funcionarios()"
+                icon      = "fas fa-search"
+                text      = "Buscar funcionarios"
+            />
+        </template>
+
+    </DxDataGrid>
+</div>

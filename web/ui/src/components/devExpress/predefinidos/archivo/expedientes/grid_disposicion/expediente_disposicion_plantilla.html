@@ -1,0 +1,82 @@
+
+<div class="container-fluid ">
+
+    <ventana_emergente_accesos                 
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <DxLoadPanel
+        v-model:visible = "indicador_visible" 
+        message         = "Por favor espere"               
+        shading-color   = "rgba(0,0,0,0.4)"
+    />
+    
+    <div class="shadow-sm p-1 mb-2">
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "false"
+            :show-column-lines       = "false"
+            :word-wrap-enabled       = "true"            
+            :columns                 = "columnas"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @row-dbl-click           = "dobleClick"
+        >
+        
+            <DxSearchPanel
+                :visible                  = "true"
+                :highlight-case-sensitive = "true"
+                placeholder               = "Buscar"
+                :width                    = "300"
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :allowed-page-sizes="pageSizes"
+                show-page-size-selector="true"
+                display-mode="full"
+                show-navigation-buttons="true"
+                visible="true"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <DxSelection
+                select-all-mode="allMode"
+                :show-check-boxes-mode="checkBoxesMode"
+                mode="multiple"
+            />
+
+            <template #acciones>
+                <DxDropDownButton
+                    :items      = "acciones_toolbar"  
+                    :element-attr="atributos_toolbar"              
+                    display-expr= "titulo"
+                    key-expr    = 'id'
+                    text        = "Acciones disposición final"    
+                    width       = 200
+                    location    = "after"
+                    styling-mode= "outlined"   
+                    @item-click = "elemento_click"       
+                />
+            </template>
+
+        </DxDataGrid>
+    </div>
+
+</div>

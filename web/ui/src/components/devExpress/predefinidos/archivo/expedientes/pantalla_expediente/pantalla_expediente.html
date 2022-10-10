@@ -1,0 +1,48 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="text-center fs-4 ">{{titulo}} - {{parametros.expediente_datos.nombre}}</div>
+
+        <div class="col-12">
+
+            <DxLoadPanel
+                v-model:visible = "indicador_visible" 
+                message         = "Por favor espere"               
+                shading-color   = "rgba(0,0,0,0.4)"
+            />
+
+            <div class="shadow-sm p-3 bg-light rounded border">
+                <div class="row justify-content-center"> 
+                    <div class="">
+                        <DataForma     
+                            ref         = "forma"  
+                            :attributes = "atributos_forma"
+                            @mounted    = "dataFormaMounted"
+                        />
+            
+                        <div class="linea_blanco"></div>            
+                    </div>
+                </div>
+    
+                <DxToolbar
+                    ref = "barra"
+                    :items = "barra_botones"
+                />
+                
+            </div>       
+        
+        </div>
+
+        <div class="p-2 "></div>
+
+        <div class="col-12" v-if="expediente_archivos_visible">
+            <expediente_archivos    
+                ref         = "expediente_archivos"         
+                :parametros = "expediente_archivos_parametros"
+            />
+        </div>  
+                
+    </div>  
+
+</div>  

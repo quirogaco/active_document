@@ -1,0 +1,43 @@
+<div class="container-fluid shadow vh-100 p-1 mb-2 rounded">
+    
+    <div 
+        ref     = "container"     
+        width   = "100%"    
+        :height = "alto"
+        class   = "vh-100"
+    ></div>
+    
+    <div 
+        id   = "js-properties-panel" 
+        class= "panel">
+    </div>   
+
+    <div id="quality-assurance" class="panel hidden">
+        <form id="form">
+        <p>
+            <b>Suitability Score</b>
+        </p>
+        <br />
+        <input id="suitability-score" type="text" placeholder="100" autocomplete="off">
+        <br />
+        <br />
+        <p id="warning" class="hidden">
+            Suitability Score must be a number
+        </p>
+        <br />
+        <p>
+            <b>Last Checked</b>
+        </p>
+        <br />
+        <p id="last-checked">
+            -
+        </p>
+        <br />
+        <input id="okay" type="submit" value="Okay">
+        </form>
+    </div>
+
+    <div id="hint" class="panel">Click <b>right mouse button</b> to edit properties.</div>
+
+
+</div>    

@@ -1,0 +1,138 @@
+
+<div class="container-fluid shadow p-3 mb-5 bg-body rounded">
+
+    <ventana_emergente_accesos                 
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <DxLoadPanel
+        v-model:visible = "indicador_visible" 
+        message         = "Por favor espere"               
+        shading-color   = "rgba(0,0,0,0.4)"
+    />
+    
+    <div class="shadow p-1 mb-2 bg-light rounded">
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :word-wrap-enabled       = "true"
+            :columns                 = "columnas"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @row-dbl-click           = "dobleClick"
+            @row-updating            = "onRowUpdating"
+        >
+            <DxEditing
+                :allow-updating="true"
+                :useIcons="true"
+            />
+
+            <DxSearchPanel
+                :visible                  = "true"
+                :highlight-case-sensitive = "true"
+                placeholder               = "Buscar"
+                :width                    = "300"
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :allowed-page-sizes="pageSizes"
+                :show-page-size-selector="true"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <slot></slot>
+
+            <template #crearButton>
+                <DxButton
+                    @click = "crear()"
+                    icon   = "fas fa-plus-square"
+                    text   = "Crear Expediente"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #accesosButton>
+                <DxButton
+                    @click = "accesos()"
+                    icon   = "fas fa-key"
+                    text   = "Acessos"
+                    type   = "default"  
+                />
+            </template>
+
+            <template #cerrarButton>
+                <DxButton
+                    @click = "cerrar()"
+                    icon   = "fas fa-door-closed"
+                    text   = "Cerrar"
+                    type   = "default"  
+                />
+            </template>
+
+            <template #abrirButton>
+                <DxButton
+                    @click = "abrir()"
+                    icon   = "fas fa-door-open"
+                    text   = "Abrir"
+                    type   = "default"  
+                />
+            </template>
+
+            <template #indice_electronico>
+                <DxButton
+                    @click = "indice_electronico()"
+                    icon   = "fas fa-indent"
+                    text   = "Indice"
+                    type   = "default"  
+                />
+            </template>
+
+            <template #controlButton>
+                <DxButton
+                    @click = "control()"
+                    icon   = "fas fa-indent"
+                    text   = "Control"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #exportarlogButton>
+                <DxButton
+                    @click = "exportar_log()"
+                    icon   = "fas fa-file-export"
+                    text   = "Log"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #fuidButton>
+                <DxButton
+                    @click = "fuid()"
+                    icon   = "fas fa-file-export"
+                    text   = "Fuid"
+                    type   = "success"  
+                />
+            </template>
+
+        
+        </DxDataGrid>
+    </div>
+
+</div>
