@@ -67,12 +67,16 @@ from datetime import datetime
 # Busqueda con parametros, genera query
 def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     querytime = globales.lee_modelo_querytime(estructura)
+    parametros = parametros["params"]
     # Crea objeto de busqueda
     #"""
     print("")
     print("")    
     print("BUSQUEDA PARAMETROS------------->", estructura)
-    pprint.pprint(parametros)
+    pprint.pprint(parametros) 
+    #pprint.pprint(definicion)
+    #print("")
+    print("***************XXXXXXXXXXXXXXX**********************************")
     print("")
     print("")
     print("")   
@@ -153,14 +157,15 @@ def ejecutar_querys(estructura, querys):
     return resultado
 
 def ejecutar(estructura, parametros, definicion, id_tarea):
-    #print("")
-    #print("")
-    #print("estructura:", estructura)
-    parametros = parametros["params"]
-    #pprint.pprint(parametros) 
-    #pprint.pprint(definicion)
-    #print("")
-    #print("")
+    # print("")
+    # print("")
+    # print("********************************************************************")
+    # print("estructura:", estructura)
+    # #parametros = parametros["params"]
+    # pprint.pprint(parametros) 
+    # pprint.pprint(definicion)
+    # #print("")
+    # print("********************************************************************")
 
     resultado = ejecutarBusqueda(estructura, parametros, definicion, id_tarea)
     """
