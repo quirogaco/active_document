@@ -14,7 +14,7 @@ import { getCurrentInstance, ref, onMounted } from "vue";
 import { DxDataGrid } from 'devextreme-vue/data-grid';
 
 // Imports component definition
-import utilities from './utilities.js';
+import utilities from "./utilities.js";
 import { methodDataGrid, eventsDxDataGrid } from './methods.js';
 const methods = methodDataGrid(that);
 const events  = eventsDxDataGrid(that)
@@ -22,7 +22,7 @@ const events  = eventsDxDataGrid(that)
 import basicAttributes from './basicAttributes.js';
 
 // #################################
-// properties, events and contexts #
+// properties, events and contexts # 
 // #################################
 
 that.name = "DataGrid";
@@ -53,11 +53,15 @@ if (attributes.dataSource == undefined) {
     attributes.dataSource = []
 }
 let source = utilities.createDataSource(attributes.dataSource);
-attributes.dataSource.dataSource = source;
+//attributes.dataSource.dataSource = source;
+attributes.dataSource = source;
 
 // create toolbar
 if (attributes.toolbar !== undefined) {
-    attributes.toolbar = utilities.createToolbar(basicAttributes.attributes, attributes.toolbar)
+    attributes.toolbar = utilities.createToolbar(
+        basicAttributes.attributes, 
+        attributes.toolbar
+    )
 }
 
 // basic grid attributes
@@ -70,7 +74,8 @@ console.log("grid_attributes:", grid_attributes)
 
 onMounted(() => {          
     that.name   = name;
-    that.dxGrid = that.$refs.dxGridRef; // that.dxGridRef.instance IS dxDataGrid
+    // that.dxGridRef.instance IS dxDataGrid
+    that.dxGrid = that.$refs.dxGridRef;
     that        = $lib.assignAttributes(that, methods);
     that        = $lib.assignAttributes(that, events);
     that.$emit('mounted', that);

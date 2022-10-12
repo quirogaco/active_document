@@ -2,8 +2,8 @@
 let columnas = [
     // Nombre
     {
-        caption    : "Nombre",
-        dataField  : "nombre",
+        caption    : "Nro Radicado",
+        dataField  : "nro_radicado",
         width      : 400,
     },
 

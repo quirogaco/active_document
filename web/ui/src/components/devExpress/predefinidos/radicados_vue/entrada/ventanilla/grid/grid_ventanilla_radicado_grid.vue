@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid border">
+    <div class="container-fluid shadow-sm ">
         <p class="text-center fs-3">Radicación ventanilla única</p>
         <DataGrid
             :attributes = "attributes"
@@ -35,6 +35,7 @@ let attributes = {
     columns: columnas.columnas,
     toolbar: barra.barraDef(that)
 };
+console.log("barra.barraDef(that)", barra.barraDef(that))
 
 //**********************//
 // Eventos del datagrid //

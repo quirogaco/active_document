@@ -1,11 +1,15 @@
+import basicos      from './basicos.js'
+import eventos      from './eventos.js'
+import validaciones from './validaciones.js'
 
 // Definición devexpress de un boton para barra de herrammientas
-const botonBarraDef = function(atributos) {
+const botonGrupoBarraDef = function(atributos) {
     let opciones = {
-        'widget'  : 'dxButton',  
+        'widget'  : 'dxButtonGroup',  
         'location': (atributos.location != undefined? atributos.location : 'after'),  
         'options' : {
             'width'  : (atributos.width != undefined? atributos.width : null),
+            'items'  : (atributos.items != undefined? atributos.items : []),   
             'text'   : (atributos.text != undefined? atributos.text : '...'),  
             'icon'   : (atributos.icon != undefined? atributos.icon : null),  
             'type'   : (atributos.type != undefined? atributos.type : 'default'),  
@@ -17,5 +21,5 @@ const botonBarraDef = function(atributos) {
 }
 
 export default {
-    campo: botonBarraDef
+    campo: botonGrupoBarraDef
 }

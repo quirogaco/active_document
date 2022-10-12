@@ -1,11 +1,16 @@
 {
-    "compilerOptions": {      
-      "paths": {
+    "compilerOptions": {
+        
+        "rootDir": "./src",
+        "paths": {
             "@/*": [
-                "./src/components/devExpress/predefinidos/*"
+                "./src/components/devExpress/predefinidos/*",                
             ]
         }
     },
+    "include": [
+        "./src",
+    ],
     "exclude": [
         "node_modules", 
         "dist"

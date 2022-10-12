@@ -10,17 +10,30 @@ const ejecutar = function(that) {
 
 let barraDef = function(that) {
     return [
-        $forma.botonBarra({
-            text : 'Crea flujo',
-            icon : 'fas fa-cogs',
-            click: function(e) {
-                //let seleccion = that.DataGridCmp.selectedRecords(1);
-                //if (seleccion.status == true) {
-                //    ejecutar(seleccion, that)
-                //}          
-                ejecutar(that)
-            },
-        }),
+        // $forma.botonBarra({
+        //     text : 'Radicar',
+        //     icon : 'fas fa-cogs',
+        //     click: function(e) {                       
+        //         ejecutar(that)
+        //     },
+        // }),
+
+        $forma.dropDownButtonBarra({
+            text: "Acciones",
+            width: "150px",
+            items: [
+                { 
+                    value: 1,  
+                    text: 'Radicar', 
+                    icon: "fa-brands fa-wpforms"
+                },
+                {
+                    value: 2,  
+                    text: 'Imprimir sticker', 
+                    icon: "fas fa-print"
+                }
+            ]
+        })
     ]
 }
 

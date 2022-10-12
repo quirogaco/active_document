@@ -83,7 +83,10 @@ export const methodDataGrid = function(that) {
                 if (many == 0) {
                     message = "al menos un";
                 };      
-                $notify(formatMessage("selectedTheseRecords", message), "warning")                
+                $notify(
+                    formatMessage("selectedTheseRecords", message), 
+                    "warning"
+                )                
             }
             else {
                 if (selected.length > 0) {
@@ -91,11 +94,17 @@ export const methodDataGrid = function(that) {
                 }
                 else {
                     if (many == 1) {
-                        $notify(formatMessage("selectRecord", ""), "warning")                
+                        $notify(
+                            formatMessage("selectRecord", ""), 
+                            "warning"
+                        )                
                     }
                     else {
                         if ( (many == 0) || (many > 1) ) {
-                            $notify(formatMessage("selectedRecords", ""), "warning")
+                            $notify(
+                                formatMessage("selectedRecords", ""), 
+                                "warning"
+                            )
                         }
                     } 
                     // que pasa cuando es un numero especifico 2, 4, 5 //jcr

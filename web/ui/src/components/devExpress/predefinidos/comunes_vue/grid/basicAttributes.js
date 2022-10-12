@@ -8,9 +8,12 @@ let attributes = {
     selection: {
         allowSelectAll    : true,
         deferred          : false,
-        mode              : "single", // 'multiple' | 'none' | 'single'            
-        selectAllMode     : "allPages", // 'allPages' | 'page'     
-        showCheckBoxesMode: "onClick" , // 'always' | 'none' | 'onClick' | 'onLongTap'
+        // 'multiple' | 'none' | 'single'  
+        mode              : "single",           
+        // 'allPages' | 'page' 
+        selectAllMode     : "allPages", 
+        // 'always' | 'none' | 'onClick' | 'onLongTap'    
+        showCheckBoxesMode: "onClick" , 
     },
 
     ref                   : "grid",
@@ -19,7 +22,8 @@ let attributes = {
     allowColumnReordering : true,
     allowColumnResizing   : true,
     rowAlternationEnabled : true,
-    showBorders           : true,
+    showBorders           : false,
+    showColumnLines       : false,
     wordWrapEnabled       : true,
     remoteOperations      : {
         groupPaging: true,
@@ -35,7 +39,7 @@ let attributes = {
 
     searchPanel: {
         visible             : true,                
-        width               : "200px",
+        width               : "80%",
         placeholder         : "Buscar",
         highlightSearchText : false
     },

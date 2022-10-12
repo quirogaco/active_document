@@ -2,6 +2,12 @@
     background-color: #FFFEFC;
 }
 
+.silver  {
+    background-color : #D3D3D3; 
+}
+
+
+
 .blanco {
     background-color: white;
 }
@@ -207,14 +213,14 @@ Grilla
 }
 
 .dx-datagrid-headers {
-    color: white;  
-    font-weight: 450;
+    color: black;  
+    font-weight: 500;
     font-size: 14px;
     background-color: white;
 }
 
 .dx-header-row {
-    background-color: #6D7A8F; /* Needed for IEs */
+    background-color: #D3D3D3; /* Needed for IEs */
 }
 
 /*

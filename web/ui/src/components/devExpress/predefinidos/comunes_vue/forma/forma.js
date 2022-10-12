@@ -1,21 +1,24 @@
-import fecha           from './fecha.js';
-import texto           from './texto.js';
-import correo          from './correo.js';
-import entero          from './entero.js';
-import texto_area      from './texto_area.js';
-import chequeo         from './chequeo.js';
-import seleccion       from './seleccion.js';
-import etiqueta        from './etiqueta.js';
-import radio           from './radio.js';
-import archivo         from './archivo.js';
-import contenido       from './contenido.js';
-import grid            from './grid.js';
-import grupo           from './grupo.js';
-import pestana         from './pestana.js';
-import pestana_panel   from './pestana_panel.js';
-import boton           from './boton.js';
-import botonBarra      from './botonBarra.js';
-import forma_librerias from './forma_librerias.js';
+import fecha            from './fecha.js';
+import texto            from './texto.js';
+import correo           from './correo.js';
+import entero           from './entero.js';
+import texto_area       from './texto_area.js';
+import chequeo          from './chequeo.js';
+import seleccion        from './seleccion.js';
+import etiqueta         from './etiqueta.js';
+import radio            from './radio.js';
+import archivo          from './archivo.js';
+import contenido        from './contenido.js';
+import grid             from './grid.js';
+import grupo            from './grupo.js';
+import pestana          from './pestana.js';
+import pestana_panel    from './pestana_panel.js';
+import boton            from './boton.js';
+import botonBarra       from './botonBarra.js';
+import botonGrupoBarra  from './botonGrupoBarra.js';
+import seleccionBarra   from './seleccionBarra.js';
+import dropDownButtonBarra from './dropDownButtonBarra.js';
+import forma_librerias  from './forma_librerias.js';
 import forma_propiedades_funciones from './forma_propiedades_funciones.js';
 
 const genera_campos_lectura = function(forma, campos) {
@@ -184,6 +187,9 @@ export default {
     pestana_panel        : pestana_panel.campo,  
     boton                : boton.campo,
     botonBarra           : botonBarra.campo,
+    botonGrupoBarra      : botonGrupoBarra.campo,
+    seleccionBarra       : seleccionBarra.campo,
+    dropDownButtonBarra  : dropDownButtonBarra.campo,
     genera_campo         : genera_campo,
     campo                : campo,
     genera_campos_lectura: genera_campos_lectura,
