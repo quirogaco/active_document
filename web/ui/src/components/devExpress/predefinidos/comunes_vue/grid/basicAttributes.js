@@ -21,14 +21,21 @@ let attributes = {
     rowAlternationEnabled : true,
     showBorders           : true,
     wordWrapEnabled       : true,
-    remoteOperations      : true,
+    remoteOperations      : {
+        groupPaging: true,
+        paging: true,
+        filtering: true,
+        sorting: true,
+        grouping: true,
+        summary: true
+    },
 
     // datagrid columns
     columns               : [],
 
     searchPanel: {
         visible             : true,                
-        width               : "300",
+        width               : "200px",
         placeholder         : "Buscar",
         highlightSearchText : false
     },

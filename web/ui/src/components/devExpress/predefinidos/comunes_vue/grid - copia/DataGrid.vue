@@ -2,31 +2,29 @@
 </template>
 
 <script setup lang="ts">
-
-// this component
-let that = getCurrentInstance().ctx;
-
 // #################################
 // Import components and libraries #
 // #################################
-import { confirm as confirmDe } from 'devextreme/ui/dialog';
+//import { confirm as confirmDe } from 'devextreme/ui/dialog';
+//import  DxDataGrid from 'devextreme-vue/data-grid';
 import { getCurrentInstance, ref, onMounted } from "vue";
-import { DxDataGrid } from 'devextreme-vue/data-grid';
-
 // Imports component definition
-import utilities from './utilities.js';
-import { methodDataGrid, eventsDxDataGrid } from './methods.js';
-const methods = methodDataGrid(that);
-const events  = eventsDxDataGrid(that)
+import utilities from "@/comunes_vue/grid/utilities.js"
+import { methodDataGrid, eventsDxDataGrid } from "@/comunes_vue/grid/methods.js";
+import basicAttributes from "@/comunes_vue/grid/basicAttributes.js";
 
-import basicAttributes from './basicAttributes.js';
+// this component
+let that = getCurrentInstance().ctx;
+// const methods = methodDataGrid(that);
+// const events  = eventsDxDataGrid(that);
 
 // #################################
 // properties, events and contexts #
 // #################################
 
 that.name = "DataGrid";
-let dxGridRef = ref(null);
+//let dxGridRef = ref(null);
+//let grid = ref(null);
 
 // properties
 const props = defineProps({
@@ -49,11 +47,11 @@ let columns = utilities.createColumns(attributes.columns);
 attributes.columns = columns;
 
 // create data source type
-if (attributes.dataSource == undefined) {
-    attributes.dataSource = []
-}
-let source = utilities.createDataSource(attributes.dataSource);
-attributes.dataSource.dataSource = source;
+// let source = utilities.createDataSource(attributes.dataSource);
+// if (attributes.dataSource == undefined) {
+//     attributes.dataSource = {}
+// }
+// attributes.dataSource.dataSource = source;
 
 // create toolbar
 if (attributes.toolbar !== undefined) {
@@ -68,12 +66,14 @@ let grid_attributes = {
 
 console.log("grid_attributes:", grid_attributes)
 
-onMounted(() => {          
-    that.name   = name;
-    that.dxGrid = that.$refs.dxGridRef; // that.dxGridRef.instance IS dxDataGrid
-    that        = $lib.assignAttributes(that, methods);
-    that        = $lib.assignAttributes(that, events);
-    that.$emit('mounted', that);
+onMounted(() => {         
+    console.log("0-xxxxxxxxx DATAGRID.VUE") 
+    // that.name   = name;
+    // that.dxGrid = that.$refs.dxGridRef; // that.dxGridRef.instance IS dxDataGrid
+    // that        = $lib.assignAttributes(that, methods);
+    // that        = $lib.assignAttributes(that, events);
+    // that.$emit('mounted', that);
+    console.log("1-xxxxxxxxx DATAGRID.VUE")     
 })
 
 </script>

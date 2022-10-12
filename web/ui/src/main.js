@@ -248,12 +248,12 @@ else {
     
     await window.$ns['aplicacion'].asignaRuta(
         'ventanilla_radicado_forma',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/ventanilla_forma_radicado.vue'
+        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/form/ventanilla_forma_radicado.vue'
     );
 
     await window.$ns['aplicacion'].asignaRuta(
         'ventanilla_radicado_grid',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid_ventanilla_radicado_grid.vue'
+        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid/grid_ventanilla_radicado_grid.vue'
     );
 
     window.$ns['aplicacion'].crea_enrutador();
@@ -273,5 +273,5 @@ else {
             //path: "usuarios_grid"
         })
     }, 1000);  
-    // */ 
+    //*/ 
 }
