@@ -1,24 +1,7 @@
 
-import visores_archivo    from "../../../../../../librerias/visores_archivo.js"
+import visores_archivo from "../../../../../../../librerias/visores_archivo.js";
 
-let metodos = {
-    onToolbarPreparing(e) {
-        e.toolbarOptions.items.push({
-            location: 'after',
-            template: 'radicarButton'
-        })     
-        
-        e.toolbarOptions.items.push({
-            location: 'after',
-            template: 'cargarDocumento'
-        })  
-
-        e.toolbarOptions.items.push({
-            location: 'after',
-            template: 'imprime_recorrido'
-        })  
-    },
-
+export const methods = {
     'columna_doble_click':  function(e) {
         let data = e.data
         if (e.column.dataField == "clase_radicado") {
@@ -98,10 +81,11 @@ let metodos = {
         }
 
         return resultado
+    },
+
+    're_render_popup': function() {
+        console.log("THIS. render_popup_key-metodo-->>:", this)
+        console.log("render_popup_key-metodo AQUI *****.,....-->>:", this.render_popup_key.value)
+        this.render_popup_key.value += 1;
     }
-
-}
-
-export default {
-    metodos: metodos
 }

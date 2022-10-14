@@ -1,10 +1,14 @@
 <template>
     <div class="container-fluid shadow-sm ">
+        <Popup
+            :attributes= "attributes_popup"
+            :key= "render_popup_key"
+        />
+
         <p class="text-center fs-3">Radicación ventanilla única</p>
         <DataGrid
-            :attributes = "attributes"
-        >
-        </DataGrid>
+            :attributes = "attributes_datagrid"
+        />
     </div>
 </template>
 
@@ -12,21 +16,28 @@
 //**************************//
 // Atributos del componente //
 //**************************//
-import { getCurrentInstance, ref, onMounted } from "vue";
-import columnas from "./grid_ventanilla_radicado_columnas.js";
-import barra from "./grid_ventanilla_radicado_barra.js";
-// import { DxDataGrid } from 'devextreme-vue/data-grid';
-
-// this component
+import {getCurrentInstance, ref, onMounted} from "vue";
 let that = getCurrentInstance().ctx;
 let grid = ref(null);
 that.name = "grid_ventanilla_radicado";
-that.DataGridCmp = null;
 
-//************************//
-// Atributos del datagrid //
-//************************//
-let attributes = {
+import columnas from "./grid_ventanilla_radicado_columnas.js";
+import barra from "./grid_ventanilla_radicado_barra.js";
+
+import {methods} from "./grid_ventanilla_radicado_metodos.js";
+that = $lib.assignAttributes(that, methods);
+
+//let .DataGridCmp = null;
+
+// POPUP
+let attributes_popup = {    
+};
+let render_popup_key = ref(0);
+// Para llamarlo con that desde methods
+that.render_popup_key = render_popup_key;
+
+// DATAGRID
+let attributes_datagrid = {
     dataSource: {                
         dataSource: "radicados_entrada"
     },
@@ -65,5 +76,7 @@ function mountedGrid(DataGrid) {
 // Ganchos del datagrid //
 //**********************//
 onMounted(() => {})
+
+//defineExpose( Object.assign({}, that) )
 
 </script>

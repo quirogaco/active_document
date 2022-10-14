@@ -38,7 +38,12 @@ const elimina_atributo = function(objeto, atributo) {
 let sin_valor = ["", null, "null", "NULL", "None", "NONE", "none", undefined, "undefined"];
 
 const isObject = (item) => {
-    return (item && typeof item === 'object' && !Array.isArray(item));
+    return (
+        item && 
+        typeof item === 'object' && 
+        !Array.isArray(item) && 
+        item.constructor.name === "Object"
+    );
 }
 
 const mezcla_profunda = (target, ...sources) => {
@@ -169,5 +174,6 @@ export default {
     assignAttributes            : assignAttributes,
     json_texto                  : json_texto,
     texto_json                  : texto_json,
-    llamar_componente           : llamar_componente
+    llamar_componente           : llamar_componente,
+    isObject                    : isObject
 }

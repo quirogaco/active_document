@@ -9,16 +9,15 @@ const ejecutar = function(that) {
 }
 
 let barraDef = function(that) {
-    return [
-        // $forma.botonBarra({
-        //     text : 'Radicar',
-        //     icon : 'fas fa-cogs',
-        //     click: function(e) {                       
-        //         ejecutar(that)
-        //     },
-        // }),
 
-        $forma.dropDownButtonBarra({
+    const call = function(event) {
+        console.log("CALL:", event.itemData);
+        console.log(that)
+        that.re_render_popup();
+    }
+
+    return [
+         $forma.dropDownButtonBarra({
             text: "Acciones",
             width: "150px",
             items: [
@@ -32,7 +31,8 @@ let barraDef = function(that) {
                     text: 'Imprimir sticker', 
                     icon: "fas fa-print"
                 }
-            ]
+            ],
+            onItemClick: call
         })
     ]
 }

@@ -1,47 +1,64 @@
-const dropDownButtonDef = function(atributos) {
+const dropDownButtonDef = function(attributes) {
     let opciones = {
         'widget'  : 'dxDropDownButton',  
-        'location': (atributos.location != undefined? atributos.location : 'after'),  
+        'location': (
+            attributes.location != undefined? 
+            attributes.location : 'after'
+        ),          
         'options' : {
-            'width': (atributos.width != undefined? atributos.width : null),
+            'width': (attributes.width != undefined? attributes.width : null),
             // items      : [
             //     { value: 1,  text: 'Imprimir sticker', icon: "fas fa-print" }
             // ],
-            'items': (atributos.items != undefined? atributos.items : []),   
+            'items': (attributes.items != undefined? attributes.items : []), 
+
             'displayExpr': (
-                atributos.displayExpr != undefined? 
-                atributos.displayExpr : 'text'
+                attributes.displayExpr != undefined? 
+                attributes.displayExpr : 'text'
             ),
-            'keyExpr': (
-                atributos.valueExpr != undefined? 
-                atributos.valueExpr : 'value'
+
+            'valueExpr': (
+                attributes.valueExpr != undefined? 
+                attributes.valueExpr : 'value'
             ),
+
             'icon': (
-                atributos.icon != undefined? 
-                atributos.icon : "fa-solid fa-rectangle-list"                
+                attributes.icon != undefined? 
+                attributes.icon : "fa-solid fa-rectangle-list"                
             ),
-            'onItemClick': (
-                atributos.onItemClick != undefined? 
-                atributos.onItemClick : null
-            ),
+
             'stylingMode': (
-                atributos.stylingMode != undefined? 
-                atributos.stylingMode : 'text'
+                attributes.stylingMode != undefined? 
+                attributes.stylingMode : 'text'
             ),
+
             'text': (
-                atributos.text != undefined? 
-                atributos.text : ''
+                attributes.text != undefined? 
+                attributes.text : ''
             ),
+
             'type': (
-                atributos.type != undefined? 
-                atributos.type : 'default'
+                attributes.type != undefined? 
+                attributes.type : 'default'
             ),
+
             'elementAttr': (
-                atributos.elementAttr != undefined? 
-                atributos.elementAttr : {
+                attributes.elementAttr != undefined? 
+                attributes.elementAttr : {
                     class: "silver  rounded"
                 }
-            )
+            ),
+
+            'value': (
+                attributes.value != undefined? 
+                attributes.value : null
+            ),
+            
+            'onItemClick': (
+                attributes.onItemClick != undefined? 
+                attributes.onItemClick : null
+            ),
+
         }        
     }
     

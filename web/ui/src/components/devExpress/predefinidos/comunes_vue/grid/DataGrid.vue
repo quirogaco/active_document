@@ -2,16 +2,15 @@
 </template>
 
 <script setup lang="ts">
-
-// this component
-let that = getCurrentInstance().ctx;
-
 // #################################
 // Import components and libraries #
 // #################################
 import { confirm as confirmDe } from 'devextreme/ui/dialog';
 import { getCurrentInstance, ref, onMounted } from "vue";
 import { DxDataGrid } from 'devextreme-vue/data-grid';
+
+// this component
+let that = getCurrentInstance().ctx;
 
 // Imports component definition
 import utilities from "./utilities.js";
