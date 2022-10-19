@@ -1,4 +1,9 @@
 <DxPopup
     ref = "reference"
     v-bind = "all_attributes"    
-/>
+>
+    <DxScrollView>
+        <component :is="all_attributes.internalComponent" />        
+    </DxScrollView>
+
+</DxPopup>

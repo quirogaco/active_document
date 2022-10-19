@@ -1,7 +1,7 @@
 
 let attributes = {        
     width: "50vh",
-    container: null,    
+    container: ".dx-viewport",    
     deferRendering: true,
     disabled: false,
     height: "50vh",
@@ -14,7 +14,7 @@ let attributes = {
     shading: true,
     showCloseButton: true,
     showTitle: true,
-    visible: true,
+    visible: false,
     title: "",
     toolbar: {
         disabled: false,

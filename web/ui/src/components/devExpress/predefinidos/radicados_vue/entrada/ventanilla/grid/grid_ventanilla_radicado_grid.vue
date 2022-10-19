@@ -16,6 +16,7 @@
 //**************************//
 // Atributos del componente //
 //**************************//
+import DxButton from 'devextreme-vue/button';
 import {getCurrentInstance, ref, onMounted} from "vue";
 let that = getCurrentInstance().ctx;
 let grid = ref(null);
@@ -30,7 +31,20 @@ that = $lib.assignAttributes(that, methods);
 //let .DataGridCmp = null;
 
 // POPUP
-let attributes_popup = {    
+const call = function(e) {
+    console.log("CALL onContentReady.:", e)
+}
+const callhidden = function(e) {
+    console.log("CALL callhidden:", e)
+}
+
+let attributes_popup = { 
+    onContentReady: call,
+    onHidden: callhidden,
+    height : "90vh",
+    width  : "80%",
+    internalComponent: "DataForma",
+    visible: true
 };
 let render_popup_key = ref(0);
 // Para llamarlo con that desde methods
@@ -41,12 +55,12 @@ let attributes_datagrid = {
     dataSource: {                
         dataSource: "radicados_entrada"
     },
-    heigth : "100%",
+    height : "100%",
     width  : "100%",
     columns: columnas.columnas,
     toolbar: barra.barraDef(that)
 };
-console.log("barra.barraDef(that)", barra.barraDef(that))
+//console.log("barra.barraDef(that)", barra.barraDef(that))
 
 //**********************//
 // Eventos del datagrid //
