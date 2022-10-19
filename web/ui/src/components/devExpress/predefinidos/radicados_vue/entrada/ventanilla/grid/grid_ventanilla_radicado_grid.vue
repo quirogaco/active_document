@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid shadow-sm ">
         <Popup
-            :attributes= "attributes_popup"
+            :attributes="attributes_popup"
             :key= "render_popup_key"
         />
 
@@ -30,7 +30,8 @@ that = $lib.assignAttributes(that, methods);
 //let .DataGridCmp = null;
 
 // POPUP
-let attributes_popup = {    
+let attributes_popup = {  
+    "uno": "ssiii"  
 };
 let render_popup_key = ref(0);
 // Para llamarlo con that desde methods

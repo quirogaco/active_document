@@ -50,6 +50,7 @@ let all_attributes = {
 console.log("popup_attributes:", all_attributes)
 
 onMounted(() => {          
+    console.log("MOINTADO props:", props)
     console.log("MOINTADO POPUP:", that)
     that.cmp = that.$refs.reference;
     that = $lib.assignAttributes(that, methods);
