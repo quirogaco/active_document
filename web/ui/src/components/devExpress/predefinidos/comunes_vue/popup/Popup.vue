@@ -2,12 +2,15 @@
 </template>
 
 <script setup lang="ts">
+//import DxForm from 'devextreme-vue/form';
 import { 
     getCurrentInstance, 
     ref, 
     onMounted 
 } from "vue";
 import { DxPopup, DxPosition, DxToolbarItem } from 'devextreme-vue/popup';
+import { DxScrollView } from 'devextreme-vue/scroll-view';
+import DxButton from 'devextreme-vue/button';
 import basicAttributes from './basicAttributes.js';
 //import utilities from "./utilities.js";
 import { methodsPopup } from './methods.js';
@@ -50,7 +53,6 @@ let all_attributes = {
 console.log("popup_attributes:", all_attributes)
 
 onMounted(() => {          
-    console.log("MOINTADO props:", props)
     console.log("MOINTADO POPUP:", that)
     that.cmp = that.$refs.reference;
     that = $lib.assignAttributes(that, methods);

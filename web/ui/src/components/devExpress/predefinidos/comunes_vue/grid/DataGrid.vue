@@ -69,7 +69,7 @@ let grid_attributes = {
     ...attributes
 }
 
-console.log("grid_attributes:", grid_attributes)
+//console.log("grid_attributes:", grid_attributes)
 
 onMounted(() => {          
     that.name   = name;

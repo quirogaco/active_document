@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
-        
+        "module": "commonjs",
+        "target": "es2016",
+        "jsx": "preserve",
         "rootDir": "./src",
         "paths": {
             "@/*": [
@@ -9,10 +11,12 @@
         }
     },
     "include": [
-        "./src",
+        "./src/**/*",
+        "./src/**/*.js"
     ],
     "exclude": [
         "node_modules", 
+        "**/node_modules/*",
         "dist"
     ]
 }

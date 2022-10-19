@@ -2,7 +2,9 @@
 </template>
 
 <script setup lang="ts">
-
+import DxButton from 'devextreme-vue/button';
+import DxTextBox from 'devextreme-vue/text-box';
+import DxForm from 'devextreme-vue/form';
 import forma_general from "@/comunes_vue/forma/forma.js";
 
 import { 
@@ -12,11 +14,13 @@ import {
 
 import { 
     getCurrentInstance, 
+    ref,
     onMounted 
 } 
 from "vue";
 
 // this -> that component
+let dxFormRef = ref(null);
 let that = getCurrentInstance().ctx;
 
 // #################
@@ -49,11 +53,10 @@ const nested_assign = function(items, forma) {
    return items
 };
 
-
 // #################################
 // properties, events and contexts #
 // #################################
-that.name       = "DataForm";
+that.name = "DataForm";
 
 // properties
 const props        = defineProps(forma_general.forma_propiedades({}));
@@ -70,7 +73,8 @@ forma_general.forma_funciones.montado_general(that, props);
 that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
-onMounted(() => {   
+onMounted(() => { 
+    console.log(" MOUNTED that.$refs.dxFormRef--88:", that.$refs.dxFormRef.instance);  
     that.instance = that.$refs.dxFormRef.instance;
     that.instance.basicas = {
         "forma_id": that.attrsReceived.id
