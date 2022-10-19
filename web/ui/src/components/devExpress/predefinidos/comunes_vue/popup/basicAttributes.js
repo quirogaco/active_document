@@ -20,7 +20,11 @@ let attributes = {
         disabled: false,
         items   : [],
         visible : true
-    }
+    },
+
+    // atributos componente
+    attributes_str: "{}",
+    attributes: {}
 }
 
 export default {

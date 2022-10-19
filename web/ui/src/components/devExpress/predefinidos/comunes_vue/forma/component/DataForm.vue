@@ -2,8 +2,7 @@
 </template>
 
 <script setup lang="ts">
-import DxButton from 'devextreme-vue/button';
-import DxTextBox from 'devextreme-vue/text-box';
+//import DxButton from 'devextreme-vue/button';
 import DxForm from 'devextreme-vue/form';
 import forma_general from "@/comunes_vue/forma/forma.js";
 
@@ -60,8 +59,10 @@ that.name = "DataForm";
 
 // properties
 const props        = defineProps(forma_general.forma_propiedades({}));
+console.log("**************** forma - 0 *********************")
 let attrsReceived  = forma_general.lee_propiedades(props);
 that.attrsReceived = attrsReceived;
+console.log("**************** forma - 1 *********************")
 
 // events
 const emit = defineEmits(['mounted'])

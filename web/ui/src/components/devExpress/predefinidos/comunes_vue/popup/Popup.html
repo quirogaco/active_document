@@ -3,7 +3,11 @@
     v-bind = "all_attributes"    
 >
     <DxScrollView>
-        <component :is="all_attributes.internalComponent" />        
+        <component 
+            :is="all_attributes.internalComponent" 
+            :attributes = "all_attributes.attributes"
+            :attributes_str = "all_attributes.attributes_str"
+        />        
     </DxScrollView>
 
 </DxPopup>

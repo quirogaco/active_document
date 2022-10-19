@@ -31,10 +31,18 @@ that = $lib.assignAttributes(that, methods);
 //let .DataGridCmp = null;
 
 // POPUP
-let attributes_popup = {    
+let attributes_popup = {  
+    internalComponent: "DataForma",
+    attributes_str: '{"sa": "aaaasss", "sb": "ssssbebebebe", "sc": "sscedefegehess"}',
+    attributes: {
+        a: "aaaa",
+        b: "bebebebe",
+        c: "cedefegehe"
+    }
 };
-let render_popup_key = ref(0);
 // Para llamarlo con that desde methods
+that.attributes_popup = attributes_popup;
+let render_popup_key = ref(0);
 that.render_popup_key = render_popup_key;
 
 // DATAGRID
@@ -78,6 +86,6 @@ function mountedGrid(DataGrid) {
 //**********************//
 onMounted(() => {})
 
-//defineExpose( Object.assign({}, that) )
+defineExpose( Object.assign({}, that) )
 
 </script>

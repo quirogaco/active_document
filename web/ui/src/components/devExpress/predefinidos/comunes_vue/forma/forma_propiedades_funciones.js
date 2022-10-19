@@ -43,7 +43,8 @@ const forma_propiedades = function(propiedades={}) {
     return propiedades_totales
 }
 
-const lee_propiedades = function(props) {
+const lee_propiedades = function(props, name="") {
+    console.log("FORM->PROPS:", props);
     let attributes = {};
     if (props.attributes_str !== "{}") {
         attributes = $lib.texto_json(props.attributes_str);
@@ -55,7 +56,7 @@ const lee_propiedades = function(props) {
             attributes = props.attributes;
         }
     }
-
+    console.log("---->attributes:", attributes);
     return attributes
 }
 

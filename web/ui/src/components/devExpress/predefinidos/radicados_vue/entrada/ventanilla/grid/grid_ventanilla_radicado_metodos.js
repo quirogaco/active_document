@@ -84,8 +84,9 @@ export const methods = {
     },
 
     're_render_popup': function() {
-        //console.log("THIS. render_popup_key-metodo-->>:", this)
+        console.log("THIS. render_popup_key-metodo-->>:", this)
         //console.log("render_popup_key-metodo AQUI *****.,....-->>:", this.render_popup_key.value)
+        this.attributes_popup.visible = true;
         this.render_popup_key.value += 1;
     }
 }
