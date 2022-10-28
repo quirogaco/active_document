@@ -153,9 +153,8 @@ import printjs from 'print-js';
 window.$print = printjs;
 
 // BACKGROUND
-let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
-document.body.style.background = 'url('+logo_ingreso+') no-repeat center center';
-
+// let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
+// document.body.style.background = 'url('+logo_ingreso+') no-repeat center center';
 
 // RUTAS
 import rutas_cortas from './rutas/rutas_cortas.js';
@@ -178,13 +177,13 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
 }
 else {   
     // CARGA APLICATIVO
-    /*
+    ///*
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
-    await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.js');  
+    await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
     window.$ns['aplicacion'].asignaComponente('login_forma');
-    */
+    //*/
     
-    ///* Especificos ára ruebas        
+    /* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
         "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "codigo": "PROFESIONAL",
@@ -273,5 +272,5 @@ else {
             //path: "usuarios_grid"
         })
     }, 1000);  
-    //*/ 
+    */ 
 }

@@ -92,6 +92,7 @@ async def ingreso_sistema(requerimiento: Request):
    ip_peticion = requerimiento.client.host  
    codigo      = parametros["codigo"]
    clave       = parametros["clave"]
+   print('/ingreso_sistema', codigo, clave)
 
    if codigo.find("*") > -1:
       # Usuario sistema
@@ -124,6 +125,6 @@ async def ingreso_sistema(requerimiento: Request):
 
    resultado["mensaje"] = mensaje
 
-   #pprint.pprint(resultado)
+   pprint.pprint(resultado)
 
    return resultado
