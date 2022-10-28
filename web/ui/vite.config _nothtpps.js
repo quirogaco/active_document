@@ -29,6 +29,16 @@ export default defineConfig({
 
     server: {
         host: "0.0.0.0",
-        port: 3000
+        port: 3000,
+        secure: true,
+        strictPort: true,
+        hmr: {
+            port: 3000,
+            host: "localhost"
+        }, 
+        https: {
+            key: fs.readFileSync("../../localhost+4-key.pem"),
+            cert: fs.readFileSync("../../localhost+4.pem")
+        }
     }
 })

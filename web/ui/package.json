@@ -11,11 +11,11 @@
     "@bpmn-io/properties-panel": "^0.23.0",    
     "@fortawesome/fontawesome-free": "^6.2.0",
     "axios": "^1.0.0",
-    "bpmn-js": "^10.2.0",
-    "bpmn-js-properties-panel": "^1.9.0",
+    "bpmn-js": "^10.2.1",
+    "bpmn-js-properties-panel": "^1.10.0",
     "camunda-bpmn-moddle": "^7.0.1",
-    "devextreme": "^22.1.5",
-    "devextreme-vue": "^22.1.5",
+    "devextreme": "^22.1.6",
+    "devextreme-vue": "^22.1.6",
     "dotenv": "^16.0.3",
     "handlebars": "^4.7.7",
     "jspdf": "^2.5.1",
@@ -23,11 +23,11 @@
     "mitt": "^3.0.0",
     "print-js": "^1.6.0",
     "vue": "^3.2.41",
-    "vue-router": "4.1.5",
+    "vue-router": "4.1.6",
     "pinia": "2.0.23"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.2",
+    "@vitejs/plugin-vue": "^3.2.0",
     "@vue/compiler-sfc": "^3.2.41",
     "autoprefixer": "10.4.12",
     "eslint": "^8.24.0",
@@ -36,6 +36,6 @@
     "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "tailwindcss": "^3.1.8",
-    "vite": "^3.1.8"
+    "vite": "^3.2.1"
   }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid shadow-sm ">
         <Popup
-            :attributes="attributes_popup"
+            :attributes= "attributes_popup"
             :key= "render_popup_key"
         />
 
@@ -16,6 +16,7 @@
 //**************************//
 // Atributos del componente //
 //**************************//
+import DxButton from 'devextreme-vue/button';
 import {getCurrentInstance, ref, onMounted} from "vue";
 let that = getCurrentInstance().ctx;
 let grid = ref(null);
@@ -30,18 +31,23 @@ that = $lib.assignAttributes(that, methods);
 //let .DataGridCmp = null;
 
 // POPUP
-let attributes_popup = {  
+const call = function(e) {
+    console.log("CALL onContentReady.:", e)
+}
+const callhidden = function(e) {
+    console.log("CALL callhidden:", e)
+}
+
+let attributes_popup = { 
+    onContentReady: call,
+    onHidden: callhidden,
+    height : "90vh",
+    width  : "80%",
     internalComponent: "DataForma",
-    attributes_str: '{"sa": "aaaasss", "sb": "ssssbebebebe", "sc": "sscedefegehess"}',
-    attributes: {
-        a: "aaaa",
-        b: "bebebebe",
-        c: "cedefegehe"
-    }
+    visible: true
 };
-// Para llamarlo con that desde methods
-that.attributes_popup = attributes_popup;
 let render_popup_key = ref(0);
+// Para llamarlo con that desde methods
 that.render_popup_key = render_popup_key;
 
 // DATAGRID
@@ -85,6 +91,6 @@ function mountedGrid(DataGrid) {
 //**********************//
 onMounted(() => {})
 
-defineExpose( Object.assign({}, that) )
+//defineExpose( Object.assign({}, that) )
 
 </script>

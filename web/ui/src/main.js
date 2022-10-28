@@ -16,6 +16,9 @@ import '@fortawesome/fontawesome-free/js/all.js';
 // Grid estilos
 import '../gestor/css/estilos.css';
 
+// store
+import { createPinia } from 'pinia'
+
 // Necesario para que funciones Handlebars
 window.global = window;
 
@@ -25,7 +28,7 @@ window.global = window;
 // Definición de objetos para almacenar información general
 window.$ns          = {}; // Guarda componentes por nombre (ruta_id), ej. terceros_nombre
 window.$direcciones = {  // Direccciones de datos para servicios ip:puerto, ej. "192.168.0.13:9100"
-    "servidorDatos": "https://" + _ambiente_.CFG_DATA_HOST + ":" + _ambiente_.CFG_DATA_PORT
+    "servidorDatos": "http://" + _ambiente_.CFG_DATA_HOST + ":" + _ambiente_.CFG_DATA_PORT
 };
 window.$definiciones          = {}; // Definiciones de componentes para fuentes de datos
 window.$componentes           = {
@@ -95,7 +98,9 @@ import App from './App.vue';
 // tailwindcss
 import './index.css'; // Debe ir aqui despues de App
 
+const pinia = createPinia()
 window._APLICACION_ = createApp(App);
+window._APLICACION_.use(pinia);
 registrar.registrar_componentes(window._APLICACION_);
 window._APLICACION_.mount('#aplicacion');
 
@@ -131,7 +136,7 @@ var validaApi = function() {
 //     "/web-apps/apps/api/documents/api.js"
 // );
 let urlOnlyOffice = (
-    "https://" + 
+    "http://" + 
     _ambiente_.CFG_NGINX_HOST + 
     ":" + 
     _ambiente_.CFG_NGINX_PORT + 
@@ -177,13 +182,13 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
 }
 else {   
     // CARGA APLICATIVO
-    ///*
+    /*
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
     await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
     window.$ns['aplicacion'].asignaComponente('login_forma');
-    //*/
+    */
     
-    /* Especificos ára ruebas        
+    //* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
         "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "codigo": "PROFESIONAL",
@@ -272,5 +277,5 @@ else {
             //path: "usuarios_grid"
         })
     }, 1000);  
-    */ 
+    //*
 }

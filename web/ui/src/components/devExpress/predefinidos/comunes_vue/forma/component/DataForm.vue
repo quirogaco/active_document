@@ -2,9 +2,7 @@
 </template>
 
 <script setup lang="ts">
-//import DxButton from 'devextreme-vue/button';
-import DxForm from 'devextreme-vue/form';
-import forma_general from "@/comunes_vue/forma/forma.js";
+import general_form from "@/comunes_vue/forma/forma.js";
 
 import { 
     methodForm, 
@@ -18,34 +16,38 @@ import {
 } 
 from "vue";
 
-// this -> that component
 let dxFormRef = ref(null);
+// this -> that component
 let that = getCurrentInstance().ctx;
 
 // #################
 // form definition #
 // #################
-// En la definicion no existe todavia referencia a window.$form
-const methods = methodForm(that);
-const events  = eventsDxForm(that)
 
-// ## ATTRIBUTES ## 
-const devExpressAttributes = function(items) {
-    let itemsDe = [];
+// methods and events of the form
+const methods = methodForm(that);
+const events = eventsDxForm(that);
+
+// devexpress fields definition
+const dev_express_definition = function(items) {
+    let definition_dev = [];
     for (const index in items) {
-        itemsDe.push(forma_general.campo(items[index]));
+        // global definition to devexpress definition
+        // It's not the component, just the definition object
+        definition_dev.push(general_form.campo(items[index]));
     }
 
-    return itemsDe
+    return definition_dev
 };
 
 
-const nested_assign = function(items, forma) {
+// assigns each field reference to the form
+const nested_assign = function(items, form) {
     for (let index in items) {
-        items[index].forma = forma;
-        // elementos, es definición en español
+        items[index].forma = form;
+        // elementos, it is definition in spanish
         if (items[index].elementos != undefined) {
-            nested_assign(items[index].elementos, forma)
+            nested_assign(items[index].elementos, form)
         }
    }
 
@@ -57,38 +59,46 @@ const nested_assign = function(items, forma) {
 // #################################
 that.name = "DataForm";
 
-// properties
-const props        = defineProps(forma_general.forma_propiedades({}));
-console.log("**************** forma - 0 *********************")
-let attrsReceived  = forma_general.lee_propiedades(props);
-that.attrsReceived = attrsReceived;
-console.log("**************** forma - 1 *********************")
+// must be declared as variables of the setup function script 
+// to be exposed by default
+const props = defineProps(general_form.forma_propiedades({}));
+let parameters_received = general_form.lee_propiedades(props);
+that.parameters_received = parameters_received;
 
 // events
 const emit = defineEmits(['mounted'])
-console.log("emit:", emit)
 
-// Accion basica al montar
-forma_general.forma_funciones.montado_general(that, props); 
+// generic mounting action
+general_form.forma_funciones.montado_general(that, props); 
 
+// assign to that (this), methods and attributes
 that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
 onMounted(() => { 
     console.log(" MOUNTED that.$refs.dxFormRef--88:", that.$refs.dxFormRef.instance);  
-    that.instance = that.$refs.dxFormRef.instance;
-    that.instance.basicas = {
-        "forma_id": that.attrsReceived.id
-    } 
-    that.formRef  = that.$refs.dxFormRef;
-    // items de la forma
-    let items = (that.attrsReceived.items != undefined ? that.attrsReceived.items: []); 
-    items = nested_assign(items, that.instance);
-    items = devExpressAttributes(items);
-    that.instance.option("items", items)    
-    that.$emit('mounted', that);
-})
+    // // devexpress instance
+    // that.instance = that.$refs.dxFormRef.instance;
 
-defineExpose( Object.assign({}, that) )
+    // // required for events, methods and fields of the form
+    // that.instance.basicas = {
+    //     "forma_id": that.parameters_received.config.id
+    // };
+    // that.formRef  = that.$refs.dxFormRef;
+    
+    // // assignment of items of the form
+    // let items = (
+    //     that.parameters_received.config.items != undefined ? 
+    //     that.parameters_received.config.items: []
+    // ); 
+    // items = nested_assign(items, that.instance);
+    // items = dev_express_definition(items);
+    // that.instance.option("items", items);
 
+    // // emit event of parent component
+    // that.$emit('mounted', that);
+});
+
+
+defineExpose( Object.assign({}, that) );
 </script>

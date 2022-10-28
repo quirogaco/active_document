@@ -1,15 +1,13 @@
 .fondo {
-    background-color: #FFFEFC;
+    background-color: #FAFAFA;
 }
-
-.silver  {
-    background-color : #D3D3D3; 
-}
-
-
 
 .blanco {
     background-color: white;
+}
+
+.barra {
+    background-color: #0f6cbd;
 }
 
 .page_holder_main {
@@ -213,14 +211,14 @@ Grilla
 }
 
 .dx-datagrid-headers {
-    color: black;  
-    font-weight: 500;
+    color: white;  
+    font-weight: 450;
     font-size: 14px;
     background-color: white;
 }
 
 .dx-header-row {
-    background-color: #D3D3D3; /* Needed for IEs */
+    background-color: #6D7A8F; /* Needed for IEs */
 }
 
 /*
