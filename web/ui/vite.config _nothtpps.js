@@ -1,7 +1,7 @@
 const path = require('path');
-const fs = require('fs');
-import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
+const fs = require('fs')
+import { defineConfig, loadEnv } from 'vite'
+import vue   from '@vitejs/plugin-vue'
 
 let ubicacion = "../../";
 let ambiente = loadEnv("development", ubicacion, prefix = 'CFG_')
@@ -29,6 +29,16 @@ export default defineConfig({
 
     server: {
         host: "0.0.0.0",
-        port: 3000
+        port: 3000,
+        secure: true,
+        strictPort: true,
+        hmr: {
+            port: 3000,
+            host: "localhost"
+        }, 
+        https: {
+            key: fs.readFileSync("../../localhost+4-key.pem"),
+            cert: fs.readFileSync("../../localhost+4.pem")
+        }
     }
 })

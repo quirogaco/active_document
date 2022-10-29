@@ -1,0 +1,148 @@
+<template>
+    <div class="container-fluid ">  
+        <div class=" logo ">  
+            <div class="vw-90 vh-90 "> 
+                    
+                    <div class="top40 shadow-sm p-3 mb-5 bg-body rounded ">
+                        <DataForma     
+                            ref         = "formRef"  
+                            :attributes = "atributos_forma"
+                            @mounted    = "dataFormaMounted"
+                        />
+
+                        <div class="linea_blanco"></div>  
+                        <ToolBar    
+                            ref         = "barraRef"  
+                            :attributes = "atributos_barra"
+                        />
+                    </div>
+
+            </div>
+        </div>        
+    </div> 
+</template>
+
+<script setup lang="ts">
+import { getCurrentInstance, ref, onMounted } from "vue";
+import crear_rutas_navegacion from '../../../librerias/crear_rutas_navegacion.js';
+
+// Este componente
+let that = getCurrentInstance().ctx;
+
+//**************************//
+// Atributos del componente //
+//**************************//
+
+let name = 'login_forma';
+let formRef = ref(null);
+let barraRef = ref(null);
+that.dataForm = null; 
+let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
+//let image = ref({ backgroundImage: "url(" + logo_ingreso + ") center" });
+let image = "url(" + logo_ingreso + ")";
+
+// Propiedades
+//const props = defineProps( $forma.forma_propiedades({}) );
+//let attributes = $forma.lee_propiedades(props);
+let attributes = {};
+
+// Retorna de envio post de datos
+const retorna_envio = function(retorna_datos) {
+    // retorna_grid();
+    // cerrar_emergente();
+}
+
+// Envia datos servidor
+async function enviar_datos() {    
+    let datos = that.dataForm.validateData();  
+    console.log("DATOS", datos)  
+    if (datos.isValid == true) {
+        window.$mostrar_esperar();
+        let parametros = datos["formData"];                
+        let urlCompleta = window.$direcciones.servidorDatos + '/ingreso_sistema';   
+        let respuesta = window.$f.http.llamadoRestSincGet(urlCompleta, parametros);
+        if (respuesta.error == "no") {
+            window.$rutasNavegacion = crear_rutas_navegacion.creaRutasNavegacion(respuesta.datos.opciones);                   
+            window._APLICACION_.use(window.$rutasNavegacion.ruta);
+            window.$router = window.$rutasNavegacion.ruta;
+            window.sessionStorage.setItem("usuario", JSON.stringify(respuesta.datos.usuario));
+            window.sessionStorage.setItem("sesion", JSON.stringify(respuesta.datos.sesion));
+            await window.$ns['aplicacion'].asignaRuta('cajon', 'components/devExpress/cajon/cajon.vue');  
+            window.$ns['aplicacion'].asignaComponente('cajon');
+
+            window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));                   
+        }
+        else {
+            $sistema["notifica"](respuesta.mensaje, "error");
+        }
+        window.$ocultar_esperar();
+    }    
+}
+
+// Acciones barra botones (Crear, Modificar, Regresar)
+function callBackButtons(evento, modo) {   
+}
+
+// Funcion llamada por evento mounted DataForma
+async function dataFormaMounted(DataForma) {};
+onMounted(() => {
+    that.dataForm = that.$refs.formRef;
+})
+
+let atributos_forma = {
+    id      : name,
+    formData: {},
+    items   : [        
+        {
+            "componente" : "campo",
+            "tipo": "texto",
+            "id": "codigo",
+            "titulo": "Codigo", 
+            "obligatorio": true,
+            "longitud": 120,
+            "ancho": 250
+        },
+        
+        {
+            "componente": "campo",
+            "tipo": "texto",
+            'modo': 'password',
+            "id": "clave",
+            "titulo": "Clave", 
+            "obligatorio": true,
+            "longitud": 30,
+            "ancho": 150
+        }
+    ],
+    colCount: 1                     
+} 
+
+let atributos_barra = {
+    items: [
+        $forma.botonBarra({
+            text : 'Ingresar',
+            type : 'success',
+            icon : 'fa-solid fa-arrow-right-to-bracket',
+            click: async function() {
+                enviar_datos()
+            }
+        })
+    ]
+}  
+</script>
+
+<style scoped>
+.logo {
+  background-image: v-bind('image');
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.top40 {
+    position: absolute;
+    top: 37%;
+    right: 65%;
+    left: 10%;
+}
+</style>

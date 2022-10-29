@@ -2,6 +2,7 @@
 
     <div 
         id = "aplicacion" 
+        class = "fondo"
     >
 
         <DxLoadPanel

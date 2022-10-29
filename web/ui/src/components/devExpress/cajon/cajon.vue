@@ -56,7 +56,7 @@
             </div>  
         </div> 
 
-        <div class="container-fluid mt-5 fondo " >
+        <div class="container-fluid mt-5 " >
 
                 <DxDrawer      
                     :opened-state-mode="selectedOpenMode"
@@ -73,7 +73,7 @@
                         </template>
 
                     
-                        <div class="container-fluid" >
+                        <div class="container-fluid blanco" >
                             <router-view>                        
                             </router-view>
                         </div>
