@@ -22,9 +22,6 @@ import { createPinia } from 'pinia'
 // Necesario para que funciones Handlebars
 window.global = window;
 
-// store
-import { createPinia } from 'pinia'
-
 // ######################################
 // # ALMACENAMIENTO DE DATOS Y OPCIONES #
 // ######################################
@@ -100,16 +97,9 @@ import App from './App.vue';
 
 // tailwindcss
 import './index.css'; // Debe ir aqui despues de App
-<<<<<<< HEAD
 const pinia = createPinia()
 window._APLICACION_ = createApp(App);
 window._APLICACION_.use(pinia)
-=======
-
-const pinia = createPinia()
-window._APLICACION_ = createApp(App);
-window._APLICACION_.use(pinia);
->>>>>>> 9f6bf918bc3ad4ed36d7f458a228a98e9eaa361b
 registrar.registrar_componentes(window._APLICACION_);
 window._APLICACION_.mount('#aplicacion');
 
@@ -166,15 +156,6 @@ let formulario = opciones[1];
 import printjs from 'print-js';
 window.$print = printjs;
 
-// BACKGROUND
-<<<<<<< HEAD
-let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
-document.body.style.background = 'url('+logo_ingreso+') no-repeat center center';
-=======
-// let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
-// document.body.style.background = 'url('+logo_ingreso+') no-repeat center center';
->>>>>>> 9f6bf918bc3ad4ed36d7f458a228a98e9eaa361b
-
 // RUTAS
 import rutas_cortas from './rutas/rutas_cortas.js';
 let aplicacion = window.$ns['aplicacion'];
@@ -202,11 +183,7 @@ else {
     window.$ns['aplicacion'].asignaComponente('login_forma');
     //*/
     
-<<<<<<< HEAD
-    /* Especificos ára ruebas        
-=======
     //* Especificos ára ruebas        
->>>>>>> 9f6bf918bc3ad4ed36d7f458a228a98e9eaa361b
     window.sessionStorage.setItem("usuario", JSON.stringify({
         "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "codigo": "PROFESIONAL",
@@ -217,7 +194,6 @@ else {
         "ubicacion_id": "be776b15-ab68-11eb-b9de-006073b60f8a",
         "ubicacion_nombre": "sede central bogota",
         "reemplaza_id": null,
-        #"roles_especificos": ['JEFE', 'ARCHIVO', 'CORRESPONDENCIA', 'PQRSD'],
         "roles_especificos": ['JEFE', 'ARCHIVO', 'CORRESPONDENCIA', 'PQRSD']
     }))
    
@@ -297,9 +273,5 @@ else {
             //path: "usuarios_grid"
         })
     }, 1000);  
-<<<<<<< HEAD
-    */ 
-=======
     //*
->>>>>>> 9f6bf918bc3ad4ed36d7f458a228a98e9eaa361b
 }
