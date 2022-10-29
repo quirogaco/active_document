@@ -23,7 +23,8 @@
     "mitt": "^3.0.0",
     "print-js": "^1.6.0",
     "vue": "^3.2.41",
-    "vue-router": "4.1.5"
+    "vue-router": "4.1.5",
+    "pinia": "2.0.23"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.2",

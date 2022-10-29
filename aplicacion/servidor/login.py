@@ -60,7 +60,8 @@ def datos_usuario(registro_usuario):
       "dependencia_nombre": registro_usuario["dependencia_nombre"],
       "ubicacion_id"      : registro_usuario["ubicacion_id"],
       "ubicacion_nombre"  : registro_usuario["ubicacion_nombre"],         
-      "reemplaza_id"      : registro_usuario["reemplaza_id"],         
+      "reemplaza_id"      : registro_usuario["reemplaza_id"],   
+      "roles_especificos" : registro_usuario["roles_especificos"],          
    }
    datos["sesion"]  = {
       "id"          : "xxx-1-2",
@@ -102,7 +103,6 @@ async def ingreso_sistema(requerimiento: Request):
    else:
       # Usuario directorio activo
       da = directorio_activo.validar_usuario(codigo, clave, ldap_ip, ldap_puerto)
-      
       if (da == ""):
          registro_usuario = ingreso_directorio(codigo, clave)
          if (registro_usuario == None):

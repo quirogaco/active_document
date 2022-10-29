@@ -6,185 +6,185 @@ let elemento_parametros = function(elemento_id) {
     //HABILITAR_RESPUESTA_RAPIDA
     switch (elemento_id) {
         case 1:
-            parametros["ventana"]       = "usuarioGestion"
-            parametros["titulo"]        = "Asigna responsable"
-            parametros["accion"]        = "ASIGNAR_RESPONSABLE"   
-            parametros["boton_mensaje"] = "Asignar responsable"    
-            parametros["fuente"]        = "usuarios_area"
+            parametros["ventana"]       = "usuarioGestion";
+            parametros["titulo"]        = "Asigna responsable";
+            parametros["accion"]        = "ASIGNAR_RESPONSABLE";   
+            parametros["boton_mensaje"] = "Asignar responsable";    
+            parametros["fuente"]        = "usuarios_area";
             break;
 
         case 2:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Devuelve a dependencia asignadora"
-            parametros["accion"]        = "DEVOLVER_DEPENDENCIA"   
-            parametros["boton_mensaje"] = "Devolver"  
-            parametros["alto"]          = 300
-            parametros["ancho"]         = 700  
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Devuelve a dependencia asignadora";
+            parametros["accion"]        = "DEVOLVER_DEPENDENCIA";   
+            parametros["boton_mensaje"] = "Devolver"; 
+            parametros["alto"]          = 300;
+            parametros["ancho"]         = 700; 
             break;
 
         case 3:
-            parametros["ventana"]       = "dependenciaGestion"
-            parametros["titulo"]        = "Traslada a dependencia"
-            parametros["accion"]        = "TRASLADAR_DEPENDENCIA"   
-            parametros["boton_mensaje"] = "Trasladar"     
+            parametros["ventana"]       = "dependenciaGestion";
+            parametros["titulo"]        = "Traslada a dependencia";
+            parametros["accion"]        = "TRASLADAR_DEPENDENCIA";   
+            parametros["boton_mensaje"] = "Trasladar";     
             break;
 
         case 4:
-            parametros["ventana"]       = "apruebaGestion"
-            parametros["titulo"]        = "Enviar a visto bueno"
-            parametros["accion"]        = "ENVIAR_VISTO_BUENO"   
-            parametros["boton_mensaje"] = "Enviar"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "apruebaGestion";
+            parametros["titulo"]        = "Enviar a visto bueno";
+            parametros["accion"]        = "ENVIAR_VISTO_BUENO";   
+            parametros["boton_mensaje"] = "Enviar";    
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
             break;
 
         case 5:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Finalizar gestión"
-            parametros["accion"]        = "FINALIZAR_MANUAL"   
-            parametros["boton_mensaje"] = "Finalizar"     
-            parametros["alto"]          = 300
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Finalizar gestión";
+            parametros["accion"]        = "FINALIZAR_MANUAL";   
+            parametros["boton_mensaje"] = "Finalizar";     
+            parametros["alto"]          = 300;
+            parametros["ancho"]         = 700;
             break;
 
         case 6:
-            parametros["ventana"]       = "borradorGestion"
-            parametros["titulo"]        = "Selecciona plantilla para borrador"
-            parametros["accion"]        = "SELECCION_PLANTILLA"   
-            parametros["boton_mensaje"] = "Crear borrador"     
-            parametros["alto"]          = 300
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "borradorGestion";
+            parametros["titulo"]        = "Selecciona plantilla para borrador";
+            parametros["accion"]        = "SELECCION_PLANTILLA";  
+            parametros["boton_mensaje"] = "Crear borrador";     
+            parametros["alto"]          = 300;
+            parametros["ancho"]         = 700;
             break;
         
         case 7:
-            parametros["ventana"]       = "ventanilla_salida_forma"
-            parametros["titulo"]        = "Radicación documento"
-            parametros["accion"]        = "RADICAR_DOCUMENTO"   
-            parametros["boton_mensaje"] = "Crear borrador"     
-            parametros["alto"]          = 600
-            parametros["ancho"]         = 1200
+            parametros["ventana"]       = "ventanilla_salida_forma";
+            parametros["titulo"]        = "Radicación documento";
+            parametros["accion"]        = "RADICAR_DOCUMENTO";   
+            parametros["boton_mensaje"] = "Crear borrador";     
+            parametros["alto"]          = 600;
+            parametros["ancho"]         = 1200;
             break;
 
         case 8:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Devolver a encargado dependencia"
-            parametros["accion"]        = "DEVOLVER_ASIGNADOR"   
-            parametros["boton_mensaje"] = "Devolver"     
-            parametros["alto"]          = 300
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Devolver a encargado dependencia";
+            parametros["accion"]        = "DEVOLVER_ASIGNADOR";   
+            parametros["boton_mensaje"] = "Devolver";     
+            parametros["alto"]          = 300;
+            parametros["ancho"]         = 700;
             break;
 
         case 9:
-            parametros["ventana"]       = "trdGestion"
-            parametros["titulo"]        = "Asigna expediente y tipo documental (TRD)"
-            parametros["accion"]        = "ASIGNA_TRD"   
-            parametros["boton_mensaje"] = "Asignar"     
-            parametros["alto"]          = 300
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "trdGestion";
+            parametros["titulo"]        = "Asigna expediente y tipo documental (TRD)";
+            parametros["accion"]        = "ASIGNA_TRD";  
+            parametros["boton_mensaje"] = "Asignar";     
+            parametros["alto"]          = 300;
+            parametros["ancho"]         = 700;
             break;
 
         case 10:
-            parametros["ventana"]       = "trdTemaSubtema"
-            parametros["titulo"]        = "Asigna tema y subtema"
-            parametros["accion"]        = "ASIGNA_TEMA_SUBTEMA"   
-            parametros["boton_mensaje"] = "Asignar"     
-            parametros["alto"]          = 300
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "trdTemaSubtema";
+            parametros["titulo"]        = "Asigna tema y subtema";
+            parametros["accion"]        = "ASIGNA_TEMA_SUBTEMA";   
+            parametros["boton_mensaje"] = "Asignar" ;    
+            parametros["alto"]          = 300;
+            parametros["ancho"]         = 700;
             break;
 
         case 11:
-            parametros["ventana"]       = "anexarGestion"
-            parametros["titulo"]        = "Anexar archivo de gestión"
-            parametros["accion"]        = "ANEXA_ARCHIVO"   
-            parametros["boton_mensaje"] = "Anexar"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "anexarGestion";
+            parametros["titulo"]        = "Anexar archivo de gestión";
+            parametros["accion"]        = "ANEXA_ARCHIVO";  
+            parametros["boton_mensaje"] = "Anexar";     
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
             break;    
             
         case 12:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Crea comentario"
-            parametros["accion"]        = "CREA_COMENTARIO"   
-            parametros["boton_mensaje"] = "Crear"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Crea comentario";
+            parametros["accion"]        = "CREA_COMENTARIO";   
+            parametros["boton_mensaje"] = "Crear";     
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
             break; 
 
         case 13:
-            parametros["ventana"]       = "usuarioGestion"
-            parametros["titulo"]        = "Solicita respuesta colaborativa"
-            parametros["accion"]        = "CREA_COLABORATIVA"   
-            parametros["boton_mensaje"] = "Solicitar ayuda cooperativa"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
-            parametros["fuente"]        = "usuarios"
+            parametros["ventana"]       = "usuarioGestion";
+            parametros["titulo"]        = "Solicita respuesta colaborativa";
+            parametros["accion"]        = "CREA_COLABORATIVA";   
+            parametros["boton_mensaje"] = "Solicitar ayuda cooperativa";     
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
+            parametros["fuente"]        = "usuarios";
             break;   
             
         case 14:
-            parametros["ventana"]       = "apruebaGestion"
-            parametros["titulo"]        = "Aprueba para radicar"
-            parametros["accion"]        = "APROBAR_RADICAR"   
-            parametros["boton_mensaje"] = "Aprobar"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "apruebaGestion";
+            parametros["titulo"]        = "Aprueba para radicar";
+            parametros["accion"]        = "APROBAR_RADICAR";  
+            parametros["boton_mensaje"] = "Aprobar";     
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
             break;
 
         case 15:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Devuelve para revisión"
-            parametros["accion"]        = "DEVOLVER_REVISION"
-            parametros["boton_mensaje"] = "Devolver"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Devuelve para revisión";
+            parametros["accion"]        = "DEVOLVER_REVISION";
+            parametros["boton_mensaje"] = "Devolver";     
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
             break; 
 
         case 16:
-            parametros["ventana"]       = "usuarioGestion"
-            parametros["titulo"]        = "Asigna responsable RESPÚESTA RAPIDA"
-            parametros["accion"]        = "ASIGNAR_RESPONSABLE"   
-            parametros["boton_mensaje"] = "Asignar responsable respuesta rapida"    
-            parametros["fuente"]        = "usuarios_area"
-            parametros["rapida"]        = "SI"
+            parametros["ventana"]       = "usuarioGestion";
+            parametros["titulo"]        = "Asigna responsable RESPÚESTA RAPIDA";
+            parametros["accion"]        = "ASIGNAR_RESPONSABLE";   
+            parametros["boton_mensaje"] = "Asignar responsable respuesta rapida";   
+            parametros["fuente"]        = "usuarios_area";
+            parametros["rapida"]        = "SI";
             break;
 
-        case 20:
-            parametros["ventana"]       = "ventanilla_radicado_consulta"
-            parametros["titulo"]        = "Consulta Radicado"
-            parametros["accion"]        = "CONSULTA_RADICADO"   
-            parametros["boton_mensaje"] = ""     
-            parametros["alto"]          = 800
-            parametros["ancho"]         = 1200
+        case 20:               
+            parametros["ventana"]       = "ventanilla_radicado_consulta";
+            parametros["titulo"]        = "Consulta Radicado";
+            parametros["accion"]        = "CONSULTA_RADICADO";   
+            parametros["boton_mensaje"] = "";    
+            parametros["alto"]          = 800;
+            parametros["ancho"]         = 1200;
             break;
 
         case 21:
-            parametros["ventana"]       = "gestion_datos_consulta"
-            parametros["titulo"]        = "Consulta datos gestión"
-            parametros["accion"]        = "CONSULTA_GESTION"   
-            parametros["boton_mensaje"] = ""     
-            parametros["alto"]          = 700
-            parametros["ancho"]         = 1200
+            parametros["ventana"]       = "gestion_datos_consulta";
+            parametros["titulo"]        = "Consulta datos gestión";
+            parametros["accion"]        = "CONSULTA_GESTION";   
+            parametros["boton_mensaje"] = "";     
+            parametros["alto"]          = 700;
+            parametros["ancho"]         = 1200;
             break;
         
         // BORRADORES
         case 100:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Crea borrador SALIDA"
-            parametros["accion"]        = "CREA_BORRADOR_SALIDA"
-            parametros["boton_mensaje"] = "Crear borrador SALIDA"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
-            parametros["borrador"]      = true
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Crea borrador SALIDA";
+            parametros["accion"]        = "CREA_BORRADOR_SALIDA";
+            parametros["boton_mensaje"] = "Crear borrador SALIDA";    
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
+            parametros["borrador"]      = true;
             break; 
 
         // BORRADORES
         case 101:
-            parametros["ventana"]       = "comentarioGestion"
-            parametros["titulo"]        = "Crea borrador INTERNO"
-            parametros["accion"]        = "CREA_BORRADOR_INTERNO"
-            parametros["boton_mensaje"] = "Crear borrador INTERNO"     
-            parametros["alto"]          = 400
-            parametros["ancho"]         = 700
-            parametros["borrador"]      = true
+            parametros["ventana"]       = "comentarioGestion";
+            parametros["titulo"]        = "Crea borrador INTERNO";
+            parametros["accion"]        = "CREA_BORRADOR_INTERNO";
+            parametros["boton_mensaje"] = "Crear borrador INTERNO";     
+            parametros["alto"]          = 400;
+            parametros["ancho"]         = 700;
+            parametros["borrador"]      = true;
             break; 
 
         default:
@@ -196,19 +196,27 @@ let elemento_parametros = function(elemento_id) {
 
 // componente: grid, forma
 let items_gestion = function(componente, contexto) {
-    console.log("omponente.parametros:", componente.parametros)
+    console.log("window.$usuario.roles_especificos:", window.$usuario.roles_especificos)
     let items = [
-        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-        { id: 16, titulo: 'Respuesta rapída',    icon: "fas fa-shipping-fast" },
+        //{ id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
+        //{ id: 16, titulo: 'Respuesta rapída',    icon: "fas fa-shipping-fast" },
     ]
 
-    if (contexto=="grid_gestion") {
-        items = [
-            { id: 1,  titulo: 'Asignar responsable',                        icon: "fas fa-user-check" },
-            //{ id: 16, titulo: 'Respuesta rapída',                           icon: "fas fa-shipping-fast" },
-            { id: 3,  titulo: 'Trasladar a otra dependencia',               icon: "fas fa-forward" },
-            { id: 2,  titulo: 'Devolver (Ventanilla, Servicio ciudadano)',  icon: "fas fa-backward" }          
-        ]
+    if (contexto=="grid_gestion") {        
+        if (
+                (window.$usuario.roles_especificos.indexOf('CORRESPONDENCIA') > -1) || 
+                (window.$usuario.roles_especificos.indexOf('PQRSD') > -1)
+            ) {
+            items = [
+                { id: 1,  titulo: 'Asignar responsable',                        icon: "fas fa-user-check" },
+                //{ id: 16, titulo: 'Respuesta rapída',                           icon: "fas fa-shipping-fast" },
+                { id: 3,  titulo: 'Trasladar a otra dependencia',               icon: "fas fa-forward" },
+                { id: 2,  titulo: 'Devolver (Ventanilla, Servicio ciudadano)',  icon: "fas fa-backward" }          
+            ]
+        }
+        else {
+            items = []
+        }
     }
     else {      
         if ( componente.parametros.colaborativa != "" ) {

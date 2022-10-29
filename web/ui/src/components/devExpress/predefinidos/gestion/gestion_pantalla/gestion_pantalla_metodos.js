@@ -187,23 +187,21 @@ let metodos = {
     },
 
     asigna_parametros(parametros) {
-        this.opciones_ventana.alto               = parametros.alto 
-        this.opciones_ventana.ancho              = parametros.ancho
-        this.opciones_ventana.componente_visible = parametros.ventana  
-        this.opciones_ventana.titulo             = parametros.titulo   
-        this.opciones_ventana.boton_mensaje      = parametros.boton_mensaje    
-        this.opciones_ventana.accion             = parametros.accion  
-        this.opciones_ventana.fuente             = parametros.fuente 
-        this.opciones_ventana.visible            = true
-        this.opciones_ventana.elementos          = [this.parametros.id]
+        this.opciones_ventana.alto               = parametros.alto;
+        this.opciones_ventana.ancho              = parametros.ancho;
+        this.opciones_ventana.componente_visible = parametros.ventana;  
+        this.opciones_ventana.titulo             = parametros.titulo;   
+        this.opciones_ventana.boton_mensaje      = parametros.boton_mensaje;    
+        this.opciones_ventana.accion             = parametros.accion;  
+        this.opciones_ventana.fuente             = parametros.fuente; 
+        this.opciones_ventana.visible            = true;
+        this.opciones_ventana.elementos          = [this.parametros.id];
         this.opciones_ventana.gestion            = {
             'gestion_id' : this.parametros.id,
             'gestion'    : this.parametros,
             'origen_tipo': this.tipo_documento,
             'entrada'    : this.radicado
         }
-
-        console.log("CLICK -> PARAMETROS:", parametros)
 
         if ( (this.opciones_ventana.accion == "RADICAR_DOCUMENTO") && (this.tipo_documento == "INTERNO") ) {
             this.opciones_ventana.componente_visible = "ventanilla_interno_forma"
@@ -212,11 +210,11 @@ let metodos = {
         // Información del radicado
         this.opciones_ventana.consulta = {
             'radicado': this.radicado
-        }
+        }        
     },
 
     accion_click(e) {        
-        let parametros         = gestion_acciones_elementos.elemento_parametros(e.itemData.id)  
+        let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id)  
         this.asigna_parametros(parametros)
         this.emergente_key    += 1;
     }

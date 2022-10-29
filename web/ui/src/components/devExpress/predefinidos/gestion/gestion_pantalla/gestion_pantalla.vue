@@ -102,32 +102,33 @@
 
         async mounted() {
             // Pantalla para invocar en acciones
-            window.$pantalla_gestion = this  
-            let temporal    = JSON.parse(this.datos)
-            this.parametros = await utilidades_estructura.leer_registro_id("peticiones", temporal["id"])
+            window.$pantalla_gestion = this;
+            let temporal = $forma.lee_propiedades(this.$props, "gestion_pantalla").datos;            
+            this.parametros = await utilidades_estructura.leer_registro_id("peticiones", temporal["id"]);
             
             // PDF
-            this.visor_pdf = this.$refs.visor_pdf
+            this.visor_pdf = this.$refs.visor_pdf;
             // Si tiene PDF PRINCIPAL
-            this.valida_mostrar_pdf(this.parametros.origen_id)
+            this.valida_mostrar_pdf(this.parametros.origen_id);
 
             // EDITOR
-            this.editor      = this.$refs.editor  
+            this.editor      = this.$refs.editor;
             this.verBorrador = true
-            let borrador_id  = this.parametros.borrador_id  
-            let etapa_estado = this.parametros.etapa_estado   
+            let borrador_id  = this.parametros.borrador_id;
+            let etapa_estado = this.parametros.etapa_estado; 
 
             // Radicado
-            this.radicado = await utilidades_estructura.leer_registro_id("radicados_entrada", this.parametros.origen_id)
+            this.radicado = await utilidades_estructura.leer_registro_id(
+                "radicados_entrada", 
+                this.parametros.origen_id
+            );
         
             // BARRA DE ACCIONES
-            this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(this)
-            console.log("this.parametros:", this.parametros)
+            this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(this);
             
             // Mensaje tipo de documento en gestión
             this.tipo_documento = this.parametros.origen_tipo            
             if (this.tipo_documento == "ENTRADA") {
-                console.log("this.parametros:", this.parametros)
                 if (this.parametros.colaborativa == "") {
                     if (this.parametros.rapida == "SI") {
                         this.titulo_gestion = "Gestión de respuesta RAPIDA [ ENTRADA - "  + this.parametros.nro_radicado + " ] "

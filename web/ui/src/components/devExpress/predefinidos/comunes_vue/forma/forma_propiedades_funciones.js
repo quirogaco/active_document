@@ -35,24 +35,39 @@ const forma_propiedades = function(propiedades={}) {
             default: () => {
                 return "{}"
             }
-        }
-    }
+        },
 
-    let propiedades_totales = Object.assign( {}, basicas, propiedades );
+        componente_name: {
+            type: String,
+            default: () => {
+                return "DataForm"
+            }
+        },
+    };
+
+    let propiedades_totales = Object.assign({}, basicas, propiedades);
     
     return propiedades_totales
 }
 
-const lee_propiedades = function(props) {
+const lee_propiedades = function(props, componente_name=null) {
     let attributes = {};
-    if (props.attributes_str !== "{}") {
-        attributes = $lib.texto_json(props.attributes_str);
+    if (componente_name != null) {
+        attributes = $get_params(componente_name);
     }
     else {
-        if (Object.keys(props.attributes).length > 0) {
-            // Clone borra las funciones y archivos..
-            //attributes = $lib.clone(props.attributes);
-            attributes = props.attributes;
+        if (props.attributes_str !== "{}") {
+            attributes = $lib.texto_json(props.attributes_str);
+        }
+        else {
+            if (Object.keys(props.attributes).length > 0) {
+                // Clone borra las funciones y archivos..
+                //attributes = $lib.clone(props.attributes);
+                attributes = props.attributes;
+            }
+            else {
+                attributes = $lib.texto_json(props.props.datos);
+            }
         }
     }
 
@@ -126,7 +141,8 @@ const forma_funciones = {
             forma_componente.forma  = forma_componente.$refs.forma.instance;
             forma_componente._forma = forma_componente.$refs.forma;                     
             forma_componente.barra  = forma_componente.$refs.barra.instance;  
-            forma_componente.parametros = JSON.parse(forma_componente.datos);
+            //forma_componente.parametros = JSON.parse(forma_componente.datos);
+            forma_componente.parametros = forma_componente.datos;
             window.$componentes["_formas"][forma_componente.basicas["forma_id"]] = forma_componente;        
             forma_componente.montado_especifico(forma_componente.basicas);
         } catch (error) {

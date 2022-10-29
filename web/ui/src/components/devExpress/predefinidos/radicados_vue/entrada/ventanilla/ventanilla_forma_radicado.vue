@@ -1,8 +1,7 @@
-<template src="./forma_radicado_consulta_plantilla.html">
+<template src="./ventanilla_forma_radicado_plantilla.html">
 </template>
 
 <script>
-import { DxDataGrid }        from 'devextreme-vue/data-grid'
 import { DxForm }            from 'devextreme-vue/form'
 import DxTextArea            from 'devextreme-vue/text-area'
 import DxRadioGroup          from 'devextreme-vue/radio-group'
@@ -11,20 +10,18 @@ import { DxFileUploader }    from 'devextreme-vue/file-uploader'
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar'
 import forma_general         from "../../../comunes_vue/forma/forma.js"
 
-import forma_definiciones from "./forma_radicado_consulta_definiciones.js"
-import forma_campos       from "./forma_radicado_consulta_campos.js"
+import forma_definiciones from "./ventanilla_forma_radicado_definiciones.js"
+import forma_campos       from "./ventanilla_forma_radicado_campos.js"
 
 // Definiciones basicas
 const basicas = {
-    "forma_id"   : "forma_radicado_consulta",
-    "titulo"     : "Consulta de Radicado",
-    "columnas"   : 2,    
+    "forma_id": "ventanilla_radicacion",
+    "titulo"  : "Radicación de ventanilla",
+    "columnas": 2 
 }
-
 let formulario =  {
     name: basicas["forma_id"],
-    components: {  
-        DxDataGrid,                     
+    components: {                       
         DxForm,
         DxTextArea,
         DxRadioGroup,
@@ -34,11 +31,10 @@ let formulario =  {
     props: forma_general.forma_propiedades({}),
 
     mounted() {
-        console.log("THIS:>>>", this);        
-        forma_general.forma_funciones.montado_general(this);
+        forma_general.forma_funciones.montado_general(this)
     },
 
-    data() {       
+    data() {        
         return forma_campos.campos_forma(this, basicas)        
     },
 

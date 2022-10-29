@@ -125,6 +125,13 @@ const llamar_componente = function(componente, parametros, texto=true) {
         name  : componente,        
         params: params    
     }) 
+};
+
+const call_component_storage = function(componente_name, params) {
+    $save_params(componente_name, params);    
+    $router.push({
+        name: componente_name
+    }) 
 }
 
 export default {
@@ -170,10 +177,11 @@ export default {
     forma_componente            : librerias_vue.forma_componente,
 
     // clone
-    clone                       : clone,
-    assignAttributes            : assignAttributes,
-    json_texto                  : json_texto,
-    texto_json                  : texto_json,
-    llamar_componente           : llamar_componente,
-    isObject                    : isObject
+    clone: clone,
+    assignAttributes: assignAttributes,
+    json_texto: json_texto,
+    texto_json: texto_json,
+    llamar_componente: llamar_componente,
+    call_component_storage: call_component_storage,
+    isObject: isObject
 }

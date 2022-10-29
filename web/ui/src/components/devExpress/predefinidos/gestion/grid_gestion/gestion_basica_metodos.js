@@ -1,16 +1,12 @@
 
 let metodos = {
-    'dobleClick':  function(e) {      
-        this.$router.push(
-            {
-                name  : "gestion_pantalla",
-                params: {
-                    "datos": JSON.stringify({
-                        "id"   : e.data.id,
-                        "datos": e.data
-                    })     
-                }
-            }
+    'dobleClick':  function(e) {              
+        $lib.call_component_storage(
+            "gestion_pantalla",
+            {"datos": {
+                "id"   : e.data.id,
+                "datos": e.data
+            }}
         )
     },
 
@@ -37,7 +33,7 @@ let metodos = {
 
     'muestra_ventana_emergente' : function(parametros){
         let seleccionados = this.$refs.grid.instance.getSelectedRowKeys();
-        let datos         = this.$refs.grid.instance.getSelectedRowsData();
+        let datos = this.$refs.grid.instance.getSelectedRowsData();
         if ( (seleccionados.length == 1) && (parametros.borrador != true ) ) {
             if (datos[0].origen_tipo == "ENTRADA") {
                 this.emergente_key += 1;
@@ -68,7 +64,7 @@ let metodos = {
             this.opciones_ventana.rapida             = parametros.rapida 
             this.opciones_ventana.visible            = true
 
-        }
+        }        
     },
 
     'plantilla_columna_estado': function(data) {

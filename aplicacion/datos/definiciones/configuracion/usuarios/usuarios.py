@@ -12,6 +12,25 @@ from librerias.datos.sql                    import sqalchemy_clase_dinamica
 from librerias.datos.base                   import globales
 from aplicacion.datos.definiciones._comunes import elementos_comunes
 
+def roles_especificos(r_):
+    roles = []
+    if (r_.id == r_.jefe_id):
+        roles.append("JEFE")
+
+    if (r_.id == r_.archivo_id):
+        roles.append("ARCHIVO")
+
+    if (r_.id == r_.correspondencia_id):
+        roles.append("CORRESPONDENCIA")
+
+    if (r_.id == r_.pqrs_id):
+        roles.append("PQRSD")
+
+    if roles:
+        print("roles_especificos:", r_.codigo, r_.nombre, roles)
+
+    return roles
+
 def nombre_completo(r_):
     return ( r_.nombre + " - " + str(r_.dependencia_nombre_completo) )
 
@@ -25,7 +44,7 @@ campos = {
     "estado_"       : tipos.texto_obligatorio(propiedades={"titulo": "Estado"}), 
 
     # Propiedades
-    # Propiedades
+    "roles_especificos": tipos.clave(propiedades={"columna": "no", "titulo": "Roles especificos", "propiedad": roles_especificos, "reporte": "SI"}),  
     "nombre_completo": tipos.texto(propiedades={"columna": "no", "titulo": "Nombre completo", "longitud": 250, "propiedad": nombre_completo, "reporte": "SI"}),  
     "roles_ids"  : tipos.clave(
         propiedades= {
@@ -52,7 +71,11 @@ referencias = [
             "dependencia_nombre"         : "nombre",
             "dependencia_nombre_completo": "nombre_completo",
             "ubicacion_id"               : "ubicacion_id",
-            "ubicacion_nombre"           : "ubicacion_nombre"
+            "ubicacion_nombre"           : "ubicacion_nombre",
+            "jefe_id": "jefe_id",
+            "archivo_id": "archivo_id",
+            "correspondencia_id": "correspondencia_id",
+            "pqrs_id": "pqrs_id"
         }],
         "estructuraDestino": "dependencias",
         "campoDestino"     : "id"         

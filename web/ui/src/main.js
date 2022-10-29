@@ -19,6 +19,9 @@ import '../gestor/css/estilos.css';
 // Necesario para que funciones Handlebars
 window.global = window;
 
+// store
+import { createPinia } from 'pinia'
+
 // ######################################
 // # ALMACENAMIENTO DE DATOS Y OPCIONES #
 // ######################################
@@ -94,8 +97,9 @@ import App from './App.vue';
 
 // tailwindcss
 import './index.css'; // Debe ir aqui despues de App
-
+const pinia = createPinia()
 window._APLICACION_ = createApp(App);
+window._APLICACION_.use(pinia)
 registrar.registrar_componentes(window._APLICACION_);
 window._APLICACION_.mount('#aplicacion');
 
@@ -156,7 +160,6 @@ window.$print = printjs;
 let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
 document.body.style.background = 'url('+logo_ingreso+') no-repeat center center';
 
-
 // RUTAS
 import rutas_cortas from './rutas/rutas_cortas.js';
 let aplicacion = window.$ns['aplicacion'];
@@ -178,13 +181,13 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
 }
 else {   
     // CARGA APLICATIVO
-    /*
+    ///*
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
     await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.js');  
     window.$ns['aplicacion'].asignaComponente('login_forma');
-    */
+    //*/
     
-    ///* Especificos ára ruebas        
+    /* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
         "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "codigo": "PROFESIONAL",
@@ -194,7 +197,9 @@ else {
         "dependencia_nombre": "coordinacion academica",
         "ubicacion_id": "be776b15-ab68-11eb-b9de-006073b60f8a",
         "ubicacion_nombre": "sede central bogota",
-        "reemplaza_id": null
+        "reemplaza_id": null,
+        #"roles_especificos": ['JEFE', 'ARCHIVO', 'CORRESPONDENCIA', 'PQRSD'],
+        "roles_especificos": ['JEFE', 'ARCHIVO', 'CORRESPONDENCIA', 'PQRSD']
     }))
    
     window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));
@@ -273,5 +278,5 @@ else {
             //path: "usuarios_grid"
         })
     }, 1000);  
-    //*/ 
+    */ 
 }

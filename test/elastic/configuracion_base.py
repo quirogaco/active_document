@@ -4,7 +4,8 @@
 import pprint, datetime, sys
 import os, builtins
 
-sys.path.append('D:\gestor_2021_vite')
+sys.path.append('D:/active_document')
+print("******************************************")
 
 #########################
 # Configuracion general #
@@ -26,14 +27,14 @@ builtins._nodo         = argumentos.nodo
 
 
 ###########################################
-# Configuración ruta global importaciones #
+# Configuraciï¿½n ruta global importaciones #
 ###########################################
 import rutaGlobal
 
 rutaGlobal.publicaRutas(builtins._appServicios)
 
 #####################################
-# Configuración inicial del sistema #
+# Configuraciï¿½n inicial del sistema #
 #####################################
 from aplicacion.inicio   import configuracion 
 
@@ -42,7 +43,7 @@ configuracion.configuracion_general("base")
 # Librerias de servicios
 from aplicacion.servicios import *
 
-# Importación de librerias necesarias para el sistema
+# Importaciï¿½n de librerias necesarias para el sistema
 print("-----------------------")
 from aplicacion.inicio import carga_librerias
 

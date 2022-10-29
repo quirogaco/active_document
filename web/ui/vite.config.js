@@ -1,7 +1,7 @@
 const path = require('path');
-const fs = require('fs')
-import { defineConfig, loadEnv } from 'vite'
-import vue   from '@vitejs/plugin-vue'
+const fs = require('fs');
+import { defineConfig, loadEnv } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 let ubicacion = "../../";
 let ambiente = loadEnv("development", ubicacion, prefix = 'CFG_')

@@ -96,8 +96,10 @@ let rutas_componentes = {
     // RADICACIóN VENTANILLA #
     // #######################
     // ENTRADAS
-    'ventanilla_radicado_grid' : () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid/grid_ventanilla_radicado_grid.vue'),
-    'ventanilla_radicado_forma': () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/form/ventanilla_forma_radicado.vue'),
+    // 'ventanilla_radicado_grid' : () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid/grid_ventanilla_radicado_grid.vue'),
+    // 'ventanilla_radicado_forma': () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/form/ventanilla_forma_radicado.vue'),
+    'ventanilla_radicado_grid' : () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid_ventanilla_radicado_grid.vue'),
+    'ventanilla_radicado_forma': () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/ventanilla_forma_radicado.vue'),    
     'forma_radicado_consulta'  : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta/forma_radicado_consulta.vue'),
 
     // SALIDAS

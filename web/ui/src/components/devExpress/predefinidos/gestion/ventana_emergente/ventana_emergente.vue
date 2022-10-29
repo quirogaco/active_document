@@ -75,7 +75,16 @@ let ventana =  {
                 break; 
                 
             case "CONSULTA_RADICADO":
-                this.datos = JSON.stringify({"datos": this.opciones.consulta.radicado})
+                console.log("this.opciones-1", this.opciones)
+                this.datos = "{}";
+                //this.datos = JSON.stringify({"datos": this.opciones.consulta.radicado})
+                $save_params(
+                    "ventanilla_radicado_consulta", 
+                    {
+                        "_visible": this.opciones.visible,
+                        "datos": this.opciones.consulta.radicado
+                    }
+                ); 
                 break; 
 
             case "CONSULTA_GESTION":

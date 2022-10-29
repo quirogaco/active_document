@@ -19,6 +19,7 @@ localhost+4.pem
 python3.10 active_document/aplicacion/trabajadores/llama_trabajadores.py
 
 python3.10 aplicacion/trabajadores/llama_trabajadores.py
+python aplicacion/trabajadores/llama_trabajadores.py
 
 
 desde /active_document

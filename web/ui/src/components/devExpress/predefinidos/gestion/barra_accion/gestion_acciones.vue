@@ -22,9 +22,47 @@ let elemento_click = function(e) {
 let elemento_click_gestion = function(e) {      
     let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id);   
     let evento     = componente.$props.opciones.evento_grid_gestion;
-    console.log("componente:", componente, evento); 
     componente.$emit(evento, parametros)     
 };
+
+let barra_elementos = function(that) {
+    let elementos = [{
+        widget  : "dxDropDownButton",
+        location: "after",
+        options : {
+            items      : gestion_acciones_elementos.items_borradores(that, that.opciones.contexto),                
+            displayExpr: 'titulo',
+            keyExpr    : 'id',
+            text       : "Borradores",    
+            onItemClick: elemento_click,  
+            width      : 350,
+            stylingMode: 'filled',
+            type       : 'default'                                 
+        }
+    }];
+
+    // itesm de gestion
+    let items_gestion = gestion_acciones_elementos.items_gestion(that, that.opciones.contexto);
+    if (items_gestion.length > 0) {
+        elementos.push({
+            widget  : "dxDropDownButton",
+            location: "after",
+            options : {
+                items      : items_gestion,                
+                displayExpr: 'titulo',
+                keyExpr    : 'id',
+                text       : "Acciones de Gestión",    
+                onItemClick: elemento_click_gestion,  
+                width      : 350,
+                stylingMode: 'filled',
+                type       : 'default'                                 
+            }
+        })               
+    };
+
+    console.log("elementos:", elementos)
+    return elementos;
+}
 
 // Barra de gestión
 let barra =  {
@@ -53,38 +91,7 @@ let barra =  {
 
     data() {
         return {
-            barra_elementos: [
-                {
-                    widget  : "dxDropDownButton",
-                    location: "after",
-                    options : {
-                        items      : gestion_acciones_elementos.items_borradores(this, this.opciones.contexto),                
-                        displayExpr: 'titulo',
-                        keyExpr    : 'id',
-                        text       : "Borradores",    
-                        onItemClick: elemento_click,  
-                        width      : 350,
-                        stylingMode: 'filled',
-                        type       : 'default'                                 
-                    }
-                },
-
-                {
-                    widget  : "dxDropDownButton",
-                    location: "after",
-                    options : {
-                        items      : gestion_acciones_elementos.items_gestion(this, this.opciones.contexto),                
-                        displayExpr: 'titulo',
-                        keyExpr    : 'id',
-                        text       : "Acciones de Gestión",    
-                        onItemClick: elemento_click_gestion,  
-                        width      : 350,
-                        stylingMode: 'filled',
-                        type       : 'default'                                 
-                    }
-                }                
-            ],
-            
+            barra_elementos: barra_elementos(this),            
             onContentReady: function(e) {}
         }
     }

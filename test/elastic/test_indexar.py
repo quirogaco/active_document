@@ -15,11 +15,11 @@ def recuperar(conexion, estructura):
     modelo = globales.lee_modelo_elastic(estructura)
     desde  = 0
 
-    resultado = sqalchemy_leer.leer_todos("base", estructura, desde=0, hasta=1000)
+    resultado = sqalchemy_leer.leer_todos("base", estructura, desde=0, hasta=10000)
     bulk      = elastic_operaciones.bulk_indexar(conexion, modelo["modelo"], modelo["indice"], resultado)
     print("")
     print("RESULTADO>>>" + estructura, len(resultado))    
-    pprint.pprint(resultado)
+    #pprint.pprint(resultado)
     print("")
 
 #CONFIGURACIÓN
@@ -28,7 +28,7 @@ def recuperar(conexion, estructura):
 # recuperar(conexion, "canales_comunicacion")
 # recuperar(conexion, "roles")
 # recuperar(conexion, "ubicaciones")
-# recuperar(conexion, "usuarios")
+recuperar(conexion, "usuarios")
 # recuperar(conexion, "dependencias")
 # recuperar(conexion, "continentes")
 # recuperar(conexion, "paises")
@@ -57,11 +57,11 @@ def recuperar(conexion, estructura):
 
 #"""
 # RADICACION GESTION
-# recuperar(conexion, "radicados_entrada")
+recuperar(conexion, "radicados_entrada")
 recuperar(conexion, "radicados_salida")
-# recuperar(conexion, "radicados_interno")
-# recuperar(conexion, "peticiones")
-# recuperar(conexion, "copias")
+recuperar(conexion, "radicados_interno")
+recuperar(conexion, "peticiones")
+recuperar(conexion, "copias")
 #"""
 
 #"""
