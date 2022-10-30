@@ -53,10 +53,7 @@ const forma_propiedades = function(propiedades={}) {
 const lee_propiedades = function(props, componente_name=null) {
     let attributes = {};
     if (componente_name != null) {
-<<<<<<< HEAD
-=======
         // pinia params
->>>>>>> 9f6bf918bc3ad4ed36d7f458a228a98e9eaa361b
         attributes = $get_params(componente_name);
     }
     else {
@@ -70,11 +67,7 @@ const lee_propiedades = function(props, componente_name=null) {
                 attributes = props.attributes;
             }
             else {
-<<<<<<< HEAD
-                attributes = $lib.texto_json(props.props.datos);
-=======
                 attributes = $lib.texto_json(props.datos);
->>>>>>> 9f6bf918bc3ad4ed36d7f458a228a98e9eaa361b
             }
         }
     }

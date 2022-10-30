@@ -7,7 +7,7 @@
                         <DataForma     
                             ref         = "formRef"  
                             :attributes = "atributos_forma"
-                            @mounted    = "dataFormaMounted"
+                            @mounted    = "form_mounted"
                         />
 
                         <div class="linea_blanco"></div>  
@@ -32,30 +32,45 @@ let that = getCurrentInstance().ctx;
 //**************************//
 // Atributos del componente //
 //**************************//
-
 let name = 'login_forma';
 let formRef = ref(null);
 let barraRef = ref(null);
-that.dataForm = null; 
 let logo_ingreso = window.$direcciones.servidorDatos+"/logo_ingreso";
-//let image = ref({ backgroundImage: "url(" + logo_ingreso + ") center" });
 let image = "url(" + logo_ingreso + ")";
 
-// Propiedades
-//const props = defineProps( $forma.forma_propiedades({}) );
-//let attributes = $forma.lee_propiedades(props);
-let attributes = {};
+// definicion de forma
+let atributos_forma = {
+    config: {
+        id: name,
+        items: [        
+            {
+                "componente" : "campo",
+                "tipo": "texto",
+                "id": "codigo",
+                "titulo": "Codigo", 
+                "obligatorio": true,
+                "longitud": 120,
+                "ancho": 250
+            },
+            
+            {
+                "componente": "campo",
+                "tipo": "texto",
+                'modo': 'password',
+                "id": "clave",
+                "titulo": "Clave", 
+                "obligatorio": true,
+                "longitud": 30,
+                "ancho": 150
+            }
+        ],
+        colCount: 1  
+    }                   
+}; 
 
-// Retorna de envio post de datos
-const retorna_envio = function(retorna_datos) {
-    // retorna_grid();
-    // cerrar_emergente();
-}
-
-// Envia datos servidor
+// envia datos servidor
 async function enviar_datos() {    
     let datos = that.dataForm.validateData();  
-    console.log("DATOS", datos)  
     if (datos.isValid == true) {
         window.$mostrar_esperar();
         let parametros = datos["formData"];                
@@ -77,58 +92,27 @@ async function enviar_datos() {
         }
         window.$ocultar_esperar();
     }    
-}
-
-// Acciones barra botones (Crear, Modificar, Regresar)
-function callBackButtons(evento, modo) {   
-}
-
-// Funcion llamada por evento mounted DataForma
-async function dataFormaMounted(DataForma) {};
-onMounted(() => {
-    that.dataForm = that.$refs.formRef;
-})
-
-let atributos_forma = {
-    id      : name,
-    formData: {},
-    items   : [        
-        {
-            "componente" : "campo",
-            "tipo": "texto",
-            "id": "codigo",
-            "titulo": "Codigo", 
-            "obligatorio": true,
-            "longitud": 120,
-            "ancho": 250
-        },
-        
-        {
-            "componente": "campo",
-            "tipo": "texto",
-            'modo': 'password',
-            "id": "clave",
-            "titulo": "Clave", 
-            "obligatorio": true,
-            "longitud": 30,
-            "ancho": 150
-        }
-    ],
-    colCount: 1                     
-} 
+};
 
 let atributos_barra = {
     items: [
         $forma.botonBarra({
-            text : 'Ingresar',
-            type : 'success',
-            icon : 'fa-solid fa-arrow-right-to-bracket',
-            click: async function() {
-                enviar_datos()
-            }
+            text: 'Ingresar',
+            type: 'success',
+            icon: 'fa-solid fa-arrow-right-to-bracket',
+            click: enviar_datos
         })
     ]
-}  
+}; 
+
+// funcion llamada por evento mounted DataForma
+async function form_mounted(DataForma) {
+    console.log("EVENT: dataFormaMounted")
+};
+
+onMounted(() => {
+    that.dataForm = that.$refs.formRef;
+});
 </script>
 
 <style scoped>

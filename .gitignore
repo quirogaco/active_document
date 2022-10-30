@@ -2,3 +2,4 @@
 **/web/ui/dist
 .env
 configurar_local.py
+configurar.py

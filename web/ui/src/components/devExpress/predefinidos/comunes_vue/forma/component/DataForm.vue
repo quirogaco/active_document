@@ -2,6 +2,7 @@
 </template>
 
 <script setup lang="ts">
+import DxForm from 'devextreme-vue/form';
 import general_form from "@/comunes_vue/forma/forma.js";
 
 import { 
@@ -76,27 +77,27 @@ that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
 onMounted(() => { 
-    console.log(" MOUNTED that.$refs.dxFormRef--88:", that.$refs.dxFormRef.instance);  
-    // // devexpress instance
-    // that.instance = that.$refs.dxFormRef.instance;
+    console.log(" onMounted DATAFORM that.$refs.dxFormRef--88:", that.$refs.dxFormRef.instance);  
+    // devexpress instance
+    that.instance = that.$refs.dxFormRef.instance;
 
-    // // required for events, methods and fields of the form
-    // that.instance.basicas = {
-    //     "forma_id": that.parameters_received.config.id
-    // };
-    // that.formRef  = that.$refs.dxFormRef;
+    // required for events, methods and fields of the form
+    that.instance.basicas = {
+        "forma_id": that.parameters_received.config.id
+    };
+    that.formRef  = that.$refs.dxFormRef;
     
-    // // assignment of items of the form
-    // let items = (
-    //     that.parameters_received.config.items != undefined ? 
-    //     that.parameters_received.config.items: []
-    // ); 
-    // items = nested_assign(items, that.instance);
-    // items = dev_express_definition(items);
-    // that.instance.option("items", items);
+    // assignment of items of the form
+    let items = (
+        that.parameters_received.config.items != undefined ? 
+        that.parameters_received.config.items: []
+    ); 
+    items = nested_assign(items, that.instance);
+    items = dev_express_definition(items);
+    that.instance.option("items", items);
 
-    // // emit event of parent component
-    // that.$emit('mounted', that);
+    // emit event of parent component
+    that.$emit('mounted', that);
 });
 
 

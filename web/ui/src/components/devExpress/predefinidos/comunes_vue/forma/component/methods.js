@@ -9,8 +9,16 @@ export const methodForm = function(that) {
         formData(datos=null) {            
             return $forma.formData(that.instance, datos)
         },
+
+        form_data(datos=null) {            
+            return $forma.formData(that.instance, datos)
+        },
         
         validateData() {
+            return $forma.forma_validacion(that.instance, {})
+        },
+
+        validate_data() {
             return $forma.forma_validacion(that.instance, {})
         },
 
