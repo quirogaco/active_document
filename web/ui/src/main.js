@@ -248,12 +248,12 @@ else {
     
     await window.$ns['aplicacion'].asignaRuta(
         'ventanilla_radicado_forma',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/form/ventanilla_forma_radicado.vue'
+        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/form/ventanilla_forma_radicado.vue'
     );
 
     await window.$ns['aplicacion'].asignaRuta(
         'ventanilla_radicado_grid',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid/grid_ventanilla_radicado_grid.vue'
+        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'
     );
 
     window.$ns['aplicacion'].crea_enrutador();
@@ -268,7 +268,8 @@ else {
             //path: "expediente_disposicion_grid"
             //path: "gestion_basica_grid"
             //path: "flujos_dinamicos_grid"
-            path: "ventanilla_radicado_grid"
+            //path: "ventanilla_radicado_grid",
+            path: "ventanilla_radicado_forma",
             //path: "pantalla_expediente"
             //path: "usuarios_grid"
         })

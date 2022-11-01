@@ -58,13 +58,14 @@ const nested_assign = function(items, form) {
 // #################################
 // properties, events and contexts #
 // #################################
-that.name = "DataForm";
+// that.name = "DataForm";
 
 // must be declared as variables of the setup function script 
 // to be exposed by default
 const props = defineProps(general_form.forma_propiedades({}));
 let parameters_received = general_form.lee_propiedades(props);
 that.parameters_received = parameters_received;
+// that.name = that.parameters_received.config.name;
 
 // events
 const emit = defineEmits(['mounted'])
@@ -78,6 +79,7 @@ that = $lib.assignAttributes(that, events);
 
 onMounted(() => { 
     console.log(" onMounted DATAFORM that.$refs.dxFormRef--88:", that.$refs.dxFormRef.instance);  
+    console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
     // devexpress instance
     that.instance = that.$refs.dxFormRef.instance;
 

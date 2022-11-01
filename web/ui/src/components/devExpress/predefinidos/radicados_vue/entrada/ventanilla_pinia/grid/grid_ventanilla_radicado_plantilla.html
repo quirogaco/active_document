@@ -1,0 +1,98 @@
+
+<div class="container-fluid">
+    
+    <ventana_emergente_archivo                  
+        :opciones = "opciones_ventana_emergente_archivo"
+        :key      = "emergente_key"
+    />
+
+    <ventana_emergente_recorrido                  
+        :opciones = "opciones_ventana_emergente_recorrido"
+        :key      = "emergente_recorrido"
+    />
+
+    <div class="shadow p-1 mb-2 bg-light rounded">
+
+        <div class="text-center fs-3 shadow-sm  bg-light rounded">{{titulo}}</div> 
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'multiple' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :columns                 = "columnas"
+            :word-wrap-enabled       = "true"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @cell-dbl-click          = "columna_doble_click"
+        >
+            <DxSearchPanel
+                :visible                  = "true"                
+                :width                    = "300"
+                placeholder               = "Buscar"
+                :highlight-search-text    = "false"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :visible="true"
+                :allowed-page-sizes="pageSizes"
+                :display-mode="displayMode"
+                :show-page-size-selector="showPageSizeSelector"
+                :show-info="showInfo"
+                :show-navigation-buttons="showNavButtons"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+
+            <DxExport
+                :enabled="true"
+            />
+
+            <DxToolbar
+                :items = "barra_elementos"
+            />
+
+            <template #radicarButton>
+                <DxButton
+                    @click = "radicar()"
+                    icon   = "fas fa-plus-square"
+                    text   = "Radicar"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #cargarDocumento>
+                <DxButton
+                    @click = "cargar_documento()"
+                    icon   = "fas fa-file"
+                    text   = "Cargar Pdf principal"
+                    type   = "normal"  
+                />
+            </template>
+
+            <template #imprime_recorrido>
+                <DxButton
+                    @click = "imprime_recorrido()"
+                    icon   = "fas fa-print"
+                    text   = "Imprime recorrido"
+                    type   = "normal"  
+                />
+            </template>
+
+            <template #icono_pdf_template="{ data }">
+                <div v-html="icono_pdf_template(data)"></div>
+            </template>       
+        
+        </DxDataGrid>
+
+    </div>
+
+</div>
