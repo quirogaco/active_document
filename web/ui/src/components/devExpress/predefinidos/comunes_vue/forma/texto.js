@@ -28,8 +28,7 @@ const texto = function(id, atributos) {
     let campo = {
         'dataField'      : id,
         'editorType'     : "dxTextBox",
-        'label'          : basicos.label(atributos),  
-        //'isRequired'     : $librerias.cargaAtributo(atributos, 'obligatorio', false),    
+        'label'          : basicos.label(atributos),
         'itemType'       : 'simple',
         'name'           : $librerias.cargaAtributo(atributos, 'nombre', id),
         'visible'        : $librerias.cargaAtributo(atributos, 'visible', true),  

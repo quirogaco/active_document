@@ -6,7 +6,7 @@ import respuesta_definiciones from "../../../../radicados_vue/comunes/basicos/re
 import archivo_definiciones   from "../../../../radicados_vue/comunes/basicos/archivo_definiciones.js"
 import asigna_definiciones    from "../../../../radicados_vue/comunes/basicos/asigna_definiciones.js"
 
-let barra_botones = function(forma, basicas) {
+let barra_botones = function(forma) {
     return  [       
         { 
             widget  : "dxButton",           
@@ -238,17 +238,17 @@ let archivo_grupo = function(forma) {
 // ###### //
 // CAMPOS //
 // ###### //
-const campos_especificos = function(forma, basicas) {
+const campos_especificos = function(forma) {
     // Barra de botones
     let campos = {
-        "barra_botones": barra_botones(forma, basicas)
+        "barra_botones": barra_botones(forma)
     }
 
     campos["elementos"] =  [
         basicos_grupo(forma),        
-        tercero_grupo(forma),
-        asignacion_grupo(forma),
-        archivo_grupo(forma)
+        // tercero_grupo(forma),
+        // asignacion_grupo(forma),
+        // archivo_grupo(forma)
     ]
 
     return campos
@@ -256,8 +256,7 @@ const campos_especificos = function(forma, basicas) {
 
 let campos_forma = function(forma, basicas) {
     let campos = {
-        ...campos_basicos_comunes.campos(forma, basicas),
-        ...campos_especificos(forma, basicas)
+        ...campos_especificos(forma)
     }
 
     return campos

@@ -1,4 +1,8 @@
-<template src="./DataForm.html">
+<template>
+    <DxForm
+        ref= "dxFormRef"
+        v-bind= "parameters_received.config"
+    /> 
 </template>
 
 <script setup lang="ts">
@@ -58,14 +62,21 @@ const nested_assign = function(items, form) {
 // #################################
 // properties, events and contexts #
 // #################################
-// that.name = "DataForm";
+that.name = "DataForm";
 
 // must be declared as variables of the setup function script 
 // to be exposed by default
 const props = defineProps(general_form.forma_propiedades({}));
 let parameters_received = general_form.lee_propiedades(props);
 that.parameters_received = parameters_received;
-// that.name = that.parameters_received.config.name;
+
+// no son definiciones validas de devxpress, se crean en mounted event
+let fields_form = (
+    that.parameters_received.config.items != undefined ? 
+    that.parameters_received.config.items: []
+); 
+that.parameters_received.config.items = [];
+//that.name = that.parameters_received.config.name;
 
 // events
 const emit = defineEmits(['mounted'])
@@ -77,31 +88,33 @@ general_form.forma_funciones.montado_general(that, props);
 that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
-onMounted(() => { 
-    console.log(" onMounted DATAFORM that.$refs.dxFormRef--88:", that.$refs.dxFormRef.instance);  
+onMounted(() => {
+    console.log(" onMounted DATAFORM that.$refs.dxFormRef:", that.$refs.dxFormRef);
+    console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
     console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
-    // devexpress instance
+    // devexpress class, access to instance
+    that.dxForm = that.$refs.dxFormRef;
+    // devexpress instance (object), acces to functions
     that.instance = that.$refs.dxFormRef.instance;
 
     // required for events, methods and fields of the form
     that.instance.basicas = {
         "forma_id": that.parameters_received.config.id
     };
-    that.formRef  = that.$refs.dxFormRef;
     
-    // assignment of items of the form
-    let items = (
-        that.parameters_received.config.items != undefined ? 
-        that.parameters_received.config.items: []
-    ); 
-    items = nested_assign(items, that.instance);
-    items = dev_express_definition(items);
-    that.instance.option("items", items);
+    // assignment of items of the form    
+    fields_form = nested_assign(fields_form, that.instance);
+    //fields_form = dev_express_definition(fields_form);
+    that.instance.option("items", fields_form);
 
-    // emit event of parent component
-    that.$emit('mounted', that);
+    console.log("visible",that.instance.option("visible"));
+
+    // emit events of parent component
+    //that.$emit('mounted', that);
+    console.log("fields_form", fields_form)
+    emit('mounted', that);
 });
 
 
-defineExpose( Object.assign({}, that) );
-</script>
+//defineExpose( Object.assign({}, that) );
+</script>(

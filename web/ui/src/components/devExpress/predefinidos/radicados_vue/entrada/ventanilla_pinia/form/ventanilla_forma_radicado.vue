@@ -13,45 +13,24 @@ console.log("getCurrentInstance()", getCurrentInstance())
 // Atributos del componente //
 //**************************//
 
+import forma_general from "../../../../comunes_vue/forma/forma.js";
+import forma_definiciones from "./ventanilla_forma_radicado_definiciones.js";
+import forma_campos from "./ventanilla_forma_radicado_campos.js";
+
 let component_name = "ventanilla_radicado_forma";
 let dataForma = ref(null);  // DataForma
-// defineOptions({
-//     name: 'yyyyyyyyyylogin_forma',
-//     formRef: null,
-//     barraRef: null
-// })
 
-// let name = 'login_forma';
-// 
-// let barraRef = ref(null);
-
+that.basicas = {
+    "forma_id": component_name
+}
+let campos = forma_campos.campos_forma(that, that.basicas);
+console.log("CAMPOS:", campos["elementos"])
 // definicion de forma
 let atributos_forma = {
     config: {
         id: component_name,
         name: component_name,
-        items: [        
-            {
-                "componente" : "campo",
-                "tipo": "texto",
-                "id": "codigo",
-                "titulo": "Codigo", 
-                "obligatorio": true,
-                "longitud": 120,
-                "ancho": 250
-            },
-            
-            {
-                "componente": "campo",
-                "tipo": "texto",
-                'modo': 'password',
-                "id": "clave",
-                "titulo": "Clave", 
-                "obligatorio": true,
-                "longitud": 30,
-                "ancho": 150
-            }
-        ],
+        items: campos["elementos"], 
         colCount: 2  
     }                   
 }; 
@@ -61,12 +40,12 @@ async function enviar_datos() {};
 
 let atributos_barra = {
     items: [
-        $forma.botonBarra({
-            text: 'Ingresar',
-            type: 'success',
-            icon: 'fa-solid fa-arrow-right-to-bracket',
-            click: enviar_datos
-        })
+        // $forma.botonBarra({
+        //     text: 'Ingresar',
+        //     type: 'success',
+        //     icon: 'fa-solid fa-arrow-right-to-bracket',
+        //     click: enviar_datos
+        // })
     ]
 }; 
 
@@ -75,6 +54,7 @@ console.log("atributos_forma:", atributos_forma);
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
     console.log("EVENT: Mounted -> THAT", that);     
+    console.log("EVENT: Mounted -> DataForma", DataForma, DataForma.instance);    
     console.log("EVENT: Mounted -> THAT.$refs.formRef", that.$refs.dataForma); 
     console.log("EVENT: Mounted -> THAT.$refs.formRef.instance", that.$refs.dataForma.instance);     
 };
