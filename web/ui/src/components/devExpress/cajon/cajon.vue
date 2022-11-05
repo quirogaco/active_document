@@ -73,7 +73,7 @@
                         </template>
 
                     
-                        <div class="container-fluid blanco" >
+                        <div class="container-fluid blanco vh-100" >
                             <router-view>                        
                             </router-view>
                         </div>

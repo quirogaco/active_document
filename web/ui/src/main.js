@@ -177,13 +177,13 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
 }
 else {   
     // CARGA APLICATIVO
-    ///*
+    /*
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
     await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
     window.$ns['aplicacion'].asignaComponente('login_forma');
-    //*/
+    */
     
-    //* Especificos ára ruebas        
+    ///* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
         "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "codigo": "PROFESIONAL",
@@ -197,68 +197,68 @@ else {
         "roles_especificos": ['JEFE', 'ARCHIVO', 'CORRESPONDENCIA', 'PQRSD']
     }))
    
-    window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));
-    await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');  
+    // window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));
+    // await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');  
     
-    await window.$ns['aplicacion'].asignaRuta(
-        'trd_basica_grid',  
-        '/components/devExpress/predefinidos/archivo/trd/definicion/grid_trd/trd_basica_grid.vue'
-    );   
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'trd_basica_grid',  
+    //     '/components/devExpress/predefinidos/archivo/trd/definicion/grid_trd/trd_basica_grid.vue'
+    // );   
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'trd_pantalla',  
-        '/components/devExpress/predefinidos/archivo/trd/definicion/pantalla_trd/pantalla_trd.vue'
-    );   
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'trd_pantalla',  
+    //     '/components/devExpress/predefinidos/archivo/trd/definicion/pantalla_trd/pantalla_trd.vue'
+    // );   
     
-    await window.$ns['aplicacion'].asignaRuta(
-        'expediente_basica_grid',  
-        '/components/devExpress/predefinidos/archivo/expedientes/grid_expediente/expediente_basica_grid.vue'
-    );   
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'expediente_basica_grid',  
+    //     '/components/devExpress/predefinidos/archivo/expedientes/grid_expediente/expediente_basica_grid.vue'
+    // );   
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'pantalla_expediente',  
-        '/components/devExpress/predefinidos/archivo/expedientes/pantalla_expediente/pantalla_expediente.vue'
-    );   
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'pantalla_expediente',  
+    //     '/components/devExpress/predefinidos/archivo/expedientes/pantalla_expediente/pantalla_expediente.vue'
+    // );   
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'expediente_transfiere_grid',  
-        '/components/devExpress/predefinidos/archivo/expedientes/grid_transferencia/expediente_basica_grid.vue'
-    );   
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'expediente_transfiere_grid',  
+    //     '/components/devExpress/predefinidos/archivo/expedientes/grid_transferencia/expediente_basica_grid.vue'
+    // );   
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'expediente_disposicion_grid',  
-        '/components/devExpress/predefinidos/archivo/expedientes/grid_disposicion/expediente_disposicion_grid.vue'
-    ); 
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'expediente_disposicion_grid',  
+    //     '/components/devExpress/predefinidos/archivo/expedientes/grid_disposicion/expediente_disposicion_grid.vue'
+    // ); 
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'gestion_basica_grid',  
-        '/components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'
-    ); 
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'gestion_basica_grid',  
+    //     '/components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'
+    // ); 
 
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'flujos_dinamicos_forma',  
-        '/components/devExpress/predefinidos/configuracion/flujos/forma/flujos_dinamicos_forma.vue'
-    );
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'flujos_dinamicos_forma',  
+    //     '/components/devExpress/predefinidos/configuracion/flujos/forma/flujos_dinamicos_forma.vue'
+    // );
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'flujos_dinamicos_grid',  
-        '/components/devExpress/predefinidos/configuracion/flujos/grid/flujos_dinamicos_grid.vue'
-    );
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'flujos_dinamicos_grid',  
+    //     '/components/devExpress/predefinidos/configuracion/flujos/grid/flujos_dinamicos_grid.vue'
+    // );
     
     await window.$ns['aplicacion'].asignaRuta(
         'ventanilla_radicado_forma',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/form/ventanilla_forma_radicado.vue'
+        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/form/ventanilla_forma_radicado.vue'
     );
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'ventanilla_radicado_grid',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla/grid/grid_ventanilla_radicado_grid.vue'
-    );
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'ventanilla_radicado_grid',  
+    //     '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'
+    // );
 
     window.$ns['aplicacion'].crea_enrutador();
-    window.$ns['aplicacion'].asignaComponente('cajon');
     await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');      
+    window.$ns['aplicacion'].asignaComponente('cajon');
     
     setTimeout(() => {
         $router.push({
@@ -268,10 +268,11 @@ else {
             //path: "expediente_disposicion_grid"
             //path: "gestion_basica_grid"
             //path: "flujos_dinamicos_grid"
-            path: "ventanilla_radicado_grid"
+            //path: "ventanilla_radicado_grid",
+            path: "ventanilla_radicado_forma",
             //path: "pantalla_expediente"
             //path: "usuarios_grid"
         })
     }, 1000);  
-    //*
+    //*/
 }

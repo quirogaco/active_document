@@ -51,7 +51,7 @@ const empresa_mensajeria_id = function(id=null, atributos={}) {
 
 const numero_guia = function(id=null, atributos={}) {
     let atributos_base = {
-        "titulo"    : 'Número_guia', 
+        "titulo"    : 'Número de guia', 
         "mensaje"   : "Digite número de guia de mensajeria",
     }
     
@@ -106,7 +106,7 @@ const entidad_traslada = function(id=null, atributos={}) {
         "titulo"    : 'Entidad que traslada', 
         "mensaje"   : "Digite nombre de la entidad que traslada",
     }
-    
+
     return forma_definiciones.genera_campo("texto", "entidad_traslada", id, atributos_base, atributos)
 }
 

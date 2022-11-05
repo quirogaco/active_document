@@ -35,14 +35,7 @@ const forma_propiedades = function(propiedades={}) {
             default: () => {
                 return "{}"
             }
-        },
-
-        componente_name: {
-            type: String,
-            default: () => {
-                return "DataForm"
-            }
-        },
+        }
     };
 
     let propiedades_totales = Object.assign({}, basicas, propiedades);

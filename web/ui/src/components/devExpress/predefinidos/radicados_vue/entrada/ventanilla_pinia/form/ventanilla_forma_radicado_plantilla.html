@@ -1,0 +1,18 @@
+<div class="container-fluid vh-100">  
+    <div>      
+        <div class="shadow-sm bg-body rounded ">
+            <DataForma     
+                ref="dataForma"  
+                :attributes="atributos_forma"
+                @mounted="form_mounted"
+            />
+
+            <div class="linea_blanco"></div>  
+            <ToolBar    
+                ref="barraRef"  
+                :attributes="atributos_barra"
+            />
+        </div>
+    </div>
+
+</div>

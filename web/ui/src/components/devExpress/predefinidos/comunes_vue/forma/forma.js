@@ -55,6 +55,7 @@ const campos_anidados = function(definicion) {
 };
 
 const genera_campo = function(tipo, id_base=null, id=null, atributos_base={}, atributos={}) {
+    console.log("genera_campo -> atributos:", tipo, atributos)
     let definicion = $lib.definicion_defecto(id, id_base, atributos_base, atributos)    
     let campo      = null
     definicion["atributos"]["tipo"] = tipo;    
@@ -158,6 +159,8 @@ const genera_campo = function(tipo, id_base=null, id=null, atributos_base={}, at
             );
             break
     }  
+
+    console.log("genera_campo:", campo)
 
     return campo
 }
