@@ -73,7 +73,8 @@ const medio_notificacion = function(id=null, atributos={}) {
         "obligatorio": true,
         "eventos"    : {
             "valor_cambiado": function(campo, definicion, forma, forma_id) {
-                let valor = campo.value
+                console.log("medio_notificacion -> valor_cambiado:", forma)
+                let valor = campo.value;
                 if ( valor.indexOf("CORREO") > -1 ) {
                     forma_definiciones.asigna_validador_forma(forma, ["tercero_correo_electronico"], "obligatorio")
                 }

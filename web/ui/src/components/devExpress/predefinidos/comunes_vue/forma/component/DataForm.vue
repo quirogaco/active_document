@@ -1,10 +1,3 @@
-<template>
-    <DxForm
-        ref= "dxFormRef"
-        v-bind= "parameters_received.config"
-    /> 
-</template>
-
 <script setup lang="ts">
 import DxForm from 'devextreme-vue/form';
 import general_form from "@/comunes_vue/forma/forma.js";
@@ -70,7 +63,9 @@ const props = defineProps(general_form.forma_propiedades({}));
 let parameters_received = general_form.lee_propiedades(props);
 that.parameters_received = parameters_received;
 
-// no son definiciones validas de devxpress, se crean en mounted event
+// 1. como hacer compatible parameters_received sin formato de config y data ?
+// 2. como identificar si  items  son definiciones devexpress o 
+//    basicas para convertir
 let fields_form = (
     that.parameters_received.config.items != undefined ? 
     that.parameters_received.config.items: []
@@ -79,7 +74,7 @@ that.parameters_received.config.items = [];
 //that.name = that.parameters_received.config.name;
 
 // events
-const emit = defineEmits(['mounted'])
+const emit = defineEmits(['mounted']);
 
 // generic mounting action
 general_form.forma_funciones.montado_general(that, props); 
@@ -92,29 +87,53 @@ onMounted(() => {
     console.log(" onMounted DATAFORM that.$refs.dxFormRef:", that.$refs.dxFormRef);
     console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
     console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
-    // devexpress class, access to instance
+    // devexpress class, access to attributes
     that.dxForm = that.$refs.dxFormRef;
-    // devexpress instance (object), acces to functions
+    // devexpress instance (object), acces to functions, ej: option
     that.instance = that.$refs.dxFormRef.instance;
 
     // required for events, methods and fields of the form
+    // validar sin no viene copn config... ver 1
     that.instance.basicas = {
         "forma_id": that.parameters_received.config.id
     };
     
-    // assignment of items of the form    
-    fields_form = nested_assign(fields_form, that.instance);
+    // crea items en formato devexpress por sin no vienen asi ? ver 1.
+    //fields_form = nested_assign(fields_form, that.instance);
     //fields_form = dev_express_definition(fields_form);
     that.instance.option("items", fields_form);
-
-    console.log("visible",that.instance.option("visible"));
+    //that.instance.option("items", null);
 
     // emit events of parent component
     //that.$emit('mounted', that);
-    console.log("fields_form", fields_form)
     emit('mounted', that);
 });
 
 
-//defineExpose( Object.assign({}, that) );
-</script>(
+defineExpose( Object.assign({}, that) );
+</script>
+
+<script lang="ts">
+import { defineComponent, ref, h } from "vue";
+
+export default defineComponent({
+  render() {
+    let div = h("div", {}, `
+
+        <DxForm        
+            ref= "dxFormRef"
+            v-bind= "parameters_received.config"        
+        > 
+
+            <template #contenido-template="{data, index}">                
+                <p v-html="data.editorOptions.value"></p>
+            </template>
+                
+        </DxForm>
+    `);
+    console.log("DIV->", div)
+    
+    return div
+  }
+})
+</script>

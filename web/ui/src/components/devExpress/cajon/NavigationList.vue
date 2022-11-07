@@ -1,6 +1,6 @@
 <template>
     
-    <div class="container-sm" >
+    <div class="container-sm " >
 
         <DxTreeView
             key-expr="path"

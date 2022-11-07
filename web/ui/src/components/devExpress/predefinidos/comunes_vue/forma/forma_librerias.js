@@ -1,5 +1,5 @@
-import fuente_manejo from './fuente.js'
-import validaciones  from './validaciones.js'
+import fuente_manejo from './fuente.js';
+import validaciones  from './validaciones.js';
 
 const busca_item = function(elementos, campo_id, ruta=[], contador=0) { 
     let seguir = true;    
@@ -8,14 +8,25 @@ const busca_item = function(elementos, campo_id, ruta=[], contador=0) {
     for (const indice in elementos) {
         let componente = elementos[indice];
         let tipoCampo = componente.itemType;
-        let nombreComponente = ( componente.dataField != undefined ? componente.dataField: componente.name ); 
+        let nombreComponente = ( 
+            componente.dataField != undefined ? 
+            componente.dataField: componente.name 
+        ); 
         seguir = ( nombreComponente == campo_id ? false: true );
         encontro = !seguir; 
         if (seguir == true) {
             ruta.push(nombreComponente);            
-            if ( (tipos_complejos.indexOf(tipoCampo) > -1) && ((componente.items != undefined) || (componente.tabs!= undefined)) ) {
+            if ( (tipos_complejos.indexOf(tipoCampo) > -1) && 
+                 (
+                    (componente.items != undefined) || 
+                    (componente.tabs!= undefined)
+                 ) 
+                ) {
                 contador = 0;
-                let elementos = ( componente.items != undefined ? componente.items: componente.tabs );
+                let elementos = ( 
+                    componente.items != undefined ? 
+                    componente.items: componente.tabs 
+                );
                 contador += 1;
                 let retorna = busca_item(elementos, campo_id, ruta, contador);  
                 seguir = retorna[0];
@@ -23,7 +34,9 @@ const busca_item = function(elementos, campo_id, ruta=[], contador=0) {
                 if (seguir == true) {
                     contador -= 1;
                     if (contador == 0) {
-                        ruta = ruta.filter(elemento => elemento !=  nombreComponente);                  
+                        ruta = ruta.filter(
+                            elemento => elemento !=  nombreComponente
+                        );                  
                     }
                 } 
                 else break;                                
@@ -40,6 +53,8 @@ const busca_item = function(elementos, campo_id, ruta=[], contador=0) {
 };
 
 const busca_campo = function(forma, campo) {
+    console.log("busca_campo-forma:", forma)
+    console.log("busca_campo-forma-instance:", forma.$options)
     let ruta       = [];
     let retorna    = busca_item(forma.forma.option("items"), campo, ruta);
     let ruta_texto = retorna[1].join('.');
@@ -95,17 +110,19 @@ const lee_valor = function(forma=null, campo="") {
 }
 
 const salva_validadores_forma = function(forma_id="", opcion="") {
-    let forma  = window.$componentes["_formas"][forma_id]
-    let campos = window.$componentes["_campos"][forma_id]
+    let forma  = window.$componentes["_formas"][forma_id];
+    let campos = window.$componentes["_campos"][forma_id];
     for (const nombre in campos) {        
-        let ruta_texto = busca_campo(forma, nombre)
-        if (window.$componentes["_opciones"][forma_id] == undefined) {
-            window.$componentes["_opciones"][forma_id] = {}
+        let ruta_texto = busca_campo(forma, nombre);
+        let _opciones = window.$componentes["_opciones"];
+        if (_opciones[forma_id] == undefined) {
+            _opciones[forma_id] = {}
         }
-        if (window.$componentes["_opciones"][forma_id][nombre] == undefined) {
-            window.$componentes["_opciones"][forma_id][nombre] = {}
+        if (_opciones[forma_id][nombre] == undefined) {
+            _opciones[forma_id][nombre] = {}
         }
-        window.$componentes["_opciones"][forma_id][nombre][opcion] = forma.forma.itemOption(ruta_texto)[opcion]
+        _opciones[forma_id][nombre][opcion] = 
+            forma.forma.itemOption(ruta_texto)[opcion];
     }
     
     return window.$componentes["_opciones"][forma_id]
@@ -131,7 +148,11 @@ const asigna_validador_forma = function(forma, campos, validador) {
         let validadores_campo = validadores[campo]
         let validador_nuevo   = [...validadores_campo]
         validador_nuevo.push(validaciones.reglas_validacion[validador])
-        asigna_opcion_forma(forma, [campo], "validationRules", validador_nuevo)
+        asigna_opcion_forma(
+            forma, [campo], 
+            "validationRules", 
+            validador_nuevo
+        )
     } 
     //forma.forma.endUpdate()   
 }
@@ -143,7 +164,11 @@ const borra_validador_forma = function(forma, campos, validador) {
         let campo             = campos[indice];
         let validadores_campo = validadores[campo];
         let validador_nuevo   = borra_validador(validador, validadores_campo);
-        asigna_opcion_forma(forma, [campo], "validationRules", validador_nuevo);
+        asigna_opcion_forma(
+            forma, [campo], 
+            "validationRules", 
+            validador_nuevo
+        );
     }    
     //forma.forma.endUpdate();
 }
@@ -163,12 +188,24 @@ const asigna_opcion = function(forma=null, campos=[], opcion="", valor) {
 }
 
 const crea_fuente = function(tipo, fuente, filtros=[], eventos=[]) {
-    let fuente_datos = fuente_manejo.fuente_datos(tipo, {"fuente": fuente}, filtros=filtros, eventos=eventos)
+    let fuente_datos = fuente_manejo.fuente_datos(
+        tipo, 
+        {"fuente": fuente}, 
+        filtros=filtros, 
+        eventos=eventos
+    );
 
     return fuente_datos
 }
 
-const asigna_fuente_datos = function(forma=null, campo="", tipo="", fuente="", filtros=[], eventos={}) {
+const asigna_fuente_datos = function(
+    forma=null, 
+    campo="", 
+    tipo="", 
+    fuente="", 
+    filtros=[], 
+    eventos={}
+) {
     let fuente_datos = crea_fuente(tipo, fuente, filtros, eventos);
     let componente   = forma._campos[campo].component;    
     componente.option("dataSource", fuente_datos);
@@ -242,12 +279,27 @@ const forma_datos = function(forma) {
 }
 
 // Envio de datos
-const envio_accion = function(url_accion="_sin_direccion_", parametros={}, funcion_retorno=null, funcion_error=null) {
+const envio_accion = function(
+    url_accion="_sin_direccion_", 
+    parametros={}, 
+    funcion_retorno=null, 
+    funcion_error=null
+) {
     let urlCompleta = window.$direcciones.servidorDatos + '/' + url_accion;  
-    window.$f["http"].llamadoRestPost( urlCompleta, parametros, funcion_retorno, null, funcion_error)   
+    window.$f["http"].llamadoRestPost( 
+        urlCompleta, 
+        parametros, 
+        funcion_retorno, 
+        null, 
+        funcion_error
+    )   
 }
 
-const envio_accion_notifica = function(url_accion="_sin_direccion_", parametros={}, funcion_retorno=null) {
+const envio_accion_notifica = function(
+    url_accion="_sin_direccion_", 
+    parametros={}, 
+    funcion_retorno=null
+) {
     const _retorna_ = function(retorna_datos) {
         $ocultar_esperar();
         funcion_retorno(retorna_datos);

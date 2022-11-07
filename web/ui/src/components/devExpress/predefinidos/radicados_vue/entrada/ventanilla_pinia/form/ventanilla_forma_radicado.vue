@@ -1,4 +1,19 @@
-<template src="./ventanilla_forma_radicado_plantilla.html">
+<template>
+    <div class="shadow-sm bg-body rounded ">
+        <DataForma                 
+            ref="dataForma"  
+            :attributes="atributos_forma"
+            @mounted="form_mounted"
+
+        >            
+        </DataForma>
+
+        <div class="linea_blanco"></div>  
+        <ToolBar    
+            ref="barraRef"  
+            :attributes="atributos_barra"
+        />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -6,8 +21,6 @@ import { getCurrentInstance, ref, onMounted } from "vue";
 
 // that <- this
 let that = getCurrentInstance().ctx;
-
-console.log("getCurrentInstance()", getCurrentInstance())
 
 //**************************//
 // Atributos del componente //
@@ -23,14 +36,15 @@ let dataForma = ref(null);  // DataForma
 that.basicas = {
     "forma_id": component_name
 }
+// elementos ya viene en formato devexpress
 let campos = forma_campos.campos_forma(that, that.basicas);
-console.log("CAMPOS:", campos["elementos"])
-// definicion de forma
+// parametros para dataforma
 let atributos_forma = {
     config: {
         id: component_name,
         name: component_name,
         items: campos["elementos"], 
+        //items: [], 
         colCount: 2  
     }                   
 }; 
@@ -49,18 +63,17 @@ let atributos_barra = {
     ]
 }; 
 
-console.log("atributos_forma:", atributos_forma);
-
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
+    that.forma = DataForma.instance;
     console.log("EVENT: Mounted -> THAT", that);     
-    console.log("EVENT: Mounted -> DataForma", DataForma, DataForma.instance);    
+    console.log("EVENT: Mounted -> DataForma.dxForm", that.forma.option);    
     console.log("EVENT: Mounted -> THAT.$refs.formRef", that.$refs.dataForma); 
     console.log("EVENT: Mounted -> THAT.$refs.formRef.instance", that.$refs.dataForma.instance);     
 };
 
 onMounted(() => {
-    //that.dataForm = that.$refs.formRef;
+   // that.forma = that.$refs.dataForma;
 });
 </script>
 

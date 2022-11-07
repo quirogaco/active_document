@@ -1,5 +1,7 @@
 **/web/ui/node_modules
 **/web/ui/dist
-.env
+*.env
 configurar_local.py
 configurar.py
+*.pyc
+*.gitignore

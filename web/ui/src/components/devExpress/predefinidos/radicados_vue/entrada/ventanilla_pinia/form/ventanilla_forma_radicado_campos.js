@@ -1,10 +1,14 @@
-import forma_definiciones     from "../../../../comunes_vue/forma/forma.js"
-import campos_basicos_comunes from "../../../../comunes_vue/forma/campos_basicos_comunes.js"
-import basicos_definiciones   from "../../../../radicados_vue/comunes/basicos/basicos_definiciones.js"
-import tercero_definiciones   from "../../../../radicados_vue/comunes/basicos/tercero_definiciones.js"
-import respuesta_definiciones from "../../../../radicados_vue/comunes/basicos/respuesta_definiciones.js"
-import archivo_definiciones   from "../../../../radicados_vue/comunes/basicos/archivo_definiciones.js"
-import asigna_definiciones    from "../../../../radicados_vue/comunes/basicos/asigna_definiciones.js"
+import forma_definiciones from "../../../../comunes_vue/forma/forma.js";
+import basicos_definiciones 
+    from "../../../../radicados_vue/comunes/basicos/basicos_definiciones.js";
+import tercero_definiciones 
+    from "../../../../radicados_vue/comunes/basicos/tercero_definiciones.js";
+import respuesta_definiciones 
+    from "../../../../radicados_vue/comunes/basicos/respuesta_definiciones.js";
+import archivo_definiciones 
+    from "../../../../radicados_vue/comunes/basicos/archivo_definiciones.js";
+import asigna_definiciones 
+    from "../../../../radicados_vue/comunes/basicos/asigna_definiciones.js";
 
 let barra_botones = function(forma) {
     return  [       
@@ -50,10 +54,15 @@ let basicos_grupo = function(forma) {
             'columna'  : 1,
             "elementos": [
                 basicos_definiciones.canal_radicado_id(null, {forma: forma}),
-                respuesta_definiciones.medio_notificacion(null, {forma: forma, "obligatorio": false}),
+                respuesta_definiciones.medio_notificacion(null, {
+                    forma: forma, 
+                    "obligatorio": false
+                }),
                 basicos_definiciones.fecha_documento(null, {forma: forma}),
                 basicos_definiciones.radicado_remitente(null, {forma: forma}),
-                basicos_definiciones.empresa_mensajeria_id(null, {forma: forma}),
+                basicos_definiciones.empresa_mensajeria_id(null, {
+                    forma: forma
+                }),
                 basicos_definiciones.numero_guia(null, {forma: forma}),
                 basicos_definiciones.nro_folios(null, {forma: forma}),
                 basicos_definiciones.anexos(null, {forma: forma}),
@@ -75,14 +84,20 @@ let clase_grupo = function(forma) {
         {
             "visible"  : true,
             "elementos": [
-                tercero_definiciones.clase_tercero(null, {forma: forma, "titulo": "Clase remitente"})
+                tercero_definiciones.clase_tercero(null, {
+                    forma: forma, 
+                    "titulo": "Clase remitente"
+                })
             ]
         }
     )
 };
 
 let tipo_tercero_id = function(forma) {
-    return tercero_definiciones.tipo_tercero_id(null, {forma: forma, "titulo": "Tipo remitente"})
+    return tercero_definiciones.tipo_tercero_id(null, {
+        forma: forma, 
+        "titulo": "Tipo remitente"
+    })
 };
 
 let tercero_juridica = function(forma) {
@@ -93,7 +108,10 @@ let tercero_juridica = function(forma) {
             "visible"  : true,
             "elementos": [
                 tipo_tercero_id(forma),
-                tercero_definiciones.busca_remitente(null, {forma: forma, "titulo": "Busca remitente"}),
+                tercero_definiciones.busca_remitente(null, {
+                    forma: forma, 
+                    "titulo": "Busca remitente"
+                }),
                 tercero_definiciones.tipo_identificacion(null, {forma: forma}),
                 tercero_definiciones.nro_identificacion(null, {forma: forma}),
                 tercero_definiciones.razon_social(null, {forma: forma}),
@@ -120,11 +138,20 @@ let tercero_natural = function(forma) {
             "visible"  : false,
             "elementos": [
                 tipo_tercero_id(forma),
-                tercero_definiciones.busca_remitente(null, {forma: forma, "titulo": "Busca remitente"}),
+                tercero_definiciones.busca_remitente(null, {
+                    forma: forma, 
+                    "titulo": "Busca remitente"
+                }),
                 tercero_definiciones.tipo_identificacion(null, {forma: forma}),
                 tercero_definiciones.nro_identificacion(null, {forma: forma}),
-                tercero_definiciones.nombres(null, {forma: forma, 'obligatorio': true}),
-                tercero_definiciones.apellidos(null, {forma: forma, 'obligatorio': true}),
+                tercero_definiciones.nombres(null, {
+                    forma: forma, 
+                    'obligatorio': true
+                }),
+                tercero_definiciones.apellidos(null, {
+                    forma: forma, 
+                    'obligatorio': true
+                }),
                 tercero_definiciones.correo_electronico(null, {forma: forma}),
                 tercero_definiciones.cargo(null, {forma: forma}),
                 tercero_definiciones.direccion(null, {forma: forma}),
@@ -193,10 +220,16 @@ let asignacion_generales = function(forma) {
                 asigna_definiciones.gestion_total_tiempo(null, {forma: forma}),    
                 asigna_definiciones.gestion_prioridad(null, {forma: forma}),    
                 asigna_definiciones.reserva(null, {forma: forma}),       
-                asigna_definiciones.gestion_dependencia_id(null, {forma: forma}),       
-                asigna_definiciones.gestion_dependencia_responsable(null, {forma: forma}),             
+                asigna_definiciones.gestion_dependencia_id(null, {
+                    forma: forma
+                }),       
+                asigna_definiciones.gestion_dependencia_responsable(null, {
+                    forma: forma
+                }),             
                 asigna_definiciones.tema_dependencia_id(null, {forma: forma}),    
-                asigna_definiciones.subtema_dependencia_id(null, {forma: forma}),                
+                asigna_definiciones.subtema_dependencia_id(null, {
+                    forma: forma
+                }),                
                 respuesta_definiciones.copia_usuarios_id(null, {forma: forma}),
                 respuesta_definiciones.copia_grupos_id(null, {forma: forma})
             ]
@@ -246,9 +279,9 @@ const campos_especificos = function(forma) {
 
     campos["elementos"] =  [
         basicos_grupo(forma),        
-        // tercero_grupo(forma),
-        // asignacion_grupo(forma),
-        // archivo_grupo(forma)
+        tercero_grupo(forma),
+        asignacion_grupo(forma),
+        archivo_grupo(forma)
     ]
 
     return campos

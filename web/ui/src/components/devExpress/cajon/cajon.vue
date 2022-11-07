@@ -73,7 +73,7 @@
                         </template>
 
                     
-                        <div class="container-fluid blanco vh-100" >
+                        <div class="container-fluid blanco overflow-auto" >
                             <router-view>                        
                             </router-view>
                         </div>

@@ -1,5 +1,5 @@
-import forma_definiciones from "../../../comunes_vue/forma/forma.js"
-import visores_archivo    from "../../../../../../librerias/visores_archivo.js"
+import forma_definiciones from "../../../comunes_vue/forma/forma.js";
+import visores_archivo from "../../../../../../librerias/visores_archivo.js";
 
 const mensaje_archivo = function(id=null, atributos={}) {
     let atributos_base = {
@@ -12,24 +12,28 @@ const mensaje_archivo = function(id=null, atributos={}) {
                     Prepare sus archivos en una carpeta comun.
                 </div>
             </div>
-    `
-    }
+        `,
+        'template': "contenido-template"
+    };
     
     return forma_definiciones.genera_campo("contenido", "mensaje_archivo", id, atributos_base, atributos)
-}
+};
 
-let acepta_archivos = [".doc", ".docx", ".xls", ".xlsx", ".gif", ".png", ".bmp", ".avi", ".mp3", ".pdf", ".zip"]
+let acepta_archivos = [
+    ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".zip",
+    ".gif", ".png", ".bmp", ".jpg", ".jpeg",
+    ".avi", ".mp3"
+];
 const archivos_anexos = function(id=null, atributos={}) {
     let atributos_base = {
         'titulo'       : 'Anexos electrónicos',
         "multiple"     : true,
         "tamano_maximo": 5000000,
-        //'obligatorio'  : true,
         'extensiones'  : acepta_archivos
     }
     
     return forma_definiciones.genera_campo("archivo", "archivos", id, atributos_base, atributos)
-}
+};
 
 
 // Anexos consulta
@@ -64,12 +68,12 @@ let columnas = [
         'caption'  : 'Creado por',
         'width'    : 300,
     },     
-]
+];
 
 const anexos_radicado = function(id=null, atributos={}) {
     let atributos_base = {
-        "columnas" : columnas,
-        "eventos"  : {
+        "columnas": columnas,
+        "eventos": {
             "fila_doble_click": function(objecto, definicion, forma, forma_id) {
                 visores_archivo.ver_descarga_archivo({
                     titulo_general: "Consulta de Documentos/Anexos RADICADO",
@@ -81,11 +85,11 @@ const anexos_radicado = function(id=null, atributos={}) {
                 })  
             },
         },
-        "fuente"          : []
+        "fuente": []
     }
     
     return forma_definiciones.genera_campo("grid", "anexos_radicado", id, atributos_base, atributos)
-}
+};
 
 export default {
     archivos_anexos: archivos_anexos,
