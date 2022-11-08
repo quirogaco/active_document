@@ -1,3 +1,40 @@
+<script lang="ts">
+import handlebars from 'handlebars';
+
+let templates_text = `        
+    <template #contenido-template="{data, index}">                
+        <p v-html="data.editorOptions.value"></p>
+    </template>
+`;
+
+let data = {
+    "templates_text": templates_text
+};
+
+// {{{}}}, triple para caracteres especiales
+let template_base = handlebars.compile(`        
+    <DxForm                    
+        ref="dxFormRef"
+        v-bind= "parameters_received.config"        
+    > 
+
+       {{{templates_text}}}
+
+    </DxForm>
+`);
+
+let template_form = template_base(data);
+
+console.log("template_form:", template_form)
+
+export default {
+    template: template_form,
+    components: {
+        DxForm
+    }
+}
+</script>
+
 <script setup lang="ts">
 import DxForm from 'devextreme-vue/form';
 import general_form from "@/comunes_vue/forma/forma.js";
@@ -66,11 +103,12 @@ that.parameters_received = parameters_received;
 // 1. como hacer compatible parameters_received sin formato de config y data ?
 // 2. como identificar si  items  son definiciones devexpress o 
 //    basicas para convertir
-let fields_form = (
-    that.parameters_received.config.items != undefined ? 
-    that.parameters_received.config.items: []
-); 
-that.parameters_received.config.items = [];
+// let fields_form = (
+//     that.parameters_received.config.items != undefined ? 
+//     that.parameters_received.config.items: []
+// ); 
+//that.parameters_received.config.items = [];
+//let config = that.parameters_received.config;
 //that.name = that.parameters_received.config.name;
 
 // events
@@ -84,8 +122,9 @@ that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
 onMounted(() => {
+    console.log(" onMounted DATAFORM THAT:", that);
     console.log(" onMounted DATAFORM that.$refs.dxFormRef:", that.$refs.dxFormRef);
-    console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
+    //console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
     console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
     // devexpress class, access to attributes
     that.dxForm = that.$refs.dxFormRef;
@@ -101,7 +140,8 @@ onMounted(() => {
     // crea items en formato devexpress por sin no vienen asi ? ver 1.
     //fields_form = nested_assign(fields_form, that.instance);
     //fields_form = dev_express_definition(fields_form);
-    that.instance.option("items", fields_form);
+    //that.instance.option("colCount", 2);
+    //that.instance.option("items", fields_form);/
     //that.instance.option("items", null);
 
     // emit events of parent component
@@ -111,29 +151,4 @@ onMounted(() => {
 
 
 defineExpose( Object.assign({}, that) );
-</script>
-
-<script lang="ts">
-import { defineComponent, ref, h } from "vue";
-
-export default defineComponent({
-  render() {
-    let div = h("div", {}, `
-
-        <DxForm        
-            ref= "dxFormRef"
-            v-bind= "parameters_received.config"        
-        > 
-
-            <template #contenido-template="{data, index}">                
-                <p v-html="data.editorOptions.value"></p>
-            </template>
-                
-        </DxForm>
-    `);
-    console.log("DIV->", div)
-    
-    return div
-  }
-})
 </script>
