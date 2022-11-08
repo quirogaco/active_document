@@ -53,8 +53,6 @@ const busca_item = function(elementos, campo_id, ruta=[], contador=0) {
 };
 
 const busca_campo = function(forma, campo) {
-    console.log("busca_campo-forma:", forma)
-    console.log("busca_campo-forma-instance:", forma.$options)
     let ruta       = [];
     let retorna    = busca_item(forma.forma.option("items"), campo, ruta);
     let ruta_texto = retorna[1].join('.');

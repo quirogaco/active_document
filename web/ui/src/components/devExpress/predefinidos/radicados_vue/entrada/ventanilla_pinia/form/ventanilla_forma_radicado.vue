@@ -43,9 +43,8 @@ let atributos_forma = {
     config: {
         id: component_name,
         name: component_name,
-        items: campos["elementos"], 
-        //items: [], 
-        colCount: 2  
+        colCount: 2,
+        items: campos["elementos"]        
     }                   
 }; 
 
