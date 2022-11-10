@@ -20,6 +20,47 @@ const muestra_asigna = function(forma=null) {
     ]);
 };
 
+const muestra_asigna_ventanilla = function(forma=null) {  
+    forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
+    forma_definiciones.oculta_campos(forma, [
+        "tema_dependencia_id"
+    ]);
+    forma_definiciones.muestra_campos(forma, [
+        "gestion_peticion_id",
+        "gestion_dependencia_id",     
+        "gestion_horas_dias",
+        "gestion_total_tiempo",
+        "gestion_prioridad",
+        "reserva",
+        //"tema_dependencia_id",
+        "copia_usuarios_id",
+        "copia_grupos_id",
+        "reserva",
+        "gestion_dependencia_responsable"
+    ]);
+};
+
+const muestra_asigna_ventanilla_tramite = function(forma=null) {  
+    console.log(".......")
+    forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
+    forma_definiciones.oculta_campos(forma, [
+        "gestion_peticion_id",
+        "gestion_dependencia_id",
+        "gestion_dependencia_responsable"
+    ]);
+    
+    forma_definiciones.muestra_campos(forma, [
+        "gestion_horas_dias",
+        "gestion_total_tiempo",
+        "gestion_prioridad",
+        "reserva",
+        "tema_dependencia_id",
+        "copia_usuarios_id",
+        "copia_grupos_id",
+        "reserva"
+    ]);
+};
+
 const oculta_asigna = function(forma=null) {    
     forma_definiciones.oculta_campos(forma, ["respuesta_datos"]);
 };
@@ -51,6 +92,7 @@ const oculta_parcial_asigna = function(forma=null) {
         "gestion_dependencia_responsable"
     ]);
 };
+
 
 // Valida si es VENTANILLA
 const es_ventanilla = function(id=null, atributos={}) {
@@ -118,29 +160,41 @@ const resuelto_inmediato = function(id=null, atributos={}) {
 // Valida si es PQRS
 const es_pqrs = function(id=null, atributos={}) {
     let atributos_base = {
-        "titulo"     : 'Es documento de pqrsd', 
+        "titulo"     : 'Tipo', 
         "fuente"     : [
-            {"id": "SI", "nombre": "SI"},
-            {"id": "NO", "nombre": "NO"}
+            {"id": "PQRSD", "nombre": "PQRSD"},
+            {"id": "TRAMITE", "nombre": "TRAMITE"},            
+            {"id": "DOCUMENTO", "nombre": "DOCUMENTO"}
         ],  
-        "valor"      : "NO",
+        "valor"      : "DOCUMENTO",
         "eventos"    : {            
             "valor_cambiado": function(campo, definicion, forma, forma_id) {                  
-                muestra_asigna(forma)  
-                switch (campo.value) {
-                    case "NO":  
+                let valor = campo.value;
+                //oculta_asigna(forma);
+                forma.forma.beginUpdate(); 
+                switch (valor) {
+                    case "DOCUMENTO": 
+                        muestra_asigna_ventanilla(forma); 
+                        break
+                    
+                    case "TRAMITE":                         
+                        muestra_asigna_ventanilla_tramite(forma); 
                         break
         
-                    case "SI":
+                    case "PQRSD":
                         oculta_asigna(forma)    
                         break
-                }    
+                };
+                forma.forma.endUpdate();
+                // Cuando se modifica se repinta el valor vuelve a default
+                $forma.asigna_valor(forma, "es_pqrs", valor);       
             }
         }
     }
     
     return forma_definiciones.genera_campo("radio", "es_pqrs", id, atributos_base, atributos)
 };
+
 
 // #########//
 // Petición //

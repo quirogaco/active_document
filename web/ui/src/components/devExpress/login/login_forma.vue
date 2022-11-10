@@ -49,6 +49,7 @@ let atributos_forma = {
                 "id": "codigo",
                 "titulo": "Codigo", 
                 "obligatorio": true,
+                "mayuscula": "NO",
                 "longitud": 120,
                 "ancho": 250
             },
@@ -60,11 +61,12 @@ let atributos_forma = {
                 "id": "clave",
                 "titulo": "Clave", 
                 "obligatorio": true,
+                "mayuscula": "NO",
                 "longitud": 30,
                 "ancho": 150
             }
         ],
-        colCount: 1  
+        colCount: 1
     }                   
 }; 
 

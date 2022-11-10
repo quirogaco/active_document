@@ -15,7 +15,7 @@ let data = {
 let template_base = handlebars.compile(`        
     <DxForm                    
         ref="dxFormRef"
-        v-bind= "parameters_received.config"        
+        v-bind= "config_form"        
     > 
 
        {{{templates_text}}}
@@ -25,7 +25,6 @@ let template_base = handlebars.compile(`
 
 let template_form = template_base(data);
 
-console.log("template_form:", template_form)
 
 export default {
     template: template_form,
@@ -89,6 +88,33 @@ const nested_assign = function(items, form) {
    return items
 };
 
+
+// validate configuration information of the form
+const validate_configuration = function(parameters_received)  {
+    let config_form = parameters_received;
+    if (
+        (parameters_received.config != undefined) && 
+        (parameters_received.config != null)
+    ) {
+        config_form = parameters_received.config;
+    };
+    
+    return config_form;
+};
+
+// determines if the field definitions are in devexpress 
+// or acappella format
+const form_field_configuration = function(config_form)  {
+    let fields_form = config_form.items;
+    if (config_form.fields_format != "devexpress") {
+        fields_form = nested_assign(fields_form, that.instance);
+        fields_form = dev_express_definition(fields_form);
+    };
+    
+    return fields_form;
+};
+
+
 // #################################
 // properties, events and contexts #
 // #################################
@@ -97,16 +123,13 @@ that.name = "DataForm";
 // must be declared as variables of the setup function script 
 // to be exposed by default
 const props = defineProps(general_form.forma_propiedades({}));
-let parameters_received = general_form.lee_propiedades(props);
-that.parameters_received = parameters_received;
+that.parameters_received = general_form.lee_propiedades(props);
 
 // 1. como hacer compatible parameters_received sin formato de config y data ?
 // 2. como identificar si  items  son definiciones devexpress o 
 //    basicas para convertir
-// let fields_form = (
-//     that.parameters_received.config.items != undefined ? 
-//     that.parameters_received.config.items: []
-// ); 
+let config_form = validate_configuration(that.parameters_received);
+config_form.items = form_field_configuration(config_form);
 //that.parameters_received.config.items = [];
 //let config = that.parameters_received.config;
 //that.name = that.parameters_received.config.name;
