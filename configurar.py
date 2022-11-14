@@ -78,7 +78,7 @@ crearParametro(redisClient, (nsBase+"db/sqlname"), "oracle")
 crearParametro(redisClient, (nsBase+"db/adrress"), "127.0.0.1:1521/XE")
 crearParametro(redisClient, (nsBase+"db/name"), "")
 crearParametro(redisClient, (nsBase+"db/user"), "GESTOR_360")
-crearParametro(redisClient, (nsBase+"db/password"), "123456789")
+crearParametro(redisClient, (nsBase+"db/password"), "12345678")
 
 """ LOCAL
 crearParametro(redisClient, (nsBase+"db/sqlname"), "oracle")

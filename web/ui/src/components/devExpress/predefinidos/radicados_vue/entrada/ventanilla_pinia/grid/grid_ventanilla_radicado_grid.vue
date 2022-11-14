@@ -21,7 +21,9 @@ let that = getCurrentInstance().ctx;
 let grid = ref(null);
 that.name = "grid_ventanilla_radicado";
 
-import columnas from "./grid_ventanilla_radicado_columnas.js";
+//import columnas from "./grid_ventanilla_radicado_columnas.js";
+// Columnas
+import ventanilla_radicado_columnas from '../../../comunes/grid/grid_ventanilla_radicado_columnas.js'
 import barra from "./grid_ventanilla_radicado_barra.js";
 
 import {methods} from "./grid_ventanilla_radicado_metodos.js";
@@ -31,13 +33,13 @@ that = $lib.assignAttributes(that, methods);
 
 // POPUP
 let attributes_popup = {  
-    internalComponent: "DataForma",
-    attributes_str: '{"sa": "aaaasss", "sb": "ssssbebebebe", "sc": "sscedefegehess"}',
-    attributes: {
-        a: "aaaa",
-        b: "bebebebe",
-        c: "cedefegehe"
-    }
+    // internalComponent: "DataForma",
+    // attributes_str: '{"sa": "aaaasss", "sb": "ssssbebebebe", "sc": "sscedefegehess"}',
+    // attributes: {
+    //     a: "aaaa",
+    //     b: "bebebebe",
+    //     c: "cedefegehe"
+    // }
 };
 // Para llamarlo con that desde methods
 that.attributes_popup = attributes_popup;
@@ -51,7 +53,7 @@ let attributes_datagrid = {
     },
     height : "100%",
     width  : "100%",
-    columns: columnas.columnas,
+    columns: ventanilla_radicado_columnas.columnas,
     toolbar: barra.barraDef(that)
 };
 //console.log("barra.barraDef(that)", barra.barraDef(that))

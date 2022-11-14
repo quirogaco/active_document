@@ -177,13 +177,13 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
 }
 else {   
     // CARGA APLICATIVO
-    ///*
+    /*
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
     await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
     window.$ns['aplicacion'].asignaComponente('login_forma');
-    //*/
+    */
     
-    /* Especificos ára ruebas        
+    ///* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
         "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "codigo": "PROFESIONAL",
@@ -251,10 +251,10 @@ else {
         '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/form/ventanilla_forma_radicado.vue'
     );
 
-    // await window.$ns['aplicacion'].asignaRuta(
-    //     'ventanilla_radicado_grid',  
-    //     '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'
-    // );
+    await window.$ns['aplicacion'].asignaRuta(
+        'ventanilla_radicado_grid',  
+        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'
+    );
 
     window.$ns['aplicacion'].crea_enrutador();
     await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');      
@@ -268,11 +268,11 @@ else {
             //path: "expediente_disposicion_grid"
             //path: "gestion_basica_grid"
             //path: "flujos_dinamicos_grid"
-            //path: "ventanilla_radicado_grid",
-            path: "ventanilla_radicado_forma",
+            path: "ventanilla_radicado_grid",
+            //path: "ventanilla_radicado_forma",
             //path: "pantalla_expediente"
             //path: "usuarios_grid"
         })
     }, 1000);  
-    */
+    //*/
 }
