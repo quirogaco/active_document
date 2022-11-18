@@ -75,7 +75,7 @@ export default {
         const globalStore = defineStore('globalStore', {
             state: () => {
                 return { 
-                    component_parameters: {}
+                    component_parameters: {}                    
                 }
             },
             // could also be defined as

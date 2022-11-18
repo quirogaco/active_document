@@ -12,8 +12,16 @@ let barraDef = function(that) {
 
     const call = function(event) {
         console.log("CALL:", event.itemData);
+        event.itemData.value;
+
+        switch (event.itemData.value) {
+            case 1:     
+                that.radicar()
+
+        }
+
         console.log(that)
-        that.re_render_popup();
+        //that.re_render_popup();
     }
 
     return [

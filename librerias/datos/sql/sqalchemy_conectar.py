@@ -25,12 +25,12 @@ def cadenaConexion(ruta):
 def motorSql(cadena_conexion):
     motor = sqlalchemy.create_engine(
         cadena_conexion, 
-        echo              = False, 
-        #echo              = True, 
-        #coerce_to_unicode = True, 
-        pool_size         = 10,  
-        pool_recycle      = 1800, 
-        max_overflow      = -1,
+        #echo=False, 
+        #echo= True, 
+        #coerce_to_unicode= True, 
+        pool_size=10,  
+        pool_recycle=1800, 
+        max_overflow= -1,
         pool_pre_ping=True
     )
 

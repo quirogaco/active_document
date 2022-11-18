@@ -10,7 +10,8 @@ import archivo_definiciones
 import asigna_definiciones 
     from "../../../../radicados_vue/comunes/basicos/asigna_definiciones.js";
 
-let barra_botones = function(forma) {
+let barra_botones = function(that) {
+    console.log("barra_botones:", that)
     return  [       
         { 
             widget  : "dxButton",           
@@ -21,7 +22,7 @@ let barra_botones = function(forma) {
                 type       : 'success',
                 text       : 'Radicar Documento', 
                 stylingMode: "contained", 
-                onClick    : forma.boton_click,
+                onClick    : that.boton_click,
             } 
         },
         
@@ -34,7 +35,7 @@ let barra_botones = function(forma) {
                 type       : 'normal',
                 text       : 'Regresar',   
                 stylingMode: "contained",  
-                onClick    : forma.boton_click,         
+                onClick    :  that.boton_click,         
             }
         }                    
     ]              
@@ -296,5 +297,6 @@ let campos_forma = function(forma, basicas) {
 } 
 
 export default {
-    campos_forma: campos_forma
+    campos_forma: campos_forma,
+    barra_botones: barra_botones
 }

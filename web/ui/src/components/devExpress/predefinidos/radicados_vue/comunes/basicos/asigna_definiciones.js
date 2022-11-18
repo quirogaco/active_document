@@ -304,11 +304,14 @@ const gestion_dependencia_id = function(id=null, atributos={}) {
         'obligatorio'       : true,
         "eventos"           : {
             "seleccion_cambiada": async function(campo, definicion, forma, forma_id) {  
-                let datos = await utilidades_estructura.leer_registro_id("dependencias", campo.selectedItem.id)
-                forma_definiciones.asigna_valor(forma, "tema_dependencia_id", null)
-                forma_definiciones.asigna_valor(forma, "subtema_dependencia_id", null)
-                forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", null)
-                if ( $lib.sin_valor.indexOf(datos.pqrs_id) > -1 ) {        
+                let datos = await utilidades_estructura.leer_registro_id("dependencias", campo.selectedItem.id);
+                forma_definiciones.asigna_valor(forma, "tema_dependencia_id", null);
+                forma_definiciones.asigna_valor(forma, "subtema_dependencia_id", null);
+                forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", null);
+                let responsable_tipo = $get_params("_radica_dependencia_")["responsable"];
+                let responsable = datos[responsable_tipo];
+                console.log("seleccion_cambiada:", responsable_tipo, responsable);
+                if ( $lib.sin_valor.indexOf(responsable) > -1 ) {        
                     dialogos.miMensaje("Información incompleta", (
                         datos.nombre_completo + " - " +  "No tiene responsable de manejo de PQRS"
                     ))
@@ -319,7 +322,7 @@ const gestion_dependencia_id = function(id=null, atributos={}) {
                             'or',
                         ["dependencia_id", "=", ""]
                     ];
-                    let responsable = await utilidades_estructura.leer_registro_id("usuarios", datos.pqrs_id);
+                    let responsable = await utilidades_estructura.leer_registro_id("usuarios", responsable);
                     try {
                         forma_definiciones.asigna_fuente_datos(forma, "tema_dependencia_id", "select", "temas", filtros, {}); 
                     } catch (error) {}  
