@@ -22,7 +22,12 @@ def llamar_conversion(url, puerto, parametros={}, servicio="http"):
     parametros['key'] =  basicas.uuidTexto()
     url_completa      = servicio + "://" + url + ":" + str(puerto) + "/ConvertService.ashx"
     encabezado        = {'accept': 'application/json'}
-    retorna           = requests.post( url_completa, json=parametros, headers=encabezado)
+    retorna           = requests.post( 
+        url_completa, 
+        json=parametros, 
+        headers=encabezado,
+        verify=False
+    )
     respuesta         = retorna.json()
     print("-------------------")
     pprint.pprint(respuesta)

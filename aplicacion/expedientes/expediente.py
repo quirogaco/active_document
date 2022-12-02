@@ -297,7 +297,12 @@ def expediente_indice(accion, datos={}, archivo=[], id_tarea=""):
 
 def firmar_salvar(url_firma, encabezado, data):
     # Firma documento
-    respuesta = requests.post(url_firma, headers=encabezado, json=data)
+    respuesta = requests.post(
+        url_firma, 
+        headers=encabezado, 
+        json=data,
+        verify=False
+    )
 
     # Respuesta  
     respuesta_json = respuesta.json()
@@ -332,7 +337,11 @@ def firmar_documento(pdf_nombre):
         'clave'  : '7v40RK5C'
     }
     # Login para token de firma
-    respuesta = requests.post(url_login, json = data)
+    respuesta = requests.post(
+        url_login, 
+        json = data,
+        verify=False
+    )
     token     = respuesta.json()["token"]
 
     #########
