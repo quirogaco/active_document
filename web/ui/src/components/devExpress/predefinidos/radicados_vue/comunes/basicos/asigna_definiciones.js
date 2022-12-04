@@ -304,27 +304,32 @@ const gestion_dependencia_id = function(id=null, atributos={}) {
         'obligatorio'       : true,
         "eventos"           : {
             "seleccion_cambiada": async function(campo, definicion, forma, forma_id) {  
-                let datos = await utilidades_estructura.leer_registro_id("dependencias", campo.selectedItem.id)
-                forma_definiciones.asigna_valor(forma, "tema_dependencia_id", null)
-                forma_definiciones.asigna_valor(forma, "subtema_dependencia_id", null)
-                forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", null)
-                if ( $lib.sin_valor.indexOf(datos.pqrs_id) > -1 ) {        
-                    dialogos.miMensaje("Información incompleta", (
-                        datos.nombre_completo + " - " +  "No tiene responsable de manejo de PQRS"
-                    ))
+                if (campo.selectedItem) {
+                    let datos = await utilidades_estructura.leer_registro_id("dependencias", campo.selectedItem.id);
+                    forma_definiciones.asigna_valor(forma, "tema_dependencia_id", null);
+                    forma_definiciones.asigna_valor(forma, "subtema_dependencia_id", null);
+                    forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", null);
+                    let responsable_tipo = $get_params("_radica_dependencia_")["responsable"];
+                    let responsable_gestion = datos[responsable_tipo];
+                    console.log("seleccion_cambiada:", responsable_tipo, responsable_gestion);
+                    if ( $lib.sin_valor.indexOf(responsable_gestion) > -1 ) {        
+                        dialogos.miMensaje("Información incompleta", (
+                            datos.nombre_completo + " - " +  "No tiene responsable de manejo de PQRS"
+                        ))
+                    }
+                    else {
+                        let filtros     = [
+                            ["dependencia_id", "=", campo.selectedItem.id],
+                                'or',
+                            ["dependencia_id", "=", ""]
+                        ];
+                        let responsable_registro = await utilidades_estructura.leer_registro_id("usuarios", responsable_gestion);
+                        try {
+                            forma_definiciones.asigna_fuente_datos(forma, "tema_dependencia_id", "select", "temas", filtros, {}); 
+                        } catch (error) {}  
+                        forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", responsable_registro["nombre"]);
+                    }                
                 }
-                else {
-                    let filtros     = [
-                        ["dependencia_id", "=", campo.selectedItem.id],
-                            'or',
-                        ["dependencia_id", "=", ""]
-                    ];
-                    let responsable = await utilidades_estructura.leer_registro_id("usuarios", datos.pqrs_id);
-                    try {
-                        forma_definiciones.asigna_fuente_datos(forma, "tema_dependencia_id", "select", "temas", filtros, {}); 
-                    } catch (error) {}  
-                    forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", responsable["nombre"]);
-                }                
             }
         }
     }

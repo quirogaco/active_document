@@ -64,10 +64,18 @@ export const methods = {
     },
 
     'radicar':  function(e) {
-        this.$router.push({
-            name  : "ventanilla_radicado_forma",            
-            params: {}        
-        })
+        $lib.call_component_storage(
+            "ventanilla_radicado_forma",
+            {"datos": {
+                //"id"   : e.data.id,
+                //"datos": e.data
+            }}
+        )
+
+        // this.$router.push({
+        //     name  : "ventanilla_radicado_forma",            
+        //     params: {}        
+        // })
     },
 
     accion_click: function(e) {        

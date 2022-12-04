@@ -25,7 +25,6 @@ let that = getCurrentInstance().ctx;
 //**************************//
 // Atributos del componente //
 //**************************//
-
 import forma_general from "../../../../comunes_vue/forma/forma.js";
 import forma_definiciones from "./ventanilla_forma_radicado_definiciones.js";
 import forma_campos from "./ventanilla_forma_radicado_campos.js";
@@ -33,6 +32,7 @@ import forma_campos from "./ventanilla_forma_radicado_campos.js";
 let component_name = "ventanilla_radicado_forma";
 let dataForma = ref(null);  // DataForma
 
+that = $lib.assignAttributes(that, forma_definiciones.metodos_forma(that));
 that.basicas = {
     "forma_id": component_name
 }
@@ -44,22 +44,13 @@ let atributos_forma = {
         id: component_name,
         name: component_name,
         colCount: 2,
-        items: campos["elementos"]        
-    }                   
+        items: campos["elementos"],
+        fields_format: "devexpress"
+    }                  
 }; 
 
-// envia datos servidor
-async function enviar_datos() {};
-
 let atributos_barra = {
-    items: [
-        // $forma.botonBarra({
-        //     text: 'Ingresar',
-        //     type: 'success',
-        //     icon: 'fa-solid fa-arrow-right-to-bracket',
-        //     click: enviar_datos
-        // })
-    ]
+    items: campos["barra_botones"]
 }; 
 
 // funcion llamada por evento mounted DataForma
@@ -72,7 +63,11 @@ async function form_mounted(DataForma) {
 };
 
 onMounted(() => {
-   // that.forma = that.$refs.dataForma;
+   console.log("RADICADO FORMA MONTADA:", that);
+   $save_params(
+        "_radica_dependencia_", 
+        {"responsable": "correspondencia_id"} // pqrs_id
+    );   
 });
 </script>
 
