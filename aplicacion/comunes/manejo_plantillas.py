@@ -21,17 +21,26 @@ def genera_pdf_plantilla(plantilla_base, archivo_destino="", datos={}, imagen=Tr
     nombre_byte     = nombre_archivo.encode('ascii')
     nombre_64       = base64.b64encode( nombre_byte )
     nombre_64_texto = str(nombre_64, 'utf-8')
-    url = "http://" + str(builtins._appAnfitrion) + ":" + str(builtins._segundoPuerto) + '/entregar_archivo_base64/' + nombre_64_texto    
+    url = builtins._appServiciosType + "://" + str(builtins._appAnfitrion) + ":" + str(builtins._appPuerto) + '/entregar_archivo_base64/' + nombre_64_texto    
     parametros = {
         "filetype"  : "docx",
         "title"     : "convertido",
         "url"       : url
     }
             
-    ruta_destino  = conversion.a_pdfa(str(builtins._appServicios), "80", parametros)  
+    ruta_destino  = conversion.a_pdfa(
+        str(builtins._appServicios), 
+        str(builtins._appServiciosPuerto), 
+        parametros=parametros, 
+        servicio=str(builtins._appServiciosType)
+    )  
     jpg_ruta      = ""
     if (imagen == True):  
-        jpg_ruta = conversion.a_jpg(str(builtins._appServicios), "80", parametros)   
+        jpg_ruta = conversion.a_jpg(str(builtins._appServicios), 
+        str(builtins._appServiciosPuerto), 
+        parametros=parametros, 
+        servicio=str(builtins._appServiciosType)
+    )   
 
     return ruta_destino, jpg_ruta      
 

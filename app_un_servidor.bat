@@ -1,11 +1,16 @@
 npm run dev -- --port 3000
-npm run dev -- --port 3000 --https
+npm run dev -- --host activedocumentv2.esap.edu.co --port 3000
+npm run dev --host activedocumentv2.esap.edu.co --port 3000
+npm run dev --host activedocumentv2.esap.edu.co --port 3000 --https
 
 uvicorn servidor:_app --host=192.168.1.144 --port=9100 --log-level critical --workers=2 -nodo=001 -celery=SI
 
 uvicorn servidor:_app --host=192.168.1.144 --port=9100 --workers=2
 uvicorn servidor:_app --host=192.168.1.99 --port=9100 --workers=2
 uvicorn servidor:_app --host=172.16.202.58 --port=9100 --workers=4
+uvicorn servidor:_app --host=activedocumentv2.esap.edu.co --port=9100 --workers=4
+uvicorn servidor:_app --host=activedocumentv2.esap.edu.co --port=9100 --workers=4 --ssl-keyfile=./localhost.key --ssl-certfile=./localhost.crt
+
 uvicorn servidor:_app --host=172.16.202.9 --port=9100 --workers=4
 uvicorn servidor:_app --host=127.0.0.1 --port=9100 --workers=2
 

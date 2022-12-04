@@ -259,7 +259,12 @@ def convierte_indice_electronico(nombre_archivo):
         "title"     : "convertido",
         "url"       : url
     }                
-    nombre_archivo = conversion.a_pdfa(str(builtins._appServicios), "80", parametros)  
+    nombre_archivo = conversion.a_pdfa(
+        str(builtins._appServicios), 
+        str(builtins._appServiciosPuerto), 
+        parametros=parametros, 
+        servicio=str(builtins._appServiciosType)
+    )  
 
     return nombre_archivo
 
