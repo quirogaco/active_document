@@ -45,8 +45,18 @@ def ultima_procesa(estructura, operacion, datos, tarea, archivos, id_tarea):
         "title"     : "convertido",
         "url"       : url
     }
-    ruta_destino  = conversion.a_pdfa(str(builtins._appServicios), "80", parametros)  
-    jpg_ruta      = conversion.a_jpg(str(builtins._appServicios), "80", parametros)    
+    ruta_destino  = conversion.a_pdfa(
+        str(builtins._appServicios), 
+        str(builtins._appServiciosPuerto), 
+        parametros=parametros, 
+        servicio=str(builtins._appServiciosType)
+    )  
+    jpg_ruta      = conversion.a_jpg(
+        str(builtins._appServicios), 
+        str(builtins._appServiciosPuerto), 
+        parametros=parametros, 
+        servicio=str(builtins._appServiciosType)
+    )  
     print("ruta destino:", ruta_destino)
 
     # Envia archivo de salida
@@ -60,7 +70,7 @@ def ultima_procesa(estructura, operacion, datos, tarea, archivos, id_tarea):
     de        = "quirogaco@gmail.com"
     clave     = "sreojrjewsjkxnml"
     para      = correos_electronicos
-    asunto    = "Notificación de comunicado [" + nro_radicado  + "]"     
+    asunto    = "Notificaciï¿½n de comunicado [" + nro_radicado  + "]"     
     archivos  = [ruta_salida_pdf]
 
     direccion_smtp = "smtp.gmail.com"

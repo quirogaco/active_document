@@ -18,7 +18,7 @@ def salvar_convertido(contenido, ruta_destino=None, tipo_archivo="pdf"):
 
     return ruta_destino
 
-def llamar_conversion(url, puerto, parametros={}, servicio="http"):
+def llamar_conversion(url, puerto, parametros={}, servicio="http"): #https
     parametros['key'] =  basicas.uuidTexto()
     url_completa      = servicio + "://" + url + ":" + str(puerto) + "/ConvertService.ashx"
     encabezado        = {'accept': 'application/json'}
@@ -38,8 +38,8 @@ def llamar_conversion(url, puerto, parametros={}, servicio="http"):
 
 
 # PDF - FORMATO 
-def crear_pdf(url, puerto, parametros={}, ruta_destino=None):
-    contenido      = llamar_conversion(url, puerto, parametros)
+def crear_pdf(url, puerto, parametros={}, ruta_destino=None, servicio="http"):
+    contenido      = llamar_conversion(url, puerto, parametros, servicio) #https
     ruta_respuesta = salvar_convertido(contenido, ruta_destino=ruta_destino, tipo_archivo="pdf")
     
     return ruta_respuesta
