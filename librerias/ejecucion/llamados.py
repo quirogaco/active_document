@@ -17,7 +17,10 @@ def llamar_celery(ubicacion, funcion_nombre, funcion, parametros, atributos, ret
     except Exception as e:
         resultado = None
         error = str(e)
-        print("Error secuencia ejecución celery: [ubicacion:" + ubicacion + "] - [Función:" + funcion_nombre + "] " + error)
+        print(
+            "Error secuencia ejecución celery: [ubicacion:" + ubicacion + 
+            "] - [Función:" + funcion_nombre + "] " + error
+        )
 
     return resultado
 
@@ -26,21 +29,50 @@ def llamar_normal(ubicacion, funcion_nombre, funcion, parametros, atributos):
         resultado   = funcion(**parametros)
     except Exception as e:
         error = str(e)
-        print("Error secuencia ejecución: [ubicacion:" + ubicacion + "] - [Función:" + funcion_nombre + "] " + error)
+        print(
+            "Error secuencia ejecución: [ubicacion:" + ubicacion + 
+            "] - [Función:" + funcion_nombre + "] " + error
+        )
 
     return resultado
 
-def llamar_funcion(ubicacion, funcion_nombre, funcion, parametros, atributos, tipo="normal", retardo=0):
+def llamar_funcion(
+    ubicacion, 
+    funcion_nombre, 
+    funcion, 
+    parametros, 
+    atributos, 
+    tipo="normal", 
+    retardo=0
+):
     error = None
     if tipo == "celery":
-        resultado = llamar_celery(ubicacion, funcion_nombre, funcion, parametros, atributos, retardo=retardo)
+        resultado = llamar_celery(
+            ubicacion, 
+            funcion_nombre, 
+            funcion, 
+            parametros, 
+            atributos, 
+            retardo=retardo
+        )
     else:
-        resultado = llamar_normal(ubicacion, funcion_nombre, funcion, parametros, atributos)
+        resultado = llamar_normal(
+            ubicacion, 
+            funcion_nombre, 
+            funcion, 
+            parametros, 
+            atributos
+        )
 
     return resultado
 
 
-def ejecutar_secuencia(secuencia=[], ubicacion="general", tipo="normal", retardo=0):
+def ejecutar_secuencia(
+    secuencia=[], 
+    ubicacion="general", 
+    tipo="normal", 
+    retardo=0
+):
     # Resultados de la ejecución
     parametros_siguiente_ejecucion = {} 
     resultados                     = []
@@ -55,7 +87,15 @@ def ejecutar_secuencia(secuencia=[], ubicacion="general", tipo="normal", retardo
             parametros  = comando.get("parametros", {})         
             
             # Ejecutar función   
-            resultado = llamar_funcion(ubicacion, funcion_nombre, funcion, parametros, atributos, tipo, retardo=retardo)
+            resultado = llamar_funcion(
+                ubicacion, 
+                funcion_nombre, 
+                funcion, 
+                parametros, 
+                atributos, 
+                tipo, 
+                retardo=retardo
+            )
             
             parametros_siguiente_ejecucion = {} # Parameros secuencia
             error = None

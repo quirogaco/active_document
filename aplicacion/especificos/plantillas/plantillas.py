@@ -16,7 +16,7 @@ def crear_plantilla(accion, datos={}, archivos=[], id_tarea=""):
     manejo_archivos.manejo("plantillas", "insertar", {"id":resultado["id"]}, archivos, id_tarea, "anexos", "plantillas")
 
     indexar_datos.indexar_estructura("plantillas", resultado["id"])
-    indexar_datos.indexar_estructura("plantillas", resultado["id"], 30)
+    indexar_datos.indexar_estructura("plantillas", resultado["id"], 120)
     resultado["accion"] = accion    
 
     return resultado
@@ -24,19 +24,19 @@ def crear_plantilla(accion, datos={}, archivos=[], id_tarea=""):
 def modificar_plantilla(accion, datos={}, archivos=[], id_tarea=""):
     plantilla_id    = datos["datos"]["id"]
     datos_plantilla = {
-        "descripcion"   : datos["datos"]["descripcion"],
+        "descripcion": datos["datos"]["descripcion"],
         "dependencia_id": datos["datos"].get("dependencia_id", None)
     }
     resultado = sqalchemy_modificar.modificar_un_registro("plantillas", plantilla_id, datos_plantilla)
     indexar_datos.indexar_estructura("plantillas", resultado["id"])
-    indexar_datos.indexar_estructura("plantillas", resultado["id"], 30)
+    indexar_datos.indexar_estructura("plantillas", resultado["id"], 120)
     resultado["accion"] = accion    
     
     return resultado
 
 def borrar_plantilla(accion, datos={}, archivos=[], id_tarea=""):
     plantilla_id = datos["datos"]["id"]
-    resultado    = sqalchemy_borrar.borrar_un_registro("plantillas", plantilla_id)
+    resultado = sqalchemy_borrar.borrar_un_registro("plantillas", plantilla_id)
     # ARCHIVO WORD !!JCR, se pierde la conexion, pero el registro en SQL, Y el archivo MINIO se mantiene
     #manejo_archivos.manejo("plantillas", "eliminar", {"id":resultado["id"]}, archivos, id_tarea, "anexos", "plantillas")
     elastic_operaciones.eliminar_registro("plantillas", plantilla_id)

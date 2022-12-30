@@ -2,11 +2,16 @@ import forma_definiciones    from "../../../comunes_vue/forma/forma.js"
 import utilidades_estructura from '../../../../../../librerias/utilidades_estructura.js'
 import dialogos              from '../../../../../../librerias/dialogos.js'
 
-const muestra_asigna = function(forma=null) {  
-    forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
-    forma_definiciones.muestra_campos(forma, [
+const oculta_asigna = function(forma=null) {    
+    forma_definiciones.oculta_campos(forma, ["respuesta_datos"]);
+};
+
+const oculta_asignacion = function(forma) {    
+    forma_definiciones.oculta_campos(forma, [
         "gestion_peticion_id",
-        "gestion_dependencia_id",     
+        "gestion_dependencia_id",
+        "gestion_dependencia_responsable",
+        "gestion_dependencia_lectura",     
         "gestion_horas_dias",
         "gestion_total_tiempo",
         "gestion_prioridad",
@@ -15,19 +20,52 @@ const muestra_asigna = function(forma=null) {
         "subtema_dependencia_id",
         "copia_usuarios_id",
         "copia_grupos_id",
+        "reserva"
+    ]);
+};
+
+const cambia_filtros_gestion_id = function(forma) {
+    let pqrs_filtro = $get_params("pqrs_filtro");
+    let filtros_fuente = [
+        ["estado_", "=", "ACTIVO"], 
+        ["pqrs", "=", pqrs_filtro]
+    ];
+    forma_definiciones.asigna_fuente_datos(
+        forma, 
+        "gestion_peticion_id", 
+        "select", 
+        "tipo_peticiones", 
+        filtros_fuente, 
+        {}
+    );   
+};
+
+const muestra_asigna = function(forma=null) {  
+    oculta_asignacion(forma);
+    forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
+    forma_definiciones.muestra_campos(forma, [
+        "gestion_peticion_id",
+        "gestion_dependencia_id",
+        "gestion_dependencia_responsable",
+        "gestion_horas_dias",
+        "gestion_total_tiempo",
+        "gestion_prioridad",
         "reserva",
-        "gestion_dependencia_responsable"
+        "tema_dependencia_id",
+        "subtema_dependencia_id",
+        "copia_usuarios_id",
+        "copia_grupos_id",
+        "reserva"
     ]);
 };
 
 const muestra_asigna_ventanilla = function(forma=null) {  
-    forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
-    forma_definiciones.oculta_campos(forma, [
-        "tema_dependencia_id"
-    ]);
+    oculta_asignacion(forma);
+    forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);    
     forma_definiciones.muestra_campos(forma, [
         "gestion_peticion_id",
-        "gestion_dependencia_id",     
+        "gestion_dependencia_id",   
+        "gestion_dependencia_responsable",
         "gestion_horas_dias",
         "gestion_total_tiempo",
         "gestion_prioridad",
@@ -35,21 +73,18 @@ const muestra_asigna_ventanilla = function(forma=null) {
         //"tema_dependencia_id",
         "copia_usuarios_id",
         "copia_grupos_id",
-        "reserva",
-        "gestion_dependencia_responsable"
+        "reserva",        
     ]);
+    cambia_filtros_gestion_id(forma);
 };
 
-const muestra_asigna_ventanilla_tramite = function(forma=null) {  
-    console.log(".......")
+const muestra_asigna_ventanilla_tramite = function(forma=null) {    
+    oculta_asignacion(forma);  
     forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
-    forma_definiciones.oculta_campos(forma, [
-        "gestion_peticion_id",
-        "gestion_dependencia_id",
-        "gestion_dependencia_responsable"
-    ]);
-    
     forma_definiciones.muestra_campos(forma, [
+        "gestion_peticion_id",
+        "gestion_dependencia_lectura",
+        "gestion_dependencia_responsable",
         "gestion_horas_dias",
         "gestion_total_tiempo",
         "gestion_prioridad",
@@ -59,10 +94,7 @@ const muestra_asigna_ventanilla_tramite = function(forma=null) {
         "copia_grupos_id",
         "reserva"
     ]);
-};
-
-const oculta_asigna = function(forma=null) {    
-    forma_definiciones.oculta_campos(forma, ["respuesta_datos"]);
+    cambia_filtros_gestion_id(forma);
 };
 
 const muestra_parcial_asigna = function(forma=null) {    
@@ -74,8 +106,7 @@ const muestra_parcial_asigna = function(forma=null) {
         "reserva",
         "copia_usuarios_id",
         "copia_grupos_id",
-        "reserva",
-        "gestion_dependencia_responsable"
+        "reserva"       
     ]);
 };
 
@@ -160,18 +191,18 @@ const resuelto_inmediato = function(id=null, atributos={}) {
 // Valida si es PQRS
 const es_pqrs = function(id=null, atributos={}) {
     let atributos_base = {
-        "titulo"     : 'Tipo', 
-        "fuente"     : [
+        "titulo": 'Tipo', 
+        "fuente": [
             {"id": "PQRSD", "nombre": "PQRSD"},
             {"id": "TRAMITE", "nombre": "TRAMITE"},            
             {"id": "DOCUMENTO", "nombre": "DOCUMENTO"}
         ],  
-        "valor"      : "DOCUMENTO",
-        "eventos"    : {            
-            "valor_cambiado": function(campo, definicion, forma, forma_id) {                  
+        "valor": "DOCUMENTO",
+        "eventos": {            
+            "valor_cambiado": function(campo, definicion, forma, forma_id) {                 
                 let valor = campo.value;
-                //oculta_asigna(forma);
-                forma.forma.beginUpdate(); 
+                if (valor) $save_params("pqrs_filtro", valor);
+                //forma.forma.beginUpdate(); 
                 switch (valor) {
                     case "DOCUMENTO": 
                         muestra_asigna_ventanilla(forma); 
@@ -185,7 +216,7 @@ const es_pqrs = function(id=null, atributos={}) {
                         oculta_asigna(forma)    
                         break
                 };
-                forma.forma.endUpdate();
+                //forma.forma.endUpdate();
                 // Cuando se modifica se repinta el valor vuelve a default
                 $forma.asigna_valor(forma, "es_pqrs", valor);       
             }
@@ -199,32 +230,83 @@ const es_pqrs = function(id=null, atributos={}) {
 // #########//
 // Petición //
 //##########//
-let valores_peticion = function(forma, objeto) {
-    let peticion = objeto.selectedItem       
+let valores_peticion = async function(forma, objeto) {
+    let peticion = objeto.selectedItem;      
 
     // Limpia valores, horas_dias, total_tiempo
-    forma_definiciones.asigna_opcion(forma, ["gestion_horas_dias", "gestion_total_tiempo"], "readOnly", true)        
-    forma_definiciones.asigna_valor(forma, "gestion_horas_dias", null)
-    forma_definiciones.asigna_valor(forma, "gestion_total_tiempo", null)
-    if (peticion !== null) {                                                                                                                                                                                             
+    forma_definiciones.asigna_opcion(
+        forma, 
+        ["gestion_horas_dias", "gestion_total_tiempo"], 
+        "readOnly", 
+        true
+    );        
+    forma_definiciones.asigna_opcion(
+        forma, 
+        ["gestion_dependencia_lectura", "gestion_dependencia_responsable"], 
+        "value", 
+        ""
+    ); 
+    forma_definiciones.asigna_valor(forma, "gestion_horas_dias", null);
+    forma_definiciones.asigna_valor(forma, "gestion_total_tiempo", null);
+    if (peticion !== null) {    
+        // Gestion horas dias                                                                                                                                                                                         
         let deshabilita = peticion.modifica_tiempo == "SI" ? false : true 
-        forma_definiciones.asigna_opcion(forma, ["gestion_horas_dias", "gestion_total_tiempo"], "readOnly", deshabilita)
-        forma_definiciones.asigna_valor(forma, "gestion_horas_dias", peticion.horas_dias)
-        forma_definiciones.asigna_valor(forma, "gestion_total_tiempo", peticion.total_tiempo)
+        forma_definiciones.asigna_opcion(
+            forma, 
+            ["gestion_horas_dias", "gestion_total_tiempo"], 
+            "readOnly", 
+            deshabilita
+        );
+        forma_definiciones.asigna_valor(
+            forma, 
+            "gestion_horas_dias", 
+            peticion.horas_dias
+        );
+        forma_definiciones.asigna_valor(
+            forma, 
+            "gestion_total_tiempo", 
+            peticion.total_tiempo
+        );
+
+        if ( 
+            (peticion.pqrs == "TRAMITE") && 
+            (peticion.dependencias_ids.length > 0)
+         ) {            
+            let datos = await utilidades_estructura.leer_registro_id(
+                "dependencias", 
+                peticion.dependencias_ids[0]
+            );
+            if (datos) {
+                forma_definiciones.asigna_valor(
+                    forma, 
+                    "gestion_dependencia_responsable",                     
+                    datos.correspondencia_nombre
+                );
+
+                forma_definiciones.asigna_valor(
+                    forma, 
+                    "gestion_dependencia_lectura", 
+                    datos.nombre_completo
+                );
+            }
+        }
     }
 };
 
 const gestion_peticion_id = function(id=null, atributos={}) {
-    let atributos_base = {
-        'titulo'        : 'Tipo de petición', 
-        "fuente"        : "tipo_peticiones", 
+    let pqrs_filtro = $get_params("pqrs_filtro");
+    //let forma_id = atributos["forma"]["basicas"]["forma_id"];
+    if (!pqrs_filtro) pqrs_filtro = "DOCUMENTO";
+    let atributos_base = {        
+        "titulo": 'Tipo de petición', 
+        "fuente": "tipo_peticiones", 
         "filtros_fuente": [
             ["estado_", "=", "ACTIVO"], 
-            ["pqrs", "=", "si"]
+            ["pqrs", "=", pqrs_filtro]
         ],
-        'obligatorio'   : true,
-        "eventos"       : {
-            "seleccion_cambiada": function(campo, definicion, forma, forma_id) {  
+        "obligatorio": true,
+        "eventos": {
+            "seleccion_cambiada": function(campo, definicion, forma, forma_id) { 
                 valores_peticion(forma, campo)
             }
         }
@@ -303,18 +385,45 @@ const gestion_dependencia_id = function(id=null, atributos={}) {
         "muestra_expresion" : "nombre_completo",
         'obligatorio'       : true,
         "eventos"           : {
-            "seleccion_cambiada": async function(campo, definicion, forma, forma_id) {  
-                if (campo.selectedItem) {
-                    let datos = await utilidades_estructura.leer_registro_id("dependencias", campo.selectedItem.id);
-                    forma_definiciones.asigna_valor(forma, "tema_dependencia_id", null);
-                    forma_definiciones.asigna_valor(forma, "subtema_dependencia_id", null);
-                    forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", null);
-                    let responsable_tipo = $get_params("_radica_dependencia_")["responsable"];
-                    let responsable_gestion = datos[responsable_tipo];
-                    console.log("seleccion_cambiada:", responsable_tipo, responsable_gestion);
+            "seleccion_cambiada": async function(
+                campo, 
+                definicion, 
+                forma, 
+                forma_id
+            ) {  
+                let responsable_campo = 
+                    $get_params("_radica_dependencia_")["responsable"];                
+                let tipo_radicado = "DOCUMENTOS";
+                if (responsable_campo == "pqrs_id") {
+                    tipo_radicado = "PQRSD";
+                    forma_definiciones.asigna_valor(
+                        forma, 
+                        "tema_dependencia_id", 
+                        null
+                    );
+                    forma_definiciones.asigna_valor(
+                        forma, 
+                        "subtema_dependencia_id", 
+                        null
+                    );
+                };
+                forma_definiciones.asigna_valor(
+                    forma, 
+                    "gestion_dependencia_responsable", 
+                    null
+                );      
+                if (campo.selectedItem) {                    
+                    let datos = await utilidades_estructura.leer_registro_id(
+                        "dependencias", 
+                        campo.selectedItem.id
+                    );
+                    // select field correspondecia_id or pqrs_id                    
+                    let responsable_gestion = datos[responsable_campo];                                                      
                     if ( $lib.sin_valor.indexOf(responsable_gestion) > -1 ) {        
                         dialogos.miMensaje("Información incompleta", (
-                            datos.nombre_completo + " - " +  "No tiene responsable de manejo de PQRS"
+                            datos.nombre_completo + " - " +  
+                            "No tiene responsable de manejo de " + 
+                            tipo_radicado
                         ))
                     }
                     else {
@@ -323,18 +432,49 @@ const gestion_dependencia_id = function(id=null, atributos={}) {
                                 'or',
                             ["dependencia_id", "=", ""]
                         ];
-                        let responsable_registro = await utilidades_estructura.leer_registro_id("usuarios", responsable_gestion);
-                        try {
-                            forma_definiciones.asigna_fuente_datos(forma, "tema_dependencia_id", "select", "temas", filtros, {}); 
-                        } catch (error) {}  
-                        forma_definiciones.asigna_valor(forma, "gestion_dependencia_responsable", responsable_registro["nombre"]);
+                        let responsable_registro = 
+                            await utilidades_estructura.leer_registro_id(
+                                "usuarios", 
+                                responsable_gestion
+                            );
+                        if (responsable_campo == "pqrs_id") {
+                            forma_definiciones.asigna_fuente_datos(
+                                forma, 
+                                "tema_dependencia_id", 
+                                "select", 
+                                "temas", 
+                                filtros, 
+                                {}
+                            ); 
+                        }   
+                        forma_definiciones.asigna_valor(
+                            forma, 
+                            "gestion_dependencia_responsable", 
+                            responsable_registro["nombre"]
+                        );
                     }                
                 }
             }
         }
     }
     
-    return forma_definiciones.genera_campo("seleccion", "gestion_dependencia_id", id, atributos_base, atributos)
+    return forma_definiciones.genera_campo(
+        "seleccion", 
+        "gestion_dependencia_id", 
+        id, 
+        atributos_base, 
+        atributos
+    )
+}
+
+const gestion_dependencia_lectura = function(id=null, atributos={}) {
+    let atributos_base = {
+        'titulo' : 'Dependencia responsable',
+        'lectura': true,
+        'visible': false
+    }
+    
+    return forma_definiciones.genera_campo("texto", "gestion_dependencia_lectura", id, atributos_base, atributos)
 }
 
 const gestion_dependencia_responsable = function(id=null, atributos={}) {
@@ -393,6 +533,7 @@ export default {
     es_pqrs                        : es_pqrs,
     gestion_dependencia_id         : gestion_dependencia_id,
     gestion_dependencia_responsable: gestion_dependencia_responsable,
+    gestion_dependencia_lectura    : gestion_dependencia_lectura,
     gestion_peticion_id            : gestion_peticion_id,
     gestion_horas_dias             : gestion_horas_dias,
     gestion_total_tiempo           : gestion_total_tiempo,

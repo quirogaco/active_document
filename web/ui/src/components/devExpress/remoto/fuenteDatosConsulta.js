@@ -11,19 +11,25 @@ const array_simple = function( arreglo ) {
     }
 
     return simple
-}
+};
 
-const cargaDatosConsulta = function(opcionesCarga, tipoComponente, idComponente, rutaRemota, filtrosFijos=[], eventos={}, ordenar_campos=[]) {  
-    // Filtros
-    
+const cargaDatosConsulta = function(
+    opcionesCarga, 
+    tipoComponente, 
+    idComponente, 
+    rutaRemota, 
+    filtrosFijos=[], 
+    eventos={}, 
+    ordenar_campos=[]
+) {  
     // Copia filtros basicos
     let filtrosTemp = []
     if ( (opcionesCarga.filter != null) && (opcionesCarga.filter != undefined) ) {
-        filtrosTemp =  opcionesCarga.filter.map((x) => x)
-    }
+        filtrosTemp = opcionesCarga.filter.map((x) => x)
+    };    
 
     let filtrosCompletos = []
-    let longitud         = filtrosFijos.length 
+    let longitud = filtrosFijos.length 
     if (longitud > 0) {
         if (array_simple( filtrosFijos ) == true) {
             filtrosCompletos.push(filtrosFijos)
@@ -38,31 +44,38 @@ const cargaDatosConsulta = function(opcionesCarga, tipoComponente, idComponente,
     }
     else {
         filtrosCompletos = filtrosTemp
-    }    
+    };
     
     // Agrupaciones
     let grupos = [];
-    if ( (opcionesCarga.group != null) && (opcionesCarga.group != undefined) ) grupos = opcionesCarga.group;
+    if ( (opcionesCarga.group != null) && (opcionesCarga.group != undefined) ) 
+        grupos = opcionesCarga.group;
 
     // Desde
     let desde = 0;
-    if ( (opcionesCarga.skip != null) && (opcionesCarga.skip != undefined) ) desde = opcionesCarga.skip;
+    if ( (opcionesCarga.skip != null) && (opcionesCarga.skip != undefined) ) 
+        desde = opcionesCarga.skip;
 
     // Hasta
-    let hasta = 10000;
-    if ( (opcionesCarga.take != null) && (opcionesCarga.take != undefined) ) hasta = opcionesCarga.take;
+    //let hasta = 10000;
+    let hasta = 200;
+    if ( (opcionesCarga.take != null) && (opcionesCarga.take != undefined) ) 
+        hasta = opcionesCarga.take;
 
     // Campo de busqueda
     let campoBusqueda = null;
-    if ( (opcionesCarga.searchExpr != null) && (opcionesCarga.searchExpr != undefined) ) campoBusqueda = opcionesCarga.searchExpr;
+    if ( (opcionesCarga.searchExpr != null) && (opcionesCarga.searchExpr != undefined) ) 
+        campoBusqueda = opcionesCarga.searchExpr;
 
     // Operación de busqueda
     let operacionBusqueda = null;
-    if ( (opcionesCarga.searchOperation != null) && (opcionesCarga.searchOperation != undefined) ) operacionBusqueda = opcionesCarga.searchOperation;
+    if ( (opcionesCarga.searchOperation != null) && (opcionesCarga.searchOperation != undefined) ) 
+        operacionBusqueda = opcionesCarga.searchOperation;
 
     // Valor de busqueda
     let valorBusqueda = null;
-    if ( (opcionesCarga.searchValue != null) && (opcionesCarga.searchValue != undefined) ) valorBusqueda = opcionesCarga.searchValue;
+    if ( (opcionesCarga.searchValue != null) && (opcionesCarga.searchValue != undefined) ) 
+        valorBusqueda = opcionesCarga.searchValue;
 
     // Ordenamientos
     let ordenamientos = [];
@@ -76,11 +89,13 @@ const cargaDatosConsulta = function(opcionesCarga, tipoComponente, idComponente,
 
     // Campos a retornar
     let campos = [];
-    if ( (opcionesCarga.campos != null) && (opcionesCarga.campos != undefined) ) campos = opcionesCarga.campos;
+    if ( (opcionesCarga.campos != null) && (opcionesCarga.campos != undefined) ) 
+        campos = opcionesCarga.campos;
 
     // Resaltar busquedas inner, las no inner?
     let resaltar = [];
-    if ( (opcionesCarga.resaltar != null) && (opcionesCarga.resaltar != undefined) ) resaltar = opcionesCarga.resaltar;
+    if ( (opcionesCarga.resaltar != null) && (opcionesCarga.resaltar != undefined) ) 
+        resaltar = opcionesCarga.resaltar;
 
     if (opcionesCarga.sort != null) {  
         // Ordenamiento especifico de la libreria
@@ -156,33 +171,62 @@ const cargaDatosConsulta = function(opcionesCarga, tipoComponente, idComponente,
     return data;    
 };
 
-const fuenteDatosGlobalConsulta = function(tipoComponente, idComponente, estructura, key="id", filtros=[], eventos={}, ordenar=[], campos=[]) {  
+const fuenteDatosGlobalConsulta = function(
+    tipoComponente, 
+    idComponente, 
+    estructura, 
+    key="id", 
+    filtros=[], 
+    eventos={}, 
+    ordenar=[], 
+    campos=[]) 
+{  
     // Eventos
-    const cargar_datos_antes   = (eventos.cargar_datos_antes   !== undefined ? eventos.cargar_datos_antes   : null);
-    const cargar_datos_despues = (eventos.cargar_datos_despues !== undefined ? eventos.cargar_datos_despues : null);      
+    const cargar_datos_antes = 
+        (eventos.cargar_datos_antes !== undefined ? eventos.cargar_datos_antes: null);
+    const cargar_datos_despues = 
+        (eventos.cargar_datos_despues !== undefined ? eventos.cargar_datos_despues: null);      
     
-    const fuente = new CustomStore({
-        key         : key,
+    let fuente = new CustomStore({
+        key: key,
         cacheRawData: false,
+
         load: (opcionesCarga) => {   
             let datos = []             
             if (opcionesCarga.searchOperation != "NO_BUSCAR") {  
                 opcionesCarga.campos = campos;                  
-                datos = cargaDatosConsulta(opcionesCarga, tipoComponente, idComponente, estructura, filtros, eventos, ordenar)   
+                datos = cargaDatosConsulta(
+                    opcionesCarga, 
+                    tipoComponente, 
+                    idComponente, 
+                    estructura, 
+                    filtros, 
+                    eventos, 
+                    ordenar
+                )   
             }
             
             return datos;            
         },
+
         byKey: (key) => {   
             let opcionesCarga = {
                 searchExpr     : "id",
                 searchOperation: "=",
                 searchValue    : key,
                 campos         : campos
-            }
-            let datos = [];
-                      
-            datos = cargaDatosConsulta(opcionesCarga, tipoComponente, idComponente, estructura, filtros, eventos, ordenar)
+            };
+
+            let datos = [];                      
+            datos = cargaDatosConsulta(
+                opcionesCarga, 
+                tipoComponente, 
+                idComponente, 
+                estructura, 
+                filtros, 
+                eventos, 
+                ordenar
+            )
 
             return datos;  
         },
@@ -211,15 +255,51 @@ const fuenteDatosGlobalConsulta = function(tipoComponente, idComponente, estruct
     return fuente;
 }
                                         
-const creaFuenteDatosConsulta = function(tipoComponente, tipoFuente, idComponente, estructura, filtros=[], eventos={}, ordenar=[], campos=[]) {  
-    let dataSource = fuenteDatosGlobalConsulta(tipoComponente, idComponente, estructura, "id", filtros, eventos, ordenar, campos)
+const creaFuenteDatosConsulta = function(
+    tipoComponente, 
+    tipoFuente, 
+    idComponente, 
+    estructura, 
+    filtros=[], 
+    eventos={}, 
+    ordenar=[], 
+    campos=[]
+) {  
+    let dataSource = fuenteDatosGlobalConsulta(
+        tipoComponente, 
+        idComponente, 
+        estructura, 
+        "id", 
+        filtros, 
+        eventos, 
+        ordenar, 
+        campos
+    )
 
     return dataSource
 }
 
-const creaFuenteDatosUniversal = function(tipo, idComponente, estructura, datos=null, filtros=[], eventos={}, ordenar=[], campos=[]) {    
+const creaFuenteDatosUniversal = function(
+    tipo, 
+    idComponente, 
+    estructura, 
+    datos=null, 
+    filtros=[], 
+    eventos={}, 
+    ordenar=[], 
+    campos=[]
+) {    
     if (datos == null) {                
-        let dataSource = fuenteDatosGlobalConsulta(tipo, idComponente, estructura, "id", filtros, eventos, ordenar, campos)
+        let dataSource = fuenteDatosGlobalConsulta(
+            tipo, 
+            idComponente, 
+            estructura, 
+            "id", 
+            filtros, 
+            eventos, 
+            ordenar, 
+            campos
+        )
         return dataSource
 
     }

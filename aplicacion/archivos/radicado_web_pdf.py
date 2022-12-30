@@ -13,12 +13,13 @@ def radicado_pdf(operacion, clase, descarga, encabezados, parametros, pdf_radica
    datos          = ""
    nombre_archivo = ""
    tipo_radicado, nro_radicado = pdf_radicado.split("__")
-   nombre_archivo = manejo_archivos.recupera_anexo_especifico_radicado(nro_radicado, tipo_radicado="ENTRADA", tipo_anexo="notificacion")         
+   print("tipo_radicado, nro_radicado:::", tipo_radicado, nro_radicado)
+   nombre_archivo = manejo_archivos.recupera_anexo_especifico_radicado(nro_radicado, tipo_radicado)         
    print("nombre_archivo:::", nombre_archivo)
    if nombre_archivo != "":
       datos = leer_archivo.descarga_archivo(nombre_archivo)
    
    return datos
 
-# Publica función de llamado
+# Publica funciï¿½n de llamado
 CONFIGURACION_GENERAL["manejo_pdf"]["radicado_pdf"] = radicado_pdf

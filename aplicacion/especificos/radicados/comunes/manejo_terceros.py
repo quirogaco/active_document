@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
@@ -32,7 +32,7 @@ def crear_registro_tercero( origen, datos, radicado_id, id_tarea=""):
         "ciudad_id"             : datos["ciudad_id"] 
     }
 
-    # RELACIÓN RADICADO TERCERO
+    # RELACIï¿½N RADICADO TERCERO
     estructura_origen = ""
     role              = ""
     if origen == "SALIDA":
@@ -40,8 +40,14 @@ def crear_registro_tercero( origen, datos, radicado_id, id_tarea=""):
         role   = "DESTINATARIOS" 
 
     tercero = sqalchemy_insertar.insertar_registro_estructura("terceros", datos_tercero)
-    elastic_operaciones.indexar_registro("terceros", tercero["id"])  
+    elastic_operaciones.indexar_registro("terceros", tercero["id"])
+    tercero = elastic_operaciones.indexar_recupera_documento(
+        "terceros", 
+        tercero["id"]
+    )['_source']
 
+    # print("@@@@@@@@@@@@@@@@@ >>>> TERCERO")
+    # pprint.pprint(tercero)
     registro_relacion.crear_registro_relacion(   
         estructura_origen,     # Estructura origen
         radicado_id,           # Id de la estructura origen
@@ -49,7 +55,7 @@ def crear_registro_tercero( origen, datos, radicado_id, id_tarea=""):
         "config_terceros",     # Estructura destino
         tercero["id"],       # Id de la estructura destino
         role,                  # Role registro destino
-        "DESTINATARIO SALIDA", # Tipo de relación origen-destino
+        "DESTINATARIO SALIDA", # Tipo de relaciï¿½n origen-destino
         "SIMPLE"               # Cardinalida simple, multiple
     )
 

@@ -4,6 +4,7 @@
 import pprint
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
 
 from librerias.datos.base import globales 
 
@@ -27,11 +28,9 @@ def motorSql(cadena_conexion):
         cadena_conexion, 
         #echo=False, 
         #echo= True, 
-        #coerce_to_unicode= True, 
-        pool_size=10,  
-        pool_recycle=1800, 
-        max_overflow= -1,
-        pool_pre_ping=True
+        #coerce_to_unicode= True,        
+        pool_pre_ping=True,
+        poolclass=NullPool
     )
 
     return motor

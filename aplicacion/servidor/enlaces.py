@@ -101,6 +101,7 @@ async def manejo_pdf(operacion:str, clase:str, descarga:str, pdf_id:str, requeri
    
    id_tarea = basicas.uuidTexto() 
    funcion = CONFIGURACION_GENERAL["manejo_pdf"].get(operacion, None)
+   print("manejo_pdf:", funcion)
    
    return funcion(operacion, clase, descarga, encabezados, parametros, pdf_id, id_tarea)
 

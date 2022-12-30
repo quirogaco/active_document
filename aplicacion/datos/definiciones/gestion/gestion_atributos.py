@@ -126,7 +126,9 @@ def vence_en(_r):
     festivos      = [] # Cargarlos de base de datos
     dias_festivos = sqalchemy_leer.leer_todos("base", "festivos", desde=0, hasta=1000)
     for dia_festivo in dias_festivos:
-        festivos.append(dia_festivo["festivo"])
+        festivos.append(
+            datetime.datetime.fromisoformat(dia_festivo["festivo"])
+        )
     
     # No tiene en cuenta HORA O DIAS
     vence = vencimientos.siguiente_fecha_habil_dias(_r.gestion_inicio, _r.total_tiempo, festivos)

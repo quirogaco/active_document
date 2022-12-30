@@ -28,10 +28,10 @@ modoFecha = DM_ISO8601 | DM_SHIFT_TO_UTC | DM_NAIVE_IS_UTC | DM_IGNORE_TZ
 from aplicacion.especificos import especificos_radicado
 @_app.post( '/radicados_acciones' )
 async def radicados_acciones(archivos: List[UploadFile] = File, datos: str = Form(...)):    
-   datos      = rapidjson.loads( datos, datetime_mode=modoFecha )
-   archivos   = prepara_archivos(archivos)
+   datos = rapidjson.loads( datos, datetime_mode=modoFecha )
+   archivos = prepara_archivos(archivos)
    # Datos generales de la tarea
-   id_tarea   = basicas.uuidTexto() 
+   id_tarea = basicas.uuidTexto() 
    publica_tarea(id_tarea, datos)
    # Accion de gestion
    print("radicados_acciones:", id_tarea)

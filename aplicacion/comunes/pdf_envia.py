@@ -18,12 +18,12 @@ def notificar_correo(correos, asunto, pdf_ruta, jpg_ruta):
     #direccion_smtp = "SMTP.OFFICE365.COM"
     #puerto_smtp    = 587
 
-    print("CELERY ENVIA-1")
+    #print("CELERY ENVIA-1")
     
     # Carga datos de conexión
     configuracion = configuracion_general.leer_registro_configuracion("radicacion_canales")
     if configuracion != None:
-        canales   = configuracion["datos"].get("datos", {})   
+        canales   = configuracion["datos"] 
         # Cuenta origen  
         de             = canales.get("notificacion_usuario_smtp", None)
         clave          = canales.get("notificacion_clave_smtp", None)

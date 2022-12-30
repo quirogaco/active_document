@@ -83,7 +83,13 @@ const clase_tercero = function(id=null, atributos={}) {
                 // Despues de endUpate para que tome elfiltro
                 if ( (valor == "JURIDICA") || (valor == "NATURAL") ) {     
                     let filtros = ["tipo", "=", valor];
-                    forma_definiciones.asigna_fuente_datos(forma, "tercero_tercero_tipo_id", "select", "tipo_terceros", filtros, {});
+                    forma_definiciones.asigna_fuente_datos(
+                        forma, 
+                        "tercero_tercero_tipo_id", 
+                        "select", 
+                        "tipo_terceros", 
+                        filtros, {}
+                    );
                 };
                 // Cuando se modifica se repinta el valor vuelve a default
                 $forma.asigna_valor(forma, "tercero_clase", valor);   

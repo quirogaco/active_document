@@ -30,16 +30,24 @@ const fuente_arreglo = function(datos, key="id") {
 }
 
 const fuente_datos = function(tipo, atributos, filtros=[], eventos=[]) {
-    let fuente = null
-    let key    = $librerias.cargaAtributo(atributos, 'valor_expresion',"id")
-    let fuente_definicion = $librerias.cargaAtributo(atributos, 'fuente', [])  
-    let fuente_orden      = $librerias.cargaAtributo(atributos, 'fuente_orden', [])    
+    let fuente = null;
+    let key = $librerias.cargaAtributo(atributos, 'valor_expresion',"id");
+    let fuente_definicion = $librerias.cargaAtributo(atributos, 'fuente', []); 
+    let fuente_orden = $librerias.cargaAtributo(atributos, 'fuente_orden', []);    
 
     if ( Array.isArray(fuente_definicion) ) {
-        fuente = fuente_arreglo(fuente_definicion, key)
+        fuente = fuente_arreglo(fuente_definicion, key);
     }
     else {
-        fuente = $sistema["fuenteDatos"].creaFuenteDatosConsulta(tipo, null, fuente_definicion, fuente_definicion, filtros, eventos, fuente_orden)
+        fuente = $sistema["fuenteDatos"].creaFuenteDatosConsulta(
+            tipo, 
+            null, 
+            fuente_definicion, 
+            fuente_definicion, 
+            filtros, 
+            eventos, 
+            fuente_orden
+        );
     }
 
     return fuente

@@ -5,7 +5,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "serve": "vite preview",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "dependencies": {
     "@bpmn-io/properties-panel": "^0.23.0",    
@@ -14,8 +14,8 @@
     "bpmn-js": "^10.2.1",
     "bpmn-js-properties-panel": "^1.10.0",
     "camunda-bpmn-moddle": "^7.0.1",
-    "devextreme": "^22.1.6",
-    "devextreme-vue": "^22.1.6",
+    "devextreme": "^22.2.3",
+    "devextreme-vue": "^22.2.3",
     "dotenv": "^16.0.3",
     "handlebars": "^4.7.7",
     "jspdf": "^2.5.1",
@@ -27,8 +27,8 @@
     "pinia": "2.0.23"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
-    "@vue/compiler-sfc": "^3.2.41",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/compiler-sfc": "^3.2.45",
     "autoprefixer": "10.4.12",
     "eslint": "^8.24.0",
     "eslint-plugin-vue": "^9.6.0",
@@ -36,6 +36,6 @@
     "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "tailwindcss": "^3.1.8",
-    "vite": "^3.2.1"
+    "vite": "^4.0.3"
   }
 }

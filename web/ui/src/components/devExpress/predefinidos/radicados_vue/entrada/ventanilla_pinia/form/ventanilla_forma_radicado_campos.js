@@ -11,7 +11,7 @@ import asigna_definiciones
     from "../../../../radicados_vue/comunes/basicos/asigna_definiciones.js";
 
 let barra_botones = function(that) {
-    console.log("barra_botones:", that)
+    // console.log("barra_botones:", that)
     return  [       
         { 
             widget  : "dxButton",           
@@ -220,17 +220,20 @@ let asignacion_generales = function(forma) {
                 asigna_definiciones.gestion_horas_dias(null, {forma: forma}),    
                 asigna_definiciones.gestion_total_tiempo(null, {forma: forma}),    
                 asigna_definiciones.gestion_prioridad(null, {forma: forma}),    
-                asigna_definiciones.reserva(null, {forma: forma}),       
+                asigna_definiciones.reserva(null, {forma: forma}),     
+                asigna_definiciones.gestion_dependencia_lectura(null, {
+                    forma: forma
+                }),              
                 asigna_definiciones.gestion_dependencia_id(null, {
                     forma: forma
                 }),       
                 asigna_definiciones.gestion_dependencia_responsable(null, {
                     forma: forma
                 }),             
-                asigna_definiciones.tema_dependencia_id(null, {forma: forma}),    
-                asigna_definiciones.subtema_dependencia_id(null, {
-                    forma: forma
-                }),                
+                // asigna_definiciones.tema_dependencia_id(null, {forma: forma}),    
+                // asigna_definiciones.subtema_dependencia_id(null, {
+                //     forma: forma
+                // }),                
                 respuesta_definiciones.copia_usuarios_id(null, {forma: forma}),
                 respuesta_definiciones.copia_grupos_id(null, {forma: forma})
             ]

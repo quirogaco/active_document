@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, ref, onMounted } from "vue";
+import { getCurrentInstance, ref, onMounted, onBeforeMount } from "vue";
 
 // that <- this
 let that = getCurrentInstance().ctx;
@@ -56,18 +56,27 @@ let atributos_barra = {
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
     that.forma = DataForma.instance;
-    console.log("EVENT: Mounted -> THAT", that);     
-    console.log("EVENT: Mounted -> DataForma.dxForm", that.forma.option);    
-    console.log("EVENT: Mounted -> THAT.$refs.formRef", that.$refs.dataForma); 
-    console.log("EVENT: Mounted -> THAT.$refs.formRef.instance", that.$refs.dataForma.instance);     
+    // console.log("EVENT: Mounted -> THAT", that);     
+    // console.log("EVENT: Mounted -> DataForma.dxForm", that.forma.option);    
+    // console.log("EVENT: Mounted -> THAT.$refs.formRef", that.$refs.dataForma); 
+    // console.log("EVENT: Mounted -> THAT.$refs.formRef.instance", that.$refs.dataForma.instance);     
 };
 
 onMounted(() => {
-   console.log("RADICADO FORMA MONTADA:", that);
-   $save_params(
-        "_radica_dependencia_", 
-        {"responsable": "correspondencia_id"} // pqrs_id
-    );   
+//    console.log("RADICADO FORMA MONTADA:", that);   
+   
+//    $save_params(
+//         "_radica_dependencia_", 
+//         {
+//             "_grupo_": "ventanilla",
+//             "responsable": "correspondencia_id"
+//         } // pqrs_id
+//     );
+});
+
+onBeforeMount(() => {
+    $save_params("_radica_dependencia_", {"responsable": "correspondencia_id"});
+    $save_params("pqrs_filtro", "DOCUMENTO");
 });
 </script>
 
