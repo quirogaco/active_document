@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint, datetime, random 
 
 from librerias.datos.base   import globales
@@ -49,7 +49,7 @@ def generacion_pdf_radicado(datos, tipo_plantilla, id_tarea, web=False):
         # Si se radico via pagina WEB
         configuracion = configuracion_general.leer_registro_configuracion("radicacion_canales")
         if configuracion != None:
-            # Lee canal de comunicaci�n        
+            # Lee canal de comunicación        
             canales   = configuracion["datos"]        
             canal_id  = canales.get("canal_web", None)
     else:
@@ -106,8 +106,8 @@ def pdf_notificacion(datos, id_tarea):
     ruta_jpg        = ""  
     plantilla       = ""       
     plantillas_tipo = {
-        "ANONIMO" : "WEB_ANONIMO",
-        "NATURAL" : "WEB_NATURAL",
+        "ANONIMO": "WEB_ANONIMO",
+        "NATURAL": "WEB_NATURAL",
         "JURIDICA": "WEB_JURIDICA"
     }
     # Si es formulario WEB
@@ -122,7 +122,7 @@ def pdf_notificacion(datos, id_tarea):
     if (medio_radicado is None):
         clase_radicado = datos.get("clase_radicado", None)
         tercero_clase  = datos.get("tercero_clase", None)
-        if (clase_radicado in ["PQRS", "VENTANILLA"]) and (tercero_clase in ["ANONIMO", "NATURAL", "JURIDICA"]):
+        if (clase_radicado in ["PQRSD", "DOCUMENTO", "TRAMITE"]) and (tercero_clase in ["ANONIMO", "NATURAL", "JURIDICA"]):
             tipo_plantilla = plantillas_tipo[tercero_clase]
     
     if tipo_plantilla not in ["", None]:
@@ -131,10 +131,10 @@ def pdf_notificacion(datos, id_tarea):
         print("ruta_pdf, ruta_jpg:", ruta_pdf, ruta_jpg)
         
 
-    # Notifica PDF Radicaci�n
+    # Notifica PDF Radicación
     correos = datos["tercero_correo_electronico"]
     if (correos not in ["", None]) and (ruta_pdf not in ["", None]) :
-        asunto = "Notifica Radicaci�n con # [" + datos["nro_radicado"] + "]"
+        asunto = "Notifica Radicación con # [" + datos["nro_radicado"] + "]"
         notificar_correo(correos, asunto, ruta_pdf, ruta_jpg)
 
     if ruta_pdf != "":

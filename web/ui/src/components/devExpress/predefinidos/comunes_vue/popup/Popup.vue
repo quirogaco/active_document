@@ -50,7 +50,7 @@ let all_attributes = {
     ...attributes
 }
 
-console.log("popup_attributes:", all_attributes)
+// console.log("popup_attributes:", all_attributes)
 
 onMounted(() => {          
     //console.log("MOINTADO POPUP:", that)

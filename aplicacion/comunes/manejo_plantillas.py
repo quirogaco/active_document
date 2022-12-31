@@ -117,7 +117,13 @@ def recuperar_archivo_plantilla(plantilla):
     return nombre_archivo
 
 def crear_pdf_plantilla(plantilla, datos, id_tarea):
-    nombre_archivo         = recuperar_archivo_plantilla(plantilla)    
+    print("")
+    print("")
+    print("DATOS")
+    print("")
+    print("")
+    pprint.pprint(datos)
+    nombre_archivo  = recuperar_archivo_plantilla(plantilla)    
     ruta_destino, jpg_ruta = genera_pdf_plantilla(nombre_archivo, "", datos)
 
     return ruta_destino, jpg_ruta  

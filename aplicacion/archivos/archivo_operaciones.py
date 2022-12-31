@@ -146,6 +146,8 @@ def crear_registro_relacion(
       'tipo_relacion': tipo_relacion,
       'cardinalidad' : cardinalidad
    }
+   print("crear_registro_relacion:")
+   pprint.pprint(data)
    registro = sqalchemy_insertar.insertar_registro('base', CLASE, data)
    
    return registro
@@ -168,9 +170,9 @@ def crear_archivo_relacion(
    detalle         = "Anexo",
    id_tarea        = ""
 ):
-   uuid_corto        = shortuuid.uuid()
+   uuid_corto = shortuuid.uuid()
    nombre, extension = os.path.splitext(nombre_objeto)
-   nombre_objeto     = (nombre + "___" + uuid_corto + extension).lower().replace(" ", "_")
+   nombre_objeto = (nombre + "___" + uuid_corto + extension).lower().replace(" ", "_")
    # Archivo MINIO
    resultado_archivo = crear_archivo(   
       nombre_archivo_fuente, 
@@ -185,39 +187,83 @@ def crear_archivo_relacion(
    )
 
    # Relación a archivo
+   print("crear_archivo_relacion:", estructura_id)
    resultado_relacion = crear_registro_relacion(   
       estructura,
       estructura_id,
-      archivo_id    = resultado_archivo['id'],   
+      archivo_id  = resultado_archivo['id'],   
       tipo_relacion = tipo_relacion  
    )
 
    return resultado_relacion
 
-def insertar_archivos(estructura, datos, tarea, archivos, tipo_relacion = "anexos", cubeta = "contenedor.general", id_tarea=""):
+def insertar_archivos(
+   estructura, 
+   datos, 
+   tarea, 
+   archivos, 
+   tipo_relacion = "anexos", 
+   cubeta = "contenedor.general", 
+   id_tarea=""
+):
    for archivo in archivos:
-      estructura_id  = datos["id"]
+      estructura_id = datos["id"]
+      print("insertar_archivos:", estructura_id)
       registro = crear_archivo_relacion(   
          estructura,     # Estructura
          estructura_id,  # Id de la estructura
          archivo["nombre_completo"], # Archivo en disco
          archivo["nombre"],          # Nombre del objeto MINIO
-         detalle       = archivo["nombre"],
-         cubeta        = cubeta,
+         detalle = archivo["nombre"],
+         cubeta = cubeta,
          tipo_relacion = tipo_relacion,
-         id_tarea      = id_tarea
+         id_tarea = id_tarea
       ) 
 
-def manejo_archivos(estructura, accion, datos, tarea, archivos, id_tarea, tipo_relacion = "anexos", cubeta = "contenedor.general"):
+def manejo_archivos(
+   estructura, 
+   accion, 
+   datos, 
+   tarea, 
+   archivos, 
+   id_tarea, 
+   tipo_relacion = "anexos", 
+   cubeta = "contenedor.general"
+):
    accion_archivo = tarea.get('accion', accion) 
-   if   accion_archivo == 'insertar':
-      insertar_archivos(estructura, datos, tarea, archivos, tipo_relacion, cubeta, id_tarea)
+   if accion_archivo == 'insertar':
+      print("Manejo_archivos:", datos, archivos)
+      insertar_archivos(
+         estructura, 
+         datos, 
+         tarea, 
+         archivos, 
+         tipo_relacion, 
+         cubeta, 
+         id_tarea
+      )
 
    elif accion_archivo == 'modificar':
       eliminar_archivos(estructura, datos, tarea, archivos)
-      insertar_archivos(estructura, datos, tarea, archivos, tipo_relacion, cubeta, id_tarea)
+      insertar_archivos(
+         estructura, 
+         datos, 
+         tarea, 
+         archivos, 
+         tipo_relacion, 
+         cubeta, 
+         id_tarea
+      )
       
    elif accion_archivo == 'eliminar':
-      eliminar_archivos(estructura, datos, tarea, archivos, tipo_relacion, cubeta, id_tarea) # Falta lemeinar archivo
+      eliminar_archivos(
+         estructura, 
+         datos, 
+         tarea, 
+         archivos, 
+         tipo_relacion, 
+         cubeta, 
+         id_tarea
+      ) # Falta lemeinar archivo
 
 CONFIGURACION_GENERAL["FUNCIONES_TAREAS"]['archivos'] = manejo_archivos

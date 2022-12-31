@@ -74,3 +74,27 @@ def datos_tercero(datos):
     }
 
     return datos_especificos
+
+
+def datos_tercero_tercero(datos):
+    datos_especificos = {
+        "tercero_clase": datos.get("clase", None),   
+        "tercero_tercero_tipo_id": datos.get("tipo_tercero_id", None),   
+        "tercero_tipo_identificacion_id": datos.get("tipo_identificacion_id", None),           
+        "tercero_nro_identificacion": datos.get("nro_identificacion", ""),   
+        "tercero_razon_social": datos.get("razon_social", ""),  
+        "tercero_cargo": datos.get("cargo", ""),   
+        "tercero_nombres": datos.get("nombres", ""), 
+        "tercero_apellidos": datos.get("apellidos", ""), 
+        "tercero_correo_electronico": datos.get("correo_electronico", ""),
+        "correo_electronico": datos.get("correo_electronico", ""), 
+        "tercero_direccion": datos.get("direccion", ""), 
+        "tercero_codigo_postal": datos.get("codigo_postal", ""), 
+        "tercero_telefono": datos.get("telefono", ""), 
+        "tercero_telefono_movil": datos.get("telefono_movil", ""), 
+        "tercero_fax": datos.get("fax", ""), 
+        "tercero_ciudad_id": datos.get("ciudad_id", ""),
+        "tercero_ciudad_nombre": datos.get("ciudad_nombre", "") 
+    }
+
+    return datos_especificos

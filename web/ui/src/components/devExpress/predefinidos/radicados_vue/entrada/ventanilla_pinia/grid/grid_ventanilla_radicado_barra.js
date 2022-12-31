@@ -11,16 +11,13 @@ const ejecutar = function(that) {
 let barraDef = function(that) {
 
     const call = function(event) {
-        console.log("CALL:", event.itemData);
+        // console.log("CALL:", event.itemData);
         event.itemData.value;
-
         switch (event.itemData.value) {
             case 1:     
                 that.radicar()
-
         }
-
-        console.log(that)
+        // console.log(that)
         //that.re_render_popup();
     }
 

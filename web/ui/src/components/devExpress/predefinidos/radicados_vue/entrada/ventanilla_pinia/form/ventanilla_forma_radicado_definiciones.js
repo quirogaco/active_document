@@ -42,13 +42,10 @@ let metodos_forma = function(that) {
         },
 
         boton_click(e) {
-            let accion = e.component.option("hint");
-            console.log(e.component.option("hint"))
-            
-            //let accion = that.define_accion(e.component.option("hint"))        
+            let accion = e.component.option("hint");    
             let valida = that.forma_validacion();
             let datos = that.forma_datos();
-            datos["clase_radicado"] = "VENTANILLA";
+            datos["clase_radicado"] = datos["es_pqrs"];
             datos["formulario_web"] = null;
             switch (accion) {
                 case 'radicar_ventanilla': 
@@ -90,9 +87,6 @@ let metodos_forma = function(that) {
     return  Object.assign({}, forma_definiciones.forma_funciones, metodos)
 }
 
-//let metodos_totales = Object.assign({}, forma_definiciones.forma_funciones, metodos)
-
 export default {
-    //metodos: metodos_totales
     metodos_forma: metodos_forma
 }

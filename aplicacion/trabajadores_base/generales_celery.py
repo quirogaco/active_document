@@ -14,7 +14,6 @@ from librerias.datos.elastic import elastic_operaciones
 @generales_app.task(name='indexar_estructura')
 def indexar_estructura(**parametros):
     elastic_operaciones.indexar_registro(parametros["estructura"], parametros["registro_id"])  
-
 globales.carga_funcion_general("indexar_estructura_cola", indexar_estructura, atributos={"tipo": "celery"})
 
 # Manejar archivos
@@ -31,5 +30,4 @@ def manejo_archivos(**parametros):
         parametros["tipo_relacion"],
         parametros.get("cubeta", "contenedor.general")
     )
-
 globales.carga_funcion_general("manejo_archivos_cola", manejo_archivos, atributos={"tipo": "celery"})

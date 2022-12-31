@@ -94,13 +94,16 @@ const definicion = {
 
         {
             dataField : "pqrs",
-            editorType: "dxRadioGroup",
+            editorType: "dxCheckBox",           
+            label     : {
+                text: "Tipo de Petición"
+            },
             validationRules: [{
                 type   : "required",
-                message: "Pqrs es obligatorio"
+                message: "Tipo de Petición es obligatorio"
             }],
             editorOptions: { 
-                items : ["SI", "NO"],    
+                items : ["PQRSD", "TRAMITE", "DOCUMENTO"],    
                 layout: "horizontal",              
             }
         },

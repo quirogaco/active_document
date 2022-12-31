@@ -8,9 +8,9 @@ import operator
 from dict_deep import deep_get
 from elasticsearch import helpers
 
-from .                    import elastic_busquedas
+from . import elastic_busquedas
 from librerias.datos.base import globales
-from librerias.datos.sql  import sqalchemy_leer
+from librerias.datos.sql import sqalchemy_leer
 
 ###############
 # CREA INDICE #
@@ -204,5 +204,10 @@ def leerUno(conexion, indice, registroId):
 def indexar_leer_documento(ruta, estructura, registroId):
     conexion  = globales.lee_conexion_elastic(ruta)
     resultado = leerUno(conexion, estructura, registroId)
+    
+    return resultado
+
+def indexar_recupera_documento(estructura, registroId):
+    resultado = indexar_leer_documento("base", estructura, registroId)
     
     return resultado

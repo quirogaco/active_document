@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint
 
 from librerias.datos.base import globales
@@ -15,7 +15,7 @@ nombre          = adaptadores_grid_forma.adaptador_columna_grid("nombre",       
 horas_dias      = adaptadores_grid_forma.adaptador_columna_grid("horas_dias",      definicion["campos"]["horas_dias"],      {'ancho': 150})
 tipo_tiempo     = adaptadores_grid_forma.adaptador_columna_grid("tipo_tiempo",     definicion["campos"]["tipo_tiempo"],     {'ancho': 150})
 modifica_tiempo = adaptadores_grid_forma.adaptador_columna_grid("modifica_tiempo", definicion["campos"]["modifica_tiempo"], {'ancho': None})
-pqrs            = adaptadores_grid_forma.adaptador_columna_grid("pqrs",            definicion["campos"]["pqrs"],            {'ancho': None})
+pqrs            = adaptadores_grid_forma.adaptador_columna_grid("pqrs",            definicion["campos"]["pqrs"],            {'titulo': 'Tipo', 'ancho': None})
 estado_ = adaptadores_grid_forma.adaptador_columna_grid("estado_", definicion["campos"]["estado_"], {'ancho': None})
 
 columnas = [
@@ -31,8 +31,8 @@ columnas = [
 grid_basico = adaptadores_grid_forma.adaptador_grid(
     definicion["estructura"], 
     columnas, 
-    "Tipos de Petición", 
-    atributos_especificos={"crear": "Crear Tipo de Petición"}
+    "Tipos de PeticiÃ³n", 
+    atributos_especificos={"crear": "Crear Tipo de PeticiÃ³n"}
 )
 CONFIGURACION_GENERAL["definiciones_visuales"]["grid"]["tipo_peticiones_grid"] = grid_basico 
 
@@ -59,7 +59,7 @@ modifica_tiempo =  adaptadores_grid_forma.adaptador_campo_forma(
 )
 pqrs               =  adaptadores_grid_forma.adaptador_campo_forma(
     "pqrs", definicion["campos"]["pqrs"], 
-    {'tipoeditor': 'radio', "elementos": ["SI", "NO"]}
+    {'tipoeditor': 'radio', "elementos": ["PQRSD", "TRAMITE", "DOCUMENTO"]}
 )
 dependencias_ids = adaptadores_grid_forma.adaptador_campo_forma(
     "dependencias_ids", 
@@ -93,7 +93,7 @@ campos = [
 forma_basico = adaptadores_grid_forma.adaptador_forma(
     definicion["estructura"], 
     campos, 
-    "Manejo de Tipos de Peticiónes", 
+    "Manejo de Tipos de Peticiones", 
     atributos_especificos={}
 )
 

@@ -42,7 +42,6 @@ const seleccion = function(id, atributos) {
         'dataField'      : id,
         'editorType'     : "dxSelectBox",
         'label'          : basicos.label(atributos),  
-        //'isRequired'     : $librerias.cargaAtributo(atributos, 'obligatorio', false),    
         'itemType'       : 'simple',
         'name'           : $librerias.cargaAtributo(atributos, 'nombre', id),
         'visible'        : $librerias.cargaAtributo(atributos, 'visible', true),  

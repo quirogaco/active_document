@@ -15,21 +15,25 @@ let data = {
 let template_base = handlebars.compile(`        
     <DxForm                    
         ref="dxFormRef"
-        v-bind= "config_form"        
+        v-bind="config_form"        
     > 
 
-       {{{templates_text}}}
+      {{{templates_text}}} 
 
     </DxForm>
 `);
 
 let template_form = template_base(data);
 
-
 export default {
     template: template_form,
     components: {
         DxForm
+    },
+    data: () => {
+        return {
+            config_form: ref({})
+        }
     }
 }
 </script>
@@ -130,9 +134,6 @@ that.parameters_received = general_form.lee_propiedades(props);
 //    basicas para convertir
 let config_form = validate_configuration(that.parameters_received);
 config_form.items = form_field_configuration(config_form);
-//that.parameters_received.config.items = [];
-//let config = that.parameters_received.config;
-//that.name = that.parameters_received.config.name;
 
 // events
 const emit = defineEmits(['mounted']);
@@ -145,33 +146,23 @@ that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
 onMounted(() => {
-    console.log(" onMounted DATAFORM THAT:", that);
-    console.log(" onMounted DATAFORM that.$refs.dxFormRef:", that.$refs.dxFormRef);
-    //console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
-    console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
+    // console.log(" onMounted DATAFORM THAT-0:", that);
+    // console.log(" onMounted DATAFORM that.$refs.dxFormRef:", that.$refs.dxFormRef);
+    // //console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
+    // console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
     // devexpress class, access to attributes
     that.dxForm = that.$refs.dxFormRef;
     // devexpress instance (object), acces to functions, ej: option
     that.instance = that.$refs.dxFormRef.instance;
 
     // required for events, methods and fields of the form
-    // validar sin no viene copn config... ver 1
+    // validar sin no viene con config... ver 1
     that.instance.basicas = {
         "forma_id": that.parameters_received.config.id
     };
-    
-    // crea items en formato devexpress por sin no vienen asi ? ver 1.
-    //fields_form = nested_assign(fields_form, that.instance);
-    //fields_form = dev_express_definition(fields_form);
-    //that.instance.option("colCount", 2);
-    //that.instance.option("items", fields_form);/
-    //that.instance.option("items", null);
-
-    // emit events of parent component
-    //that.$emit('mounted', that);
+    that.config_form.value = config_form;
     emit('mounted', that);
 });
 
-
-defineExpose( Object.assign({}, that) );
+//defineExpose( Object.assign({}, that) );
 </script>

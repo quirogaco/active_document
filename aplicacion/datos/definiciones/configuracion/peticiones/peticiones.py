@@ -22,7 +22,7 @@ campos = {
     "horas_dias"        : tipos.texto_obligatorio(propiedades={"titulo": "Horas ó dias", "longitud": 32, "reporte": "SI"}),       
     "tipo_tiempo"       : tipos.texto_obligatorio(propiedades={"titulo": "Calculo de tiempo en", "longitud": 32, "reporte": "SI"}),  
     "modifica_tiempo"   : tipos.texto_obligatorio(propiedades={"titulo": "Modifica tiempo", "longitud": 10, "reporte": "SI"}),          
-    "pqrs"              : tipos.texto_obligatorio(propiedades={"titulo": "Es PQRS", "longitud": 10, "reporte": "SI"}), 
+    "pqrs"              : tipos.texto_obligatorio(propiedades={"titulo": "Tipo de Petición", "longitud": 50, "reporte": "SI"}), 
     "bloquear"          : tipos.entero(propiedades={"titulo": "Bloquear traslado (dias)", "reporte": "SI"}),      
     "estado_"           : tipos.texto_obligatorio(propiedades={"titulo": "Estado", "reporte": "SI"}),
 

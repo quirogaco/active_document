@@ -95,6 +95,8 @@ services:
     stdin_open: true
     tty: true
     restart: always
+    environment:      
+      - JWT_ENABLED=false
     ports:
       - '80:80'
       - '443:443'

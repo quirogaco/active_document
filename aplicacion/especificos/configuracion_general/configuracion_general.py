@@ -14,8 +14,8 @@ from aplicacion.comunes      import manejo_archivos
 
 # LEER REGISTRO DE CONFIGURACIoN
 def leer_registro_configuracion(codigo):
-    datos           = None
-    filtros         = [ [ "codigo", "=", codigo ] ]
+    datos = None
+    filtros = [ [ "codigo", "=", codigo ] ]
     configuraciones = sqalchemy_filtrar.filtrarOrdena(estructura="configuracion_general", filtros=filtros, ordenamientos=[])
     if len(configuraciones) > 0:
         return configuraciones[0]
@@ -34,6 +34,7 @@ def crear_registro_configuracion(codigo, datos):
 
 # MODIFICAR REGISTRO DE CONFIGURACIoN
 def modificar_registro_configuracion(registro_id, datos):
+    pprint.pprint(datos)
     datos_configuracion = {
         "datos" : datos["datos"]
     }
@@ -54,13 +55,13 @@ def salvar_configuracion(codigo, datos={}):
 # RADICACIoN PLANTILLAS #
 #########################
 def leer_radicacion_canales(accion, datos={}, archivos=[], acciones={}, id_tarea=""):
-    codigo    = datos["datos"]["_tipo_"]
+    codigo = datos["datos"]["_tipo_"]
     resultado = leer_registro_configuracion(codigo)
 
     return resultado
 
 def salvar_radicacion_canales(accion, datos={}, archivos=[], acciones={}, id_tarea=""):
-    datos  = datos["datos"]
+    datos = datos["datos"]
     codigo = datos["_tipo_"]
     datos_plantilla = {
         "datos": datos

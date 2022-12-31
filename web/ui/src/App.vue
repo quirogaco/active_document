@@ -183,14 +183,12 @@ export default {
         get_params(componente_name) {            
             let globalStore = window._APLICACION_.config.globalProperties.globalStore;
             let datos = globalStore.get_params(componente_name);
-            console.log("leer this.globalStore", componente_name, datos);   
 
             return datos;
         },
 
         save_params(componente_name, params) {            
             let globalStore = window._APLICACION_.config.globalProperties.globalStore;
-            console.log("salvar globalStore", globalStore)
             globalStore.save_params(componente_name, params);         
         }
     }

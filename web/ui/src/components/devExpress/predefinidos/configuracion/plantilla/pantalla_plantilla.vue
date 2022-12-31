@@ -13,18 +13,17 @@ import {
     DxStringLengthRule,
     DxItem 
 } from 'devextreme-vue/form'
-import { DxScrollView }  from 'devextreme-vue/scroll-view'
-import DxToolbar         from 'devextreme-vue/toolbar'
-import DxButton          from 'devextreme-vue/button'
-import notify            from 'devextreme/ui/notify'
-import DxValidationGroup from 'devextreme-vue/validation-group'
-import ArrayStore        from 'devextreme/data/array_store'
-import DataSource        from 'devextreme/data/data_source'
+import { DxScrollView } from 'devextreme-vue/scroll-view';
+import DxToolbar from 'devextreme-vue/toolbar';
+import DxButton from 'devextreme-vue/button';
+import notify from 'devextreme/ui/notify';
+import DxValidationGroup from 'devextreme-vue/validation-group';
 
-import fuenteDatos       from '../../../remoto/fuenteDatos.js'
-import onlyoffice_editor from '../../../../onlyOffice/onlyoffice_editor.vue'
+import general_form from "@/comunes_vue/forma/forma.js";
+import fuenteDatos from '../../../remoto/fuenteDatos.js';
+import onlyoffice_editor from '../../../../onlyOffice/onlyoffice_editor.vue';
 
-import pantalla_plantilla_definiciones from "./pantalla_plantilla_definiciones.js"
+import pantalla_plantilla_definiciones from "./pantalla_plantilla_definiciones.js";
 
 let plantilla =  {
     name: 'plantilla',
@@ -59,31 +58,38 @@ let plantilla =  {
     },
 
     mounted() {
-        this.indicador_visible     = false
-        this.forma                 = this.$refs.forma.instance            
-        this.barra                 = this.$refs.barra.instance  
-        this.editor                = this.$refs.editor  
-        this.notify                = notify  
-        window.$pantalla_plantilla = this  
-        this.parametros            = JSON.parse(this.datos)
-        console.log(" PLANTILLA->this.parametros:", this.parametros)
+        this.archivo_visible = false;
+        this.indicador_visible     = false;
+        this.forma                 = this.$refs.forma.instance;            
+        this.barra                 = this.$refs.barra.instance;
+        this.editor                = this.$refs.editor;  
+        this.notify                = notify; 
+        window.$pantalla_plantilla = this;  
+        //this.parametros            = JSON.parse(this.datos);
+        this.parametros = general_form.lee_propiedades({}, "pantalla_plantilla");
+        console.log(" PLANTILLA->this.parametros:", this.parametros);
         if (this.parametros.modo == "modificar") {
-            // No cargar archivo de disco
-            this.archivo_visible = false
-            // Mostrar visor
-            console.log(" PLANTILLA->this.parametros.plantilla_datos.mostrar_archivos:", this.parametros.plantilla_datos.mostrar_archivos)
-            let archivo = this.parametros.plantilla_datos.mostrar_archivos
-            let parametros = window.$lib.unifica_datos_visor({
-                titulo_general: "Consulta de Plantillas",
-                archivo_id    : archivo.id, 
-                tipo_documento: archivo.tipo_archivo, 
-                titulo        : this.parametros.plantilla_datos.descripcion,
-                modo          : "editar",
-                descarga      : 'no'
-            })             
-            this.editor_visible      = true
-            this.repintar_onlyoffice += 1
-            this.editor.mostrar_editor(parametros)
+            // No cargar archivo de disco            
+            //this.archivo_visible = true;
+            // Mostrar visor            
+            let archivo = this.parametros.plantilla_datos.mostrar_archivos;
+            console.log(" PLANTILLA-> archivo:", archivo)
+            if (archivo != undefined) {
+                let parametros = window.$lib.unifica_datos_visor({
+                    titulo_general: "Consulta de Plantillas",
+                    archivo_id    : archivo.id, 
+                    tipo_documento: archivo.tipo_archivo, 
+                    titulo        : this.parametros.plantilla_datos.descripcion,
+                    modo          : "editar",
+                    descarga      : 'no'
+                });
+                this.editor_visible = true;
+                this.repintar_onlyoffice += 1;
+                this.editor.mostrar_editor(parametros);
+            }
+            {
+                this.archivo_visible = true
+            }             
         }
         else {
             this.archivo_visible = true

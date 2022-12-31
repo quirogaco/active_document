@@ -29,6 +29,10 @@ const forma_prepara = function(definicion={}) {
             campos_base.push( forma_objeto.radio_objeto(campo) )
         }
 
+        if (tipoeditor == "chequeo") {
+            campos_base.push( forma_objeto.radio_objeto(campo) )
+        }
+
         if (tipoeditor == "select") {
             campos_base.push( forma_objeto.select_objeto(campo) )
         }

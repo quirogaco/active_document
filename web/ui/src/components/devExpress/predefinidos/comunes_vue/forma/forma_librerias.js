@@ -205,8 +205,12 @@ const asigna_fuente_datos = function(
     eventos={}
 ) {
     let fuente_datos = crea_fuente(tipo, fuente, filtros, eventos);
-    let componente   = forma._campos[campo].component;    
+    let componente = forma._campos[campo].component;  
+    //console.log("asigna_fuente_datos:", componente, fuente_datos)
+    //componente.option("dataSource", []);  
+    //fuente_datos.clearRawDataCache();
     componente.option("dataSource", fuente_datos);
+    componente.reset();
 }
 
 const asigna_fuente = function(forma=null, campo="", fuente_datos) {

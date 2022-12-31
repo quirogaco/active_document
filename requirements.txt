@@ -17,7 +17,7 @@ requests-toolbelt        # Utilitarios request
 pdfminer.six             # Extrae texto de un pdf pagina a pagina
 pydantic                 # Clase para validación
 datamodel-code-generator # Generador de clases pydantic
-prefect                  # Herramienta para crear flujos de trabajo de datos
+prefect==1.3.1           # Herramienta para crear flujos de trabajo de datos
 sqlathanor               # Serializa sqlalchemy a dicionrios, json, csv
 redis                    # Cliente redis
 python-rapidjson         # Json parser para load datetime

@@ -51,7 +51,8 @@ let atributos_forma = {
                 "obligatorio": true,
                 "mayuscula": "NO",
                 "longitud": 120,
-                "ancho": 250
+                "ancho": 250,
+                //"alto": 30
             },
             
             {
@@ -109,11 +110,11 @@ let atributos_barra = {
 
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
-    console.log("EVENT: dataFormaMounted")
+    console.log("EVENT: dataFormaMounted", DataForma)
+    that.dataForm = DataForma;
 };
 
 onMounted(() => {
-    that.dataForm = that.$refs.formRef;
 });
 </script>
 
