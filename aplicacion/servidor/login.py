@@ -28,9 +28,10 @@ modoFecha = DM_ISO8601 | DM_SHIFT_TO_UTC | DM_NAIVE_IS_UTC | DM_IGNORE_TZ
 
 def ingreso_local(codigo, clave):
    registro_usuario = None
-   codigo   = codigo.upper().replace("*", "")
+   codigo   = codigo.replace("*", "")
    clave    = clave.upper()
    filtros  = [ [ "codigo", "=", codigo ], [ "clave", "=", clave ] ]
+   print("ingreso_local:", filtros)
    usuarios = sqalchemy_filtrar.filtrarOrdena(estructura="usuarios", filtros=filtros, ordenamientos=[])   
    if len(usuarios) > 0:
       registro_usuario = usuarios[0]
@@ -42,6 +43,7 @@ def ingreso_directorio(codigo, clave):
    #codigo   = codigo.upper()
    #clave    = clave.upper()
    filtros  = [ [ "codigo", "=", codigo ] ]
+   print("ingreso_directorio:", filtros)
    usuarios = sqalchemy_filtrar.filtrarOrdena(estructura="usuarios", filtros=filtros, ordenamientos=[])     
    if len(usuarios) > 0:
       registro_usuario = usuarios[0]

@@ -5,11 +5,13 @@ export const eventsDxDataGrid = function(that) {
     // this is DxDataGrid, that is DataGrid (this component)
     return {        
         rowClick(event) {
-            that.$emit('clickRow', event, that)
+            console.log("rowClick");
+            that.$emit('clickRow', event, that);
         },
 
         cellDblClick(event) {
-            that.$emit('dblClickCell', event, that)
+            console.log("cellDblClick");
+            that.$emit('dblClickCell', event, that);
         }
     }
 }

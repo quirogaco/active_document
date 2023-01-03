@@ -1,9 +1,10 @@
 
+import {ref} from "vue";
 import visores_archivo from "../../../../../../../librerias/visores_archivo.js";
 
 export const methods = {
     'columna_doble_click':  function(e) {
-        let data = e.data
+        let data = e.data;
         if (e.column.dataField == "clase_radicado") {
             if (data.pdf_base.id !== undefined) {
                 visores_archivo.ver_descarga_archivo({
@@ -18,43 +19,40 @@ export const methods = {
         }
         else {
             let datos = {
-                "id"         : data.id,
-                "datos"      : data,
-                "modo"       : "consulta",
+                "radicado": data,
+                "modo": "consulta",
                 "llamado_por": "ventanilla_radicado_grid"
-            }
-            this.$router.push({
-                name: "forma_radicado_consulta",                      
-                params: {
-                    //"datos": JSON.stringify(datos)     
-                    "attributes_str": JSON.stringify(datos)     
-                }                            
-            })
+            };
+            $lib.call_component_storage(
+                "forma_radicado_consulta",
+                {"datos": datos}
+            )
         }
     },
 
-    'cargar_documento':  function(e) {
-        if (this.grid.getSelectedRowKeys().length > 0) {
-            this.opciones_ventana_emergente_archivo = {
+    'cargar_documento':  function(event) {
+        if (this.grid.getSelectedRowKeys().length == 1) {
+            this.opciones_ventana_emergente_archivo)
+            this.opciones_ventana_emergente_archivo.value = {
                 visible  : true,
-                datos    : {
+                datos: {
                     "estructura": "radicados_entrada",
-                    "relacion"  : "principal",
-                    "origen_id" : this.grid.getSelectedRowKeys()[0]
+                    "relacion": "principal",
+                    "origen_id": this.grid.getSelectedRowKeys()[0]
                 },
                 atributos: {
-                    multiple       : false,
-                    permitidos     : ".pdf",
-                    label          : "Archivo pdf",
+                    multiple: false,
+                    permitidos: ".pdf",
+                    label: "Archivo pdf",
                     titulo_pantalla: "Cargue de archivo Pdf (documento principal)",
-                    titulo_boton   : "Cargar archivo PDF",
+                    titulo_boton: "Cargar archivo PDF",
                     mensaje_retorno: "Cargue de archivo correcto!" 
                 }
             }
-            this.emergente_key += 1
+            this.emergente_key.value += 1;
         }
         else {
-            this.notify("Seleccione un radicado ", "warning") 
+            $alertar("Seleccione un (1) radicado, por favor! ", "Alerta");
         }
     },
 
@@ -63,19 +61,11 @@ export const methods = {
         this.emergente_recorrido += 1
     },
 
-    'radicar':  function(e) {
+    'radicar':  function(event) {
         $lib.call_component_storage(
             "ventanilla_radicado_forma",
-            {"datos": {
-                //"id"   : e.data.id,
-                //"datos": e.data
-            }}
+            {"datos": {}}
         )
-
-        // this.$router.push({
-        //     name  : "ventanilla_radicado_forma",            
-        //     params: {}        
-        // })
     },
 
     accion_click: function(e) {        

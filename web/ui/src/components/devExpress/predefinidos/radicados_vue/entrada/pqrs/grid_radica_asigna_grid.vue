@@ -30,8 +30,8 @@ import grid_radica_asigna_metodos from './grid_radica_asigna_metodos.js'
 let basica = {
     "estructura"  : "radicados_entrada",
     "filtros_grid": [
-        ["gestion_asignada_peticion", "=", "NO"],
-        ["clase_radicado", "=", "PQRS"]
+        //["gestion_asignada_peticion", "=", "NO"],
+        ["clase_radicado", "=", "PQRSD"]
     ],
     "titulo_grid" : "PQRSD - Radicación y traslado de radicados"
 }

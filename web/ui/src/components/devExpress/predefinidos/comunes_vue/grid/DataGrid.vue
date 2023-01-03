@@ -1,11 +1,15 @@
-<template src="./DataGrid.html">
+<template>
+    <DxDataGrid
+        v-bind = "grid_attributes"
+        v-on = "events"
+    >
+    </DxDataGrid>
 </template>
 
 <script setup lang="ts">
 // #################################
 // Import components and libraries #
 // #################################
-import { confirm as confirmDe } from 'devextreme/ui/dialog';
 import { getCurrentInstance, ref, onMounted } from "vue";
 import { DxDataGrid } from 'devextreme-vue/data-grid';
 
@@ -69,14 +73,11 @@ let grid_attributes = {
     ...attributes
 }
 
-//console.log("grid_attributes:", grid_attributes)
-
 onMounted(() => {          
     that.name   = name;
-    // that.dxGridRef.instance IS dxDataGrid
-    that.dxGrid = that.$refs.dxGridRef;
-    that        = $lib.assignAttributes(that, methods);
-    that        = $lib.assignAttributes(that, events);
+    that.dxGrid = that.$refs.grid;
+    that = $lib.assignAttributes(that, methods);
+    that = $lib.assignAttributes(that, events);
     that.$emit('mounted', that);
 })
 

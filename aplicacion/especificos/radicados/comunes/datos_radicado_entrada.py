@@ -4,8 +4,26 @@
 import pprint, datetime, random
 
 from librerias.utilidades import basicas  
-from .                    import datos_comunes
+from . import datos_comunes
+from librerias.datos.sql import sqalchemy_filtrar 
+from librerias.datos.sql import sqalchemy_modificar 
 from aplicacion.especificos.configuracion_general import configuracion_general
+
+def radicado_consecutivo(tipo="ENTRADAS"):
+    filtros = [ [ "nombre", "=", tipo ] ]
+    entrada = sqalchemy_filtrar.filtrarOrdena(
+        estructura="consecutivos", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )[0]
+    consecutivo = entrada["consecutivo"] + 1
+    sqalchemy_modificar.modificar_un_registro(
+        "consecutivos", 
+        entrada["id"],
+        {"consecutivo": consecutivo}
+    )
+
+    return str(consecutivo).rjust(6,'0')
 
 ###################
 # BASICOS ENTRADA #
@@ -19,7 +37,8 @@ campos_basicos_entrada = [
 # DATOS BASICOS DE LA ALIDA (DEL REGISTRO FISICO)
 def datos_basicos(datos, tarea_id):    
     radicado_por, radicado_en = datos_comunes.datos_radicador(datos, tarea_id)
-    radicado                  = "E-2021-" + str(random.randint(0, 10000))
+    consecutivo = radicado_consecutivo("ENTRADAS")
+    radicado = "E-" + basicas.ano() + "-" + consecutivo    
     datos_especificos = {
         'radicado_en'   : radicado_en,
         'radicado_por'  : radicado_por,

@@ -62,17 +62,7 @@ async function form_mounted(DataForma) {
     // console.log("EVENT: Mounted -> THAT.$refs.formRef.instance", that.$refs.dataForma.instance);     
 };
 
-onMounted(() => {
-//    console.log("RADICADO FORMA MONTADA:", that);   
-   
-//    $save_params(
-//         "_radica_dependencia_", 
-//         {
-//             "_grupo_": "ventanilla",
-//             "responsable": "correspondencia_id"
-//         } // pqrs_id
-//     );
-});
+onMounted(() => {});
 
 onBeforeMount(() => {
     $save_params("_radica_dependencia_", {"responsable": "correspondencia_id"});

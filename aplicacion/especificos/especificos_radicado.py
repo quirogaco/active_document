@@ -37,7 +37,7 @@ acciones_funcion = {
 def acciones_ejecuta(datos={}, archivos=[], id_tarea=""):
     accion = datos["accion"]
 
-    """
+    #"""
     print("")
     print("")
     print("------------------------------------------------")
@@ -45,7 +45,7 @@ def acciones_ejecuta(datos={}, archivos=[], id_tarea=""):
     print('datos:')
     pprint.pprint(datos)   
     print('archivos:', archivos)
-    """
+    #"""
 
     resultado = datos
     funcion   = acciones_funcion[accion]

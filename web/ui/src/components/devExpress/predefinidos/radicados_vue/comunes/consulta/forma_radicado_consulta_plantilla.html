@@ -1,4 +1,7 @@
-<div class="container-fluid shadow p-3 mb-5 bg-body rounded min-vh-100">
+<div
+    class="container-fluid shadow p-3 mb-5 bg-body rounded min-vh-100"
+    v-if="basicas.visible"
+>
     <div class="col-12 shadow p-3 rounded">            
         <div class="row ">
 
@@ -6,7 +9,7 @@
             <DxForm
                 ref               = "forma"
                 :id               = "basicas.forma_id"
-                :form-data        = "parametros.datos"
+                :form-data        = "parametros.radicado"
                 :col-count        = "basicas.columnas"
                 :items            = "elementos"
                 :validation-group = "validacion_grupo"

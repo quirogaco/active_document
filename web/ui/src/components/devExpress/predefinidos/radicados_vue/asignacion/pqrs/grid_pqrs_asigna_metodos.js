@@ -27,16 +27,16 @@ let metodos = {
             data['es_ventanilla'] = 'NO';
             data['es_pqrs'] = 'NO';
             data['resuelto_inmediato'] = 'NO';
-            this.$router.push({
-                name: "forma_pqrs_asigna",
-                params: {
-                    "datos": JSON.stringify({
-                        "id"   : e.data.id,
-                        "datos": e.data,
-                        "modo" : "asigna"
-                    })                
-                }
-            })
+            $save_params("pqrs_filtro", "PQRSD");
+            $save_params("_radica_dependencia_", {"responsable": "pqrs_id"});
+            $lib.call_component_storage(
+                "forma_pqrs_asigna",
+                {"datos": {
+                    "id"   : e.data.id,
+                    "radicado": e.data,
+                    "modo" : "asigna"
+                }}
+            )
         }
     },
 

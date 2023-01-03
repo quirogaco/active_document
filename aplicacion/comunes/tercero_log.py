@@ -76,9 +76,6 @@ def fuente_lee(radicado_tipo, radicado_clase):
 def log_radicado(radicado_tipo, radicado_clase, accion, datos, id_tarea):
     datos_tarea = redis_datos.lee_tarea_ejecucion(id_tarea)
 
-    print("LOG RADICADO datos tarea:", radicado_tipo, radicado_clase)
-#pprint.pprint(datos_tarea)
-
     accionante_tipo, accionante_id     = accionante_lee(radicado_tipo, radicado_clase, accion, datos, datos_tarea)
     destinatario_tipo, destinatario_id = destinatario_lee(radicado_tipo, radicado_clase, accion, datos, datos_tarea)
     proceso   = acciones_lee(radicado_tipo, radicado_clase, accion, "PROCESO", datos, datos_tarea)
@@ -97,19 +94,10 @@ def log_radicado(radicado_tipo, radicado_clase, accion, datos, id_tarea):
         "fuente"           : fuente,
         "fuente_id"        : datos.get('id', "222"), 
         "accion"           : accion_,  
-        "detalle"          : ( "RADICACIÓN CON #: " + datos.get("nro_radicado", "333")),
+        "detalle"          : ( "RADICACIï¿½N CON #: " + datos.get("nro_radicado", "333")),
         "estado"           : estado,  
         "detalle_estado"   : destalle_
     }
-
-    """
-    print("")
-    print("")
-    print("DATOS LOG")    
-    pprint.pprint(datos_log)
-    print("")
-    print("")
-    """
 
     #""" 
     radicados_celery.crea_log.apply_async(**utilidades.parametros(

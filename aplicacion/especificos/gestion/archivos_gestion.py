@@ -21,8 +21,15 @@ from aplicacion.archivos      import archivo_operaciones
 # Recupera archivo plantilla de borrador
 def recuperar_archivo_plantilla(plantilla_id):
     nombre_archivo = ""
-    filtros        = [ [ "origen", "=", "plantillas" ], [ "origen_id", "=", plantilla_id ] ]
-    relaciones     = sqalchemy_filtrar.filtrarOrdena(estructura="archivos_relacion", filtros=filtros, ordenamientos=[])
+    filtros        = [ 
+        [ "origen", "=", "plantillas" ], 
+        [ "origen_id", "=", plantilla_id ] 
+    ]
+    relaciones     = sqalchemy_filtrar.filtrarOrdena(
+        estructura="archivos_relacion", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )
     # Si existen relaciones 
     if len(relaciones) > 0:
         archivo_id     = relaciones[0]['archivo_id']            
@@ -39,9 +46,18 @@ def seleccion_plantilla(accion, datos={}, archivo=[], id_tarea=""):
     plantilla_id   = datos["plantilla"]
 
     for peticion_id in peticiones_id:
-        gestion        = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)     
-        responsable    = sqalchemy_leer.leer_un_registro("usuarios", usuario_id) 
-        radicado       = sqalchemy_leer.leer_un_registro("radicados_entrada", gestion["origen_id"]) 
+        gestion        = sqalchemy_leer.leer_un_registro(
+            "peticiones", 
+            peticion_id
+        )     
+        responsable    = sqalchemy_leer.leer_un_registro(
+            "usuarios", 
+            usuario_id
+        ) 
+        radicado       = sqalchemy_leer.leer_un_registro(
+            "radicados_entrada", 
+            gestion["origen_id"]
+        ) 
 
         # Manejo del borrador
         nombre_archivo = recuperar_archivo_plantilla(plantilla_id)
@@ -60,7 +76,10 @@ def seleccion_plantilla(accion, datos={}, archivo=[], id_tarea=""):
             "borrador",
             "borradores"
         )
-        archivo_id = manejo_archivos.recupera_anexo_id(peticion_id, "borrador")
+        archivo_id = manejo_archivos.recupera_anexo_id(
+            peticion_id, 
+            "borrador"
+        )
         
         # Actualiza peticion
         datos_modificados = {
@@ -73,7 +92,10 @@ def seleccion_plantilla(accion, datos={}, archivo=[], id_tarea=""):
             "accion"         : accion,
             "destinatario_id": usuario_id,     
             "id"             : peticion_id, 
-            "detalle"        : "CREA BORRADOR DE RESPUESTA, " + responsable["nombre"] + ", DE " + responsable["dependencia_nombre_completo"]
+            "detalle"        : (
+                "CREA BORRADOR DE RESPUESTA, " + responsable["nombre"] + 
+                ", DE " + responsable["dependencia_nombre_completo"]
+            )
         }
         # Log indexa la peticion
         logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
@@ -84,8 +106,15 @@ def seleccion_plantilla(accion, datos={}, archivo=[], id_tarea=""):
 # Recupera archivo borrador gestion
 def recuperar_archivo_borrador_gestion(borrador_id):
     nombre_archivo = ""
-    filtros        = [ [ "tipo_relacion", "=", "borrador" ], [ "origen_id", "=", borrador_id ] ]
-    relaciones     = sqalchemy_filtrar.filtrarOrdena(estructura="archivos_relacion", filtros=filtros, ordenamientos=[])
+    filtros        = [ 
+        [ "tipo_relacion", "=", "borrador" ], 
+        [ "origen_id", "=", borrador_id ] 
+    ]
+    relaciones     = sqalchemy_filtrar.filtrarOrdena(
+        estructura="archivos_relacion", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )
     # Si existen relaciones 
     if len(relaciones) > 0:
         archivo_id     = relaciones[0]['archivo_id']            
@@ -94,7 +123,12 @@ def recuperar_archivo_borrador_gestion(borrador_id):
         nombre_byte     = nombre_archivo.encode('ascii')
         nombre_64       = base64.b64encode( nombre_byte )
         nombre_64_texto = str(nombre_64, 'utf-8')
-        url = "http://" + str(builtins._appAnfitrion) + ":" + str(builtins._appPuerto) + '/entregar_archivo_base64/' + nombre_64_texto    
+        url = (
+            builtins._appServiciosType + "://" + 
+            str(builtins._appAnfitrion) + ":" + 
+            str(builtins._appPuerto) +
+            '/entregar_archivo_base64/' + nombre_64_texto
+        )   
         parametros = {
             "filetype"  : "docx",
             "title"     : "convertido",

@@ -3,7 +3,7 @@
         <div class=" logo ">  
             <div class="vw-90 vh-90 "> 
                     
-                    <div class="top40 shadow-sm p-3 mb-5 bg-body rounded ">
+                    <div class="top40 shadow-sm p-3 mb-5 bg-body ">
                         <DataForma     
                             ref         = "formRef"  
                             :attributes = "atributos_forma"
@@ -128,8 +128,7 @@ onMounted(() => {
 
 .top40 {
     position: absolute;
-    top: 37%;
-    right: 65%;
-    left: 10%;
+    top: 30%;
+    left: 15%;
 }
 </style>

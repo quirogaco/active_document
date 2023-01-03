@@ -15,7 +15,7 @@ let barra_botones = function(forma, basicas) {
                 alignment  : 'center',
                 hint       : 'radicar_pqrs',
                 type       : 'success',
-                text       : 'Radicar PQRS', 
+                text       : 'Radicar PQRSD', 
                 stylingMode: "contained", 
                 onClick    : forma.boton_click,
             } 

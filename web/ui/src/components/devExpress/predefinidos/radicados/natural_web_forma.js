@@ -21,7 +21,7 @@ let grupoIdentificacion = forma_objeto.grupo_objeto({
 
 
 let remitenteUbicacion = [
-    comunes_generales.clase_radicado("PQRS"),
+    comunes_generales.clase_radicado("PQRSD"),
     comunes_generales.medio_radicado("WEB"),
     comunes_generales.tipo_web("NATURAL"),
     comunes_generales.medio_notificacion,
@@ -79,7 +79,7 @@ let campos = [
 const limpia_forma = function(formaid) {
     let forma  = $lib.traer_componentes(formaid).formaInstancia
     forma.option("formData", {
-        "clase_radicado": "PQRS",
+        "clase_radicado": "PQRSD",
         "medio_radicado": "WEB",
         "tipo_web"      : "NATURAL",
     })

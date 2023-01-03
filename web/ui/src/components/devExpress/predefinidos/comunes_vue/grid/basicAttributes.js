@@ -60,7 +60,7 @@ let attributes = {
 
     paging: {
         enabled : true,
-        pageSize: 20
+        pageSize: 10
     },
 
     export: {

@@ -1,4 +1,4 @@
-import forma_objeto          from '../../forma/utilidades/forma_objeto.js';
+import forma_objeto from '../../forma/utilidades/forma_objeto.js';
 
 let clase_radicado = function(clase) {
     let campo = forma_objeto.campo_objeto({

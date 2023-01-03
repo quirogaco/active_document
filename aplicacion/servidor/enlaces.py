@@ -135,7 +135,8 @@ async def definiciones(clase:str, tipo:str, requerimiento: Request ):
 
 @_app.get( '/logo_ingreso' )
 async def logo_ingreso():
-   ruta_archivo = builtins.rutaBase + "/aplicacion/servidor/logo_ingreso.jpg"   
+   ruta_archivo = builtins.rutaBase + "/aplicacion/servidor/logo_ingreso.jpg"
+   print('/logo_ingreso>', ruta_archivo)
     
    return FileResponse(ruta_archivo)
 

@@ -22,8 +22,8 @@ let definicion = {
         ["clase_radicado", "=", "PQRS"]
     ],    
     'titulos'   : {
-        'principal': 'Asignación y traslado de PQRS',
-        'crear'    : 'Radicar PQRS',        
+        'principal': 'Asignación y traslado de PQRSD',
+        'crear'    : 'Radicar PQRSD',        
     },
     'nombreLlamar': "asignar_pqrs_forma"
 }

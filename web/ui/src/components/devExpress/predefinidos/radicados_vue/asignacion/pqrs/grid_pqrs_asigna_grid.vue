@@ -32,7 +32,7 @@ let basica = {
     "estructura"  : "radicados_entrada",
     "filtros_grid": [
         ["gestion_asignada_peticion", "=", "NO"],
-        ["clase_radicado", "=", "PQRS"]
+        ["clase_radicado", "=", "PQRSD"]
     ],
     "titulo_grid" : "PQRSD - Asignación y traslado de radicados"
 }

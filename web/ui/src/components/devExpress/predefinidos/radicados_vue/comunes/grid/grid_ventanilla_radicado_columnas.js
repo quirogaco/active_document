@@ -5,7 +5,7 @@ let columnas = [
         dataField     : "clase_radicado",
         dataType      : "string",             
         width         : 130,
-        cellTemplate  : "icono_pdf_template"
+        //cellTemplate  : "icono_pdf_template"
     },
 
     // Clase Radicado

@@ -19,12 +19,13 @@ let definicion = {
     'nombreGrid'  : "pqrs_radicado_grid",
     'nombreLlamar': "pqrs_radicado_forma",
     'titulos'     : {
-        'principal': 'PQRS Radicación',
+        'principal': 'PQRSD Radicación',
         'crear'    : 'Radicar'       
     },
     'metodos'     : {
         'dobleClick': async function(e) {
             let datos = await estructuras.leer_registro_id("radicados_entrada", e.data.id)
+            //console.log("CONSLAU ´´rqrsdefgg")
             console.log(datos)
             componentes_llamados_crud_comunes.llamarComponenteCrud(
                 "radicados_entrada", 

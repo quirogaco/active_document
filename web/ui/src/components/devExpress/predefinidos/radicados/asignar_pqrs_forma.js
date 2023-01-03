@@ -57,7 +57,7 @@ let inicializa_forma = function() {
 
 let definicion = {
     'estructura'  : 'pqrs_asigna_responsable',
-    "titulo"      : "Asignación y traslado de PQRS",
+    "titulo"      : "Asignación y traslado de PQRSD",
     'campos'      : campos,
     'plantillaAtributos': plantillaAtributos,
     "nombre_forma": "asignar_pqrs_forma",
