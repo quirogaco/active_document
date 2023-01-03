@@ -1,4 +1,4 @@
-import forma_objeto      from '../../forma/utilidades/forma_objeto.js';
+import forma_objeto from '../../forma/utilidades/forma_objeto.js';
 
 let discapacidad_id = forma_objeto.select_objeto({
     "campo"      : "discapacidad_id",

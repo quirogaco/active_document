@@ -5,7 +5,7 @@ import grupos_comunes  from '../radicados_comunes/grupos_comunes.js'
 
 let plantillaAtributos = forma_objeto.plantillaAtributos()
 let forma_id           = "pqrs_radicado_forma"  
-let tipo               = "PQRS"  
+let tipo               = "PQRSD"  
 
 window.atributos_campos = {
     forma_id: {}
@@ -13,7 +13,7 @@ window.atributos_campos = {
 
 let definicion = {
     'estructura'  : 'radicados_entrada',
-    "titulo"      : "PQRS Radicación",
+    "titulo"      : "PQRSD Radicación",
     'campos'      : grupos_comunes.campos(forma_id, tipo, plantillaAtributos),
     'columnas'    : 2,
     'plantillaAtributos': plantillaAtributos,

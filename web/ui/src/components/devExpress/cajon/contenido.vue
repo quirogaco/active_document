@@ -1,8 +1,5 @@
 <template>
     
-    <div class="container-sm p-2 m-2 w-80 hidden-mobile">
-    </div>
-
 </template>
 
 <script>

@@ -44,7 +44,15 @@ campos = {
     "estado_"       : tipos.texto_obligatorio(propiedades={"titulo": "Estado"}), 
 
     # Propiedades
-    "roles_especificos": tipos.clave(propiedades={"columna": "no", "titulo": "Roles especificos", "propiedad": roles_especificos, "reporte": "SI"}),  
+    "roles_especificos": tipos.clave(
+        propiedades={
+            "columna": "no", 
+            "titulo": "Roles especificos", 
+            "propiedad": roles_especificos, 
+            "reporte": "SI",
+            "validador": "clave_lista"
+        }
+    ),  
     "nombre_completo": tipos.texto(propiedades={"columna": "no", "titulo": "Nombre completo", "longitud": 250, "propiedad": nombre_completo, "reporte": "SI"}),  
     "roles_ids"  : tipos.clave(
         propiedades= {

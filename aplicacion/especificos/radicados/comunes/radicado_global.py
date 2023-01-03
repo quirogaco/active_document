@@ -13,11 +13,6 @@ from . import log_radicados
 
 # Invoca llamado celery
 def invoca_tercero_log_anexos_copias(datos):
-    print("")
-    print("?????????????????????????")
-    print("INVOCA crea_tercero_log_anexos_copias", datos["radicado_id"])
-    print("")
-    print("-------------------")
     radicados_celery.radicados_app_tercero_log_anexos_copias.apply_async(**utilidades.parametros(
         'radicados', 
         parametros={
@@ -27,11 +22,6 @@ def invoca_tercero_log_anexos_copias(datos):
 
 # Crea informacion de radicados en una sola tarea de cola
 def crea_tercero_log_anexos_copias(datos={}):
-    print("")
-    print("******************************")
-    print("crea_tercero_log_anexos_copias", datos["radicado_id"])
-    print("")
-    print("-------------------")
     # Id de la tarea
     tarea_id = datos["tarea_id"]    
     # Tipo de radicado
@@ -86,7 +76,7 @@ def crea_tercero_log_anexos_copias(datos={}):
     ###########################
     # Con copia de RADICACIóN #
     ###########################
-    copia_grupos_id   = datos.get("copia_grupos_id", [])
+    copia_grupos_id = datos.get("copia_grupos_id", [])
     copia_usuarios_id = datos.get("copia_usuarios_id", [])
     if copia_grupos_id in ["", " ", None]:
         copia_grupos_id = []

@@ -5,6 +5,9 @@ npm run dev --host activedocumentv2.esap.edu.co --port 3000 --https
 
 uvicorn servidor:_app --host=192.168.1.144 --port=9100 --log-level critical --workers=2 -nodo=001 -celery=SI
 
+// local casa
+uvicorn servidor:_app --host=192.168.1.144 --port=9100 --workers=2
+
 uvicorn servidor:_app --host=192.168.1.76 --port=9100 --workers=2
 uvicorn servidor:_app --host=192.168.1.99 --port=9100 --workers=2
 uvicorn servidor:_app --host=172.16.202.58 --port=9100 --workers=4

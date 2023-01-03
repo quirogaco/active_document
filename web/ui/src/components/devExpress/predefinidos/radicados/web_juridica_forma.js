@@ -1,6 +1,6 @@
-import { confirm }       from 'devextreme/ui/dialog';
-import visores_archivo   from "../../../../librerias/visores_archivo.js"
-import forma_objeto      from '../../forma/utilidades/forma_objeto.js';
+import { confirm } from 'devextreme/ui/dialog';
+import visores_archivo from "../../../../librerias/visores_archivo.js"
+import forma_objeto from '../../forma/utilidades/forma_objeto.js';
 import comunes_remitente from '../radicados_comunes/comunes_remitente.js';
 import comunes_generales from '../radicados_comunes/comunes_generales.js';
 
@@ -16,13 +16,13 @@ let identificacion = [
 ]
 
 let grupoIdentificacion = forma_objeto.grupo_objeto({
-    'titulo'     : 'Remitente identificación',
-    'elementos'  : identificacion
+    'titulo': 'Remitente identificación',
+    'elementos': identificacion
 });
 
 
 let remitenteUbicacion = [
-    comunes_generales.clase_radicado("PQRS"),
+    comunes_generales.clase_radicado("PQRSD"),
     comunes_generales.medio_radicado("WEB"),
     comunes_generales.tipo_web("JURIDICA"),
     comunes_generales.medio_notificacion,
@@ -67,9 +67,9 @@ let campos = [
 const limpia_forma = function(formaid) {
     let forma  = $lib.traer_componentes(formaid).formaInstancia
     forma.option("formData", {
-        "clase_radicado": "PQRS",
+        "clase_radicado": "PQRSD",
         "medio_radicado": "WEB",
-        "tipo_web"      : "JURIDICA",
+        "tipo_web": "JURIDICA",
     })
     let archivo = $lib.traer_componentes(formaid, "archivos_anexos")
     archivo.reset()
@@ -108,7 +108,7 @@ let definicion = {
     "eventos"     : {        
         "montado": function(objeto) {    
             //$lib.forma_atributo_item("radicado_juridica_forma", "busca_remitente", "visible", false);          
-            let forma       = $lib.traer_componentes(forma_id).formaInstancia 
+            let forma = $lib.traer_componentes(forma_id).formaInstancia 
 
             // Campos obligatorios            
             $lib.forma_atributo_item(forma_id, "tercero_nro_identificacion", "validationRules", [{type: "required", message: "Nit es obligatorio"}], false);

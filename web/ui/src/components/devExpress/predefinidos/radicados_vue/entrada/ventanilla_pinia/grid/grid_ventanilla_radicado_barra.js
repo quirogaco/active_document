@@ -10,32 +10,41 @@ const ejecutar = function(that) {
 
 let barraDef = function(that) {
 
-    const call = function(event) {
-        // console.log("CALL:", event.itemData);
-        event.itemData.value;
+    const call = function(event) {        
         switch (event.itemData.value) {
-            case 1:     
-                that.radicar()
+            case 1:  
+                $save_params("pqrs_filtro", "DOCUMENTO");   
+                that.radicar(event)
+                break
+                
+            case 2:     
+                that.cargar_documento(event)
+                break
         }
-        // console.log(that)
-        //that.re_render_popup();
     }
 
     return [
          $forma.dropDownButtonBarra({
             text: "Acciones",
-            width: "150px",
+            width: "200px",
             items: [
                 { 
                     value: 1,  
                     text: 'Radicar', 
                     icon: "fa-brands fa-wpforms"
                 },
+
                 {
                     value: 2,  
-                    text: 'Imprimir sticker', 
-                    icon: "fas fa-print"
-                }
+                    text: 'Cargar PDF principal', 
+                    icon: "fas fa-file-upload"
+                },
+
+                // {
+                //     value: 2,  
+                //     text: 'Imprimir sticker', 
+                //     icon: "fas fa-print"
+                // }
             ],
             onItemClick: call
         })

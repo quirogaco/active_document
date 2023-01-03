@@ -90,9 +90,6 @@ from aplicacion.logs import crea_logs
 def log_radicado(radicado_tipo, radicado_clase, accion, datos, id_tarea, remoto=True):
     datos_tarea = redis_datos.lee_tarea_ejecucion(id_tarea)
 
-    #print("LOG RADICADO datos tarea:", radicado_tipo, radicado_clase)
-    #pprint.pprint(datos)
-
     accionante_tipo, accionante_id     = accionante_lee(radicado_tipo, radicado_clase, accion, datos, datos_tarea)
     destinatario_tipo, destinatario_id = destinatario_lee(radicado_tipo, radicado_clase, accion, datos, datos_tarea)
     proceso   = acciones_lee(radicado_tipo, radicado_clase, accion, "PROCESO", datos, datos_tarea)
@@ -111,7 +108,7 @@ def log_radicado(radicado_tipo, radicado_clase, accion, datos, id_tarea, remoto=
         "fuente"           : fuente,
         "fuente_id"        : datos['id'], 
         "accion"           : accion_,  
-        "detalle"          : ( "RADICACIÓN CON #: " + datos["nro_radicado"]),
+        "detalle"          : ( "RADICACIï¿½N CON #: " + datos["nro_radicado"]),
         "estado"           : estado,  
         "detalle_estado"   : destalle_
     }

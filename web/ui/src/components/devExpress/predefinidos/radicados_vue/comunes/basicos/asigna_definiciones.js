@@ -393,7 +393,7 @@ const gestion_dependencia_id = function(id=null, atributos={}) {
             ) {  
                 let responsable_campo = 
                     $get_params("_radica_dependencia_")["responsable"];                
-                let tipo_radicado = "DOCUMENTOS";
+                let tipo_radicado = "DOCUMENTO";
                 if (responsable_campo == "pqrs_id") {
                     tipo_radicado = "PQRSD";
                     forma_definiciones.asigna_valor(

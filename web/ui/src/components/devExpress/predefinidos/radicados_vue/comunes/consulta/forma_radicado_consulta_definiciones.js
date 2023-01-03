@@ -1,30 +1,43 @@
+import { ref } from "vue";
 import forma_definiciones from "../../../comunes_vue/forma/forma.js";
 import fuente from "../../../comunes_vue/forma/fuente.js";
-import forma_general from "../../../comunes_vue/forma/forma.js"
+import forma_general from "../../../comunes_vue/forma/forma.js";
 
 let metodos = {
-    //regresar_visual: function() {},
-    //error_accion: function(error_datos) {},
     montado_especifico: function(basicas) {
-        console.log("]>>>this.$props:", this.$props)
-        this.parametros = forma_general.lee_propiedades(this.$props, "ventanilla_radicado_consulta");
-        console.log("]>>>this.parametros:", this.parametros)
-        this.forma_datos(parametros.datos);
+        let datos = forma_general.lee_propiedades(
+            this.$props, 
+            "forma_radicado_consulta"
+        );
+        this.parametros = datos.datos;
+        this.forma_datos(this.parametros.radicado);
 
         // Anexos
-        let anexos        = this.parametros.datos['archivos']
+        let anexos = this.parametros.radicado['archivos']
         let fuente_anexos = fuente.fuente_arreglo(anexos) 
-        forma_definiciones.asigna_fuente(this, "anexos_radicado", fuente_anexos)    
+        forma_definiciones.asigna_fuente(
+            this, 
+            "anexos_radicado", 
+            fuente_anexos
+        )    
         
         // Logs
-        let logs        = this.parametros.datos['logs']
+        let logs = this.parametros.radicado['logs']
         let fuente_logs = fuente.fuente_arreglo(logs) 
-        forma_definiciones.asigna_fuente(this, "logs_radicado", fuente_logs)        
+        forma_definiciones.asigna_fuente(
+            this, 
+            "logs_radicado", 
+            fuente_logs
+        )        
         
         // Con copia
-        let con_copia    = this.parametros.datos['con_copia']
+        let con_copia = this.parametros.radicado['con_copia']
         let fuente_copia = fuente.fuente_arreglo(con_copia) 
-        forma_definiciones.asigna_fuente(this, "con_copia", fuente_copia)    
+        forma_definiciones.asigna_fuente(
+            this, 
+            "con_copia", 
+            fuente_copia
+        )    
     },
 
     boton_click(e) {
@@ -32,8 +45,8 @@ let metodos = {
         switch (accion) {
             case 'regresar':       
                 window.scroll(0,0); 
-                if (this.parametros._visible != undefined) {
-                    this.parametros._visible = false;
+                if (this.parametros.llamado_por == "_close_") {
+                    this.basicas.visible = false; 
                 }
                 else {
                     this.$router.push(this.parametros.llamado_por)
@@ -51,7 +64,11 @@ let metodos = {
     }
 }
 
-let metodos_totales = Object.assign({}, forma_definiciones.forma_funciones, metodos)
+let metodos_totales = Object.assign(
+    {}, 
+    forma_definiciones.forma_funciones, 
+    metodos
+)
 
 export default {
     metodos: metodos_totales

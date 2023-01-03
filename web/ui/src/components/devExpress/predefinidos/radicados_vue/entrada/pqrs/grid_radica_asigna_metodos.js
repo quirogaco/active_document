@@ -1,4 +1,4 @@
-import visores_archivo    from "../../../../../../librerias/visores_archivo.js"
+import visores_archivo from "../../../../../../librerias/visores_archivo.js"
 
 let metodos = {
     onToolbarPreparing(e) {
@@ -9,6 +9,8 @@ let metodos = {
     },
 
     'radicar':  function(e) {
+        $save_params("pqrs_filtro", "PQRSD");
+        $save_params("_radica_dependencia_", {"responsable": "pqrs_id"});
         this.$router.push({
             name: "pqrs_radicado_forma",
             params: {
@@ -32,20 +34,15 @@ let metodos = {
             }
         }
         else {
-            //let archivos = $lib.elimina_atributo(data, 'archivos');
-            console.log("DATA-XXXXX:", data)
-            //e.data['anexos_radicado'] = archivos
-            this.$router.push({
-                name: "forma_radicado_consulta",
-                params: {                     
-                    "attributes_str": JSON.stringify({
-                        "id"         : e.data.id,
-                        "datos"      : e.data,
-                        "modo"       : "consulta",
-                        "llamado_por": "grid_radica_asigna_grid"
-                    })                
-                }
-            })
+            let datos = {
+                "radicado": data,
+                "modo": "consulta",
+                "llamado_por": "grid_radica_asigna_grid"
+            };
+            $lib.call_component_storage(
+                "forma_radicado_consulta",
+                {"datos": datos}
+            )
         }
     },
 

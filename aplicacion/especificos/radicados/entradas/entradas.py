@@ -3,6 +3,7 @@
  
 import pprint, datetime, random 
 
+from librerias.utilidades import basicas 
 from librerias.datos.sql import sqalchemy_insertar
 from aplicacion.especificos.radicados.comunes import datos_radicados
 from aplicacion.especificos.radicados.comunes import radicado_global
@@ -23,14 +24,6 @@ def crear_radicado(datos_basicos, datos):
 def radicar(accion, datos={}, archivos=[], id_tarea=""):  
     datos_radicado = datos["datos"]
     
-    # Datos de operacion
-    # ANO POR DEFECTO Y NRO CONSECUTIVO DE TABLA
-    # filtros = [ [ "codigo", "=", codigo ] ]
-    # configuraciones = sqalchemy_filtrar.filtrarOrdena(estructura="configuracion_general", filtros=filtros, ordenamientos=[])
-    # if len(configuraciones) > 0:
-    #     return configuraciones[0]
-    radicado = "E-2022-" + str(random.randint(0, 10000)) # JCR?
-    datos_radicado["nro_radicado"] = radicado    
     datos_basicos = datos_radicados.datos_basicos(
         "ENTRADA", 
         "ENTRADA", 
@@ -60,15 +53,6 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         id_tarea
     )
     elastic_operaciones.indexar_registro("radicados_entrada", radicado_id)
-    # radicado_datos = elastic_operaciones.indexar_recupera_documento(
-    #     "radicados_entrada", 
-    #     radicado_id
-    # )
-    #datos_tercero = datos_radicados.datos_tercero_registro(radicado_datos)
-    # print("")
-    # print("................................")
-    # print("datos_tercero")
-    # pprint.pprint(tercero)
 
     # Genera pdf y notifica
     # Datos del radicado, todavia no se a indexado
@@ -96,7 +80,7 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         "tercero_id"       : tercero["id"],
         "archivos"         : archivos,
         "radicado"         : radicado,
-        "nro_radicado"     : datos_radicado["nro_radicado"],
+        "nro_radicado"     : datos_basicos["nro_radicado"],
         "asunto"           : datos_radicado["asunto"],
         "copia_usuarios_id": datos_copia["copia_usuarios_id"],  
         "copia_grupos_id"  : datos_copia["copia_grupos_id"],  

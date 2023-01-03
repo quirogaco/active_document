@@ -9,20 +9,22 @@ let acciones_especificas = {
 
 let metodos_forma = function(that) {
     let metodos = {
-        //regresar_visual: function() {},
-        //error_accion: function(error_datos) {},
-        //montado_especifico: function(basicas) {},
-
         recargar_forma: function() {
-            window.scroll(0,0);                  
-            that.$router.push("ventanilla_radicado_grid")
+            window.scroll(0,0);  
+            $lib.call_component_storage(
+                "ventanilla_radicado_grid", 
+                {"datos": {}}
+            )
         },
 
         retorna_remoto: function(retorna) {
             window.$ocultar_esperar()        
             let nro_radicado   = retorna.datos.datos.nro_radicado
             let llamar_funcion = that.recargar_forma
-            let resultado    = confirm(("Descarga PDF con información registrada ?"), "Petición " + nro_radicado)
+            let resultado    = confirm(
+                "Descarga PDF con información registrada ?", 
+                "Petición " + nro_radicado
+            )
             resultado.then(dialogo => {
                 if (dialogo == true) {
                     visores_archivo.ver_descarga_archivo(
@@ -35,9 +37,9 @@ let metodos_forma = function(that) {
                         },                     
                     )   
                 }
-                else {
+                //else {
                     that.recargar_forma()
-                }
+                //}
             })
         },
 
@@ -53,17 +55,28 @@ let metodos_forma = function(that) {
                         "accion": accion,
                         "datos" : datos
                     }
-                    console.log("parametros:", parametros)       
                     // Datos OK
                     if (valida == true) {  
                         // Envio de datos
                         let urlCompleta = acciones_especificas.ruta_remota                            
-                        window.$f["http"].llamadoRestPost( urlCompleta, parametros, that.retorna_remoto, "", that.error_remoto)         
+                        window.$f["http"].llamadoRestPost( 
+                            urlCompleta, 
+                            parametros, 
+                            that.retorna_remoto, 
+                            "", 
+                            that.error_remoto
+                        )         
                         // Mensaje
-                        window.$mostrar_esperar(acciones_especificas.mensaje_envio + ", por favor espere..")
+                        window.$mostrar_esperar(
+                            acciones_especificas.mensaje_envio + 
+                            ", por favor espere.."
+                        )
                     }
                     else {
-                        $sistema["notifica"]("Datos invalidos o incompletos !!", "error")
+                        $sistema["notifica"](
+                            "Datos invalidos o incompletos !!", 
+                            "error"
+                        )
                     }
                     break;
 

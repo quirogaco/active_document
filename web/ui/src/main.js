@@ -246,15 +246,30 @@ else {
     //     '/components/devExpress/predefinidos/configuracion/flujos/grid/flujos_dinamicos_grid.vue'
     // );
     
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'ventanilla_radicado_forma',  
+    //     '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/form/ventanilla_forma_radicado.vue'
+    // );
+
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'ventanilla_radicado_grid',  
+    //     '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'
+    // );
+
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'forma_radicado_consulta', 
+    //     '/components/devExpress/predefinidos/radicados_vue/comunes/consulta/forma_radicado_consulta.vue'
+    // ),
+
     await window.$ns['aplicacion'].asignaRuta(
-        'ventanilla_radicado_forma',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/form/ventanilla_forma_radicado.vue'
+        'grid_pqrs_asigna_grid',  
+        '/components/devExpress/predefinidos/radicados_vue/asignacion/pqrs/grid_pqrs_asigna_grid.vue'
     );
 
     await window.$ns['aplicacion'].asignaRuta(
-        'ventanilla_radicado_grid',  
-        '/components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'
-    );
+        'forma_pqrs_asigna', 
+        '/components/devExpress/predefinidos/radicados_vue/asignacion/pqrs/forma_pqrs_asigna.vue'
+    ),
 
     window.$ns['aplicacion'].crea_enrutador();
     await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');      
@@ -268,10 +283,12 @@ else {
             //path: "expediente_disposicion_grid"
             //path: "gestion_basica_grid"
             //path: "flujos_dinamicos_grid"
-            path: "ventanilla_radicado_grid",
+            //path: "ventanilla_radicado_grid",
             //path: "ventanilla_radicado_forma",
             //path: "pantalla_expediente"
             //path: "usuarios_grid"
+
+            path: "grid_pqrs_asigna_grid",
         })
     }, 1000);  
     */

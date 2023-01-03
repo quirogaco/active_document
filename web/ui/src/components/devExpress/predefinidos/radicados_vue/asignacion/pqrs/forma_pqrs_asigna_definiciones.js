@@ -1,6 +1,6 @@
-import { confirm }        from 'devextreme/ui/dialog'
 import forma_definiciones from "../../../comunes_vue/forma/forma.js"
-import fuente             from "../../../comunes_vue/forma/fuente.js"
+import forma_general from "../../../comunes_vue/forma/forma.js";
+import fuente from "../../../comunes_vue/forma/fuente.js";
 
 let acciones_especificas = {
     "ruta_remota"  : window.$direcciones.servidorDatos + '/radicados_acciones',
@@ -8,13 +8,22 @@ let acciones_especificas = {
 }
 
 let metodos = {
-    //regresar_visual: function() {},
-    //error_accion: function(error_datos) {},
     montado_especifico: function(basicas) {
-        let anexos        = this.parametros.datos['anexos_radicado']
+        console.log(".................")
+        let datos = forma_general.lee_propiedades(
+            this.$props, 
+            "forma_pqrs_asigna"
+        );
+        this.parametros = datos.datos;
+        // Anexos
+        let anexos = this.parametros.radicado['anexos_radicado'];
         let fuente_anexos = fuente.fuente_arreglo(anexos) 
-        forma_definiciones.asigna_fuente(this, "anexos_radicado", fuente_anexos)        
-    },
+        forma_definiciones.asigna_fuente(
+            this, 
+            "anexos_radicado", 
+            fuente_anexos
+        )
+     },
 
     recargar_forma: function() {
         window.$router.go(0)

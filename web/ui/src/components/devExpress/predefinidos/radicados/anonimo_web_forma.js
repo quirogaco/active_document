@@ -8,14 +8,14 @@ import comunes_generales from '../radicados_comunes/comunes_generales.js';
 let plantillaAtributos = forma_objeto.plantillaAtributos()
 
 let remitenteUbicacion = [
-    comunes_generales.clase_radicado("PQRS"),
+    comunes_generales.clase_radicado("PQRSD"),
     comunes_generales.medio_radicado("WEB"),
     comunes_generales.tipo_web("ANONIMO"),
     comunes_remitente.correo_electronico
 ]
 
 let grupoUbicacion = forma_objeto.grupo_objeto({
-    'titulo'     : 'Remitente ubicaci髇',
+    'titulo'     : 'Remitente ubicaci贸n',
     'elementos'  : remitenteUbicacion
 });
 
@@ -28,7 +28,7 @@ let grupoAnexos = forma_objeto.grupo_objeto({
 });
 
 let grupoInformacion = forma_objeto.grupo_objeto({
-    'titulo'     : 'Pol韙ica para el uso y tratamiento de datos personales',
+    'titulo'     : 'Pol铆tica para el uso y tratamiento de datos personales',
     'elementos'  : [
         comunes_generales.mensaje_informacion(plantillaAtributos), 
         comunes_generales.manejo_informacion
@@ -45,7 +45,7 @@ let campos = [
 const limpia_forma = function(formaid) {
     let forma  = $lib.traer_componentes(formaid).formaInstancia
     forma.option("formData", {
-        "clase_radicado": "PQRS",
+        "clase_radicado": "PQRSD",
         "medio_radicado": "WEB",
         "tipo_web"      : "ANONIMO",
     })
@@ -56,7 +56,7 @@ const limpia_forma = function(formaid) {
 let forma_id   = "anonimo_web_forma"  
 let definicion = {
     'estructura'  : 'radicados_entrada',
-    "titulo"      : "Radicaci髇 Anonimo",
+    "titulo"      : "Radicaci贸n Anonimo",
     'campos'      : campos,
     'plantillaAtributos': plantillaAtributos,
     "nombre_forma": forma_id,
@@ -70,7 +70,7 @@ let definicion = {
         "retorno_envio": function(respuesta) {
             let nro_radicado = respuesta.resultados.datos.nro_radicado
             limpia_forma(forma_id)
-            let resultado    = confirm(("Descarga PDF con informaci髇 registrada ?"), "Petici贸n " + nro_radicado)
+            let resultado    = confirm(("Descarga PDF con informaci贸n registrada ?"), "Petici贸n " + nro_radicado)
             resultado.then(dialogo => {
                 if (dialogo == true) {
                     visores_archivo.ver_descarga_archivo({

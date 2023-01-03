@@ -46,8 +46,6 @@ def crear_registro_tercero( origen, datos, radicado_id, id_tarea=""):
         tercero["id"]
     )['_source']
 
-    # print("@@@@@@@@@@@@@@@@@ >>>> TERCERO")
-    # pprint.pprint(tercero)
     registro_relacion.crear_registro_relacion(   
         estructura_origen,     # Estructura origen
         radicado_id,           # Id de la estructura origen

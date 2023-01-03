@@ -4,11 +4,16 @@
 import pprint, datetime, random, base64, builtins, tempfile, os
 import requests
 
-from librerias.datos.sql             import sqalchemy_modificar, sqalchemy_insertar, sqalchemy_borrar, sqalchemy_leer
-from librerias.datos.elastic         import elastic_operaciones
+from librerias.datos.sql import (
+    sqalchemy_modificar, 
+    sqalchemy_insertar, 
+    sqalchemy_borrar, 
+    sqalchemy_leer
+)
+from librerias.datos.elastic import elastic_operaciones
 from librerias.documentos.conversion import conversion
-from librerias.utilidades            import basicas 
-from aplicacion.trd                  import logs
+from librerias.utilidades import basicas 
+from aplicacion.trd import logs
 
 # TRD
 def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
@@ -26,8 +31,17 @@ def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
         "caja"       : caja,
         "ubicacion_topografica": ubicacion_topografica  
     }
-    resultado = sqalchemy_insertar.insertar_registro_estructura("agn_expedientes_trd", datos_expediente)    
-    logs.log_trd("agn_expedientes_trd", resultado["id"], "CREACIÓN DE EXPEDIENTE", "CREACION", id_tarea) 
+    resultado = sqalchemy_insertar.insertar_registro_estructura(
+        "agn_expedientes_trd", 
+        datos_expediente
+    )    
+    logs.log_trd(
+        "agn_expedientes_trd", 
+        resultado["id"], 
+        "CREACIÓN DE EXPEDIENTE", 
+        "CREACION", 
+        id_tarea
+    ) 
 
     # Carpeta
     datos_carpeta = {
@@ -37,11 +51,17 @@ def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
         "carpeta_nro"          : 1,
         "tomo"                 : 1
     }
-    carpeta = sqalchemy_insertar.insertar_registro_estructura("agn_carpetas_trd", datos_carpeta)
+    carpeta = sqalchemy_insertar.insertar_registro_estructura(
+        "agn_carpetas_trd", 
+        datos_carpeta
+    )
     elastic_operaciones.indexar_registro("agn_carpetas_trd", carpeta["id"])
 
     # Indexa EXPEDIENTE
-    elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
+    elastic_operaciones.indexar_registro(
+        "agn_expedientes_trd", 
+        resultado["id"]
+    )
 
     resultado["accion"] = accion    
 
@@ -55,11 +75,27 @@ def modificar_expediente(accion, datos={}, archivo=[], id_tarea=""):
         "nombre"     : datos["datos"]["nombre"],
         "caja"       : datos["datos"].get("caja", 0),
         "observacion": datos["datos"].get("observacion", ""),
-        "ubicacion_topografica": datos["datos"].get("ubicacion_topografica", "")  
+        "ubicacion_topografica": datos["datos"].get(
+            "ubicacion_topografica", 
+            ""
+        )  
     }
-    resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", expediente_id, datos_expediente)
-    elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-    logs.log_trd("agn_expedientes_trd", resultado["id"], "MODIFICACIÓN DE EXPEDIENTE", "MODIFICACION", id_tarea) 
+    resultado = sqalchemy_modificar.modificar_un_registro(
+        "agn_expedientes_trd", 
+        expediente_id, 
+        datos_expediente
+    )
+    elastic_operaciones.indexar_registro(
+        "agn_expedientes_trd", 
+        resultado["id"]
+    )
+    logs.log_trd(
+        "agn_expedientes_trd", 
+        resultado["id"], 
+        "MODIFICACIÓN DE EXPEDIENTE", 
+        "MODIFICACION", 
+        id_tarea
+    ) 
     
     resultado["accion"] = accion    
 
@@ -67,10 +103,21 @@ def modificar_expediente(accion, datos={}, archivo=[], id_tarea=""):
 
 def borrar_expediente(accion, datos={}, archivo=[], id_tarea=""):
     expediente_id = datos["datos"]["id"]
-    resultado  = sqalchemy_borrar.borrar_un_registro("agn_expedientes_trd", expediente_id)
-    elastic_operaciones.eliminar_registro("agn_expedientes_trd", expediente_id)
-    logs.log_trd("agn_expedientes_trd", resultado["id"], "BORRAR DE EXPEDIENTE", "BORRADO", id_tarea) 
-
+    resultado  = sqalchemy_borrar.borrar_un_registro(
+        "agn_expedientes_trd", 
+        expediente_id
+    )
+    elastic_operaciones.eliminar_registro(
+        "agn_expedientes_trd", 
+        expediente_id
+    )
+    logs.log_trd(
+        "agn_expedientes_trd", 
+        resultado["id"], 
+        "BORRAR DE EXPEDIENTE", 
+        "BORRADO", 
+        id_tarea
+    ) 
     resultado["accion"] = accion
     
     return resultado
@@ -81,9 +128,22 @@ def cerrar_expediente(accion, datos={}, archivo=[], id_tarea=""):
         "estado": "CERRADO" 
     }
     for id in expediente_id:
-        resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", id, datos_expediente)
-        elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-        logs.log_trd("agn_expedientes_trd", resultado["id"], "CERRAR DE EXPEDIENTE", "CERRAR", id_tarea) 
+        resultado = sqalchemy_modificar.modificar_un_registro(
+            "agn_expedientes_trd", 
+            id, 
+            datos_expediente
+        )
+        elastic_operaciones.indexar_registro(
+            "agn_expedientes_trd", 
+            resultado["id"]
+        )
+        logs.log_trd(
+            "agn_expedientes_trd", 
+            resultado["id"], 
+            "CERRAR DE EXPEDIENTE", 
+            "CERRAR", 
+            id_tarea
+        ) 
 
     resultado["accion"] = accion    
 
@@ -95,9 +155,22 @@ def abrir_expediente(accion, datos={}, archivo=[], id_tarea=""):
         "estado": "ABIERTO" 
     }
     for id in expediente_id:
-        resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", id, datos_expediente)
-        elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-        logs.log_trd("agn_expedientes_trd", resultado["id"], "ABRIR DE EXPEDIENTE", "ABRIR", id_tarea) 
+        resultado = sqalchemy_modificar.modificar_un_registro(
+            "agn_expedientes_trd", 
+            id, 
+            datos_expediente
+        )
+        elastic_operaciones.indexar_registro(
+            "agn_expedientes_trd", 
+            resultado["id"]
+        )
+        logs.log_trd(
+            "agn_expedientes_trd", 
+            resultado["id"], 
+            "ABRIR DE EXPEDIENTE", 
+            "ABRIR", 
+            id_tarea
+        ) 
     resultado["accion"] = accion    
 
     return resultado
@@ -105,7 +178,13 @@ def abrir_expediente(accion, datos={}, archivo=[], id_tarea=""):
 def consulta_expediente(accion, datos={}, archivo=[], id_tarea=""):
     pprint.pprint(datos["datos"])
     expediente_id = datos["datos"]["id"]
-    logs.log_trd("agn_expedientes_trd", expediente_id, "CONSULTA DE EXPEDIENTE", "CONSULTA", id_tarea) 
+    logs.log_trd(
+        "agn_expedientes_trd", 
+        expediente_id, 
+        "CONSULTA DE EXPEDIENTE", 
+        "CONSULTA", 
+        id_tarea
+    ) 
     resultado = {"accion": accion}    
 
     return resultado
@@ -125,9 +204,22 @@ def actualiza_caja_anotacion(accion, datos={}, archivo=[], id_tarea=""):
           "anotacion": anotacion  
         }
     
-    resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", expediente_id, actualiza)
-    elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-    logs.log_trd("agn_expedientes_trd", resultado["id"], "ASIGNA CAJA/ANOTACIÓN", "CAJA/ANOTACION", id_tarea) 
+    resultado = sqalchemy_modificar.modificar_un_registro(
+        "agn_expedientes_trd", 
+        expediente_id, 
+        actualiza
+    )
+    elastic_operaciones.indexar_registro(
+        "agn_expedientes_trd", 
+        resultado["id"]
+    )
+    logs.log_trd(
+        "agn_expedientes_trd", 
+        resultado["id"], 
+        "ASIGNA CAJA/ANOTACIÓN", 
+        "CAJA/ANOTACION", 
+        id_tarea
+    ) 
     
     resultado["accion"] = accion
 
@@ -140,9 +232,22 @@ def asignar_anotacion(accion, datos={}, archivo=[], id_tarea=""):
     datos_expediente = {
         "anotacion": datos["anotacion"] 
     }
-    resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", expediente_id, datos_expediente)
-    elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-    logs.log_trd("agn_expedientes_trd", resultado["id"], "ASIGNA ANOTACIÓN TRANSFERENCIA", "ANOTACIÓN", id_tarea) 
+    resultado = sqalchemy_modificar.modificar_un_registro(
+        "agn_expedientes_trd", 
+        expediente_id, 
+        datos_expediente
+    )
+    elastic_operaciones.indexar_registro(
+        "agn_expedientes_trd", 
+        resultado["id"]
+    )
+    logs.log_trd(
+        "agn_expedientes_trd", 
+        resultado["id"], 
+        "ASIGNA ANOTACIÓN TRANSFERENCIA", 
+        "ANOTACIÓN", 
+        id_tarea
+    ) 
     
     resultado["accion"] = accion
 
@@ -154,9 +259,22 @@ def permite_eliminar(accion, datos={}, archivo=[], id_tarea=""):
         datos_expediente = {
             "eliminar": "SI"
         }
-        resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", expediente_id, datos_expediente)
-        elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-        logs.log_trd("agn_expedientes_trd", resultado["id"], "AUTORIZA ELMIMINACIÓN EN DISPOSICIÓN FINAL", "ELIMINACIÓN", id_tarea) 
+        resultado = sqalchemy_modificar.modificar_un_registro(
+            "agn_expedientes_trd", 
+            expediente_id, 
+            datos_expediente
+        )
+        elastic_operaciones.indexar_registro(
+            "agn_expedientes_trd", 
+            resultado["id"]
+        )
+        logs.log_trd(
+            "agn_expedientes_trd", 
+            resultado["id"], 
+            "AUTORIZA ELMIMINACIÓN EN DISPOSICIÓN FINAL", 
+            "ELIMINACIÓN", 
+            id_tarea
+        ) 
     
     resultado["accion"] = accion
 
@@ -168,9 +286,22 @@ def no_permite_eliminar(accion, datos={}, archivo=[], id_tarea=""):
         datos_expediente = {
             "eliminar": "NO"
         }
-        resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", expediente_id, datos_expediente)
-        elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-        logs.log_trd("agn_expedientes_trd", resultado["id"], "AUTORIZA ELMIMINACIÓN EN DISPOSICIÓN FINAL", "ELIMINACIÓN", id_tarea) 
+        resultado = sqalchemy_modificar.modificar_un_registro(
+            "agn_expedientes_trd", 
+            expediente_id, 
+            datos_expediente
+        )
+        elastic_operaciones.indexar_registro(
+            "agn_expedientes_trd", 
+            resultado["id"]
+        )
+        logs.log_trd(
+            "agn_expedientes_trd", 
+            resultado["id"], 
+            "AUTORIZA ELMIMINACIÓN EN DISPOSICIÓN FINAL", 
+            "ELIMINACIÓN", 
+            id_tarea
+        ) 
     
     resultado["accion"] = accion
 
@@ -180,7 +311,10 @@ def disposicion_final(accion, datos={}, archivo=[], id_tarea=""):
     datos = datos["datos"] 
     resultado = {}   
     for expediente in datos["expedientes"]:
-        expediente = sqalchemy_leer.leer_un_registro("agn_expedientes_trd", expediente["id"])
+        expediente = sqalchemy_leer.leer_un_registro(
+            "agn_expedientes_trd", 
+            expediente["id"]
+        )
         print("")
         print("************************************************")
         pprint.pprint(expediente)
@@ -190,9 +324,23 @@ def disposicion_final(accion, datos={}, archivo=[], id_tarea=""):
         datos_expediente = {
             "disposicion_fecha": datetime.date.today()
         }
-        resultado = sqalchemy_modificar.modificar_un_registro("agn_expedientes_trd", expediente["id"], datos_expediente)
-        elastic_operaciones.indexar_registro("agn_expedientes_trd", resultado["id"])
-        logs.log_trd("agn_expedientes_trd", resultado["id"], "APLICA DISPOSICIÓN FINAL - " + expediente["disposicion_final"], "DISPOSICIÓN", id_tarea) 
+        resultado = sqalchemy_modificar.modificar_un_registro(
+            "agn_expedientes_trd", 
+            expediente["id"], 
+            datos_expediente
+        )
+        elastic_operaciones.indexar_registro(
+            "agn_expedientes_trd", 
+            resultado["id"]
+        )
+        logs.log_trd(
+            "agn_expedientes_trd", 
+            resultado["id"], 
+            "APLICA DISPOSICIÓN FINAL - " + 
+            expediente["disposicion_final"], 
+            "DISPOSICIÓN", 
+            id_tarea
+        ) 
         
     resultado["accion"] = accion
 
@@ -253,7 +401,12 @@ def convierte_indice_electronico(nombre_archivo):
     nombre_byte     = nombre_archivo.encode('ascii')
     nombre_64       = base64.b64encode( nombre_byte )
     nombre_64_texto = str(nombre_64, 'utf-8')
-    url             = "http://" + str(builtins._appAnfitrion) + ":" + str(builtins._appPuerto) + '/entregar_archivo_base64/' + nombre_64_texto    
+    url = (
+        builtins._appServiciosType + "://" + 
+        str(builtins._appAnfitrion) + ":" + 
+        str(builtins._appPuerto) + '/entregar_archivo_base64/' + 
+        nombre_64_texto
+    )    
     parametros = {
         "filetype"  : "xml",
         "title"     : "convertido",
@@ -313,7 +466,7 @@ def firmar_salvar(url_firma, encabezado, data):
     respuesta_json = respuesta.json()
     # str obliga a que json compolete la descarga
     # si no se hace genera None
-    pdf_64         = str(respuesta_json["documentoFirmado"])
+    pdf_64 = str(respuesta_json["documentoFirmado"])
 
     # Salva pdf
     ruta_destino = tempfile.gettempdir() + os.sep + basicas.uuidTexto() + "." + "pdf"
@@ -339,7 +492,7 @@ def firmar_documento(pdf_nombre):
     # Información usuario PRUEBAS
     data = {
         'usuario': 'esapuser',
-        'clave'  : '7v40RK5C'
+        'clave': '7v40RK5C'
     }
     # Login para token de firma
     respuesta = requests.post(
@@ -353,18 +506,22 @@ def firmar_documento(pdf_nombre):
     # FIRMA #
     #########
     # Url firma
-    url_firma  = "https://8uw10ruhfj.execute-api.us-east-2.amazonaws.com/qa/signature/api/sign/pades"
+    url_firma = "https://8uw10ruhfj.execute-api.us-east-2.amazonaws.com/qa/signature/api/sign/pades"
     # Encabezado de autenticacón
-    bearer     = "Bearer " + token
+    bearer = "Bearer " + token
     encabezado = {'Authorization': bearer}
     # Información firma
     pdf_base64 = firmar_leer(pdf_nombre)
 
     # Datos envio
     data = {
-        'numeroDocumento': '52412',        # Documento certificado que me entregan despues de registrar formalmente el certificado
+        # Documento certificado que me entregan 
+        # despues de registrar formalmente el certificado
+        'numeroDocumento': '52412',
         'base64'         : pdf_base64,
-        'clave'          : 'Escuela11', # Clave certificado que me entregan despues de registrar formalmente el certificado
+        # Clave certificado que me entregan 
+        # despues de registrar formalmente el certificado
+        'clave'          : 'Escuela11', 
         "conLTV"         : False,
         "conEstampa"     : False,
         "conEstampa"     : False,

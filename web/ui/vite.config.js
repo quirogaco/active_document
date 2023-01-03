@@ -10,7 +10,9 @@ export default defineConfig({
     plugins: [
         //basicSsl(),
         //HttpsCert(),
-        vue()
+        vue({
+            reactivityTransform: true
+        })
     ],
     resolve: {
         alias: {

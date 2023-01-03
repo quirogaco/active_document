@@ -8,13 +8,12 @@ let acciones_especificas = {
 }
 
 let metodos = {
-    //regresar_visual: function() {},
-    //error_accion: function(error_datos) {},
-    //montado_especifico: function(basicas) {},
-
     recargar_forma: function() {        
-        //window.scroll(0,0);                  
-        //this.$router.push("grid_radica_asigna_grid")
+        window.scroll(0,0);  
+        $lib.call_component_storage(
+            "grid_radica_asigna_grid", 
+            {"datos": {}}
+        )
     },
 
     retorna_remoto: function(retorna) {
@@ -44,8 +43,7 @@ let metodos = {
         let accion = this.define_accion(e.component.option("hint"))        
         let valida = this.forma_validacion()       
         let datos = this.forma_datos()
-        console.log("DATOS:", datos);
-        datos["clase_radicado"] = "PQRS"
+        datos["clase_radicado"] = "PQRSD"
         datos["formulario_web"] = null
         switch (accion) {
             case 'radicar_pqrs': 
@@ -68,7 +66,10 @@ let metodos = {
 
             case 'regresar':       
                 window.scroll(0,0);  
-                this.$router.push("grid_radica_asigna_grid")
+                $lib.call_component_storage(
+                    "grid_radica_asigna_grid", 
+                    {"datos": {}}
+                )
                 break;
         }
     },

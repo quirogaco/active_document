@@ -29,8 +29,6 @@ def manejo(
             }
         }
     ]
-    print("MANJEO ARCHIVOS:>>>>")
-    pprint.pprint(secuencia)
     llamados.ejecutar_secuencia(
         secuencia=secuencia, 
         ubicacion="comunes manejo archivos"
@@ -94,7 +92,6 @@ def recupera_anexo_especifico_radicado(
             filtros=filtros, 
             ordenamientos=[]
         )
-        #pprint.pprint("RADICADOS:", radicados)
         if len(radicados) > 0:
             nombre_archivo = recupera_anexo_especifico_id(
                 radicados[0]["id"], 
