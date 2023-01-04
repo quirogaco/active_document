@@ -142,7 +142,7 @@ def crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusque
 
 # Crea query booleano
 def filtroGrupo(agrupador, primerQuery, segundoQuery):
-    print("filtroGrupo:", agrupador, primerQuery, segundoQuery)
+    #print("filtroGrupo:", agrupador, primerQuery, segundoQuery)
     if agrupador == "and":
         query = Q_dsl( primerQuery & segundoQuery )
     else:
@@ -203,9 +203,9 @@ def creaFiltroGrupo(definicion, filtro):
 
 from itertools import zip_longest
 def lista_binarios(definicion, filtros):  
-    print("")
-    print("+++++++++++++++++++++++")
-    pprint.pprint(filtros)
+    # print("")
+    # print("+++++++++++++++++++++++")
+    # pprint.pprint(filtros)
     # iter es necesario para avanzar en la lista 
     args = [iter(filtros)] * 2
     pairs = (zip_longest(fillvalue=None, *args))
@@ -213,10 +213,10 @@ def lista_binarios(definicion, filtros):
     conector_anterior = None
     filtros_elastic = []
     for filtro, conector in pairs:
-        print("")
-        print(".....", filtro)
+        # print("")
+        # print(".....", filtro)
         campo, operacion, valor = filtro
-        print("campo, operacion, valor, conector -->", campo, operacion, valor, conector)
+        # print("campo, operacion, valor, conector -->", campo, operacion, valor, conector)
         ####################
         # Prepara el query #
         ####################
@@ -247,10 +247,10 @@ def lista_binarios(definicion, filtros):
         if conector_anterior is None:
             conector_anterior = conector
 
-    print("&&&&&")
-    pprint.pprint(filtro_ultimo)
-    print("")
-    print("")
+    # print("&&&&&")
+    # pprint.pprint(filtro_ultimo)
+    # print("")
+    # print("")
 
     # se retorna el ultimo que es el acumulado de tos los campos
     return filtro_ultimo
@@ -280,10 +280,8 @@ def contieneValores(filtros):
     contiene = True
     for filtro in filtros:
         if   isinstance(filtro, list) and len(filtro) == 0:
-            print("aaa")
             contiene = False
         elif isinstance(filtro, dict) and len(filtro.keys()) == 0:
-            print("bbb")
             contiene = False
         #elif (filtro in [None, ""]):
         #    contiene = False
@@ -321,17 +319,17 @@ def lista_filtros(definicion, filtros):
 # Crea los filtros basados en lista de filtros
 def crear_filtros(definicion, filtros):
     filtroElastic = None
-    print("crear_filtros-------->>>", len(filtros)    )
+    #print("crear_filtros-------->>>", len(filtros)    )
     if contieneValores(filtros):
         if (contieneLista(filtros)):  
             tipoGlobal = tipoFiltro(filtros)   
-            print("TIPO GLOBAL:", tipoGlobal)         
+            #print("TIPO GLOBAL:", tipoGlobal)         
             if (tipoGlobal == "grupo"):
-                print("crear_filtros->GRUPO:", tipoGlobal)   
+                #print("crear_filtros->GRUPO:", tipoGlobal)   
                 filtroElastic = creaFiltroGrupo(definicion, filtros)
             else:
                 if (tipoGlobal == "lista"):  
-                    print("crear_filtros->LISTA:", tipoGlobal)                                      
+                    #print("crear_filtros->LISTA:", tipoGlobal)                                      
                     filtro_lista = lista_filtros(definicion, filtros)                    
                     query = filtro_lista.pop()
                     conector = "&"
@@ -345,7 +343,7 @@ def crear_filtros(definicion, filtros):
                                 query = Q_dsl( query | filtro )
                     filtroElastic = query                     
                 else:  
-                    print("crear_filtros->LISTA:", tipoGlobal)                                      
+                    #print("crear_filtros->LISTA:", tipoGlobal)                                      
                     filtro_lista = lista_filtros(definicion, filtros)                    
                     query = filtro_lista.pop()
                     conector = "&"
@@ -363,7 +361,7 @@ def crear_filtros(definicion, filtros):
                     #     if ( tipoFiltro(filtro) == 'binario' ):            
                     #         filtroElastic = crearFiltroBinario(definicion, filtro)
         else:
-            print("crear_filtros->DIRECTO:")    
+            #print("crear_filtros->DIRECTO:")    
             # Filtro directo
             if ( len(filtros) > 0 ):                       
                 filtroElastic = crearFiltroBinario(definicion, filtros)
@@ -380,8 +378,8 @@ def prepararFiltros(busqueda, parametros, definicion):
     else:
         # Filtros panel, busqueda y encabezados
         filtros = parametros.get("filtros", []) 
-        print("&&&&&&&&&&&&&&&&&&&&&&&&")
-        print(filtros)
+        # print("&&&&&&&&&&&&&&&&&&&&&&&&")
+        # print(filtros)
         filtro  = crear_filtros(definicion, filtros)
         if (filtro != None):
             busqueda = busqueda.query(filtro)

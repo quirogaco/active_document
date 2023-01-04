@@ -71,7 +71,7 @@ from aplicacion.datos.definiciones.configuracion.permisos_archivo      import *
 from aplicacion.datos.definiciones.configuracion.motivo_devolucion     import *
 
 # Tablas especificas de pqrs, ventanilla, gestión
-from aplicacion.datos.definiciones.terceros            import *
+from aplicacion.datos.definiciones.terceros import *
 
 # Log de eventos
 from aplicacion.datos.definiciones.logs import *
@@ -79,18 +79,18 @@ from aplicacion.datos.definiciones.logs import *
 #######################
 # ENVIOS Definiciones #
 #######################
-from aplicacion.datos.definiciones.envios            import *
+from aplicacion.datos.definiciones.envios import *
 
 #######################
 # MASIVO Definiciones #
 #######################
-from aplicacion.datos.definiciones.masivos            import *
+from aplicacion.datos.definiciones.masivos import *
 
 """
 from aplicacion.datos.definiciones.configuracion.mensajeria          import *
 from aplicacion.datos.definiciones.configuracion.medio_envio         import *
-from aplicacion.datos.definiciones.configuracion.correo              import *
 """
+
 ########################
 # GESTIóN Definiciones #
 ########################
@@ -101,18 +101,18 @@ from aplicacion.datos.definiciones.gestion.gestion_relaciones import *
 # MIGRACIóN DE DATOS #
 ######################
 ## ESTA PENDIENTE
-from aplicacion.datos.definiciones.migrados.historico  import *
-from aplicacion.datos.definiciones.migrados.pqrs       import *
+from aplicacion.datos.definiciones.migrados.historico import *
+from aplicacion.datos.definiciones.migrados.pqrs import *
 from aplicacion.datos.definiciones.migrados.ventanilla import *
 
 ##############
 # RADICACIóN #
 ##############
 from aplicacion.datos.definiciones.radicados import *
-from aplicacion.datos.definiciones.salidas   import *
-from aplicacion.datos.definiciones.internos  import *
-from aplicacion.datos.definiciones.correos   import *
-from aplicacion.datos.definiciones.copias    import *
+from aplicacion.datos.definiciones.salidas import *
+from aplicacion.datos.definiciones.internos import *
+from aplicacion.datos.definiciones.correos import *
+from aplicacion.datos.definiciones.copias import *
 
 ###################
 # DATOS Dinamicos #

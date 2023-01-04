@@ -36,16 +36,16 @@ async def estructuras_comandos(estructura:str, archivos: List[UploadFile] = File
    id_tarea = basicas.uuidTexto() 
    publica_tarea(id_tarea, datos)
    #"""
-   print("")
-   print("")
-   print("------------------------------------------------")
-   print('/estructuras/comandos/{estructura}:', estructura) 
-   print('datos:')
-   pprint.pprint(datos)   
-   print('archivos:', archivos)
-   print("------------------------------------------------")
-   print("")
-   print("")
+   # print("")
+   # print("")
+   # print("------------------------------------------------")
+   # print('/estructuras/comandos/{estructura}:', estructura) 
+   # print('datos:')
+   # pprint.pprint(datos)   
+   # print('archivos:', archivos)
+   # print("------------------------------------------------")
+   # print("")
+   # print("")
    #"""
    resultado = estructuras.ejecutar(estructura, datos, archivos, id_tarea=id_tarea)   
    resultado["peticion"] = {
@@ -70,11 +70,11 @@ async def estructuras_consulta(estructura:str, requerimiento: Request ):
    publica_tarea(id_tarea, parametros)
    
    #"""
-   print('parametros-2:')
-   pprint.pprint(parametros)
-   print("")
-   print("")
-   print("")
+   # print('parametros-2:')
+   # pprint.pprint(parametros)
+   # print("")
+   # print("")
+   # print("")
    #"""
    data       = consultas.ejecutar(estructura, parametros, id_tarea)
    
@@ -136,7 +136,7 @@ async def definiciones(clase:str, tipo:str, requerimiento: Request ):
 @_app.get( '/logo_ingreso' )
 async def logo_ingreso():
    ruta_archivo = builtins.rutaBase + "/aplicacion/servidor/logo_ingreso.jpg"
-   print('/logo_ingreso>', ruta_archivo)
+   #print('/logo_ingreso>', ruta_archivo)
     
    return FileResponse(ruta_archivo)
 

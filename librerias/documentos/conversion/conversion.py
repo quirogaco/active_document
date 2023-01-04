@@ -29,24 +29,21 @@ def llamar_conversion(url, puerto, parametros={}, servicio="http"):
         url_completa, 
         json=parametros, 
         headers=encabezado,
-        #verify=False
+        verify=False
         #verify='/docker_data/only_office/data/certs/raiz.cer',
         # cert=(
         #     '/docker_data/only_office/data/certs/onlyoffice.crt', 
         #     '/docker_data/only_office/data/certs/onlyoffice.key'
         # )     
     )
-    print(dir(retorna))
     print(retorna.text)
     respuesta = retorna.json()
     pprint.pprint(respuesta)
-    print("")
-    print("")
-    print("1--- llamar_conversion", url_completa)    
     fileUrl = respuesta['fileUrl']
+    print("1--- llamar_conversion -> fileUrl", fileUrl)
     pdfConvertido = requests.get(
         fileUrl,
-        #verify=False
+        verify=False
     )
 
     return pdfConvertido.content

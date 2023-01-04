@@ -5,3 +5,8 @@ configurar_local.py
 configurar.py
 *.pyc
 *.gitignore
+celerybeat-schedule.dat
+configurar.py
+.env
+.gitignore
+configurar.py

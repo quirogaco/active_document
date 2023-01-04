@@ -63,18 +63,25 @@ let grid =  {
 
     data() {
         return {
-            columnas      : grid_ventanilla_salida_columnas.columnas, // Columnas grid
-            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta('grid', null, 'radicados_salida', 'radicados_salida', [], []),            
-            pageSizes           : [10, 25, 50, 100],
-            displayMode         : 'full',
+            columnas: grid_ventanilla_salida_columnas.columnas, // Columnas grid
+            fuente_datos: fuenteDatos.creaFuenteDatosConsulta(
+                'grid', 
+                null, 
+                'radicados_salida', 
+                'radicados_salida', 
+                [], 
+                []
+            ),            
+            pageSizes: [10, 25, 50, 100],
+            displayMode: 'full',
             showPageSizeSelector: true,
-            showInfo            : true,
-            showNavButtons      : true,
+            showInfo: true,
+            showNavButtons: true,
 
             //Ventana emergente archivos
             opciones_ventana_emergente_archivo: {
-                visible : false,
-                datos   : {},
+                visible: false,
+                datos: {},
                 atributos: {
                     titulo_pantalla: "Cargar archivo",                   
                     titulo_boton   : "Salvar archivo",

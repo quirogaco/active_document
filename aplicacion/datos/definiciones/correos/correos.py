@@ -23,7 +23,8 @@ def archivo_procesamiento(_r):
     return archivos
 
 campos = {
-    "correo_origen": tipos.clave(propiedades={"titulo": "Correo origen", "longitud": 60}),    
+    "correo_entidad": tipos.clave(propiedades={"titulo": "Correo entidad", "longitud": 256}), 
+    "correo_origen": tipos.clave(propiedades={"titulo": "Correo origen", "longitud": 256}),       
     "asunto"       : tipos.texto(propiedades={"titulo": "Asunto", "longitud": 1024}),    
     "fecha_correo" : tipos.fecha(propiedades={"titulo": "Fecha correo"}),  
     "estado"       : tipos.clave(propiedades={"titulo": "Estado", "longitud": 60}),

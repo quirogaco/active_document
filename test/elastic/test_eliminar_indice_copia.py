@@ -193,4 +193,4 @@ resultado = elastic_operaciones.eliminaIndice("agn_documentos_trd", "base")
 resultado = elastic_operaciones.eliminaIndice("agn_tipo_documental_trd", "base")
 """
 
-elastic_operaciones.eliminaIndice("grupo", "base")
+resultado = elastic_operaciones.eliminaIndice("correos_descargados", "base")

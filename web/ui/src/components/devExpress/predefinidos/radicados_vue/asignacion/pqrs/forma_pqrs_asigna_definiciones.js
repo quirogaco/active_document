@@ -9,7 +9,6 @@ let acciones_especificas = {
 
 let metodos = {
     montado_especifico: function(basicas) {
-        console.log(".................")
         let datos = forma_general.lee_propiedades(
             this.$props, 
             "forma_pqrs_asigna"

@@ -63,6 +63,8 @@ recuperar(conexion, "radicados_salida")
 recuperar(conexion, "radicados_interno")
 recuperar(conexion, "peticiones")
 recuperar(conexion, "copias")
+
+recuperar(conexion,"correos_descargados")
 #"""
 
 #"""

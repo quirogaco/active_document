@@ -19,7 +19,7 @@ def leerParametro(redisClient, ruta):
 
 # Rutas globales para importación de librerias
 def publicaRutas(ipServicios):
-    redisClient       = crearClienteRedis(ipServicios)
+    redisClient = crearClienteRedis(ipServicios)
     builtins.rutaBase = leerParametro(redisClient, "ruta/basica")
     sys.path.append(builtins.rutaBase + 'aplicacion')
     sys.path.append(builtins.rutaBase + 'librerias')

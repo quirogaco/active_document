@@ -11,12 +11,12 @@ from librerias.datos.base import globales
 radicado_web_juridico = {
     "definicion": {
         "id"    : "35",
-        "nombre": "RADICACI驨 - Radicaci髇 Persona JURIDICA"
+        "nombre": "RADICACI贸N - Radicaci贸n Persona JURIDICA"
     },
 
     "grid": {
         "componente": "radicado_general_grid",     
-        "texto"     : "Radicaci髇 Persona JURIDICA",
+        "texto"     : "Radicaci贸n Persona JURIDICA",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
@@ -33,12 +33,12 @@ radicado_web_juridico = {
 radicado_web_natural = {
     "definicion": {
         "id"    : "36",
-        "nombre": "RADICACI驨 - Radicaci髇 Persona Natural"
+        "nombre": "RADICACI贸N - Radicaci贸n Persona Natural"
     },
 
     "grid": {
         "componente": "natural_radicados_grid",     
-        "texto"     : "Radicaci髇 Persona Natural",
+        "texto"     : "Radicaci贸n Persona Natural",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
@@ -55,12 +55,12 @@ radicado_web_natural = {
 radicado_web_anonimo = {
     "definicion": {
         "id"    : "37",
-        "nombre": "RADICACI驨 - Radicaci髇 Anonimo"
+        "nombre": "RADICACI贸N - Radicaci贸n Anonimo"
     },
 
     "grid": {
         "componente": "anonimo_radicados_grid",     
-        "texto"     : "Radicaci髇 Anonimo",
+        "texto"     : "Radicaci贸n Anonimo",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
@@ -77,12 +77,12 @@ radicado_web_anonimo = {
 asignar_pqrs = {
     "definicion": {
         "id"    : "38",
-        "nombre": "RADICACI驨 - Asignaci髇 y traslado de radicados PQRS"
+        "nombre": "RADICACI贸N - Asignaci贸n y traslado de radicados PQRS"
     },
 
     "grid": {
         "componente": "grid_pqrs_asigna_grid",     
-        "texto"     : "Asignaci髇 y traslado de radicados PQRS",
+        "texto"     : "Asignaci贸n y traslado de radicados PQRS",
         "icon"      : "",      
         "navegar"   : "si",
         "padre"     : "PQRS",
@@ -91,7 +91,7 @@ asignar_pqrs = {
 
     "forma": {
         "componente": "forma_pqrs_asigna",      
-        "texto"     : "Asignaci髇 y traslado de PQRS",
+        "texto"     : "Asignaci贸n y traslado de PQRS",
         "tipo"      : "importar"
     }
 }
@@ -99,12 +99,12 @@ asignar_pqrs = {
 pqrs_radicado = {
     "definicion": {
         "id"    : "39",
-        "nombre": "RADICACI驨 - Radicaci髇 PQRS"
+        "nombre": "RADICACI贸N - Radicaci贸n PQRS"
     },
 
     "grid": {
         "componente": "grid_radica_asigna_grid",     
-        "texto"     : "Radicaci髇",
+        "texto"     : "Radicaci贸n",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
@@ -113,7 +113,7 @@ pqrs_radicado = {
 
     "forma": {
         "componente": "pqrs_radicado_forma",      
-        "texto"     : "Radicaci髇 PQRS",
+        "texto"     : "Radicaci贸n PQRS",
         "tipo"      : "importar"
     },
 
@@ -129,20 +129,19 @@ pqrs_radicado = {
 #######################
 # VENTANILLA RADICADO #
 #######################
-
 ventanilla_radicado = {
     "definicion": {
         "id"    : "41",
-        "nombre": "RADICACI驨 - Radicaci髇"
+        "nombre": "RADICACI贸N - Radicaci贸n"
     },
 
     "grid": {
         "componente": "ventanilla_radicado_grid",     
-        "texto"     : "Radicaci髇",
+        "texto"     : "Radicaci贸n",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
-        "padre"     : "Ventanilla Radicaci髇",
+        "padre"     : "Ventanilla Radicaci贸n",
         "tipo"      : "importar"
     },
 
@@ -165,7 +164,7 @@ ventanilla_radicado = {
 ventanilla_radicado_consulta = {
     "definicion": {
         "id"    : "41",
-        "nombre": "RADICACI驨 - Consulta Radicados"
+        "nombre": "RADICACI贸N - Consulta Radicados"
     },
 
     "forma": {
@@ -206,21 +205,21 @@ ventanilla_salida = {
 ventanilla_interno = {
     "definicion": {
         "id"    : "543",
-        "nombre": "RADICACI驨 - Radicaci髇 Interno"
+        "nombre": "RADICACI贸N - Radicaci贸n Interno"
     },
 
     "grid": {
         "componente": "ventanilla_interno_grid",     
-        "texto"     : "Radicaci髇 Interno",
+        "texto"     : "Radicaci贸n Interno",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
-        "padre"     : "Ventanilla Radicaci髇",
+        "padre"     : "Ventanilla Radicaci贸n",
     },
 
     "forma": {
         "componente": "ventanilla_interno_forma",      
-        "texto"     : "Radicaci髇 Ventanilla Interno",
+        "texto"     : "Radicaci贸n Ventanilla Interno",
         "tipo"      : "importar"
     }
 }
@@ -228,7 +227,7 @@ ventanilla_interno = {
 ventanilla_interno_consulta = {
     "definicion": {
         "id"    : "5543",
-        "nombre": "RADICACI驨 - Consulta Radicados Interno"
+        "nombre": "RADICACI贸N - Consulta Radicados Interno"
     },
 
     "forma": {
@@ -249,11 +248,11 @@ consulta_radicados_web = {
 
     "grid": {
         "componente": "ventanilla_interno_grid",     
-        "texto"     : "Radicaci髇 Interno",
+        "texto"     : "Radicaci贸n Interno",
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
-        "padre"     : "Ventanilla Radicaci髇",
+        "padre"     : "Ventanilla Radicaci贸n",
     },
 }
 
@@ -263,20 +262,20 @@ consulta_radicados_web = {
 correos_grid = {
     "definicion": {
         "id"    : "110",
-        "nombre": "RADICACI驨 - CORREOS POR RADICAR"
+        "nombre": "RADICACI贸N - CORREOS POR RADICAR"
     },
 
     "grid": {
         "componente": "correos_grid",     
-        "texto"     : "Radicaci髇 de Correos",
+        "texto"     : "Radicaci贸n de Correos",
         "navegar"   : "si",
-        "padre"     : "Ventanilla Radicaci髇",
+        "padre"     : "Ventanilla Radicaci贸n",
         "tipo"      : "importar",
     },
 
     "forma": {
         "componente": "ventanilla_radicado_forma",      
-        "texto"     : "Radicaci髇 Ventanilla",
+        "texto"     : "Radicaci贸n Ventanilla",
         "tipo"      : "importar"
     }
 }
@@ -296,9 +295,9 @@ opciones = [
     ventanilla_radicado,
     ventanilla_radicado_consulta,
 
-    ventanilla_salida,
+    #ventanilla_salida,
 
-    ventanilla_interno,
+    #ventanilla_interno,
     ventanilla_interno_consulta,
 
     consulta_radicados_web,

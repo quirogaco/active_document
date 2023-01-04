@@ -17,15 +17,15 @@ if len(_ambiente_.keys()) == 0:
     _ambiente_ = dotenv_values("../../.env") 
     
 print( "ambiente  TRABAJDADOR >>>>>>>>>>>>>>")
+
 pprint.pprint(_ambiente_)
 builtins._appServicios = _ambiente_['CFG_SERVICIOS_URL']
 builtins._appAnfitrion = _ambiente_['CFG_DATA_HOST']
 builtins._appPuerto    = _ambiente_['CFG_DATA_PORT']
 
-sys.path.append('D:/gestor_2021_vite')
+sys.path.append('C:/active_document')
 import rutaGlobal
 rutaGlobal.publicaRutas(builtins._appServicios)
-
 import carga_inicial
 
 
@@ -131,7 +131,7 @@ def cargarCorreos():
   #correosConfig = ac_pathglobal + '/configuracion/correosConfig.json'
   datosCorreos  = {      
     'oficial_usuario' : 'quirogaco@gmail.com',
-    'oficial_clave'   : 'sreojrjewsjkxnml',
+    'oficial_clave'   : 'zsmkljsejkxbxqiv',
     'oficial_url'     : 'imap.gmail.com',
     'oficial_puerto'  : 0,
         
@@ -161,74 +161,78 @@ def cargarCorreos():
 
   return datosCorreos
 
-def descargarCorreos( ruta, cuantos = 1, cual="email" ):
-  ruta_basica = 'D:/gestor_2021_vite/'
-  config     = cargarCorreos()
-  mailserver = conectarCorreo( config )   
-  count      = 0
-  data       = buscarCorreos( mailserver, '(UNSEEN)' )[0].split()
-  data.reverse()
-  # Invertir el correo para que tome los mas recientes !!!!
-  #data      = buscarCorreos( mailserver, '(SEEN)' )
-  
-  # Para cada correo
-  for numCorreo in data:
-    count += 1
-    nombreEml       = descargaCorreo( mailserver, ruta, numCorreo )   
-    anexos, message = extraeAnexos( nombreEml, ruta, numCorreo, cual )
-    if message != None:
-      From = message['From']
-      print( count, numCorreo, From )
-      if From != None:
-        fromCorreo = re.findall( r'[\w\.-]+@[\w\.-]+', From )            
-        if fromCorreo != None:
-          From      = fromCorreo[0]
-          Date      = message['Date'][5:25].strip()
-          dt        = datetime.strptime( Date, '%d %b  %Y  %H:%M:%S')
-          asunto    = str(make_header( decode_header(message['Subject']) ))
-          
-          # Listado de archivos
-          archivos  = []
-          for  nombre in anexos:
-            data = {
-              "nombre_completo": nombre,
-              "nombre"         : os.path.basename( nombre )
-            }
-            archivos.append(data)
+def descargarCorreos(  cuantos = 1, cual="email" ):
+    ruta_basica = builtins.rutaBase + '/email_data/'
+    print("ruta_basica:", ruta_basica)
+    config     = cargarCorreos()
+    mailserver = conectarCorreo( config )   
+    count      = 0
+    data       = buscarCorreos( mailserver, '(UNSEEN)' )[0].split()
+    data.reverse()
+    # Invertir el correo para que tome los mas recientes !!!!
+    #data      = buscarCorreos( mailserver, '(SEEN)' )
+    
+    # Para cada correo
+    for numCorreo in data:
+      count += 1
+      nombreEml       = descargaCorreo( mailserver, ruta_basica, numCorreo )   
+      anexos, message = extraeAnexos( nombreEml, ruta_basica, numCorreo, cual )
+      if message != None:
+        From = message['From']
+        print( count, numCorreo, From )
+        if From != None:
+          fromCorreo = re.findall( r'[\w\.-]+@[\w\.-]+', From )            
+          if fromCorreo != None:
+            From      = fromCorreo[0]
+            Date      = message['Date'][5:25].strip()
+            dt        = datetime.strptime( Date, '%d %b %Y  %H:%M:%S')
+            asunto    = str(make_header( decode_header(message['Subject']) ))
+            
+            # Listado de archivos
+            archivos  = []
+            for  nombre in anexos:
+              data = {
+                "nombre_completo": nombre,
+                "nombre"         : os.path.basename( nombre )
+              }
+              archivos.append(data)
 
-          # Arma correo                      
-          dataTemporal = {}
-          dataTemporal['correo_origen'] = From
-          dataTemporal['asunto']        = asunto[0:1000]
-          dataTemporal['fecha_correo']  = dt
-          dataTemporal['estado']        = u'PENDIENTE'
-          dataTemporal['radicado']      = u''
-          print("")
-          print("datos correo:", count)
-          pprint.pprint(dataTemporal)
-          resultado = sqalchemy_insertar.insertar_registro_estructura("correos_descargados", dataTemporal)
-          elastic_operaciones.indexar_registro("correos_descargados", resultado["id"])
-          print("")
-          print("ANEXOS:")
-          pprint.pprint(anexos)
-          print("")
-          print("")          
-          manejo_archivos.manejo("correos", "insertar", {"id":resultado["id"]}, archivos, "", cubeta = "correos")
-          
-          print("")
-          print("")
-          
-          """
-          temporal = CORREO_ELECTRONICO_TEMPORAL( **dataTemporal )
-          session.add( temporal )
-          session.commit()                      
-          fulltext.indexOneRecord( 'CORREO_ELECTRONICO_TEMPORAL', temporal, connPyes, flush=True)
-          """
-    if count > cuantos:
-        break
-                  
-  mailserver.close()
-  mailserver.logout()
-  print("sale...................descarga")
+            # Arma correo                      
+            dataTemporal = {}
+            dataTemporal['correo_entidad'] = config["oficial_usuario"]
+            dataTemporal['correo_origen'] = From
+            dataTemporal['asunto'] = asunto[0:1000]
+            dataTemporal['fecha_correo'] = dt
+            dataTemporal['estado'] = u'PENDIENTE'
+            dataTemporal['radicado'] = u''
+            print("")
+            print("datos correo:", count)
+            pprint.pprint(dataTemporal)
+            resultado = sqalchemy_insertar.insertar_registro_estructura("correos_descargados", dataTemporal)
+            elastic_operaciones.indexar_registro("correos_descargados", resultado["id"])
+            print("")
+            print("ANEXOS:")
+            pprint.pprint(anexos)
+            print("")
+            print("")          
+            manejo_archivos.manejo("correos", "insertar", {"id":resultado["id"]}, archivos, "", cubeta = "correos")
+            
+            print("")
+            print("")
+            
+            """
+            temporal = CORREO_ELECTRONICO_TEMPORAL( **dataTemporal )
+            session.add( temporal )
+            session.commit()                      
+            fulltext.indexOneRecord( 'CORREO_ELECTRONICO_TEMPORAL', temporal, connPyes, flush=True)
+            """
+      if count > cuantos:
+          break
+                    
+    mailserver.close()
+    mailserver.logout()
+    print("sale...................descarga")
 
-descargarCorreos( "D:/gestor_2021_vite/aplicacion/correos", 1, cual="email" )
+print("builtins.rutaBase:", builtins.rutaBase)
+
+descargarCorreos( 10, cual="email" )

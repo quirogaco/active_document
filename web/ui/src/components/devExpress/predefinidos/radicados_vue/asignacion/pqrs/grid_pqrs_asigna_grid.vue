@@ -13,12 +13,7 @@ import {
     DxFilterRow,
     DxExport,
 } from 'devextreme-vue/data-grid';
-
-import DxDropDownButton from 'devextreme-vue/drop-down-button'
-import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } from 'devextreme-vue/responsive-box'
-import { locale, loadMessages, formatMessage } from 'devextreme/localization'
-import notify from 'devextreme/ui/notify'
-
+ 
 import fuenteDatos from '../../../../remoto/fuenteDatos.js'
 
 // Columnas
@@ -29,12 +24,12 @@ import ventanilla_radicado_columnas from '../../comunes/grid/grid_ventanilla_rad
 import grid_pqrs_asigna_metodos from './grid_pqrs_asigna_metodos.js'
 
 let basica = {
-    "estructura"  : "radicados_entrada",
+    "estructura": "radicados_entrada",
     "filtros_grid": [
         ["gestion_asignada_peticion", "=", "NO"],
         ["clase_radicado", "=", "PQRSD"]
     ],
-    "titulo_grid" : "PQRSD - Asignación y traslado de radicados"
+    "titulo_grid": "PQRSD - Asignación y traslado de radicados"
 }
 
 // Grid de gestión

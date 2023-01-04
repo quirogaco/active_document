@@ -87,7 +87,7 @@ let plantilla =  {
                 this.repintar_onlyoffice += 1;
                 this.editor.mostrar_editor(parametros);
             }
-            {
+            else  {
                 this.archivo_visible = true
             }             
         }

@@ -232,14 +232,13 @@ const es_pqrs = function(id=null, atributos={}) {
 //##########//
 let valores_peticion = async function(forma, objeto) {
     let peticion = objeto.selectedItem;      
-
     // Limpia valores, horas_dias, total_tiempo
     forma_definiciones.asigna_opcion(
         forma, 
         ["gestion_horas_dias", "gestion_total_tiempo"], 
         "readOnly", 
         true
-    );        
+    );  
     forma_definiciones.asigna_opcion(
         forma, 
         ["gestion_dependencia_lectura", "gestion_dependencia_responsable"], 
@@ -249,7 +248,7 @@ let valores_peticion = async function(forma, objeto) {
     forma_definiciones.asigna_valor(forma, "gestion_horas_dias", null);
     forma_definiciones.asigna_valor(forma, "gestion_total_tiempo", null);
     if (peticion !== null) {    
-        // Gestion horas dias                                                                                                                                                                                         
+        // Gestion horas dias   
         let deshabilita = peticion.modifica_tiempo == "SI" ? false : true 
         forma_definiciones.asigna_opcion(
             forma, 
@@ -267,7 +266,6 @@ let valores_peticion = async function(forma, objeto) {
             "gestion_total_tiempo", 
             peticion.total_tiempo
         );
-
         if ( 
             (peticion.pqrs == "TRAMITE") && 
             (peticion.dependencias_ids.length > 0)
@@ -277,16 +275,40 @@ let valores_peticion = async function(forma, objeto) {
                 peticion.dependencias_ids[0]
             );
             if (datos) {
-                forma_definiciones.asigna_valor(
-                    forma, 
-                    "gestion_dependencia_responsable",                     
-                    datos.correspondencia_nombre
-                );
+                if (datos) {
+                    forma_definiciones.asigna_valor(
+                        forma, 
+                        "gestion_dependencia_responsable",                     
+                        datos.correspondencia_nombre
+                    );
 
+                    forma_definiciones.asigna_valor(
+                        forma, 
+                        "gestion_dependencia_lectura", 
+                        datos.nombre_completo
+                    );
+                    }
+                    else {
+                        dialogos.miMensaje("Información incompleta", (
+                            datos.nombre_completo + " - " +  
+                            "No tiene responsable de PQRSD "
+                        ));
+                        forma_definiciones.asigna_valor(
+                            forma, 
+                            "gestion_peticion_id", 
+                            null
+                        );
+                    }
+            }
+            else {
+                dialogos.miMensaje("Información incompleta", (
+                    peticion.nombre + " - " +  
+                    "No tiene dependencia responsable "
+                ))
                 forma_definiciones.asigna_valor(
                     forma, 
-                    "gestion_dependencia_lectura", 
-                    datos.nombre_completo
+                    "gestion_peticion_id", 
+                    null
                 );
             }
         }
@@ -295,7 +317,6 @@ let valores_peticion = async function(forma, objeto) {
 
 const gestion_peticion_id = function(id=null, atributos={}) {
     let pqrs_filtro = $get_params("pqrs_filtro");
-    //let forma_id = atributos["forma"]["basicas"]["forma_id"];
     if (!pqrs_filtro) pqrs_filtro = "DOCUMENTO";
     let atributos_base = {        
         "titulo": 'Tipo de petición', 
@@ -312,7 +333,13 @@ const gestion_peticion_id = function(id=null, atributos={}) {
         }
     }
     
-    return forma_definiciones.genera_campo("seleccion", "gestion_peticion_id", id, atributos_base, atributos)
+    return forma_definiciones.genera_campo(
+        "seleccion", 
+        "gestion_peticion_id", 
+        id, 
+        atributos_base, 
+        atributos
+    )
 };
 
 // Tipo de tiempo horas/dias

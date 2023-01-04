@@ -32,7 +32,6 @@ export const methods = {
 
     'cargar_documento':  function(event) {
         if (this.grid.getSelectedRowKeys().length == 1) {
-            this.opciones_ventana_emergente_archivo)
             this.opciones_ventana_emergente_archivo.value = {
                 visible  : true,
                 datos: {

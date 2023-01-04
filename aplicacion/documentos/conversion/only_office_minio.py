@@ -29,10 +29,26 @@ async def salvar_archivo_minio( request: Request ):
         archivo    = sqalchemy_leer.leer_un_registro("archivos_anexos", archivo_id)          
         url = parametros['url']
         pos = url.find('/cache') 
-        url = "http://" + str(builtins._appServicios) + ":80" + url[pos:]   
-        modificado = requests.get(url)
+        url = (
+            #builtins._appServiciosType + "://" + 
+            "http://" + # si se envia https molesta..
+            str(builtins._appServicios) + ":80" + url[pos:]
+        ) 
+        print("")  
+        print("")  
+        print("")  
+        print("...........................")  
+        print("URL>>>>>>>:", url)
+        print("")  
+        print("")  
+        print("")  
+        print("...........................")          
+        modificado = requests.get(
+            url,
+            verify=False
+        )
         nombre_archivo = tempfile.gettempdir() + os.sep + basicas.uuidTexto() + "." + archivo['tipo_archivo']
-        word           = open(nombre_archivo , "wb")
+        word = open(nombre_archivo , "wb")
         word.write(modificado.content)
         word.close()
         minio_acciones.cargar_objeto(archivo['cubeta'], archivo['nombre'], nombre_archivo)

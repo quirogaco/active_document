@@ -28,7 +28,7 @@ configura_radicacion_canales = {
 plantillas = {
    "definicion": {
       "id"    : "15",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Plantillas del sistema"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Plantillas del sistema"
    },
 
    "grid": {
@@ -37,7 +37,7 @@ plantillas = {
       "texto"     : "Plantillas del sistema",
       "icon"      : "",      
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "importar",
    },
 
@@ -52,7 +52,7 @@ plantillas = {
 consecutivos = {
    "definicion": {
       "id"    : "16",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Consecutivos"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Consecutivos"
    },
 
    "grid": {
@@ -62,7 +62,7 @@ consecutivos = {
       "icon"      : "",
       "tipo"      : "importar",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
    },
 
    "forma": {
@@ -77,7 +77,7 @@ consecutivos = {
 motivos_devolucion = {
    "definicion": {
       "id"    : "16",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Motivos devolución"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Motivos devolución"
    },
 
    "grid": {
@@ -87,7 +87,7 @@ motivos_devolucion = {
       "icon"      : "",
       "tipo"      : "importar",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
    },
 
    "forma": {
@@ -102,7 +102,7 @@ motivos_devolucion = {
 tipo_identificaciones = {
    "definicion": {
       "id"    : "17",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Tipo identificaciÓn"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Tipo identificaciÓn"
    },
 
    "grid": {
@@ -111,7 +111,7 @@ tipo_identificaciones = {
       "texto"     : "Tipo identificación",
       "icon"      : "",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
@@ -127,7 +127,7 @@ tipo_identificaciones = {
 genero = {
    "definicion": {
       "id"    : "18",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Tipo Genero"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Tipo Genero"
    },
 
    "grid": {
@@ -136,7 +136,7 @@ genero = {
       "texto"     : "Genero personas",
       "icon"      : "",      
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
@@ -177,7 +177,7 @@ tipo_entidad = {
 tipo_poblacion = {
    "definicion": {
       "id"    : "20",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Tipo poblaciÓn"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Tipo poblaciÓn"
    },
 
    "grid": {
@@ -187,7 +187,7 @@ tipo_poblacion = {
       "icon"      : "",
       "tipo"      : "remota",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
    },
 
    "forma": {
@@ -202,7 +202,7 @@ tipo_poblacion = {
 rango_edad = {
    "definicion": {
       "id"    : "21",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Rango de edad"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Rango de edad"
    },
 
    "grid": {
@@ -212,7 +212,7 @@ rango_edad = {
       "icon"      : "",
       "tipo"      : "remota",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
    },
 
    "forma": {
@@ -227,7 +227,7 @@ rango_edad = {
 discapacidad = {
    "definicion": {
       "id"    : "22",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Tipo de discapacidad"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Tipo de discapacidad"
    },
 
    "grid": {
@@ -236,7 +236,7 @@ discapacidad = {
       "texto"     : "Tipo de discapacidad",
       "icon"      : "",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
@@ -278,7 +278,7 @@ tipo_ciudadano = {
 tipo_terceros = {
    "definicion": {
       "id"    : "24",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Tipo de terceros"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Tipo de terceros"
    },
 
    "grid": {
@@ -288,7 +288,7 @@ tipo_terceros = {
       "icon"      : "",
       "tipo"      : "remota",
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
    },
 
    "forma": {
@@ -304,7 +304,7 @@ tipo_terceros = {
 tipo_peticiones = {
    "definicion": {
       "id"    : "25",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Tipos de Peticiones"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Tipos de Peticiones"
    },
 
    "grid": {
@@ -313,7 +313,7 @@ tipo_peticiones = {
       "texto"     : "Tipos de Peticiones",
       "icon"      : "",      
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
@@ -329,7 +329,7 @@ tipo_peticiones = {
 temas = {
    "definicion": {
       "id"    : "26",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Temas por dependencia"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Temas por dependencia"
    },
 
    "grid": {
@@ -338,7 +338,7 @@ temas = {
       "texto"     : "Temas por dependencia",
       "icon"      : "",      
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
@@ -354,7 +354,7 @@ temas = {
 subtemas = {
    "definicion": {
       "id"    : "27",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Subtemas por Tema"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Subtemas por Tema"
    },
 
    "grid": {
@@ -363,7 +363,7 @@ subtemas = {
       "texto"     : "Subtemas por Tema",
       "icon"      : "",      
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
@@ -404,7 +404,7 @@ canales_comunicacion = {
 empresas_mensajeria = {
    "definicion": {
       "id"    : "29",
-      "nombre": "CONFIGURACIÓN PQRS-VENTANILLA - Empresas de mensajeria"
+      "nombre": "CONFIGURACIÓN PQRSDF-VENTANILLA - Empresas de mensajeria"
    },
 
    "grid": {
@@ -413,7 +413,7 @@ empresas_mensajeria = {
       "texto"     : "Empresas de mensajeria",
       "icon"      : "",      
       "navegar"   : "si",
-      "padre"     : "Configuración PQRS-VENTANILLA",
+      "padre"     : "Configuración PQRSDF-VENTANILLA",
       "tipo"      : "remota"
    },
 
