@@ -10,3 +10,5 @@ configurar.py
 .env
 .gitignore
 configurar.py
+app_un_servidor.bat
+celerybeat-schedule.dat

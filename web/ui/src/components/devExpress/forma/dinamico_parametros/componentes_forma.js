@@ -19,10 +19,9 @@ let componentes = {
     "DxFileUploader" : DxFileUploader,
     "DxRadioGroup"   : DxRadioGroup,
     "DxTextArea"     : DxTextArea,
-    "DxTagBox"       : DxTagBox,
-    
+    "DxTagBox"       : DxTagBox,    
     "DxLoadPanel"    : DxLoadPanel,
-}   
+}
 
 export default {
     componentes: componentes,

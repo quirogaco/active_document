@@ -118,7 +118,7 @@ def radicar_peticion(accion, datos={}, archivos=[], id_tarea=""):
     # Es gestión o traslado a ventanilla
     archivos = []
     resuelto_inmediato = datos["datos"].get("resuelto_inmediato", "NO")
-    repone_id          = datos["datos"].get("repone_id", None)
+    repone_id = datos["datos"].get("repone_id", None)
     if (resuelto_inmediato == "SI"):
         datos["datos"]["gestion_horas_dias"] = "DIAS"
         datos["datos"]["gestion_total_tiempo"] = 0

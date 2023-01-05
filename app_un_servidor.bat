@@ -8,7 +8,10 @@ uvicorn servidor:_app --host=192.168.1.144 --port=9100 --log-level critical --wo
 // local casa
 uvicorn servidor:_app --host=192.168.1.144 --port=9100 --workers=2
 
+// ofcina
 uvicorn servidor:_app --host=192.168.1.76 --port=9100 --workers=2
+
+
 uvicorn servidor:_app --host=192.168.1.99 --port=9100 --workers=2
 uvicorn servidor:_app --host=172.16.202.58 --port=9100 --workers=4
 uvicorn servidor:_app --host=172.16.202.58 --port=9100 --workers=4 --ssl-keyfile=./localhost.key --ssl-certfile=./localhost.crt

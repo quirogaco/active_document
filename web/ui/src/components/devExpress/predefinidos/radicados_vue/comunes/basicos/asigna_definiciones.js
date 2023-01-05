@@ -1,6 +1,6 @@
-import forma_definiciones    from "../../../comunes_vue/forma/forma.js"
+import forma_definiciones from "../../../comunes_vue/forma/forma.js"
 import utilidades_estructura from '../../../../../../librerias/utilidades_estructura.js'
-import dialogos              from '../../../../../../librerias/dialogos.js'
+import dialogos from '../../../../../../librerias/dialogos.js'
 
 const oculta_asigna = function(forma=null) {    
     forma_definiciones.oculta_campos(forma, ["respuesta_datos"]);
@@ -59,7 +59,8 @@ const muestra_asigna = function(forma=null) {
     ]);
 };
 
-const muestra_asigna_ventanilla = function(forma=null) {  
+const muestra_asigna_ventanilla = function(forma=null, tipo_peticion="") {  
+    console.log("muestra_asigna_ventanilla>", tipo_peticion)
     oculta_asignacion(forma);
     forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);    
     forma_definiciones.muestra_campos(forma, [
@@ -78,12 +79,17 @@ const muestra_asigna_ventanilla = function(forma=null) {
     cambia_filtros_gestion_id(forma);
 };
 
-const muestra_asigna_ventanilla_tramite = function(forma=null) {    
+const muestra_asigna_ventanilla_tramite = function(
+    forma=null, 
+    tipo_peticion=""
+) { 
+    console.log("muestra_asigna_ventanilla_tramite>", tipo_peticion)    
     oculta_asignacion(forma);  
     forma_definiciones.muestra_campos(forma, ["respuesta_datos"]);
     forma_definiciones.muestra_campos(forma, [
         "gestion_peticion_id",
-        "gestion_dependencia_lectura",
+        "gestion_dependencia_id",
+        //"gestion_dependencia_lectura",
         "gestion_dependencia_responsable",
         "gestion_horas_dias",
         "gestion_total_tiempo",
@@ -205,11 +211,11 @@ const es_pqrs = function(id=null, atributos={}) {
                 //forma.forma.beginUpdate(); 
                 switch (valor) {
                     case "DOCUMENTO": 
-                        muestra_asigna_ventanilla(forma); 
+                        muestra_asigna_ventanilla(forma, valor); 
                         break
                     
                     case "TRAMITE":                         
-                        muestra_asigna_ventanilla_tramite(forma); 
+                        muestra_asigna_ventanilla_tramite(forma, valor); 
                         break
         
                     case "PQRSD":
@@ -241,7 +247,8 @@ let valores_peticion = async function(forma, objeto) {
     );  
     forma_definiciones.asigna_opcion(
         forma, 
-        ["gestion_dependencia_lectura", "gestion_dependencia_responsable"], 
+        //["gestion_dependencia_lectura", "gestion_dependencia_responsable"],
+        ["gestion_dependencia_responsable"], 
         "value", 
         ""
     ); 
@@ -266,50 +273,74 @@ let valores_peticion = async function(forma, objeto) {
             "gestion_total_tiempo", 
             peticion.total_tiempo
         );
-        if ( 
-            (peticion.pqrs == "TRAMITE") && 
-            (peticion.dependencias_ids.length > 0)
-         ) {            
-            let datos = await utilidades_estructura.leer_registro_id(
-                "dependencias", 
-                peticion.dependencias_ids[0]
-            );
-            if (datos) {
-                if (datos) {
-                    forma_definiciones.asigna_valor(
-                        forma, 
-                        "gestion_dependencia_responsable",                     
-                        datos.correspondencia_nombre
-                    );
+        if  (peticion.pqrs == "TRAMITE") {   
+            console.log("peticion.dependencias_ids:", peticion.dependencias_ids);
+            let dependencias = [];
+            let datos;
+            for (const dependencia in peticion.dependencias_ids) {
+                datos = await utilidades_estructura.leer_registro_id(
+                    "dependencias", 
+                    peticion.dependencias_ids[dependencia]
+                );
+                dependencias.push(datos);                
+            };
+            
+            console.log("DDDpendencias", dependencias);
 
-                    forma_definiciones.asigna_valor(
-                        forma, 
-                        "gestion_dependencia_lectura", 
-                        datos.nombre_completo
-                    );
-                    }
-                    else {
-                        dialogos.miMensaje("Información incompleta", (
-                            datos.nombre_completo + " - " +  
-                            "No tiene responsable de PQRSD "
-                        ));
-                        forma_definiciones.asigna_valor(
-                            forma, 
-                            "gestion_peticion_id", 
-                            null
-                        );
-                    }
-            }
-            else {
+            forma_definiciones.asigna_fuente_datos(
+                forma, 
+                "gestion_dependencia_id", 
+                "select", 
+                dependencias, 
+                [], 
+                {}
+            );   
+
+            if (dependencias.length == 0) {
                 dialogos.miMensaje("Información incompleta", (
                     peticion.nombre + " - " +  
-                    "No tiene dependencia responsable "
+                    "No tiene dependencia(s) responsable(s) "
                 ))
                 forma_definiciones.asigna_valor(
                     forma, 
                     "gestion_peticion_id", 
                     null
                 );
+                // if (datos) {
+                //     forma_definiciones.asigna_valor(
+                //         forma, 
+                //         "gestion_dependencia_responsable",                     
+                //         datos.correspondencia_nombre
+                //     );
+
+                //     forma_definiciones.asigna_valor(
+                //         forma, 
+                //         "gestion_dependencia_lectura", 
+                //         datos.nombre_completo
+                //     );
+                // }
+                // else {
+                //     dialogos.miMensaje("Información incompleta", (
+                //         datos.nombre_completo + " - " +  
+                //         "No tiene responsable de PQRSD "
+                //     ));
+                //     forma_definiciones.asigna_valor(
+                //         forma, 
+                //         "gestion_peticion_id", 
+                //         null
+                //     );
+                // }
+            }
+            else {
+                // dialogos.miMensaje("Información incompleta", (
+                //     peticion.nombre + " - " +  
+                //     "No tiene dependencia responsable "
+                // ))
+                // forma_definiciones.asigna_valor(
+                //     forma, 
+                //     "gestion_peticion_id", 
+                //     null
+                // );
             }
         }
     }
@@ -501,7 +532,13 @@ const gestion_dependencia_lectura = function(id=null, atributos={}) {
         'visible': false
     }
     
-    return forma_definiciones.genera_campo("texto", "gestion_dependencia_lectura", id, atributos_base, atributos)
+    return forma_definiciones.genera_campo(
+        "texto", 
+        "gestion_dependencia_lectura", 
+        id, 
+        atributos_base, 
+        atributos
+    )
 }
 
 const gestion_dependencia_responsable = function(id=null, atributos={}) {

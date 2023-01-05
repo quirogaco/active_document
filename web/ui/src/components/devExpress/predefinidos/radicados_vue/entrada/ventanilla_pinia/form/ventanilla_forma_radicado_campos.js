@@ -221,9 +221,9 @@ let asignacion_generales = function(forma) {
                 asigna_definiciones.gestion_total_tiempo(null, {forma: forma}),    
                 asigna_definiciones.gestion_prioridad(null, {forma: forma}),    
                 asigna_definiciones.reserva(null, {forma: forma}),     
-                asigna_definiciones.gestion_dependencia_lectura(null, {
-                    forma: forma
-                }),              
+                // asigna_definiciones.gestion_dependencia_lectura(null, {
+                //     forma: forma
+                // }),              
                 asigna_definiciones.gestion_dependencia_id(null, {
                     forma: forma
                 }),       

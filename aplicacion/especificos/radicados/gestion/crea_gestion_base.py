@@ -61,11 +61,10 @@ def crea_registro_gestion(datos, archivos, id_tarea):
         "tipo_peticiones", 
         peticion_id
     )
-    if clase_radicado == "TRAMITE":
-        dependencia_id = peticion["dependencias_ids"][0]
-    else:        
-        dependencia_id = datos['gestion_dependencia_id']
-
+    # if clase_radicado == "TRAMITE":
+    #     dependencia_id = peticion["dependencias_ids"][0]
+    # else:        
+    dependencia_id = datos['gestion_dependencia_id']
     dependencia = sqalchemy_leer.leer_un_registro(
                       "dependencias", 
                       dependencia_id

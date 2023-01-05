@@ -32,7 +32,7 @@ const definicion = {
             dataField: "total_dias",            
             editorType: "dxNumberBox",
             label     : {
-                text: "Total en dias"
+                text: "Total en dias XX"
             },
             validationRules: [{
                 type   : "required",

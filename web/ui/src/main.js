@@ -151,6 +151,7 @@ let opciones   = busqueda.split('=');
 let formularios = ["anonimo", "natural", "juridica", "consulta"];
 let ruta       = opciones[0];
 let formulario = opciones[1];
+console.log("busqueda:", busqueda, ruta, formulario)
 
 // IMPRESIÓN
 import printjs from 'print-js';
@@ -162,23 +163,43 @@ let aplicacion = window.$ns['aplicacion'];
 
 // Muestra formulario
 if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
-    window.$componentesRutas = rutas_cortas.rutas_componentes;
+    window.$componentesRutas = rutas_cortas.rutas_componentes;   
+    window.$ns['aplicacion'].crea_enrutador(); 
     if (formulario == "anonimo")
-        aplicacion.asignaComponente('anonimo_web_forma', 'components/devExpress/predefinidos/radicados_vue/entrada/web_anonimo_formulario/web_anonimo_forma_radicado.vue');   
+        await window.$ns['aplicacion'].asignaRuta(
+            'anonimo_web_forma', 
+            'components/devExpress/predefinidos/radicados_vue/entrada/web_anonimo_formulario/web_anonimo_forma_radicado.vue'
+        );   
+        window.$ns['aplicacion'].asignaComponente('anonimo_web_forma');
     
-    if (formulario == "natural")
-        aplicacion.asignaComponente('natural_web_forma', 'components/devExpress/predefinidos/radicados_vue/entrada/web_natural_formulario/web_natural_forma_radicado.vue'); 
+    if (formulario == "natural") {
+        await window.$ns['aplicacion'].asignaRuta(
+            'natural_web_forma', 
+            'components/devExpress/predefinidos/radicados_vue/entrada/web_natural_formulario/web_natural_forma_radicado.vue'
+        ); 
+        window.$ns['aplicacion'].asignaComponente('natural_web_forma');
+    }
 
-    if (formulario == "juridica")
-        aplicacion.asignaComponente('radicado_juridica_forma', 'components/devExpress/predefinidos/radicados_vue/entrada/web_juridica_formulario/web_juridica_forma_radicado.vue'); 
+    if (formulario == "juridica") {
+        await window.$ns['aplicacion'].asignaRuta(
+            'radicado_juridica_forma', 
+            'components/devExpress/predefinidos/radicados_vue/entrada/web_juridica_formulario/web_juridica_forma_radicado.vue'
+        ); 
+        window.$ns['aplicacion'].asignaComponente('radicado_juridica_forma');
+    }
 
-    if (formulario == "consulta")
-        aplicacion.asignaComponente('consulta_radicados_web', '/components/devExpress/predefinidos/radicados_consulta/consulta_radicados_web.vue'); 
+    if (formulario == "consulta") {
+        await window.$ns['aplicacion'].asignaRuta(
+            'consulta_radicados_web', 
+            '/components/devExpress/predefinidos/radicados_consulta/consulta_radicados_web.vue'
+        ); 
+        window.$ns['aplicacion'].asignaComponente('consulta_radicados_web');
+    }
 }
 else {   
-    // CARGA APLICATIVO
-    
+    // CARGA APLICATIVO    
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
+    //window.$ns['aplicacion'].crea_enrutador();
     await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
     window.$ns['aplicacion'].asignaComponente('login_forma');
     
