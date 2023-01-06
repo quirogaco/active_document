@@ -4,7 +4,6 @@
 <script>
 import {
     DxDataGrid,
-    DxColumn,
     DxPager,
     DxPaging,
     DxSearchPanel,
@@ -14,8 +13,7 @@ import {
 } from 'devextreme-vue/data-grid';
 
 import DxDropDownButton from 'devextreme-vue/drop-down-button'
-import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } from 'devextreme-vue/responsive-box'
-import { locale, loadMessages, formatMessage } from 'devextreme/localization'
+import { DxResponsiveBox } from 'devextreme-vue/responsive-box'
 import notify from 'devextreme/ui/notify'
 
 import fuenteDatos from '../../../remoto/fuenteDatos.js'
@@ -41,7 +39,11 @@ let eventos = {
 
 let basica = {
     "estructura"  : "peticiones",
-    "filtros_grid": [ ["responsable_id", "=", window.$usuario.id], ["estado_gestion", "=", "PENDIENTE"], ["estado_", "=", "ACTIVO"] ] ,
+    "filtros_grid": [ 
+        ["responsable_id", "=", window.$usuario.id], 
+        ["estado_gestion", "=", "PENDIENTE"], 
+        ["estado_", "=", "ACTIVO"] 
+    ],
     "titulo_grid" : "Gestión de peticiones, documentos y tramites"
 }
 
@@ -72,11 +74,19 @@ let grid =  {
     methods: gestion_basica_metodos.metodos,
     
     mounted() {
-        this.opciones_accion['grid'] = this.$refs 
-        window.$peticion_datos       = {}
-        setTimeout(() => {
-            window.$grid_gestion = this.$refs.grid.instance
-        }, 3000);
+        this.opciones_accion['grid'] = this.$refs;
+        this.$refs.grid.instance.columnOption(
+            "nro_radicado",
+            {sortOrder: 'asc', sortIndex: 0} 
+        );
+        // this.dataGrid.instance.columnOption('FirstName', {  
+        //     sortOrder: 'asc',  
+        //     sortIndex: 0  
+        // });  
+        window.$peticion_datos = {}
+        // setTimeout(() => {
+        //     window.$grid_gestion = this.$refs.grid.instance
+        // }, 3000);
         this.notify = notify                  
     },
 
@@ -87,7 +97,14 @@ let grid =  {
             indicador_visible: false,
             
             columnas      : gestion_basica_columnas.columnas, // Columnas grid
-            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta('grid', null, basica.estructura, basica.estructura, basica.filtros_grid, {}),            
+            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta(
+                'grid', 
+                null, 
+                basica.estructura, 
+                basica.estructura, 
+                basica.filtros_grid, 
+                {}
+            ),            
             pageSizes           : [10, 25, 50, 100],
             displayMode         : 'full',
             showPageSizeSelector: true,
@@ -96,7 +113,7 @@ let grid =  {
             
             opciones_accion: {
                 contexto: "grid_gestion",
-                evento  : "gridGestionMuestraVentanaEmergente",   
+                evento: "gridGestionMuestraVentanaEmergente",   
                 evento_grid_gestion: "gridGestionMuestraVentanaEmergenteGrid"             
             },
 

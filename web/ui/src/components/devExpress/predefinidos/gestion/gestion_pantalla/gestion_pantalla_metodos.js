@@ -15,7 +15,10 @@ let metodos = {
             this.pdf_mostrar(pdf_informacion)
         }
 
-        if ( (this.parametros.borrador_id != null) && (this.parametros.borrador_id != "") ) {
+        if ( 
+            (this.parametros.borrador_id != null) && 
+            (this.parametros.borrador_id != "") 
+        ) {
             this.carga_borrador(this.parametros.borrador_id)
         }
     },
@@ -28,10 +31,17 @@ let metodos = {
                 estructura : estructura
             },
             accion: "gestion_pdf_principal"
-        }        
-        let urlCompleta        = window.$direcciones.servidorDatos + '/especifico_acciones'   
+        };        
+        let urlCompleta = (
+            window.$direcciones.servidorDatos + '/especifico_acciones'
+        );   
         this.indicador_visible = true 
-        window.$f["http"].llamadoRestPost( urlCompleta, parametros, this.retorna_pdf, "")               
+        window.$f["http"].llamadoRestPost( 
+            urlCompleta, 
+            parametros, 
+            this.retorna_pdf, 
+            ""
+        )               
     },
 
     "pdf_visible": function(pdf_informacion) {
@@ -50,21 +60,24 @@ let metodos = {
             modo          : "leer",
             descarga      : 'no'
         }        
-        let parametros = window.$lib.prepara_parametros_archivo(pdf_parametros) 
-        this.opciones_pdf.nombrePdf   = parametros.datos.idArchivo
-        this.opciones_pdf.buscarTexto = parametros.datos.buscarTexto
-        this.opciones_pdf.operacion   = parametros.datos.operacion           
-        this.opciones_pdf.clase       = parametros.datos.clase
-        this.opciones_pdf.descarga    = parametros.datos.descarga
-        this.opciones_pdf.titulo      = parametros.datos.titulo_general 
-        if ( (this.parametros.borrador_id != null) && (this.parametros.borrador_id != "") ) {
-            this.clase_pdf      = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
-            this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
+        let parametros = window.$lib.prepara_parametros_archivo(pdf_parametros); 
+        this.opciones_pdf.nombrePdf = parametros.datos.idArchivo;
+        this.opciones_pdf.buscarTexto = parametros.datos.buscarTexto;
+        this.opciones_pdf.operacion = parametros.datos.operacion;           
+        this.opciones_pdf.clase = parametros.datos.clase;
+        this.opciones_pdf.descarga = parametros.datos.descarga;
+        this.opciones_pdf.titulo = parametros.datos.titulo_general; 
+        if ( 
+            (this.parametros.borrador_id != null) && 
+            (this.parametros.borrador_id != "") 
+        ) {
+            this.clase_pdf = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
+            this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
         }
         else {
             this.clase_pdf = "col-12 shadow-sm p-3 mb-3 bg-body rounded"
         }      
-        this.repintar_pdf += 1
+        this.repintar_pdf += 1;
         this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(this)
     },
 
@@ -72,9 +85,7 @@ let metodos = {
     // Muestra pdf del borrador //
     //************************* //
     "retorna_borrador_mostrar": function(parametros) {
-        window.$ocultar_esperar()
-        console.log("retorna_borrador_mostrar:", parametros)
-
+        window.$ocultar_esperar();
         visores_archivo.ver_descarga_archivo({
             archivo_id: parametros.nombre_archivo, 
             operacion : 'pdf_disco', 
@@ -87,9 +98,16 @@ let metodos = {
         let parametros = {
             peticion: this.parametros.id,
             accion  : "PDF_BORRADOR"
-        }        
-        let urlCompleta = window.$direcciones.servidorDatos + '/gestion_acciones'    
-        window.$f["http"].llamadoRestPost( urlCompleta, parametros, this.retorna_borrador_mostrar, "")   
+        };        
+        let urlCompleta = (
+            window.$direcciones.servidorDatos + '/gestion_acciones'
+        );
+        window.$f["http"].llamadoRestPost( 
+            urlCompleta, 
+            parametros, 
+            this.retorna_borrador_mostrar, 
+            ""
+        )   
     },
 
     // ######### //
@@ -130,93 +148,131 @@ let metodos = {
     },
 
     elemento_click(e) {
-        let boton = e.itemData.code  
-        let parametros = {}          
+        let boton = e.itemData.code; 
+        let parametros = {};          
         switch (boton) {
             case 'borrador':
                 // Pdf
-                this.verPdf    = false
-                this.clase_pdf = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
+                this.verPdf = false;
+                this.clase_pdf = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
                 
                 // Borrador
-                this.verBorrador    = true                        
-                this.clase_borrador =  "col-12 shadow-sm p-3 mb-3 bg-body rounded"
+                this.verBorrador = true;                        
+                this.clase_borrador = "col-12 shadow-sm p-3 mb-3 bg-body rounded";
                 break;
 
             case 'documento':
                 // Borrador
-                this.verBorrador    = false
-                this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
+                this.verBorrador = false;
+                this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
 
                 // Pdf
-                this.verPdf    = true
-                this.clase_pdf =  "col-12 shadow-sm p-3 mb-3 bg-body rounded"
+                this.verPdf = true;
+                this.clase_pdf = "col-12 shadow-sm p-3 mb-3 bg-body rounded";
                 break;
 
             case 'radicado':
-                parametros          = gestion_acciones_elementos.elemento_parametros(20) 
-                this.asigna_parametros(parametros) 
-                this.emergente_key += 1
+                parametros = gestion_acciones_elementos.elemento_parametros(20); 
+                this.asigna_parametros(parametros);
+                this.emergente_key += 1;
                 
                 break;
 
             case 'gestion':
-                parametros      = gestion_acciones_elementos.elemento_parametros(21) 
-                this.asigna_parametros(parametros) 
-                this.emergente_key += 1
+                parametros = gestion_acciones_elementos.elemento_parametros(21); 
+                this.asigna_parametros(parametros);
+                this.emergente_key += 1;
                 
                 break;
 
             case 'ver_borrador':
-                this.pdf_borrador_mostrar()
+                this.pdf_borrador_mostrar();
                 break;
 
             case 'regresar':
-                this.$router.push({path: "gestion_basica_grid"})
+                this.$router.push({path: "gestion_basica_grid"});
                 break;
 
             default:
                 // Borrador
-                this.verBorrador    = true
-                this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
+                this.verBorrador = true;
+                this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
                 
                 // Pdf
-                this.verPdf    = true
-                this.clase_pdf = "col-6 shadow-sm p-3 mb-3 bg-body rounded"                                                
+                this.verPdf = true;
+                this.clase_pdf = "col-6 shadow-sm p-3 mb-3 bg-body rounded";                                                
         }
     },
 
     asigna_parametros(parametros) {
-        this.opciones_ventana.alto               = parametros.alto;
-        this.opciones_ventana.ancho              = parametros.ancho;
+        this.opciones_ventana.alto = parametros.alto;
+        this.opciones_ventana.ancho = parametros.ancho;
         this.opciones_ventana.componente_visible = parametros.ventana;  
-        this.opciones_ventana.titulo             = parametros.titulo;   
-        this.opciones_ventana.boton_mensaje      = parametros.boton_mensaje;    
-        this.opciones_ventana.accion             = parametros.accion;  
-        this.opciones_ventana.fuente             = parametros.fuente; 
-        this.opciones_ventana.visible            = true;
-        this.opciones_ventana.elementos          = [this.parametros.id];
-        this.opciones_ventana.gestion            = {
-            'gestion_id' : this.parametros.id,
-            'gestion'    : this.parametros,
+        this.opciones_ventana.titulo = parametros.titulo;   
+        this.opciones_ventana.boton_mensaje = parametros.boton_mensaje;    
+        this.opciones_ventana.accion = parametros.accion;  
+        this.opciones_ventana.fuente = parametros.fuente; 
+        this.opciones_ventana.visible = true;
+        this.opciones_ventana.elementos = [this.parametros.id];
+        this.opciones_ventana.gestion = {
+            'gestion_id': this.parametros.id,
+            'gestion': this.parametros,
             'origen_tipo': this.tipo_documento,
-            'entrada'    : this.radicado
-        }
+            'entrada': this.radicado
+        };
 
-        if ( (this.opciones_ventana.accion == "RADICAR_DOCUMENTO") && (this.tipo_documento == "INTERNO") ) {
-            this.opciones_ventana.componente_visible = "ventanilla_interno_forma"
-        }
+        let that = this;
+        let cerrar = function(desde) {
+            that.opciones_ventana.visible = false; 
+            that.emergente_key += 1;                               
+        };
+
+        let datos = {
+            "datos": this.opciones_ventana,
+            "modo": "consulta",
+            "llamado_por": "_call_",
+            "call": this.cerrar
+        };
+
+        $save_params(
+            "ventana_emergente_gestion", 
+            {"datos": datos}
+        )
+
+        if ( 
+            (this.opciones_ventana.accion == "RADICAR_DOCUMENTO") && 
+            (this.tipo_documento == "INTERNO") 
+        ) {
+            this.opciones_ventana.componente_visible = "ventanilla_interno_forma";
+        };
+
+        if ( this.opciones_ventana.accion == "CONSULTA_RADICADO") {
+            let that = this;
+            let datos = {
+                "radicado": this.radicado,
+                "modo": "consulta",
+                "llamado_por": "_call_",
+                "call": cerrar
+            };
+
+            $save_params(
+                "forma_radicado_consulta", 
+                {"datos": datos}
+            )
+        };
 
         // Información del radicado
         this.opciones_ventana.consulta = {
-            'radicado': this.radicado
-        }        
+            'datos': this.radicado
+        };        
     },
 
     accion_click(e) {        
-        let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id)  
+        let parametros = gestion_acciones_elementos.elemento_parametros(
+            e.itemData.id
+        )  
         this.asigna_parametros(parametros)
-        this.emergente_key    += 1;
+        this.emergente_key += 1;
     }
 }
 

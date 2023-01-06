@@ -119,7 +119,7 @@ let columnas = [
 
     // Tipo documento
     {
-        caption       : "Tipo",
+        caption       : "Origen",
         dataField     : "origen_tipo",
         dataType      : "string",
         allowSorting  : true,
@@ -153,6 +153,43 @@ let columnas = [
         width         : "110px"
     },
 
+     // Radicado
+     {
+        caption       : "Fecha de radicación",
+        dataField     : "fecha_radicado",
+        dataType      : "date",
+        allowSorting  : true,
+        allowFiltering: true,
+        width         : "130px",
+        format        : 'y-MM-dd HH:MM'
+    },
+
+    // Fuente
+    {
+        caption       : "Tipo de radicado",
+        dataField     : "clase_radicado",
+        dataType      : "string",
+        allowSorting  : true,
+        allowFiltering: true,
+        lookup        : {
+            dataSource: {
+                store: {
+                    type: 'array',
+                    data: [
+                        { id: 'DOCUMENTO', nombre: 'DOCUMENTO' },
+                        { id: 'TRAMITE', nombre: 'TRAMITE' },
+                        { id: 'PQRSD',       nombre: 'PQRSD' }
+                    ],
+                    key: "id"
+                },
+                
+            },
+            valueExpr  : 'id', 
+            displayExpr: 'nombre',           
+        },  
+        width      : "110px"
+    },
+
     // Tipo gestión
     {
         caption       : "Tipo gestión",
@@ -161,17 +198,6 @@ let columnas = [
         allowSorting  : true,
         allowFiltering: true,
         width         : "120px"
-    },
-
-    // Radicado
-    {
-        caption       : "Fecha de radicación",
-        dataField     : "fecha_radicado",
-        dataType      : "date",
-        allowSorting  : true,
-        allowFiltering: true,
-        width         : "130px",
-        format        : 'y-MM-dd HH:MM'
     },
     
     // Nombre tercero
@@ -262,32 +288,7 @@ let columnas = [
         allowSorting  : true,
         allowFiltering: true,
         width         : 250
-    },
-
-    // Fuente
-    {
-        caption       : "Origen",
-        dataField     : "clase_radicado",
-        dataType      : "string",
-        allowSorting  : true,
-        allowFiltering: true,
-        lookup        : {
-            dataSource: {
-                store: {
-                    type: 'array',
-                    data: [
-                        { id: 'VENTANILLA', nombre: 'VENTANILLA' },
-                        { id: 'PQRS',       nombre: 'PQRS' }   
-                    ],
-                    key: "id"
-                },
-                
-            },
-            valueExpr  : 'id', 
-            displayExpr: 'nombre',           
-        },  
-        width      : "150px"
-    },
+    }
 ]
 
 export default {

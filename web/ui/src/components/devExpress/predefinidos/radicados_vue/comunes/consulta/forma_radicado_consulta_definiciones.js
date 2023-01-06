@@ -1,4 +1,3 @@
-import { ref } from "vue";
 import forma_definiciones from "../../../comunes_vue/forma/forma.js";
 import fuente from "../../../comunes_vue/forma/fuente.js";
 import forma_general from "../../../comunes_vue/forma/forma.js";
@@ -43,15 +42,20 @@ let metodos = {
     boton_click(e) {
         let accion = this.define_accion(e.component.option("hint"))  
         switch (accion) {
-            case 'regresar':       
-                window.scroll(0,0); 
-                if (this.parametros.llamado_por == "_close_") {
-                    this.basicas.visible = false; 
+            case 'regresar':      
+                switch (this.parametros.llamado_por) {
+                    case "_close_":   
+                        window.scroll(0,0); 
+                        this.basicas.visible = false; 
+                        break
+
+                    case "_call_": 
+                        this.parametros.call(this)
+                        break
+                    
+                    default:
+                        this.$router.push(this.parametros.llamado_por)
                 }
-                else {
-                    this.$router.push(this.parametros.llamado_por)
-                }
-                break;
         }
     },
 

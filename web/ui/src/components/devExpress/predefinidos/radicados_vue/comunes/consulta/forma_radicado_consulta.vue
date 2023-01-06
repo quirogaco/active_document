@@ -2,7 +2,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import { DxDataGrid } from 'devextreme-vue/data-grid';
 import { DxForm } from 'devextreme-vue/form';
 import DxTextArea from 'devextreme-vue/text-area';
@@ -34,7 +33,7 @@ let formulario =  {
     props: forma_general.forma_propiedades({}),
 
     mounted() {
-        //this.visible = ref(true);
+        basicas["visible"] = true;
         forma_general.forma_funciones.montado_general(this);
     },
 

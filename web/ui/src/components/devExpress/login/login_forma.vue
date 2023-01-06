@@ -88,7 +88,7 @@ async function enviar_datos() {
             await window.$ns['aplicacion'].asignaRuta('cajon', 'components/devExpress/cajon/cajon.vue');  
             window.$ns['aplicacion'].asignaComponente('cajon');
 
-            window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));                   
+            window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario")); 
         }
         else {
             $sistema["notifica"](respuesta.mensaje, "error");
@@ -110,7 +110,6 @@ let atributos_barra = {
 
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
-    console.log("EVENT: dataFormaMounted", DataForma)
     that.dataForm = DataForma;
 };
 

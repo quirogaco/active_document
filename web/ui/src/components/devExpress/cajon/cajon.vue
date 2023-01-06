@@ -22,7 +22,7 @@
                   
                     <div class="col-7 p-2 centered" style="height: 35px;">                    
                         <div class="centered">
-                            {{ usuario_nombre }} / {{ ubicacion_nombre }}
+                            {{usuario_nombre}} / {{dependencia_nombre}} / {{ubicacion_nombre}}
                         </div>   
                     </div>
 
@@ -66,7 +66,6 @@
                     :close-on-outside-click="true"
                     template="listMenu"                              
                 >
-
                     
                         <template #listMenu>
                             <NavigationList/>
@@ -135,7 +134,8 @@ export default {
             
             // Usuario
             usuario_nombre: window.$usuario.nombre,
-            ubicacion_nombre: window.$usuario.ubicacion_nombre          
+            ubicacion_nombre: window.$usuario.ubicacion_nombre,
+            dependencia_nombre: window.$usuario.dependencia_nombre       
         }
     },
 

@@ -196,7 +196,6 @@ let elemento_parametros = function(elemento_id) {
 
 // componente: grid, forma
 let items_gestion = function(componente, contexto) {
-    console.log("window.$usuario.roles_especificos:", window.$usuario.roles_especificos)
     let items = [
         //{ id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
         //{ id: 16, titulo: 'Respuesta rapída',    icon: "fas fa-shipping-fast" },
@@ -208,10 +207,10 @@ let items_gestion = function(componente, contexto) {
                 (window.$usuario.roles_especificos.indexOf('PQRSD') > -1)
             ) {
             items = [
-                { id: 1,  titulo: 'Asignar responsable',                        icon: "fas fa-user-check" },
-                //{ id: 16, titulo: 'Respuesta rapída',                           icon: "fas fa-shipping-fast" },
-                { id: 3,  titulo: 'Trasladar a otra dependencia',               icon: "fas fa-forward" },
-                { id: 2,  titulo: 'Devolver (Ventanilla, Servicio ciudadano)',  icon: "fas fa-backward" }          
+                { id: 1, titulo: 'Asignar responsable', icon: "fas fa-user-check" },
+                //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
+                { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
+                { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" }          
             ]
         }
         else {
@@ -222,8 +221,8 @@ let items_gestion = function(componente, contexto) {
         if ( componente.parametros.colaborativa != "" ) {
             items = [
                 { id: 11, titulo: 'Anexar archivo de gestión', icon: "fas fa-file" },
-                { id: 12, titulo: 'Crea comentario',           icon: "fas fa-comments" },
-                { id: 5,  titulo: 'Finalizar',                 icon: "fas fa-window-close" }
+                { id: 12, titulo: 'Crea comentario', icon: "fas fa-comments" },
+                { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }
             ]
         }  
         else {
@@ -233,18 +232,18 @@ let items_gestion = function(componente, contexto) {
                 case "ASIGNADO_DEPENDENCIA":
                     items = [
                         { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                        { id: 16, titulo: 'Respuesta rapída',    icon: "fas fa-shipping-fast" },
+                        { id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
                     ]
                     break
                 
                 case "ASIGNADO_RESPONSABLE":
                     items = [
-                        { id: 6,  titulo: 'Crear borrador',                            icon: "fas fa-file-import" },                                            
+                        { id: 6,  titulo: 'Crear borrador', icon: "fas fa-file-import" },                                            
                         { id: 9,  titulo: 'Asigna expediente y tipo documental (TRD)', icon: "fas fa-folder-plus" },
-                        { id: 11, titulo: 'Anexar archivo de gestión',                 icon: "fas fa-file" },
-                        { id: 12, titulo: 'Crea comentario',                           icon: "fas fa-comments" },
-                        { id: 8,  titulo: 'Devolver a encargado/enlace dependencia',   icon: "fas fa-backward" },
-                        { id: 13, titulo: 'Solicitar ayuda cooperativa',               icon: "fas fa-hands-helping" }                   
+                        { id: 11, titulo: 'Anexar archivo de gestión', icon: "fas fa-file" },
+                        { id: 12, titulo: 'Crea comentario', icon: "fas fa-comments" },
+                        { id: 8,  titulo: 'Devolver a encargado/enlace dependencia', icon: "fas fa-backward" },
+                        { id: 13, titulo: 'Solicitar ayuda cooperativa', icon: "fas fa-hands-helping" }                   
                     ]
 
                     if (componente.parametros.total_tiempo == 0) {
@@ -253,7 +252,7 @@ let items_gestion = function(componente, contexto) {
                     
                     //if ( borrador_existe ) {
                         items.push({ id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" })
-                        items.push({ id: 7,  titulo: 'Radicar borrador'    , icon: "fas fa-edit" })
+                        items.push({ id: 7,  titulo: 'Radicar borrador', icon: "fas fa-edit" })
                     //}
                     break
 
@@ -271,18 +270,18 @@ let items_gestion = function(componente, contexto) {
 
                 case "VISTO_BUENO":
                     items = [
-                        { id: 8,  titulo: 'Devolver a asignador dependencia',  icon: "fas fa-backspace" },
-                        { id: 14, titulo: 'Aprobar para radicar',              icon: "fas fa-thumbs-up" },
-                        { id: 5,  titulo: 'Finalizar',                         icon: "fas fa-window-close" },
-                        { id: 15, titulo: 'Devolver para revisión',            icon: "fas fa-undo-alt" },
-                        { id: 3,  titulo: 'Trasladar a otra dependencia',      icon: "fas fa-forward" },
+                        { id: 8,  titulo: 'Devolver a asignador dependencia', icon: "fas fa-backspace" },
+                        { id: 14, titulo: 'Aprobar para radicar', icon: "fas fa-thumbs-up" },
+                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" },
+                        { id: 15, titulo: 'Devolver para revisión', icon: "fas fa-undo-alt" },
+                        { id: 3,  titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
                     ]  
                     break
 
                 case "DEVUELTO_REVISION":
                     items = [
                         { id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" },                    
-                        { id: 6,  titulo: 'Crear borrador',       icon: "fas fa-file-import" },                 
+                        { id: 6,  titulo: 'Crear borrador', icon: "fas fa-file-import" },                 
                     ]
                     break
                 
@@ -294,9 +293,9 @@ let items_gestion = function(componente, contexto) {
 
                 default:
                     items = [
-                        { id: 6,  titulo: 'Crear borrador',                            icon: "fas fa-file-import" },                                            
-                        { id: 11, titulo: 'Anexar archivo de gestión',                 icon: "fas fa-file" },
-                        { id: 12, titulo: 'Crea comentario',                           icon: "fas fa-comments" },
+                        { id: 6,  titulo: 'Crear borrador', icon: "fas fa-file-import" },                                            
+                        { id: 11, titulo: 'Anexar archivo de gestión', icon: "fas fa-file" },
+                        { id: 12, titulo: 'Crea comentario', icon: "fas fa-comments" },
                     ]
 
                     if (componente.parametros.total_tiempo == 0) {
@@ -305,7 +304,7 @@ let items_gestion = function(componente, contexto) {
                     
                     //if ( borrador_existe ) {
                         items.push({ id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" })
-                        items.push({ id: 7,  titulo: 'Radicar borrador'    , icon: "fas fa-edit" })
+                        items.push({ id: 7,  titulo: 'Radicar borrador', icon: "fas fa-edit" })
                     //}
                     break
             }        
@@ -317,7 +316,7 @@ let items_gestion = function(componente, contexto) {
 
 let items_borradores = function(componente, contexto) {    
     let items = [
-        { id: 100, titulo: 'SALIDA',  icon: "fas fa-angle-double-right" },
+        { id: 100, titulo: 'SALIDA', icon: "fas fa-angle-double-right" },
         { id: 101, titulo: 'INTERNO', icon: "fas fa-angle-double-down" },
     ]
 

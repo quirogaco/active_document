@@ -1,6 +1,6 @@
 import gestion_acciones_elementos from "../gestion_acciones_elementos/gestion_acciones_elementos.js"
-import gestion_pantalla_metodos   from "./gestion_pantalla_metodos.js"
-import gestion_pantalla_ventanas  from "./gestion_pantalla_ventanas.js" 
+import gestion_pantalla_metodos from "./gestion_pantalla_metodos.js"
+import gestion_pantalla_ventanas from "./gestion_pantalla_ventanas.js" 
 
 const barra_elementos = function(forma) {
     let barra_botones = [                   

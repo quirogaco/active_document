@@ -64,8 +64,6 @@ import DxValidator, {
     DxRequiredRule,    
 } from 'devextreme-vue/validator'
 import notify from 'devextreme/ui/notify'
-import { locale, loadMessages, formatMessage } from 'devextreme/localization'
-
 import fuenteDatos from '../../../remoto/fuenteDatos.js'
 
 let usuario_gestion =  {
@@ -93,15 +91,13 @@ let usuario_gestion =  {
         },  
     },
 
-    mounted() {
-        console.log("usuario_gestion", this.datos)
-    },
+    mounted() {},
 
     methods: {
         retorna: function() {
             this.indicador_visible = false
             let acciones_grid = ["ASIGNAR_RESPONSABLE"]
-            let grid          = window.$grid_gestion   
+            let grid = window.$grid_gestion   
             if (acciones_grid.indexOf(this.datos.accion) > -1) {
                 grid.refresh()  
                 this.$router.push({path: "gestion_basica_grid"})  
@@ -115,16 +111,26 @@ let usuario_gestion =  {
             // Indicador de tareas
             indicador_visible: false,
 
-            //fuente         : [], 
-            fuente         : fuenteDatos.creaFuenteDatosUniversal("select", "usuario", this.datos.fuente, null, [], []),
-            comentario     : null,
-            usuario        : null,
+            //fuente: [], 
+            fuente: fuenteDatos.creaFuenteDatosUniversal(
+                "select", 
+                "usuario", 
+                this.datos.fuente, 
+                null, 
+                [], 
+                []
+            ),
+            comentario: null,
+            usuario: null,
             accion_opciones: {
                 text: this.datos.boton_mensaje,
                 type: "success",
                 onClick: () => {
-                    console.log("datos:", this.comentario, this.datos.elementos, this.datos.accion)
-                    if ( (this.comentario == null) || (this.comentario == "") || (this.usuario == null) ) {
+                    if ( 
+                        (this.comentario == null) || 
+                        (this.comentario == "") || 
+                        (this.usuario == null) 
+                    ) {
                         notify(
                             {
                                 message: "Comentario y usuario son obligatorios",                             
@@ -143,12 +149,19 @@ let usuario_gestion =  {
                             peticiones: this.datos.elementos,
                             accion    : this.datos.accion,
                             rapida    : this.datos.rapida
-                        }
+                        };
                         this.indicador_visible = true
-                        let urlCompleta = window.$direcciones.servidorDatos + '/gestion_acciones'    
-                        window.$f["http"].llamadoRestPost( urlCompleta, parametros, this.retorna, "")   
-                        this.$parent.$_instance.option("disabled", true)
-
+                        let urlCompleta = (
+                            window.$direcciones.servidorDatos + 
+                            '/gestion_acciones'
+                        );    
+                        window.$f["http"].llamadoRestPost( 
+                            urlCompleta, 
+                            parametros, 
+                            this.retorna, 
+                            ""
+                        );   
+                        this.$parent.$_instance.option("disabled", true);
                     }
                 }
             }

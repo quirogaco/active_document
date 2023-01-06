@@ -1,6 +1,7 @@
 
 let metodos = {
-    'dobleClick':  function(e) {              
+    'dobleClick':  function(e) {  
+        window.scroll(0,0);            
         $lib.call_component_storage(
             "gestion_pantalla",
             {"datos": {

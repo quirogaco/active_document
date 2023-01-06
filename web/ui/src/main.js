@@ -151,7 +151,6 @@ let opciones   = busqueda.split('=');
 let formularios = ["anonimo", "natural", "juridica", "consulta"];
 let ruta       = opciones[0];
 let formulario = opciones[1];
-console.log("busqueda:", busqueda, ruta, formulario)
 
 // IMPRESIÓN
 import printjs from 'print-js';

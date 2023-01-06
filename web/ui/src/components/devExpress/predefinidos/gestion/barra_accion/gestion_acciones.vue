@@ -60,7 +60,6 @@ let barra_elementos = function(that) {
         })               
     };
 
-    console.log("elementos:", elementos)
     return elementos;
 }
 

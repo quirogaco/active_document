@@ -87,7 +87,10 @@ const ver_ventanas = function(forma) {
     }
 
     // Ocultar borrador
-    if ( (forma.parametros.borrador_id == "") || (forma.parametros.borrador_id == undefined) ) {
+    if ( 
+            (forma.parametros.borrador_id == "") || 
+            (forma.parametros.borrador_id == undefined) 
+    ) {
         ocultar.push("borrador")
         ocultar.push("ambos")  
         ocultar.push("ver_borrador")      

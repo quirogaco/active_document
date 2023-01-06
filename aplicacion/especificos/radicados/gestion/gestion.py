@@ -29,7 +29,7 @@ def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
     if es_pqrs == "PQRSD":
         crea_gestion_base.actualiza_radicado(
             radicado_id, 
-            "VENTANILLA", 
+            "PQRDS", 
             "", 
             id_tarea
         )        
@@ -67,7 +67,7 @@ def pqrs_gestion(estructura, accion, datos, tarea, archivos, id_tarea):
     else:
         crea_gestion_base.actualiza_radicado(
             radicado_id, 
-            "VENTANILLA", 
+            "PQRSD", 
             id_tarea
         )
 
@@ -90,7 +90,7 @@ def asigna_pqrs(accion, datos={}, archivos=[], id_tarea=""):
     if es_ventanilla == "SI":
         crea_gestion_base.actualiza_radicado(
             radicado_id, 
-            "VENTANILLA", 
+            "DOCUMENTO", 
             comentario_traslado, 
             id_tarea
         )        
