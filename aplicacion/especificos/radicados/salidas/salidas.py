@@ -6,8 +6,9 @@ import pprint, datetime, random
 from librerias.datos.sql import sqalchemy_insertar, sqalchemy_leer
 from aplicacion.comunes  import pdf_notifica
 from aplicacion.comunes  import indexar_datos
-
+from librerias.datos.elastic import elastic_operaciones
 from aplicacion.especificos.radicados.comunes import datos_radicados
+from aplicacion.especificos.radicados.comunes import manejo_terceros
 from aplicacion.especificos.radicados.comunes import radicado_global
 
 def crear_radicado(datos_basicos, datos):
@@ -21,26 +22,30 @@ from . import maneja_gestion
 def radicar(accion, datos={}, archivos=[], id_tarea=""):
     datos_radicado = datos["datos"]
     #"""
-    print("")
-    print("...............")    
-    print("SALIDA - > RADICAR:", accion, id_tarea)
-    pprint.pprint(datos)
-    print("SALIDA - > RADICAR ARCHIVOS:")
-    pprint.pprint(archivos)
+    # print("")
+    # print("...............")    
+    # print("SALIDA - > RADICAR:", accion, id_tarea)
+    # pprint.pprint(datos)
+    # print("SALIDA - > RADICAR ARCHIVOS:")
+    # pprint.pprint(archivos)
     #"""
 
+    datos_radicado = datos["datos"]
+    
     # Datos de operacion
-    datos_basicos = datos_radicados.datos_basicos("SALIDA", "SALIDA", datos_radicado, id_tarea)
-    datos_extendidos = datos_radicados.datos_extendidos("SALIDA", "SALIDA", datos_radicado, id_tarea)
+    datos_basicos = datos_radicados.datos_basicos(
+        "SALIDA", 
+        "SALIDA", 
+        datos_radicado, 
+        id_tarea
+    )
+    datos_extendidos = datos_radicados.datos_extendidos(
+        "SALIDA", 
+        "SALIDA", 
+        datos_radicado, 
+        id_tarea
+    )
     datos_tercero = datos_radicados.datos_tercero(datos_radicado)
-    print("")
-    print("")
-    print("DATOS TERCERO.............")
-    pprint.pprint(datos_radicado)
-    print("----------------")
-    pprint.pprint(datos_tercero)
-    print("...............")
-    print("")
     datos_copia = datos_radicados.datos_copia(datos_radicado)
 
     # Creación del radicado
@@ -49,6 +54,28 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     radicado = crear_radicado(datos_basicos, datos)
     radicado_id = radicado["id"]
 
+    # creacion de tercero
+    tercero = manejo_terceros.crear_registro_tercero(
+        "SALIDA", 
+        datos_tercero, 
+        radicado_id, 
+        id_tarea
+    )
+    elastic_operaciones.indexar_registro("radicados_salida", radicado_id)
+
+
+    # Genera pdf y notifica
+    # Datos del radicado, todavia no se a indexado
+    datos_completos = {}
+    datos_completos.update(radicado)
+    datos_completos.update(datos_basicos)
+    datos_completos.update(datos_extendidos)
+    datos_completos.update(tercero)
+    datos_completos["fecha_radicado"] = str(
+        datos_completos["fecha_radicado"]
+    )[0:19]
+    # lo cambia el id de tercero
+    datos_completos["id"] = radicado_id
     datos_cola = {
         "tarea_id": id_tarea,
         "radicado_tipo": "SALIDA",
@@ -58,14 +85,6 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         "radicado": radicado,
     }
     radicado_global.invoca_tercero_log_anexos_copias(datos_cola)
-
-    # Genera pdf y notifica
-    # Datos del radicado, todavia no se a indexado
-    datos_completos = {}
-    datos_completos.update(radicado)
-    datos_completos.update(datos_basicos)
-    datos_completos.update(datos_extendidos)
-    datos_completos.update(datos_tercero)
 
     # Lee información gestión
     gestion_id = datos_radicado.get("gestion_id", None)

@@ -25,12 +25,12 @@
         >
 
             <DxSimpleItem
-                data-field      = "codigo"
+                data-field      = "comentario"
                 editor-type     = "dxTextBox"
                 :editor-options = "opciones_codigo"
             >
-                <DxLabel text="Correo electronico"/>
-                <DxRequiredRule message="Correo electronico es obligatorio"/> 
+                <DxLabel text="Motivo de la anulación"/>
+                <DxRequiredRule message="Motivo es obligatorio"/> 
                 <DxStringLengthRule
                     :max="256"
                     message="Maximo 256 caracteres"
@@ -43,10 +43,10 @@
 
         <div class="centered">
             <DxButton
-                @click = "firmar()"
-                icon   = "far fa-paper-plane"
+                @click = "anular()"
+                icon   = "fas fa-ban"
                 :text   = "opciones.titulo_boton"
-                type   = "success"  
+                type   = "danger"  
             />
         </div>
 
@@ -128,7 +128,7 @@ let ventana =  {
             this.indicador_visible = false
         },
 
-        firmar(e) {
+        anular(e) {
             let valido = this.forma.validate().isValid
             let datos  = this.forma.option("formData")
             if ( valido == true) {

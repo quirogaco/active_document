@@ -79,13 +79,9 @@ let grid =  {
             "nro_radicado",
             {sortOrder: 'asc', sortIndex: 0} 
         );
-        // this.dataGrid.instance.columnOption('FirstName', {  
-        //     sortOrder: 'asc',  
-        //     sortIndex: 0  
-        // });  
-        window.$peticion_datos = {}
+        window.$peticion_datos = {};
         setTimeout(() => {
-            window.$grid_gestion = this.$refs.grid.instance
+            window.$grid_gestion = this.$refs.grid.instance;
         }, 3000);
         this.notify = notify                  
     },

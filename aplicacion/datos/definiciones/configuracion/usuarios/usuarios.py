@@ -14,20 +14,20 @@ from aplicacion.datos.definiciones._comunes import elementos_comunes
 
 def roles_especificos(r_):
     roles = []
-    if (r_.id == r_.jefe_id):
-        roles.append("JEFE")
+    # if (r_.id == r_.jefe_id):
+    #     roles.append("JEFE")
 
-    if (r_.id == r_.archivo_id):
-        roles.append("ARCHIVO")
+    # if (r_.id == r_.archivo_id):
+    #     roles.append("ARCHIVO")
 
-    if (r_.id == r_.correspondencia_id):
-        roles.append("CORRESPONDENCIA")
+    # if (r_.id == r_.correspondencia_id):
+    #     roles.append("CORRESPONDENCIA")
 
-    if (r_.id == r_.pqrs_id):
-        roles.append("PQRSD")
+    # if (r_.id == r_.pqrs_id):
+    #     roles.append("PQRSD")
 
-    if roles:
-        print("roles_especificos:", r_.codigo, r_.nombre, roles)
+    # if roles:
+    #     print("roles_especificos:", r_.codigo, r_.nombre, roles)
 
     return roles
 

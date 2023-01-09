@@ -4,14 +4,8 @@
 import pprint, datetime, builtins, base64
 
 from librerias.datos.base    import globales
-from librerias.datos.sql     import sqalchemy_modificar, sqalchemy_leer
-from librerias.datos.sql     import sqalchemy_filtrar 
+from librerias.datos.sql     import sqalchemy_leer
 from librerias.datos.sql     import sqalchemy_comunes
-from librerias.datos.elastic import elastic_operaciones
-from librerias.utilidades    import basicas 
-
-from aplicacion.comunes                       import indexar_datos
-from aplicacion.especificos.archivos_acciones import acciones
 from aplicacion.especificos.gestion.acciones  import acciones_detalle
 from aplicacion.especificos.radicados.gestion import logs
 
@@ -56,7 +50,7 @@ def asignar_responsable(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : mensaje
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
     
     return {}
 
@@ -95,7 +89,7 @@ def devolver_dependencia_asignadora(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : comentario
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
         
     sesion.close()
 
@@ -126,7 +120,7 @@ def trasladar_dependencia(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : "SE TRASLADA A " + dependencia["pqrs_nombre"] + ", DE " + dependencia["nombre_completo"] + " - " + comentario
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
         
     return {}
 
@@ -139,6 +133,7 @@ def enviar_visto_bueno(accion, datos={}, archivo=[], id_tarea=""):
     responsable    = sqalchemy_leer.leer_un_registro("usuarios", responsable_id) 
     peticiones_id  = datos["peticiones"]
     comentario     = datos["comentario"]
+    print("enviar_visto_bueno-0:")
     for peticion_id in peticiones_id:
         # Modifica registro
         datos_modificados = {
@@ -147,6 +142,7 @@ def enviar_visto_bueno(accion, datos={}, archivo=[], id_tarea=""):
             "dependencia_id": dependencia_id
         }
         comunes_gestion.modifica_peticion(peticion_id, datos_modificados)
+        print("enviar_visto_bueno-1:")
 
         # Log de acción
         datos_log = {
@@ -156,7 +152,8 @@ def enviar_visto_bueno(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : "SE ENVIA A VISTO BUENO " + responsable["nombre"] + ", DE " + responsable["dependencia_nombre_completo"] + " - " + comentario
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
+        print("enviar_visto_bueno-0:")
     
     return {}
 
@@ -186,7 +183,7 @@ def devolver_revision(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : "SE DEVUELVE A REVISIÓN " + responsable["nombre"] + ", DE " + responsable["dependencia_nombre_completo"] + " - " + comentario
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
     
     return {}
 
@@ -218,7 +215,7 @@ def devolver_asignador(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : "SE DEVUELVE A ASIGANDOR " + responsable["nombre"] + ", DE " + responsable["dependencia_nombre_completo"] + " - " + comentario
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
 
     return {}
 
@@ -248,7 +245,7 @@ def aprobar_radicar(accion, datos={}, archivo=[], id_tarea=""):
             "detalle"        : "SE APRUEBA PARA RADICACIÓN " + responsable["nombre"] + ", DE " + responsable["dependencia_nombre_completo"] + " - " + comentario
         }
         # Log indexa la peticion
-        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
+        logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=True)
     
     return {}
 

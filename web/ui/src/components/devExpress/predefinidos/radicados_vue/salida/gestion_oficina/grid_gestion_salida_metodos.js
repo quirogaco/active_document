@@ -1,12 +1,17 @@
-
-import visores_archivo    from "../../../../../../librerias/visores_archivo.js"
+import visores_archivo 
+from "../../../../../../librerias/visores_archivo.js";
 
 let metodos = {
     onToolbarPreparing(e) {
         e.toolbarOptions.items.push({
             location: 'after',
-            template: 'firmarButton'
-        })                    
+            template: 'notificarButton'
+        })    
+        
+        // e.toolbarOptions.items.push({
+        //     location: 'after',
+        //     template: 'anularButton'
+        // })    
     },
 
     'columna_doble_click':  function(e) {
@@ -39,23 +44,41 @@ let metodos = {
         }
     },
 
-    'firmar':  function(e) {
+    'notificar':  function(e) {
         if (this.grid.getSelectedRowKeys().length > 0) {            
             this.emergente_key += 1;            
-            this.opciones_ventana.alto               = 300
-            this.opciones_ventana.ancho              = 800
-            this.opciones_ventana.visible            = true
-            this.opciones_ventana.accion             = "FIRMA_BORRADOR"
-            this.opciones_ventana.titulo_boton       = "Firmar electronicamente"
+            this.opciones_ventana.alto = 300;
+            this.opciones_ventana.ancho = 800;
+            this.opciones_ventana.visible = true;
+            this.opciones_ventana.accion = "NOTIFICAR";
+            this.opciones_ventana.titulo_boton = "Notificar via correo";
             // Información del registro
-            this.opciones_ventana.datos              = {
-                "firmar_ids": this.grid.getSelectedRowKeys()
+            this.opciones_ventana.datos = {
+                "notificar_ids": this.grid.getSelectedRowKeys()
             }
         }
         else {
-            this.notify("Seleccione al menos un radicado a firmar!", "warning") 
+            this.notify("Seleccione un radicado a notificar!", "warning");
         }
     },
+
+    // 'anular':  function(e) {
+    //     if (this.grid.getSelectedRowKeys().length > 0) {            
+    //         this.emergente_key_anula += 1;            
+    //         this.opciones_ventana_anula.alto = 300;
+    //         this.opciones_ventana_anula.ancho = 800;
+    //         this.opciones_ventana_anula.visible = true;
+    //         this.opciones_ventana_anula.accion = "ANULAR";
+    //         this.opciones_ventana_anula.titulo_boton = "Anular salida";
+    //         // Información del registro
+    //         this.opciones_ventana_anula.datos = {
+    //             "anula_ids": this.grid.getSelectedRowKeys()
+    //         }
+    //     }
+    //     else {
+    //         this.notify("Seleccione un radicado a anular!", "warning");
+    //     }
+    // },
 
     'icono_pdf_template': function(data) {
         let resultado = data.value

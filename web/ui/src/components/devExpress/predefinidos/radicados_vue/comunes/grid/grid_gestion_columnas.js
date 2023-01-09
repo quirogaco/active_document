@@ -56,7 +56,7 @@ let columnas = [
         dataType    : "string",        
         width       : 600,
         allowSorting: false   
-    },
+    }
 ]
 
 export default {

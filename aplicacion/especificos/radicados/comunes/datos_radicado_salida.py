@@ -28,15 +28,15 @@ campos_basicos_salida = [
 
 def radicado_consecutivo(tipo="SALIDAS"):
     filtros = [ [ "nombre", "=", tipo ] ]
-    entrada = sqalchemy_filtrar.filtrarOrdena(
+    salida = sqalchemy_filtrar.filtrarOrdena(
         estructura="consecutivos", 
         filtros=filtros, 
         ordenamientos=[]
     )[0]
-    consecutivo = entrada["consecutivo"] + 1
+    consecutivo = salida["consecutivo"] + 1
     sqalchemy_modificar.modificar_un_registro(
         "consecutivos", 
-        entrada["id"],
+        salida["id"],
         {"consecutivo": consecutivo}
     )
 
