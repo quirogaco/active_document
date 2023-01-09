@@ -51,16 +51,18 @@ let forma =  {
     },
 
     props: {
-        datos: ""   
+        //datos: ""   
     },
 
     mounted() {
-        this.indicador_visible = false
-        this.forma             = this.$refs.forma.instance            
-        this.barra             = this.$refs.barra.instance  
-        this.notify            = notify  
-        this.parametros        = JSON.parse(this.datos)
-        this.mostrar_botones()
+        this.indicador_visible = false;
+        this.forma = this.$refs.forma.instance;            
+        this.barra = this.$refs.barra.instance; 
+        this.notify = notify;
+        //this.parametros = JSON.parse(this.datos);
+        console.log(">>>>", $get_params("roles_formulario"))
+        this.parametros = $get_params("roles_formulario").datos;
+        this.mostrar_botones();
     },
 
     methods: pantalla_definiciones.metodos,
@@ -77,13 +79,22 @@ let forma =  {
             
             // Opciones CAMPOS
             opciones_opciones: {
-                dataSource       : fuenteDatos.creaFuenteDatosConsulta('select', null, 'opciones_sistema', 'opciones_sistema', [], []),
+                dataSource       : fuenteDatos.creaFuenteDatosConsulta(
+                    'select', 
+                    null, 
+                    'opciones_sistema', 
+                    'opciones_sistema', 
+                    [], 
+                    []
+                ),
                 displayValue     : "nombre",
                 displayExpr      : "nombre",
                 searchExpr       : "nombre",
                 valueExpr        : "id",
                 hideSelectedItems: true
-            }      
+            },
+            
+            datos: {}
         }
     }
 }

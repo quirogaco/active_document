@@ -82,9 +82,10 @@ let usuario_gestion =  {
 
     methods: {
         retorna: function(parametros) {
-            this.indicador_visible = false
-            window.$pantalla_gestion.opciones_ventana.visible = false
-            window.$pantalla_gestion.carga_borrador(parametros.archivo_id)
+            this.indicador_visible = false;
+            //window.$pantalla_gestion.opciones_ventana.visible = false;
+            window.$ventana_emergente.popup_visible = false;
+            window.$pantalla_gestion.carga_borrador(parametros.archivo_id);
         }
     },
 

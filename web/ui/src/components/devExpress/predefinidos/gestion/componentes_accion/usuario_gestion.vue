@@ -99,7 +99,7 @@ let usuario_gestion =  {
             let acciones_grid = ["ASIGNAR_RESPONSABLE"]
             let grid = window.$grid_gestion   
             if (acciones_grid.indexOf(this.datos.accion) > -1) {
-                grid.refresh()  
+                //grid.refresh()  
                 this.$router.push({path: "gestion_basica_grid"})  
             }
             this.$parent.$parent.$_instance.hide()

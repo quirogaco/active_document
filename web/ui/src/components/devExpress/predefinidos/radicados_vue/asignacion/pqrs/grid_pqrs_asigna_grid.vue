@@ -48,7 +48,12 @@ let grid =  {
 
     methods: grid_pqrs_asigna_metodos.metodos,
     
-    mounted() {},
+    mounted() {
+        this.$refs.grid.instance.columnOption(
+            "nro_radicado",
+            {sortOrder: 'asc', sortIndex: 0} 
+        );
+    },
 
     data() {
         return {

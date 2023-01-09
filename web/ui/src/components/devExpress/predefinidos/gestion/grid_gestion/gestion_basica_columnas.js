@@ -150,7 +150,7 @@ let columnas = [
         dataType      : "string",
         allowSorting  : true,
         allowFiltering: true,
-        width         : "110px"
+        width         : "120px"
     },
 
      // Radicado

@@ -12,17 +12,6 @@
             <div class="dx-fieldset">
 
                 <div class="dx-field">
-                    <div class="dx-field-label">Tipo de Respuesta:</div>
-                    <div class="dx-field-value">
-                        <DxRadioGroup
-                            :items="tipos"     
-                            v-model:value = "tipo"                       
-                        />
-                        
-                    </div>
-                </div>
-
-                <div class="dx-field">
                     <div class="dx-field-label">Comentario:</div>
                     <div class="dx-field-value">
                         <DxTextArea
@@ -49,6 +38,18 @@
 </template>
 
 <script>
+
+{/* <div class="dx-field">
+                    <div class="dx-field-label">Tipo de Respuesta:</div>
+                    <div class="dx-field-value">
+                        <DxRadioGroup
+                            :items="tipos"     
+                            v-model:value = "tipo"                       
+                        />
+                        
+                    </div>
+                </div> */}
+
 import { DxLoadPanel } from 'devextreme-vue/load-panel'
 import DxTextArea from 'devextreme-vue/text-area'
 import DxRadioGroup from 'devextreme-vue/radio-group';

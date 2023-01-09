@@ -30,32 +30,37 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     #"""
 
     # Datos de operacion
-    radicado                       = "S-2021-" + str(random.randint(0, 10000))
-    datos_radicado["nro_radicado"] = radicado    
-    datos_basicos    = datos_radicados.datos_basicos("SALIDA", "SALIDA", datos_radicado, id_tarea)
+    datos_basicos = datos_radicados.datos_basicos("SALIDA", "SALIDA", datos_radicado, id_tarea)
     datos_extendidos = datos_radicados.datos_extendidos("SALIDA", "SALIDA", datos_radicado, id_tarea)
-    datos_tercero    = datos_radicados.datos_tercero(datos_radicado)
-    datos_copia      = datos_radicados.datos_copia(datos_radicado)
+    datos_tercero = datos_radicados.datos_tercero(datos_radicado)
+    print("")
+    print("")
+    print("DATOS TERCERO.............")
+    pprint.pprint(datos_radicado)
+    print("----------------")
+    pprint.pprint(datos_tercero)
+    print("...............")
+    print("")
+    datos_copia = datos_radicados.datos_copia(datos_radicado)
 
     # Creación del radicado
     datos_basicos["fecha_radicado"] = datetime.datetime.now()
-    datos_basicos["atributos_"]     = datos_extendidos
-    radicado    = crear_radicado(datos_basicos, datos)
+    datos_basicos["atributos_"] = datos_extendidos
+    radicado = crear_radicado(datos_basicos, datos)
     radicado_id = radicado["id"]
 
     datos_cola = {
-        "tarea_id"     : id_tarea,
+        "tarea_id": id_tarea,
         "radicado_tipo": "SALIDA",
-        "radicado_id"  : radicado_id,
+        "radicado_id": radicado_id,
         "tercero_datos": datos_tercero,
-        "archivos"     : archivos,
-        "radicado"     : radicado,
+        "archivos": archivos,
+        "radicado": radicado,
     }
     radicado_global.invoca_tercero_log_anexos_copias(datos_cola)
 
     # Genera pdf y notifica
     # Datos del radicado, todavia no se a indexado
-    # 
     datos_completos = {}
     datos_completos.update(radicado)
     datos_completos.update(datos_basicos)

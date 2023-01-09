@@ -82,10 +82,11 @@ let rutas_componentes = {
     // GESTION #
     // ############################
     //'gestion_basica_grid'  : () => import('../components/devExpress/predefinidos/gestion/gestion_basica_grid.js'),
-    'gestion_basica_grid'  : () => import('../components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'),
-    'gestion_pantalla'     : () => import('../components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'),
-    'tablero_general'      : () => import('../components/devExpress/tablero_control/tablero_general.vue'),
-
+    'gestion_basica_grid': () => import('../components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'),
+    'gestion_pantalla': () => import('../components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'),
+    'tablero_general': () => import('../components/devExpress/tablero_control/tablero_general.vue'),
+    'grid_gestion_salida': () => import('../components/devExpress/predefinidos/radicados_vue/salida/gestion_oficina/grid_gestion_salida.vue'),
+    
     // ######
     // PQRS #
     // ######

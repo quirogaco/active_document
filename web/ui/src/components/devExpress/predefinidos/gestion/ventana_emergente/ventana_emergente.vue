@@ -94,11 +94,12 @@ let ventana =  {
     },
     
     mounted() {
-        this.popup_visible = ref(this.opciones.visible)
+        this.popup_visible = ref(this.opciones.visible);
+        window.$ventana_emergente = this;
         let that = this;
         switch (this.opciones.accion) {
             case "RADICAR_DOCUMENTO":
-                this.datos = JSON.stringify(this.opciones)
+                this.datos = JSON.stringify(this.opciones);
                 break; 
                 
             case "CONSULTA_RADICADO":
@@ -106,11 +107,11 @@ let ventana =  {
                 break; 
 
             case "CONSULTA_GESTION":
-                this.datos = JSON.stringify({"datos": this.opciones})
+                this.datos = JSON.stringify({"datos": this.opciones});
                 break; 
             
             default:
-                this.datos = this.opciones
+                this.datos = this.opciones;
                 break;
         }       
     },

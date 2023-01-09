@@ -9,17 +9,16 @@ let metodos = {
     },
 
     'dobleClick':  function(e) {
-        let data = e.data
-        this.$router.push({
-            name: formulario,
-            params: {
-                "datos": JSON.stringify({
-                    "datos_id": data.id,
-                    "datos"   : data,
-                    "modo"    : "modificar"
-                })                
-            }
-        })
+        let data = e.data;
+        let datos = {
+            "datos": e.data,
+            "datos_id": data.id,
+            "modo": "modificar"
+        };
+        $lib.call_component_storage(
+            "roles_formulario",
+            {"datos": datos}
+        )
     },
 
     'crear':  function(e) {

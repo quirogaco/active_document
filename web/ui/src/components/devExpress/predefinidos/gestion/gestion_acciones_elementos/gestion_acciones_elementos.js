@@ -226,13 +226,14 @@ let items_gestion = function(componente, contexto) {
             ]
         }  
         else {
-            let etapa_estado    = componente.parametros.etapa_estado
-            let borrador_existe = componente.parametros.borrador_existe 
+            let etapa_estado = componente.parametros.etapa_estado
+            let borrador_existe = componente.parametros.borrador_existe;
+            console.log("GESTION: ", etapa_estado, borrador_existe) 
             switch (etapa_estado) {
                 case "ASIGNADO_DEPENDENCIA":
                     items = [
                         { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                        { id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
+                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
                     ]
                     break
                 
@@ -287,7 +288,8 @@ let items_gestion = function(componente, contexto) {
                 
                 case "APROBADO_RESPUESTA":
                     items = [
-                        { id: 7,  titulo: 'Radicar', icon: "fas fa-edit" },                        
+                        { id: 7,  titulo: 'Radicar', icon: "fas fa-edit" }, 
+                        { id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" }                       
                     ]
                     break
 

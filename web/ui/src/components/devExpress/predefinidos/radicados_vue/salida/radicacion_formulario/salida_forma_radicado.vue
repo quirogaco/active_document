@@ -31,11 +31,12 @@ let formulario =  {
     props: forma_general.forma_propiedades({}),
 
     mounted() {
-        forma_general.forma_funciones.montado_general(this)               
+        forma_general.forma_funciones.montado_general(this);
+        console.log("parametros:", this.parametros)            
     },
 
     data() {        
-        return forma_campos.campos_forma(this, basicas)        
+        return forma_campos.campos_forma(this, basicas);   
     },
 
     methods: forma_definiciones.metodos

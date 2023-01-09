@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
@@ -8,15 +8,15 @@ from librerias.datos.base import globales
 gestion_basica = {
     "definicion": {
         "id"    : "53",
-        "nombre": "GESTI覰 - Gesti髇 de peticiones/tramites"
+        "nombre": "GESTI脫N - Gesti贸n de peticiones/tramites"
     },
 
     "grid": {
         "componente": "gestion_basica_grid",     
-        "texto"     : "Gesti髇 de Peticiones/Tramites",
+        "texto"     : "Gesti贸n de Peticiones/Tramites",
         "icon"      : "",      
         "navegar"   : "si",
-        "padre"     : "Gesti髇",
+        "padre"     : "Gesti贸n",
         "tipo"      : "importar",
     },
 
@@ -27,15 +27,37 @@ gestion_basica = {
     }
 }
 
+salidas_gestion = {
+    "definicion": {
+        "id"    : "533",
+        "nombre": "GESTI脫N - Manejo de salidas"
+    },
+
+    "grid": {
+        "componente": "grid_gestion_salida",     
+        "texto"     : "Gesti贸n de Salidas oficina",
+        "icon"      : "",      
+        "navegar"   : "si",
+        "padre"     : "Gesti贸n",
+        "tipo"      : "importar",
+    },
+
+    # "forma": {
+    #     "componente": "gestion_pantalla",      
+    #     "texto"     : "Consulta Radicados",
+    #     "tipo"      : "importar"
+    # }
+}
+
 gestion_pantalla = {
     "definicion": {
         "id"    : "553",
-        "nombre": "GESTI覰 - Gesti髇 peticiones"
+        "nombre": "GESTI脫N - Gesti贸n peticiones"
     },
 
     "forma": {
         "componente": "gestion_pantalla",     
-        "texto"     : "Gesti髇 peticiones",
+        "texto"     : "Gesti贸n peticiones",
         "tipo"      : "importar",
     }
 }
@@ -43,15 +65,15 @@ gestion_pantalla = {
 tablero_general = {
     "definicion": {
         "id"    : "54",
-        "nombre": "GESTI覰 - Gesti髇 seguimiento general"
+        "nombre": "GESTI脫N - Gesti贸n seguimiento general"
     },
 
     "grid": {
         "componente": "tablero_general",     
-        "texto"     : "Gesti髇 seguimiento general",
+        "texto"     : "Gesti贸n seguimiento general",
         "icon"      : "",      
         "navegar"   : "si",
-        "padre"     : "Gesti髇",
+        "padre"     : "Gesti贸n",
         "tipo"      : "importar",
     }
 }
@@ -59,5 +81,6 @@ tablero_general = {
 opciones = [
     gestion_basica,
     tablero_general,
-    gestion_pantalla
+    gestion_pantalla,
+    salidas_gestion
 ]

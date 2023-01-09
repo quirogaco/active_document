@@ -84,9 +84,9 @@ let grid =  {
         //     sortIndex: 0  
         // });  
         window.$peticion_datos = {}
-        // setTimeout(() => {
-        //     window.$grid_gestion = this.$refs.grid.instance
-        // }, 3000);
+        setTimeout(() => {
+            window.$grid_gestion = this.$refs.grid.instance
+        }, 3000);
         this.notify = notify                  
     },
 

@@ -1,4 +1,4 @@
-<template src="./grid_ventanilla_salida_plantilla.html">
+<template src="./grid_gestion_salida_plantilla.html">
 </template>
 
 <script>
@@ -21,12 +21,12 @@ import notify from 'devextreme/ui/notify'
 import fuenteDatos from '../../../../remoto/fuenteDatos.js'
 
 // Firmado
-import ventana_emergente_firma from './ventana_emergente_firma/ventana_emergente_firma.vue'
+import ventana_emergente_firma from './ventana_emergente_gestion/ventana_emergente_gestion.vue'
 
 // Columnas
-import grid_ventanilla_salida_columnas from '../../comunes/grid/grid_ventanilla_salida_columnas.js'
+import grid_ventanilla_salida_columnas from '../../comunes/grid/grid_gestion_columnas.js'
 // Metodos
-import grid_ventanilla_salida_metodos from './grid_ventanilla_salida_metodos.js'
+import grid_ventanilla_salida_metodos from './grid_gestion_salida_metodos.js'
 
 // Grid de gestión
 let grid =  {
@@ -54,11 +54,8 @@ let grid =  {
     methods: grid_ventanilla_salida_metodos.metodos,
     
     mounted() {
-        this.grid = this.$refs.grid.instance
-        setTimeout(() => {
-            //window.$trd_grid = this.$refs.grid.instance
-        }, 3000);
-        this.notify = notify                          
+        this.grid = this.$refs.grid.instance;
+        this.notify = notify;                       
     },
 
     data() {

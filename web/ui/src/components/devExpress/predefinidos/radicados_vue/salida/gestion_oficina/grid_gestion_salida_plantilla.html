@@ -1,0 +1,56 @@
+
+<div class="container-fluid">
+
+    <ventana_emergente_firma                  
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+    
+    <div class="shadow p-1 mb-2 bg-light rounded">
+
+        <DxDataGrid
+            ref="grid"
+            :data-source             = "fuente_datos"
+            :selection               = "{ mode: 'single' }"
+            :remote-operations       = "true"
+            :allow-column-reordering = "true"
+            :row-alternation-enabled = "true"
+            :show-borders            = "true"
+            :columns                 = "columnas"
+            :word-wrap-enabled       = "true"
+            @toolbar-preparing       = "onToolbarPreparing"
+            @cell-dbl-click          = "columna_doble_click"
+        >
+            <DxSearchPanel
+                :visible                  = "true"                
+                :width                    = "300"
+                placeholder               = "Buscar"
+                :highlight-search-text    = "false"
+            />
+
+            <DxFilterRow 
+                :visible="true" 
+            />
+
+            <DxPager
+                :visible="true"
+                :allowed-page-sizes="pageSizes"
+                :display-mode="displayMode"
+                :show-page-size-selector="showPageSizeSelector"
+                :show-info="showInfo"
+                :show-navigation-buttons="showNavButtons"
+            />
+
+            <DxPaging 
+                :page-size="10"
+            />
+            
+            <template #icono_pdf_template="{ data }">
+                <div v-html="icono_pdf_template(data)"></div>
+            </template>       
+        
+        </DxDataGrid>
+
+    </div>
+
+</div>

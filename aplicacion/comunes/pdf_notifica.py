@@ -69,10 +69,10 @@ def notifica_salida(datos, id_tarea):
         insertar_anexos("radicados_salida", datos["nro_radicado"], datos["id"], ruta_pdf, "respuesta", id_tarea, "respuesta")
 
     # Notifica PDF Radicación
-    correos = datos["correo_electronico"]
-    if (correos not in ["", None]) and (ruta_pdf not in ["", None]) :
-        asunto = "Notifica Radicación con número: [" + datos["nro_radicado"] + "]"
-        pdf_envia.invoca_enviar_correo_radicado({"correos": correos, "asunto": asunto, "ruta_pdf": ruta_pdf, "ruta_jpg": ruta_jpg})
+    # correos = datos["correo_electronico"]
+    # if (correos not in ["", None]) and (ruta_pdf not in ["", None]) :
+    #     asunto = "Notifica Radicación con número: [" + datos["nro_radicado"] + "]"
+    #     pdf_envia.invoca_enviar_correo_radicado({"correos": correos, "asunto": asunto, "ruta_pdf": ruta_pdf, "ruta_jpg": ruta_jpg})
     
     return ruta_pdf, ruta_jpg  
 
