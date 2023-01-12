@@ -94,8 +94,15 @@ let usuario_gestion =  {
             // Indicador de tareas
             indicador_visible: false,
 
-            fuente         : fuenteDatos.creaFuenteDatosUniversal("select", "plantillas", "plantillas", null, [], []),
-            plantilla       : null,
+            fuente: fuenteDatos.creaFuenteDatosUniversal(
+                "select", 
+                "plantillas", 
+                "plantillas", 
+                null, 
+                [], 
+                []
+            ),
+            plantilla: null,
             accion_opciones: {
                 text: this.datos.boton_mensaje,
                 type: "success",

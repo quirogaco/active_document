@@ -3,7 +3,6 @@
 import pprint, datetime, random 
 
 from aplicacion.comunes import manejo_archivos
- 
 from . import pdf_envia
 from . import pdf_genera 
 
@@ -30,14 +29,15 @@ def insertar_anexos(
         tipo_relacion
     )
 
+
 # ENTRADA -> Genera plantilla, notifica por correo, y anexo notificación
 def notifica_entrada(datos, id_tarea):
     # Genera PLANTILLA
     ruta_pdf = "" 
     ruta_jpg = ""  
     plantillas_tipo = {
-        "ANONIMO" : "WEB_ANONIMO",
-        "NATURAL" : "WEB_NATURAL",
+        "ANONIMO": "WEB_ANONIMO",
+        "NATURAL": "WEB_NATURAL",
         "JURIDICA": "WEB_JURIDICA"
     }    
 
@@ -89,16 +89,23 @@ def notifica_entrada(datos, id_tarea):
             datos["nro_radicado"] + "]"
         )
         pdf_envia.invoca_enviar_correo_radicado({
+            "tipo": "ENTRADA", 
+            "id": datos["id"],
             "correos": correos, 
             "asunto": asunto, 
             "ruta_pdf": ruta_pdf, 
-            "ruta_jpg": ruta_jpg}
-        )
+            "ruta_jpg": ruta_jpg
+        })
     
     return ruta_pdf, ruta_jpg
 
+
+def anexos_salida():
+    pass
+
+
 # SALIDA -> Genera pdf, notifica por correo, y anexo notificación
-def notifica_salida(datos, id_tarea):    
+def notifica_salida(datos, id_tarea):        
     # Genera PDF
     ruta_pdf, ruta_jpg = pdf_genera.generacion_pdf_borrador(datos, id_tarea)
     print("notifica_salida:", ruta_pdf, ruta_jpg)
@@ -118,23 +125,23 @@ def notifica_salida(datos, id_tarea):
     # Notifica PDF Radicación
     correos = datos["correo_electronico"]
     # FISICA,ELECTRONICA,DIGITAL
-    if (
-        ("ELECTRONICA" in datos["tipo_firma"])  or 
-        ("DIGITAL" in datos["tipo_firma"])
-    ):
+    if  ("DIGITAL" in datos["tipo_firma"]):
         if (correos not in ["", None]) and (ruta_pdf not in ["", None]) :
             asunto = (
                 "Notifica Radicación con número: [" + 
                 datos["nro_radicado"] + "]"
             )
             pdf_envia.invoca_enviar_correo_radicado({
-                "correos": correos, 
+                "tipo": "SALIDA", 
+                "id": datos["id"],
+                "correos": correos,
                 "asunto": asunto, 
                 "ruta_pdf": ruta_pdf, 
                 "ruta_jpg": ruta_jpg
             })
         
     return ruta_pdf, ruta_jpg  
+
 
 def pdf_notificacion(radicado_tipo, datos, id_tarea):
     # print("")

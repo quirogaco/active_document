@@ -81,18 +81,18 @@ async def ingreso_sistema(requerimiento: Request):
    
    # Valores iniciales
    registro_usuario = None
-   mensaje          = "Usuario invalido"     
-   resultado  = {
+   mensaje = "Usuario invalido"     
+   resultado = {
       "datos"  : {},
       "error"  : "si",
       "mensaje": mensaje   
    }   
 
    # Parametros de login
-   estado      = "INGRESADO"
+   estado = "INGRESADO"
    ip_peticion = requerimiento.client.host  
-   codigo      = parametros["codigo"]
-   clave       = parametros["clave"]
+   codigo = parametros["codigo"]
+   clave = parametros["clave"]
    print('/ingreso_sistema', codigo, clave)
 
    if codigo.find("*") > -1:
@@ -100,7 +100,7 @@ async def ingreso_sistema(requerimiento: Request):
       registro_usuario = ingreso_local(codigo, clave)
       if (registro_usuario == None):
          mensaje = "Usuario NO registrado en la APLICACION"
-         estado  = "NEGADO"   
+         estado = "NEGADO"   
    else:
       # Usuario directorio activo
       da = directorio_activo.validar_usuario(codigo, clave, ldap_ip, ldap_puerto)
@@ -108,16 +108,27 @@ async def ingreso_sistema(requerimiento: Request):
          registro_usuario = ingreso_directorio(codigo, clave)
          if (registro_usuario == None):
             mensaje = "Usuario NO registrado en la APLICACION"
-            estado  = "NEGADO"   
+            estado = "NEGADO"   
       else:
          mensaje = "Usuario NO registrado en la ENTIDAD"
-         estado  = "NEGADO"   
+         estado = "NEGADO"   
 
-   if (registro_usuario != None):    
-      mensaje            = ""   
-      datos              = datos_usuario(registro_usuario)  
-      resultado["error"] = "no" 
-      resultado["datos"] = datos
+   if (registro_usuario != None):   
+      if (len(registro_usuario["roles_ids"]) > 0): 
+         mensaje = ""   
+         datos = datos_usuario(registro_usuario)
+         resultado["error"] = "no" 
+         resultado["datos"] = datos
+      else:
+         if codigo not in ["JEFE*", "ENLACE*", "PROFESIONAL*"]:
+            mensaje = "Usuario NO tiene ROLES asignados"
+            estado = "NEGADO" 
+            resultado["mensaje"] = mensaje
+         else:
+            mensaje = ""   
+            datos = datos_usuario(registro_usuario)
+            resultado["error"] = "no" 
+            resultado["datos"] = datos
    else:
       resultado["mensaje"] = mensaje    
 
@@ -125,6 +136,6 @@ async def ingreso_sistema(requerimiento: Request):
 
    resultado["mensaje"] = mensaje
 
-   pprint.pprint(resultado)
+   pprint.pprint(registro_usuario)
 
    return resultado

@@ -1,10 +1,14 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-15 -*-
-
 import pprint, datetime, random
 
 from aplicacion.datos.redis import redis_datos
-from librerias.datos.sql import sqalchemy_modificar, sqalchemy_leer, sqalchemy_filtrar, sqalchemy_insertar
+from librerias.datos.sql import (
+    sqalchemy_modificar, 
+    sqalchemy_leer, 
+    sqalchemy_filtrar, 
+    sqalchemy_insertar
+)
 from librerias.datos.elastic import elastic_operaciones
 
 from aplicacion.comunes import indexar_datos
@@ -16,7 +20,11 @@ def indexa_peticion(gestion, peticion_id):
     elastic_operaciones.indexar_registro("peticiones", peticion_id)
     # Actualiza ENTRADA
     if gestion["origen_tipo"] == "ENTRADA":
-        indexar_datos.indexar_estructura("radicados_entrada", gestion["origen_id"], retardo=120)
+        indexar_datos.indexar_estructura(
+            "radicados_entrada", 
+            gestion["origen_id"], 
+            retardo=120
+        )
 
 # Modifica registro de gestión 
 def modifica_peticion(gestion, peticion_id, datos):
@@ -29,7 +37,10 @@ def actualiza(radicado_datos, peticion_id, id_tarea):
     # Trae petición
     gestion = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)
     # Trae radicado Entrada     
-    radicado = sqalchemy_leer.leer_un_registro("radicados_entrada", gestion["origen_id"])
+    radicado = sqalchemy_leer.leer_un_registro(
+        "radicados_entrada", 
+        gestion["origen_id"]
+    )
 
     print("")
     print("")
@@ -45,7 +56,10 @@ def actualiza(radicado_datos, peticion_id, id_tarea):
         # Actualiza petición
         atributos_["finalizado"] = {
             "fecha_respuesta": datetime.datetime.now(),        
-            "finalizado_comentario": "CONTESTADO CON RADICADO [" + radicado_datos["nro_radicado"] + "] ",
+            "finalizado_comentario": (
+                "CONTESTADO CON RADICADO [" + 
+                radicado_datos["nro_radicado"] + "] "
+            ),
             "finalizado_en": datetime.datetime.now(),        
             "fecha_respuesta" : datetime.datetime.now()
         }
@@ -60,7 +74,10 @@ def actualiza(radicado_datos, peticion_id, id_tarea):
             "accion": "ASIGNAR_RESPONSABLE",
             "destinatario_id": datos_tarea['_usuario_']['id'],     
             "id": peticion_id, 
-            "detalle": "RADICA SALIDA CON NRO [" + radicado_datos["nro_radicado"] + "] "
+            "detalle": (
+                "RADICA SALIDA CON NRO [" + 
+                radicado_datos["nro_radicado"] + "] "
+            )
         }
         logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)    
         
@@ -106,7 +123,10 @@ def actualiza(radicado_datos, peticion_id, id_tarea):
             'origen_role'  : 'padre',
             'tipo_relacion': 'respuesta'
         }
-        sqalchemy_insertar.insertar_registro_estructura("archivos_relacion", datos_relacion)
+        sqalchemy_insertar.insertar_registro_estructura(
+            "archivos_relacion", 
+            datos_relacion
+        )
 
     # ENTRADA -> Log del radicado 
     accionante_id   = datos_tarea['_usuario_']['id']

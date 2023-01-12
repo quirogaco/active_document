@@ -6,7 +6,7 @@ const respuesta_tipo = function(id=null, atributos={}) {
         "fuente"     : [
             {"id": "FINAL",      "nombre": "FINAL"},
             {"id": "PARCIAL",    "nombre": "PARCIAL"},
-            {"id": "INCOMPLETA", "nombre": "INCOMPLETA"}
+            //{"id": "INCOMPLETA", "nombre": "INCOMPLETA"}
         ],  
         "valor"      : "FINAL",
         "obligatorio": true,

@@ -3,10 +3,10 @@
 
 import pprint, datetime, builtins, base64
 
-from librerias.datos.sql     import sqalchemy_modificar, sqalchemy_leer
+from librerias.datos.sql import sqalchemy_modificar, sqalchemy_leer
 from librerias.datos.elastic import elastic_operaciones
 
-from aplicacion.comunes                       import indexar_datos
+from aplicacion.comunes import indexar_datos
 from aplicacion.especificos.archivos_acciones import acciones
 
 # Modifica registro de gestión 
@@ -16,7 +16,11 @@ def modifica_peticion(peticion_id, datos):
 
     gestion = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)
     if gestion["origen_tipo"] == "ENTRADA":
-        indexar_datos.indexar_estructura("radicados_entrada", gestion["origen_id"], retardo=120)
+        indexar_datos.indexar_estructura(
+            "radicados_entrada", 
+            gestion["origen_id"], 
+            retardo=120
+        )
 
 
 def peticion_real(peticion_id):

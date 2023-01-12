@@ -2,13 +2,15 @@
 # -*- coding: iso-8859-15 -*-
 import pprint, datetime, random 
 
+from librerias.datos.sql import sqalchemy_leer
+from librerias.datos.archivos import leer_archivo
 from aplicacion.especificos.configuracion_general import configuracion_general
-from aplicacion.trabajadores      import utilidades
+from aplicacion.trabajadores import utilidades
 from aplicacion.trabajadores_base import radicados_celery
-from librerias.email              import email
+from librerias.email import email
 
 # Envia correo notificando radicado
-def notificar_correo(correos, asunto, pdf_ruta, jpg_ruta):
+def notificar_correo(correos, asunto, pdf_ruta, jpg_ruta, anexos=[]):
     #de             = "quirogaco@gmail.com"
     #clave          = "sreojrjewsjkxnml"
      #direccion_smtp = "smtp.gmail.com"
@@ -39,9 +41,10 @@ def notificar_correo(correos, asunto, pdf_ruta, jpg_ruta):
         """
 
         # Información correo
-        para           = correos.split(",")
-        asunto         = asunto     
-        archivos       = [ pdf_ruta]
+        para = correos.split(",")
+        asunto = asunto     
+        #archivos       = list(set([pdf_ruta] + anexos))
+        archivos = anexos
         
         # Envio de correo
         mensaje = email.mensaje_imagen(
@@ -63,7 +66,30 @@ def notificar_correo(correos, asunto, pdf_ruta, jpg_ruta):
 
 # Funcion invocado desde celery
 def enviar_correo_radicado(datos={}):
-    notificar_correo(datos["correos"], datos["asunto"], datos["ruta_pdf"], datos["ruta_jpg"])
+    tipo = datos.get("tipo", "ENTRADA") 
+    radicado_id = datos.get("id", None)
+    if tipo == "ENTRADA":
+        radicado = sqalchemy_leer.leer_un_registro(
+            "radicados_entrada", 
+            radicado_id
+        )
+    else:
+        radicado = sqalchemy_leer.leer_un_registro(
+            "radicados_salida", 
+            radicado_id
+        ) 
+
+    anexos = []
+    for archivo in radicado["archivos"]:
+        anexos.append( leer_archivo.salva_archivo_minio(archivo["id"]))
+
+    notificar_correo(
+        datos["correos"], 
+        datos["asunto"], 
+        datos["ruta_pdf"], 
+        datos["ruta_jpg"],
+        anexos
+    )
 
 # Función que invoca llamado celery
 def invoca_enviar_correo_radicado(datos):
@@ -71,5 +97,6 @@ def invoca_enviar_correo_radicado(datos):
         'radicados', 
         parametros={
             "datos": datos
-        }
+        },
+        retardo=120
     ))

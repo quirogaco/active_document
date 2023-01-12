@@ -63,6 +63,7 @@ def buca_anexo_especifico_id(origen_id, tipo_anexo="notificacion"):
     
     return archivos
 
+
 def recupera_anexo_id(origen_id, tipo_anexo="notificacion"):
     anexo_id = ""    
     archivos = buca_anexo_especifico_id(origen_id, tipo_anexo)
@@ -71,13 +72,15 @@ def recupera_anexo_id(origen_id, tipo_anexo="notificacion"):
 
     return anexo_id
 
+
 def recupera_anexo_especifico_id(origen_id, tipo_anexo="notificacion"):
     nombre_archivo = ""    
-    archivos      = buca_anexo_especifico_id(origen_id, tipo_anexo)
+    archivos = buca_anexo_especifico_id(origen_id, tipo_anexo)
     if len(archivos) > 0:
         nombre_archivo = leer_archivo.salva_archivo_minio(archivos[0]["id"]) 
 
     return nombre_archivo
+
 
 def recupera_anexo_especifico_radicado(
     nro_radicado, 

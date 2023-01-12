@@ -29,7 +29,7 @@ def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
     if es_pqrs == "PQRSD":
         crea_gestion_base.actualiza_radicado(
             radicado_id, 
-            "PQRDS", 
+            "PQRSD", 
             "", 
             id_tarea
         )        

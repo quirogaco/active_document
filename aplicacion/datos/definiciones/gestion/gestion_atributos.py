@@ -30,14 +30,28 @@ def clase_radicado(_r):
     return _r._radicado.get("fuente", "VENTANILLA")
 
 def nro_radicado(_r):
-    carga_radicado(_r)
+    nro = ""
+    if (_r.origen_tipo == "ENTRADA"):
+        carga_radicado(_r)
+        nro = _r._radicado.get("nro_radicado", "")
+    elif (_r.origen_tipo == "SALIDA"):
+        nro = "BORRADOR"
+    elif (_r.origen_tipo == "INTERNO"):
+        nro = "BORRADOR"
     
-    return _r._radicado.get("nro_radicado", "")
+    return nro
 
 def fecha_radicado(_r):
-    carga_radicado(_r)
+    fecha = ""
+    if (_r.origen_tipo == "ENTRADA"):
+        carga_radicado(_r)
+        fecha = _r._radicado.get("fecha_radicado", "")
+    elif (_r.origen_tipo == "SALIDA"):
+        fecha = _r.gestion_inicio
+    elif (_r.origen_tipo == "INTERNO"):
+        fecha = _r.gestion_inicio
     
-    return _r._radicado.get("fecha_radicado", None)
+    return fecha
 
 def tercero_nombres_apellidos(_r):
     carga_radicado(_r)
@@ -66,7 +80,10 @@ def asunto(_r):
         asunto = _r._radicado.get("asunto", "")
     elif (_r.origen_tipo == "SALIDA"):
         salida_borrador = _r.atributos_.get("salida_borrador", {})
-        asunto          = salida_borrador.get("asunto", "")
+        asunto = salida_borrador.get("asunto", "")
+    elif (_r.origen_tipo == "INTERNO"):
+        interno_borrador = _r.atributos_.get("interno_borrador", {})
+        asunto = interno_borrador.get("asunto", "")
     
     return asunto
 

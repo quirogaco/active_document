@@ -153,15 +153,25 @@ let columnas = [
         width         : "120px"
     },
 
-     // Radicado
+     // Fecha radicado
      {
-        caption       : "Fecha de radicación",
+        caption       : "Fecha radicación / creación",
         dataField     : "fecha_radicado",
         dataType      : "date",
         allowSorting  : true,
         allowFiltering: true,
         width         : "130px",
         format        : 'y-MM-dd HH:MM'
+    },
+
+    // Asunto
+    {
+        caption       : "Asunto",
+        dataField     : "asunto",
+        dataType      : "string",         
+        width         : "200px",
+        allowSorting  : false,
+        allowFiltering: true,
     },
 
     // Fuente
@@ -217,16 +227,6 @@ let columnas = [
         dataType      : "string",         
         width         : "150px",
         allowSorting  : true,
-        allowFiltering: true,
-    },
-
-     // Asunto
-     {
-        caption       : "Asunto",
-        dataField     : "asunto",
-        dataType      : "string",         
-        width         : "120px",
-        allowSorting  : false,
         allowFiltering: true,
     },
 

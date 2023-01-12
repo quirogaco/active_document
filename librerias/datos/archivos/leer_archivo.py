@@ -102,11 +102,11 @@ def descarga_archivo(ruta):
 def leer_buffer_minio(archivo_id):
    registro_archivo  = sqalchemy_leer.leer_un_registro("archivos_anexos", archivo_id)
    #"""
-   print("")
-   print("----------------------------------")
-   pprint.pprint(registro_archivo)
-   print("----------------------------------")
-   print("")
+   # print("")
+   # print("----------------------------------")
+   # pprint.pprint(registro_archivo)
+   # print("----------------------------------")
+   # print("")
    #"""
    media_type         = mimetypes.guess_type(registro_archivo["nombre"])[0]
    buffer             = io.BytesIO()
@@ -120,11 +120,11 @@ def salva_archivo_minio_ruta(archivo_id, ruta_destino=""):
    if ruta_destino == "":
       ruta_destino = tempfile.gettempdir() + os.sep + basicas.uuidTexto() + "." + registro_archivo["tipo_archivo"]
    
-   print("")
-   print("----------ruta_destino  ----------")
-   pprint.pprint(ruta_destino)
-   print("----------------------------------")
-   print("")
+   # print("")
+   # print("----------ruta_destino  ----------")
+   # pprint.pprint(ruta_destino)
+   # print("----------------------------------")
+   # print("")
    with open(ruta_destino, 'wb') as archivo:
       archivo.write(buffer.getbuffer())
 

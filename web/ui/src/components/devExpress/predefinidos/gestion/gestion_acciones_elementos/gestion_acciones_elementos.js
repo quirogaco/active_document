@@ -1,7 +1,7 @@
 let elemento_parametros = function(elemento_id) {   
     let parametros = {}
     parametros["alto"]  = 400
-    parametros["ancho"] = 800
+    parametros["ancho"] = 1000
 
     //HABILITAR_RESPUESTA_RAPIDA
     switch (elemento_id) {
@@ -19,7 +19,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "DEVOLVER_DEPENDENCIA";   
             parametros["boton_mensaje"] = "Devolver"; 
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 700; 
+            parametros["ancho"]         = 1000; 
             break;
 
         case 3:
@@ -35,7 +35,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ENVIAR_VISTO_BUENO";   
             parametros["boton_mensaje"] = "Enviar";    
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
 
         case 5:
@@ -44,7 +44,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "FINALIZAR_MANUAL";   
             parametros["boton_mensaje"] = "Finalizar";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
 
         case 6:
@@ -53,7 +53,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "SELECCION_PLANTILLA";  
             parametros["boton_mensaje"] = "Crear borrador";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
         
         case 7:
@@ -71,7 +71,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "DEVOLVER_ASIGNADOR";   
             parametros["boton_mensaje"] = "Devolver";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
 
         case 9:
@@ -80,7 +80,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ASIGNA_TRD";  
             parametros["boton_mensaje"] = "Asignar";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
 
         case 10:
@@ -89,7 +89,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ASIGNA_TEMA_SUBTEMA";   
             parametros["boton_mensaje"] = "Asignar" ;    
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
 
         case 11:
@@ -98,7 +98,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ANEXA_ARCHIVO";  
             parametros["boton_mensaje"] = "Anexar";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;    
             
         case 12:
@@ -107,7 +107,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_COMENTARIO";   
             parametros["boton_mensaje"] = "Crear";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break; 
 
         case 13:
@@ -116,7 +116,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_COLABORATIVA";   
             parametros["boton_mensaje"] = "Solicitar ayuda cooperativa";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             parametros["fuente"]        = "usuarios";
             break;   
             
@@ -126,7 +126,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "APROBAR_RADICAR";  
             parametros["boton_mensaje"] = "Aprobar";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break;
 
         case 15:
@@ -135,7 +135,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "DEVOLVER_REVISION";
             parametros["boton_mensaje"] = "Devolver";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             break; 
 
         case 16:
@@ -152,7 +152,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["titulo"]        = "Consulta Radicado";
             parametros["accion"]        = "CONSULTA_RADICADO";   
             parametros["boton_mensaje"] = "";    
-            parametros["alto"]          = 800;
+            parametros["alto"]          = 1000;
             parametros["ancho"]         = 1200;
             break;
 
@@ -161,7 +161,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["titulo"]        = "Consulta datos gestión";
             parametros["accion"]        = "CONSULTA_GESTION";   
             parametros["boton_mensaje"] = "";     
-            parametros["alto"]          = 700;
+            parametros["alto"]          = 1000;
             parametros["ancho"]         = 1200;
             break;
         
@@ -172,7 +172,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_BORRADOR_SALIDA";
             parametros["boton_mensaje"] = "Crear borrador SALIDA";    
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             parametros["borrador"]      = true;
             break; 
 
@@ -183,7 +183,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_BORRADOR_INTERNO";
             parametros["boton_mensaje"] = "Crear borrador INTERNO";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 700;
+            parametros["ancho"]         = 1000;
             parametros["borrador"]      = true;
             break; 
 
@@ -210,7 +210,8 @@ let items_gestion = function(componente, contexto) {
                 { id: 1, titulo: 'Asignar responsable', icon: "fas fa-user-check" },
                 //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
                 { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" }          
+                { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
+                { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }          
             ]
         }
         else {
@@ -228,11 +229,14 @@ let items_gestion = function(componente, contexto) {
         else {
             let etapa_estado = componente.parametros.etapa_estado
             let borrador_existe = componente.parametros.borrador_existe;
-            console.log("GESTION: ", etapa_estado, borrador_existe) 
+            //console.log("GESTION: ", etapa_estado, borrador_existe) 
             switch (etapa_estado) {
                 case "ASIGNADO_DEPENDENCIA":
                     items = [
                         { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
+                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
+                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
+                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
                         //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
                     ]
                     break
@@ -258,15 +262,33 @@ let items_gestion = function(componente, contexto) {
                     break
 
                 case "DEVUELTO_ASIGNADORA":
-                    items = []
+                    items = [
+                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
+                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
+                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
+                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
+                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
+                    ]
                     break
                 
-                case "DEVUELTO_ASIGNADOR":
-                    items = []
+                case "DEVUELTO_ASIGNADOR":   
+                    items = [
+                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
+                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
+                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
+                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
+                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
+                    ]
                     break
                 
-                case "TRASLADO_DEPENDENCIA":
-                    items = []
+                case "TRASLADO_DEPENDENCIA":                    
+                    items = [
+                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
+                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
+                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
+                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
+                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
+                    ]
                     break
 
                 case "VISTO_BUENO":
@@ -326,7 +348,7 @@ let items_borradores = function(componente, contexto) {
 }
 
 export default {
-    items_gestion      : items_gestion,
-    items_borradores   : items_borradores,
+    items_gestion: items_gestion,
+    items_borradores: items_borradores,
     elemento_parametros: elemento_parametros
 }

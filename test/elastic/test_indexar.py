@@ -6,21 +6,32 @@ import pprint
 import configuracion_base
 
 from librerias.datos.elastic import elastic_operaciones
-from librerias.datos.sql     import sqalchemy_leer
-from librerias.datos.base    import globales
+from librerias.datos.sql import sqalchemy_leer
+from librerias.datos.base import globales
+from librerias.datos.archivos import leer_archivo
 
-conexion   = globales.lee_conexion_elastic("base")
+conexion = globales.lee_conexion_elastic("base")
 
 def recuperar(conexion, estructura):
     modelo = globales.lee_modelo_elastic(estructura)
     desde  = 0
 
     resultado = sqalchemy_leer.leer_todos("base", estructura, desde=0, hasta=10000)
-    bulk      = elastic_operaciones.bulk_indexar(conexion, modelo["modelo"], modelo["indice"], resultado)
+    bulk = elastic_operaciones.bulk_indexar(conexion, modelo["modelo"], modelo["indice"], resultado)
     print("")
-    print("RESULTADO>>>" + estructura, len(resultado))    
-    pprint.pprint(resultado)
-    print("")
+    
+    # #print("RESULTADO>>>" + estructura, len(resultado))    
+    # print("")
+
+    # for r in resultado:
+    #     print("")
+    #     print("....................")
+    #     for archivo in r["archivos"]:
+    #         nombre_archivo = leer_archivo.salva_archivo_minio(archivo["id"])  
+    #         print(r["nro_radicado"], nombre_archivo)
+    # #pprint.pprint(resultado)
+    # # nombre_archivo = leer_archivo.salva_archivo_minio(archivos[0]["id"])
+    # print("")
 
 #CONFIGURACIÓN
 # recuperar(conexion, "configuracion_general")
@@ -61,10 +72,10 @@ def recuperar(conexion, estructura):
 
 #"""
 # RADICACION GESTION
-# recuperar(conexion, "radicados_entrada")
+#recuperar(conexion, "radicados_entrada")
 recuperar(conexion, "radicados_salida")
 # recuperar(conexion, "radicados_interno")
-#recuperar(conexion, "peticiones")
+recuperar(conexion, "peticiones")
 # recuperar(conexion, "copias")
 
 # recuperar(conexion,"correos_descargados")

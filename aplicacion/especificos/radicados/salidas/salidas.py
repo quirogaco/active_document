@@ -4,15 +4,18 @@
 import pprint, datetime, random
 
 from librerias.datos.sql import sqalchemy_insertar, sqalchemy_leer
-from aplicacion.comunes  import pdf_notifica
-from aplicacion.comunes  import indexar_datos
+from aplicacion.comunes import pdf_notifica
+from aplicacion.comunes import indexar_datos
 from librerias.datos.elastic import elastic_operaciones
 from aplicacion.especificos.radicados.comunes import datos_radicados
 from aplicacion.especificos.radicados.comunes import manejo_terceros
 from aplicacion.especificos.radicados.comunes import radicado_global
 
 def crear_radicado(datos_basicos, datos):
-    resultado = sqalchemy_insertar.insertar_registro_estructura("radicados_salida", datos_basicos)
+    resultado = sqalchemy_insertar.insertar_registro_estructura(
+        "radicados_salida", 
+        datos_basicos
+    )
    
     return resultado
 
@@ -104,7 +107,11 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         maneja_gestion.actualiza(radicado, gestion_id, id_tarea)
 
     # Indexa de ultimo
-    indexar_datos.indexar_estructura("radicados_salida", radicado_id, retardo=60)
+    indexar_datos.indexar_estructura(
+        "radicados_salida", 
+        radicado_id, 
+        retardo=60
+    )
 
     # Con copia a eventos de RADICACIóN
     #copia_radicados.copia_radicado("SALIDA", "SALIDA", radicado_id, copia_usuarios, copia_grupos, copia_terceros)    

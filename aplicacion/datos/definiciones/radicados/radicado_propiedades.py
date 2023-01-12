@@ -38,12 +38,12 @@ def gestion_asignada_peticion(sesion, r_):
     setattr(r_, "gestion_relacion", None)
 
     # Valores de gestion    
-    gestion_id               = [] 
+    gestion_id = [] 
     asignada = "NO"
-    GESTION_CLASE            = globales.lee_clase("gestor_peticiones")
+    GESTION_CLASE = globales.lee_clase("gestor_peticiones")
     GESTION_RELACIONES_CLASE = globales.lee_clase("gestor_peticion_relaciones")
-    relaciones               = sesion.query(GESTION_RELACIONES_CLASE).filter( GESTION_RELACIONES_CLASE.origen_id == r_.id ). \
-                                      order_by( desc( GESTION_RELACIONES_CLASE.creado_en_) ).all()
+    relaciones = sesion.query(GESTION_RELACIONES_CLASE).filter( GESTION_RELACIONES_CLASE.origen_id == r_.id ). \
+                        order_by( desc( GESTION_RELACIONES_CLASE.creado_en_) ).all()
     for relacion in relaciones:
         setattr(r_, "gestion_relacion", relacion.estado_)
         if relacion != None: # and relacion.estado_ == "ACTIVO": # estado_ -> DEVUELTO, cuando se regresa a servicio ciudadano o ventanilla
@@ -51,6 +51,7 @@ def gestion_asignada_peticion(sesion, r_):
             if peticion != None:
                 atributos_ = getattr(r_, "atributos_", {})                    
                 gestion_id.append(peticion.id) # id de gestion
+                print("relacion.estado_", r_.nro_radicado, relacion.estado_)
                 if relacion.estado_ == "ACTIVO": # si esta asigando para filtrar por pendientes de asignacion
                     asignada = "SI"                 
                 

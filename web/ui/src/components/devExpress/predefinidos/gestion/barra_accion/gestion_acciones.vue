@@ -21,7 +21,7 @@ let elemento_click = function(e) {
 
 let elemento_click_gestion = function(e) {      
     let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id);   
-    let evento     = componente.$props.opciones.evento_grid_gestion;
+    let evento = componente.$props.opciones.evento_grid_gestion;
     componente.$emit(evento, parametros)     
 };
 

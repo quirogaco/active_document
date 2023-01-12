@@ -15,4 +15,8 @@ def indexar_estructura(estructura, registro_id, retardo=0):
             }
         }
     ]
-    llamados.ejecutar_secuencia(secuencia=secuencia, ubicacion="indexar_datos", retardo=retardo)
+    llamados.ejecutar_secuencia(
+        secuencia=secuencia, 
+        ubicacion="indexar_datos", 
+        retardo=retardo
+    )

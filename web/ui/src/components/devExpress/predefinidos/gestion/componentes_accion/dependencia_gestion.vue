@@ -18,7 +18,9 @@
                             :data-source    = "fuente"
                             v-model:value   = "dependencia"
                             display-expr    = "nombre_completo"
+                            width           = "550px"
                             value-expr      = "id"
+                            search-enabled   = "true"
                             :showClearButton = "true"
                         >
                             <DxValidator>
@@ -101,7 +103,6 @@ let dependencia_gestion =  {
             let acciones_grid = ["TRASLADAR_DEPENDENCIA"]
             let grid          = window.$grid_gestion   
             if (acciones_grid.indexOf(this.datos.accion) > -1) {
-                grid.refresh()    
                 this.$router.push({path: "gestion_basica_grid"})
             }
             this.$parent.$parent.$_instance.hide()

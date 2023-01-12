@@ -76,8 +76,8 @@ let grid =  {
     mounted() {
         this.opciones_accion['grid'] = this.$refs;
         this.$refs.grid.instance.columnOption(
-            "nro_radicado",
-            {sortOrder: 'asc', sortIndex: 0} 
+            "fecha_radicado",
+            {sortOrder: 'desc', sortIndex: 0} 
         );
         window.$peticion_datos = {};
         setTimeout(() => {

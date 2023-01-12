@@ -6,8 +6,6 @@ import { DxDataGrid }        from 'devextreme-vue/data-grid'
 import { DxForm }            from 'devextreme-vue/form'
 import DxTextArea            from 'devextreme-vue/text-area'
 import DxRadioGroup          from 'devextreme-vue/radio-group'
-import DxTagBox              from 'devextreme-vue/tag-box'
-import { DxFileUploader }    from 'devextreme-vue/file-uploader'
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar'
 import forma_general         from "../../comunes_vue/forma/forma.js"
 
