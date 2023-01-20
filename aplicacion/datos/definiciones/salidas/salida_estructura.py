@@ -52,6 +52,7 @@ CLASE = globales.lee_clase(definicion["clase"])
 def al_cargar(target, context):
     salida_propiedades.archivos_nombres(context.session, target)
     salida_propiedades.pdf_base(context.session, target)
+    salida_propiedades.logs(context.session, target)
     
 sqalchemy_clase_dinamica.asigna_evento(CLASE, "load", al_cargar)
 
@@ -60,3 +61,18 @@ from . import salida_procesamiento
 
 # Normalización
 from . import salida_estructura_funciones
+
+
+# # Eventos de clase y objeto
+# COPIA DE ENTRADA
+# def al_cargar(target, context):
+#     # Primero trae Id de gestión para logs
+#     radicado_propiedades.gestion_asignada_peticion(context.session, target)
+#     radicado_propiedades.logs(context.session, target)
+#     radicado_propiedades.archivos_nombres(context.session, target)
+#     radicado_propiedades.archivos_total(context.session, target)
+#     radicado_propiedades.pdf_base(context.session, target)
+#     radicado_propiedades.relacionados(context.session, target)
+#     radicado_propiedades.con_copia(context.session, target)    
+    
+sqalchemy_clase_dinamica.asigna_evento(CLASE, "load", al_cargar)

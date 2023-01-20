@@ -90,6 +90,34 @@ let metodos = {
             }
 
             return resultado
+    },
+
+    'plantilla_nro_radicado': function(data) {
+        let resultado = data.value;
+        
+        if ( data.data.nro_radicado == "BORRADOR") {
+            resultado =  '<div class="shadow-sm bg-body rounded text-center">' + data.value + '</div>'
+        }
+
+        return resultado
+    },
+
+    'plantilla_origen': function(data) {
+        let resultado = data.value;
+        
+        if ( data.value == "ENTRADA") {
+            resultado = '<div class="shadow-sm bg-body rounded text-center">' + data.value + '</div>'
+        }
+
+        if ( data.value == "SALIDA") {
+            resultado = '<div class="shadow-sm bg-info rounded text-center">' + data.value + '</div>'
+        }
+
+        if ( data.value == "INTERNO") {
+            resultado = '<div class="shadow-sm bg-warning rounded text-center">' + data.value + '</div>'
+        }
+
+        return resultado
     }
 }
 

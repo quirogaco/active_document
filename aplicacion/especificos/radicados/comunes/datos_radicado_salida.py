@@ -71,7 +71,8 @@ def datos_basicos(datos, tarea_id):
 def datos_extendidos(datos, tarea_id):    
     extendidos = {}
     for campo, valor in datos.items():
-        if (campo not in campos_basicos_salida) and (campo not in datos_comunes.campos_tercero):
+        if (campo not in campos_basicos_salida) and \
+        (campo not in datos_comunes.campos_tercero):
             extendidos[campo] = valor
     
     extendidos = datos_comunes.limpiar_datos(extendidos, ['archivos', 'id'])

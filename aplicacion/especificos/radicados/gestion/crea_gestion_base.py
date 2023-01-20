@@ -33,12 +33,12 @@ def actualiza_radicado(radicado_id, clase_radicado, comentario_traslado, id_tare
     # Log de creación registro gestión
     detalle = comentario_traslado + ", NUEVA CLASE: " + clase_radicado
     datos_log = {
-        "accion"         : "CAMBIA_CLASE",
-        "proceso"        : "ASIGNACION",
-        "estado"         : "RADICADO", 
+        "accion": "CAMBIA_CLASE",
+        "proceso": "ASIGNACION",
+        "estado": "RADICADO", 
         "destinatario_id": "",     
-        "id"             : radicado_id, 
-        "detalle"        : detalle,
+        "id": radicado_id, 
+        "detalle": detalle,
         "detalle_estado" : "CAMBIA CLASE RADICADO"
     }
     # Cola de log
@@ -71,8 +71,8 @@ def crea_registro_gestion(datos, archivos, id_tarea):
                    )
 
     if clase_radicado == "DOCUMENTO":                
-        responsable_id = dependencia["archivo_id"]
-        responsable_nombre = dependencia["archivo_nombre"]
+        responsable_id = dependencia["correspondencia_id"]
+        responsable_nombre = dependencia["correspondencia_nombre"]
     else:
         responsable_id = dependencia["pqrs_id"]
         responsable_nombre = dependencia["pqrs_nombre"]

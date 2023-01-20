@@ -16,7 +16,8 @@ import forma_campos       from "./gestion_datos_campos.js"
 const basicas = {
     "forma_id"   : "gestion_datos_consulta",
     "titulo"     : "Consulta datos gestión",
-    "columnas"   : 1    
+    "columnas"   : 1,
+    "datos_gestion": {}  
 }
 
 let formulario =  {
@@ -29,9 +30,10 @@ let formulario =  {
         DxToolbar,
     },
 
-    props: forma_general.forma_propiedades({}),
+    //props: forma_general.forma_propiedades({}),
 
-    mounted() {
+    mounted() {        
+        this.basicas = basicas;
         forma_general.forma_funciones.montado_general(this)        
     },
 

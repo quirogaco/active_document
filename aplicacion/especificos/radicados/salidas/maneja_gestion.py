@@ -10,7 +10,6 @@ from librerias.datos.sql import (
     sqalchemy_insertar
 )
 from librerias.datos.elastic import elastic_operaciones
-
 from aplicacion.comunes import indexar_datos
 from aplicacion.logs import crea_logs
 from aplicacion.especificos.radicados.gestion import logs

@@ -4,8 +4,8 @@ import pprint
  
 # Base general con atributos basicos
 from aplicacion.datos.clases.clases_base import base_general_campos
-from librerias.datos.sql                 import sqalchemy_tipo_campos as tipos
-from .                                   import radicado_propiedades
+from librerias.datos.sql import sqalchemy_tipo_campos as tipos
+from . import radicado_propiedades
 
 campos = {
     # Sitio de radicación

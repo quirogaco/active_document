@@ -7,9 +7,32 @@ from librerias.datos.sql import sqalchemy_insertar, sqalchemy_leer
 from aplicacion.comunes import pdf_notifica
 from aplicacion.comunes import indexar_datos
 from librerias.datos.elastic import elastic_operaciones
-from aplicacion.especificos.radicados.comunes import datos_radicados
-from aplicacion.especificos.radicados.comunes import manejo_terceros
-from aplicacion.especificos.radicados.comunes import radicado_global
+from aplicacion.especificos.radicados.comunes import (
+    datos_radicados,
+     manejo_terceros,
+     radicado_global,
+     datos_comunes
+)
+from aplicacion.logs import crea_logs
+
+def log_radica_salida(datos, id_tarea=""):
+    pass
+    # detalle = "SALIDA RADICADA CON #: " + datos["nro_radicado"]
+    # datos_log = {
+    #     "accionante_tipo": "USUARIO",      
+    #     "accionante_id": datos['funcionario_responde_id'],  
+    #     "destinatario_tipo": "TERCERO",      
+    #     "destinatario_id": datos["tercero_id"], 
+    #     "proceso": "GESTION",
+    #     "fuente": "radicados_salida",
+    #     "fuente_id": datos["id"], 
+    #     "accion": "RESPONDER",  
+    #     "detalle": detalle,
+    #     "estado": "RADICADO",  
+    #     "detalle_estado": detalle
+    # }
+    # crea_logs.crea_log(datos_log)
+
 
 def crear_radicado(datos_basicos, datos):
     resultado = sqalchemy_insertar.insertar_registro_estructura(
@@ -23,7 +46,6 @@ def crear_radicado(datos_basicos, datos):
 from . import maneja_gestion
 
 def radicar(accion, datos={}, archivos=[], id_tarea=""):
-    datos_radicado = datos["datos"]
     #"""
     # print("")
     # print("...............")    
@@ -55,7 +77,7 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     datos_basicos["fecha_radicado"] = datetime.datetime.now()
     datos_basicos["atributos_"] = datos_extendidos
     radicado = crear_radicado(datos_basicos, datos)
-    radicado_id = radicado["id"]
+    radicado_id = radicado["id"]    
 
     # creacion de tercero
     tercero = manejo_terceros.crear_registro_tercero(
@@ -65,7 +87,12 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         id_tarea
     )
     elastic_operaciones.indexar_registro("radicados_salida", radicado_id)
+    radicado = sqalchemy_leer.leer_un_registro(
+        "radicados_salida", 
+        radicado_id
+    )
 
+    log_radica_salida(radicado, id_tarea)
 
     # Genera pdf y notifica
     # Datos del radicado, todavia no se a indexado
@@ -97,10 +124,6 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
 
     pdf_notifica.pdf_notificacion("SALIDA", datos_completos, id_tarea)
 
-    # Valida gestión
-    #print("")
-    #print("...............")    
-    #print("SALIDA - > DATOS:", datos_radicado)
     
     # Actualiza gestión
     if gestion_id not in ["", None]:
@@ -123,5 +146,5 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         "datos"  : radicado
     }
 
-    
+
     return resultado

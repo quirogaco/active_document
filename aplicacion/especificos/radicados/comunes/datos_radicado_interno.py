@@ -4,6 +4,9 @@
 import pprint, datetime, random
 
 from . import datos_comunes
+from librerias.utilidades import basicas
+from librerias.datos.sql import sqalchemy_filtrar 
+from librerias.datos.sql import sqalchemy_modificar 
 
 ##################
 # BASICOS SALIDA #
@@ -19,23 +22,43 @@ campos_basicos_interno = [
     'dependencia_recibe_id',
     'funcionario_recibe_id',
 ]
+ 
+def radicado_consecutivo(tipo="INTERNOS"):
+    filtros = [ [ "nombre", "=", tipo ] ]
+    salida = sqalchemy_filtrar.filtrarOrdena(
+        estructura="consecutivos", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )[0]
+    consecutivo = salida["consecutivo"] + 1
+    sqalchemy_modificar.modificar_un_registro(
+        "consecutivos", 
+        salida["id"],
+        {"consecutivo": consecutivo}
+    )
+
+    return str(consecutivo).rjust(6,'0')
 
 # DATOS BASICOS DEL INTERNO (DEL REGISTRO FISICO)
 def datos_basicos(datos, tarea_id):    
     radicado_por, radicado_en = datos_comunes.datos_radicador(datos, tarea_id)
-    radicado                  = "I-2021-" + str(random.randint(0, 10000))
-    tipo_firma                = ",".join(datos['tipo_firma'])
-    medio_notificacion        = ",".join(datos['medio_notificacion'])
+    consecutivo = radicado_consecutivo("INTERNOS")
+    radicado = "I-" + basicas.ano() + "-" + consecutivo    
+    tipo_firma = ",".join(datos['tipo_firma'])
+    medio_notificacion = ",".join(datos['medio_notificacion'])
+    usuario = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)
     datos_especificos = {
-        'radicado_en'            : radicado_en,
-        'radicado_por'           : radicado_por,
-        'nro_radicado'           : radicado,
-        'fecha_radicado'         : datetime.datetime.now(),
-        'asunto'                 : datos['asunto'],
-        'dependencia_envia_id'   : datos['dependencia_envia_id'],
-        'funcionario_envia_id'   : datos['funcionario_envia_id'],
-        'dependencia_recibe_id'  : datos['dependencia_recibe_id'],
-        'funcionario_recibe_id'  : datos['funcionario_recibe_id'],        
+        'radicado_en': radicado_en,
+        'radicado_por': radicado_por,
+        'nro_radicado': radicado,
+        'fecha_radicado': datetime.datetime.now(),
+        'asunto': datos['asunto'],
+        'dependencia_envia_id': datos['dependencia_envia_id'],
+        'funcionario_envia_id': datos['funcionario_envia_id'],
+        'dependencia_recibe_id': datos['dependencia_recibe_id'],
+        'funcionario_recibe_id': datos['funcionario_recibe_id'], 
+        'medio_notificacion': medio_notificacion,
+        'tipo_firma': tipo_firma
     }
     
     return datos_especificos

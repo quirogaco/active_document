@@ -24,7 +24,8 @@
 
 <script setup lang="ts">
 import { getCurrentInstance, ref, onMounted } from "vue";
-import crear_rutas_navegacion from '../../../librerias/crear_rutas_navegacion.js';
+import crear_rutas_navegacion from 
+'../../../librerias/crear_rutas_navegacion.js';
 
 // Este componente
 let that = getCurrentInstance().ctx;

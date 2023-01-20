@@ -18,6 +18,7 @@
                             v-model:value   = "usuario"
                             display-expr    = "nombre"
                             value-expr      = "id"
+                            search-enabled   = "true"
                             :showClearButton = "true"
                         >
                             <DxValidator>
@@ -95,14 +96,14 @@ let usuario_gestion =  {
 
     methods: {
         retorna: function() {
-            this.indicador_visible = false
-            let acciones_grid = ["ASIGNAR_RESPONSABLE"]
-            let grid = window.$grid_gestion   
+            this.indicador_visible = false;
+            let acciones_grid = ["ASIGNAR_RESPONSABLE"];
+            let grid = window.$grid_gestion;   
             if (acciones_grid.indexOf(this.datos.accion) > -1) {
                 //grid.refresh()  
-                this.$router.push({path: "gestion_basica_grid"})  
+                this.$router.push({path: "gestion_basica_grid"});
             }
-            this.$parent.$parent.$_instance.hide()
+            this.$parent.$parent.$_instance.hide();
         }
     },
 

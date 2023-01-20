@@ -4,8 +4,8 @@ import pprint
 
 # Base general con atributos basicos
 from aplicacion.datos.clases.clases_base import base_general_campos
-from librerias.datos.sql                 import sqalchemy_tipo_campos as tipos
-from .                                   import interno_propiedades
+from librerias.datos.sql import sqalchemy_tipo_campos as tipos
+from . import interno_propiedades
 
 campos = {
     # Sitio de radicación
@@ -56,6 +56,8 @@ campos = {
     # Firmado
     "firmado"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Canal id", "longitud": 64, "default": "NO"}),
     "firmado_por": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Canal", "longitud": 512}),
+
+    "esta_firmado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Esta firmado", "propiedad": interno_propiedades.esta_firmado}),
 
     #######################
     # Informaci�n gesti�n #

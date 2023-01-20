@@ -29,7 +29,7 @@ def recuperar(conexion, estructura):
     #     for archivo in r["archivos"]:
     #         nombre_archivo = leer_archivo.salva_archivo_minio(archivo["id"])  
     #         print(r["nro_radicado"], nombre_archivo)
-    # #pprint.pprint(resultado)
+    pprint.pprint(resultado)
     # # nombre_archivo = leer_archivo.salva_archivo_minio(archivos[0]["id"])
     # print("")
 
@@ -74,8 +74,8 @@ def recuperar(conexion, estructura):
 # RADICACION GESTION
 #recuperar(conexion, "radicados_entrada")
 recuperar(conexion, "radicados_salida")
-# recuperar(conexion, "radicados_interno")
-recuperar(conexion, "peticiones")
+#recuperar(conexion, "radicados_interno")
+#recuperar(conexion, "peticiones")
 # recuperar(conexion, "copias")
 
 # recuperar(conexion,"correos_descargados")

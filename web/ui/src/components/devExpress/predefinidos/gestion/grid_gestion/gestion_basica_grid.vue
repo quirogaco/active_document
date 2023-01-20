@@ -38,7 +38,7 @@ let eventos = {
 }
 
 let basica = {
-    "estructura"  : "peticiones",
+    "estructura": "peticiones",
     "filtros_grid": [ 
         ["responsable_id", "=", window.$usuario.id], 
         ["estado_gestion", "=", "PENDIENTE"], 
@@ -75,25 +75,26 @@ let grid =  {
     
     mounted() {
         this.opciones_accion['grid'] = this.$refs;
-        this.$refs.grid.instance.columnOption(
+        let instancia = this.$refs.grid.instance;
+        instancia.columnOption(
             "fecha_radicado",
             {sortOrder: 'desc', sortIndex: 0} 
         );
         window.$peticion_datos = {};
         setTimeout(() => {
-            window.$grid_gestion = this.$refs.grid.instance;
+            window.$grid_gestion = instancia;
         }, 3000);
         this.notify = notify                  
     },
 
     data() {
         return {
-            basica        : basica,
+            basica: basica,
             // Indicador de tareas
             indicador_visible: false,
             
-            columnas      : gestion_basica_columnas.columnas, // Columnas grid
-            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta(
+            columnas: gestion_basica_columnas.columnas, // Columnas grid
+            fuente_datos: fuenteDatos.creaFuenteDatosConsulta(
                 'grid', 
                 null, 
                 basica.estructura, 
@@ -101,11 +102,11 @@ let grid =  {
                 basica.filtros_grid, 
                 {}
             ),            
-            pageSizes           : [10, 25, 50, 100],
-            displayMode         : 'full',
+            pageSizes: [10, 25, 50, 100],
+            displayMode: 'full',
             showPageSizeSelector: true,
-            showInfo            : true,
-            showNavButtons      : true,
+            showInfo: true,
+            showNavButtons: true,
             
             opciones_accion: {
                 contexto: "grid_gestion",
@@ -123,3 +124,7 @@ let grid =  {
 
 export default grid
 </script>
+
+<style scoped>
+
+</style>

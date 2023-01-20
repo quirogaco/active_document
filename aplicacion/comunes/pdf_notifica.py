@@ -18,7 +18,7 @@ def insertar_anexos(
 ):
     archivos = [{
         "nombre_completo": archivo,
-        "nombre"         : ("notifica_radicado_" + nro_radicado + ".pdf")
+        "nombre": ("notifica_radicado_" + nro_radicado + ".pdf")
     }]
     manejo_archivos.manejo(
         estructura, 
@@ -99,11 +99,6 @@ def notifica_entrada(datos, id_tarea):
     
     return ruta_pdf, ruta_jpg
 
-
-def anexos_salida():
-    pass
-
-
 # SALIDA -> Genera pdf, notifica por correo, y anexo notificación
 def notifica_salida(datos, id_tarea):        
     # Genera PDF
@@ -143,6 +138,45 @@ def notifica_salida(datos, id_tarea):
     return ruta_pdf, ruta_jpg  
 
 
+# INTERNO -> Genera pdf, notifica por correo, y anexo notificación
+def notifica_interno(datos, id_tarea):        
+    # Genera PDF
+    ruta_pdf, ruta_jpg = pdf_genera.generacion_pdf_borrador(datos, id_tarea)
+    print("notifica_interno:", ruta_pdf, ruta_jpg)
+
+    # Inserta anexo de notificación al radicado.
+    if ruta_pdf != "":                         
+        insertar_anexos(
+            "radicados_interno", 
+            datos["nro_radicado"], 
+            datos["id"], 
+            ruta_pdf, 
+            "notifica", 
+            id_tarea, 
+            "notifica"
+        )
+
+    # Notifica PDF Radicación
+    correos = datos["correo_electronico"]
+    # FISICA,ELECTRONICA,DIGITAL
+    if  ("DIGITAL" in datos["tipo_firma"]):
+        if (correos not in ["", None]) and (ruta_pdf not in ["", None]) :
+            asunto = (
+                "Notifica Radicación con número: [" + 
+                datos["nro_radicado"] + "]"
+            )
+            pdf_envia.invoca_enviar_correo_radicado({
+                "tipo": "INTERNO", 
+                "id": datos["id"],
+                "correos": correos,
+                "asunto": asunto, 
+                "ruta_pdf": ruta_pdf, 
+                "ruta_jpg": ruta_jpg
+            })
+        
+    return ruta_pdf, ruta_jpg  
+
+
 def pdf_notificacion(radicado_tipo, datos, id_tarea):
     # print("")
     # print("................................")
@@ -153,3 +187,6 @@ def pdf_notificacion(radicado_tipo, datos, id_tarea):
 
     if radicado_tipo == "SALIDA":
         notifica_salida(datos, id_tarea)
+
+    if radicado_tipo == "INTERNO":
+        notifica_interno(datos, id_tarea)

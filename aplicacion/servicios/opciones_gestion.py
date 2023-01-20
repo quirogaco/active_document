@@ -42,11 +42,11 @@ salidas_gestion = {
         "tipo"      : "importar",
     },
 
-    # "forma": {
-    #     "componente": "gestion_pantalla",      
-    #     "texto"     : "Consulta Radicados",
-    #     "tipo"      : "importar"
-    # }
+    "forma": {
+        "componente": "forma_salida_consulta",      
+        "texto"     : "Consulta Salidas",
+        "tipo"      : "importar"
+    }
 }
 
 gestion_pantalla = {

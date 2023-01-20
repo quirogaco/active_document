@@ -140,17 +140,19 @@ let columnas = [
             valueExpr  : 'id', 
             displayExpr: 'nombre',           
         }, 
-        width         : "110px"
+        width         : "110px",
+        cellTemplate: "plantilla_origen"
     },
 
     // Numero de radicado
     {
-        caption       : "# Radicado",
-        dataField     : "nro_radicado",
-        dataType      : "string",
-        allowSorting  : true,
+        caption: "# Radicado",
+        dataField: "nro_radicado",
+        dataType: "string",
+        allowSorting: true,
         allowFiltering: true,
-        width         : "120px"
+        width: "120px",
+        cellTemplate: "plantilla_nro_radicado"
     },
 
      // Fecha radicado

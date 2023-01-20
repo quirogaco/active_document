@@ -26,12 +26,19 @@ let columnas = [
 
     // Nombre tercero
     {
+        caption       : "Dependencia",
+        dataField     : "dependencia_responde_nombre",
+        dataType      : "string",         
+        width         : 250
+    },
+
+    // Nombre tercero
+    {
         caption       : "Destinatario",
         dataField     : "tercero_nombres_apellidos",
         dataType      : "string",         
         width         : 250
     },
-
 
     // Clase tercero
     {

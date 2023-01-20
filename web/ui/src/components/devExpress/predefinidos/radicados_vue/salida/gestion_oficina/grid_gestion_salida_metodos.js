@@ -15,7 +15,7 @@ let metodos = {
     },
 
     'columna_doble_click':  function(e) {
-        let data = e.data
+        let data = e.data;
         if (e.column.dataField == "nro_radicado") {
             if (data.pdf_base.id !== undefined) {
                 visores_archivo.ver_descarga_archivo({
@@ -29,18 +29,33 @@ let metodos = {
             }
         }
         else {
-            let datos = {
-                "id"         : data.id,
-                "datos"      : data,
-                "modo"       : "consulta",
-                "llamado_por": "grid_ventanilla_salida"
+            let mostrar = true;
+            // let usuario_id = window.$usuario["id"];
+            // let usuario_dependencia_id = window.$usuario["dependencia_id"];
+            // let reserva = data["reserva"];
+            // let gestion_responsable_id = data["gestion_responsable_id"];
+            // let gestion_dependencia_id = data["gestion_dependencia_id"];
+            // if (reserva == "SI") {
+            //     if (usuario_id != gestion_responsable_id) {
+            //         mostrar = false
+            //     }
+            // }
+
+            if (mostrar == true) {                
+                let datos = {
+                    "id": data.id,
+                    "radicado": data,
+                    "modo": "consulta",
+                    "llamado_por": "grid_gestion_salida"
+                };
+                $lib.call_component_storage(
+                    "forma_salida_consulta",
+                    {"datos": datos}
+                )            
             }
-            this.$router.push({
-                name: "forma_salida_consulta",                      
-                params: {
-                    "datos": JSON.stringify(datos)                
-                }                            
-            })
+            else {
+                $notify("Documento con reserva!!", "error");
+            }
         }
     },
 

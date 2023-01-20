@@ -4,11 +4,11 @@ import pprint
 
 # Base general con atributos basicos
 from aplicacion.datos.clases.clases_base import base_general_campos
-from librerias.datos.sql                 import sqalchemy_tipo_campos as tipos
-from .                                   import salida_propiedades
+from librerias.datos.sql import sqalchemy_tipo_campos as tipos
+from . import salida_propiedades
 
 campos = {
-    # Sitio de radicaci�n
+    # Sitio de radicación
     "radicado_en_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en id",   "longitud": 64}),
     "radicado_en_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en"}),
 
@@ -21,31 +21,31 @@ campos = {
     "fecha_documento"   : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha documento"}), # Valor defecto
     "responde_radicado" : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Responde radicado", "longitud": 512}),
     
-    # Informaci�n basica
+    # Información basica
     "nro_radicado"      : tipos.clave_obligatorio(propiedades={"titulo": "Numero de radicado", "longitud": 64}),    
     "asunto"            : tipos.texto(propiedades={"titulo": "Asunto", "longitud": 2048}),  
 
-    "nro_folios"        : tipos.entero(propiedades={"columna": "no", "titulo": "N�mero de folios"}),
+    "nro_folios"        : tipos.entero(propiedades={"columna": "no", "titulo": "Nómero de folios"}),
     "anexos"            : tipos.texto(propiedades={"columna": "no", "titulo": "Anexos"}),
 
     ###############################
-    # Informaci�n tercero externa #
+    # Información tercero externa #
     ###############################
     "tercero_id"                    : tipos.clave(propiedades={"columna": "no", "titulo": "Tercero id", "longitud": 64}),  
     "tercero_clase"                 : tipos.texto(propiedades={"columna": "no", "titulo": "Clase de tercero", "longitud": 256, "reporte": "SI"}),  
     # Tipo tercero
     "tercero_tipo_tercero_id"       : tipos.clave(propiedades={"columna": "no", "titulo": "Tipo de tercero id", "longitud": 64}),  
     "tercero_tipo_tercero_nombre"   : tipos.texto(propiedades={"columna": "no", "titulo": "Tipo de tercero", "longitud": 64, "reporte": "SI"}),
-    # Tipo de identificaci�n
-    "tercero_tipo_identificacion_id"     : tipos.clave(propiedades={"columna": "no", "titulo": "Tipo de identificaci�n id", "longitud": 64}),  
-    "tercero_tipo_identificacion_nombre" : tipos.texto(propiedades={"columna": "no", "titulo": "Tipo de identificaci�n", "longitud": 256, "reporte": "SI"}),  
-    "tercero_nro_identificacion"    : tipos.texto(propiedades={"columna": "no", "titulo": "N�mero de identificaci�n", "longitud": 64, "reporte": "SI"}),  
+    # Tipo de identificación
+    "tercero_tipo_identificacion_id"     : tipos.clave(propiedades={"columna": "no", "titulo": "Tipo de identificación id", "longitud": 64}),  
+    "tercero_tipo_identificacion_nombre" : tipos.texto(propiedades={"columna": "no", "titulo": "Tipo de identificación", "longitud": 256, "reporte": "SI"}),  
+    "tercero_nro_identificacion"    : tipos.texto(propiedades={"columna": "no", "titulo": "Nómero de identificación", "longitud": 64, "reporte": "SI"}),  
     "tercero_razon_social"          : tipos.texto(propiedades={"columna": "no", "titulo": "Razon social", "longitud": 256, "reporte": "SI"}),   
     "tercero_cargo"                 : tipos.texto(propiedades={"columna": "no", "titulo": "Cargo", "longitud": 256, "reporte": "SI"}),   
     "tercero_nombres"               : tipos.texto(propiedades={"columna": "no", "titulo": "Nombres remitente", "longitud": 128, "reporte": "SI"}),           
     "tercero_apellidos"             : tipos.texto(propiedades={"columna": "no", "titulo": "Apellidos remitente", "longitud": 128, "reporte": "SI"}),             
-    "tercero_correo_electronico"    : tipos.texto(propiedades={"columna": "no", "titulo": "Correo electr�nico", "longitud": 64, "reporte": "SI"}),
-    "tercero_direccion"             : tipos.texto(propiedades={"columna": "no", "titulo": "Direcci�n notificaci�n", "longitud": 128, "reporte": "SI"}),  
+    "tercero_correo_electronico"    : tipos.texto(propiedades={"columna": "no", "titulo": "Correo electrónico", "longitud": 64, "reporte": "SI"}),
+    "tercero_direccion"             : tipos.texto(propiedades={"columna": "no", "titulo": "Dirección notificación", "longitud": 128, "reporte": "SI"}),  
     "tercero_codigo_postal"         : tipos.texto(propiedades={"columna": "no", "titulo": "Codigo postal",   "longitud": 64, "reporte": "SI"}),
     "tercero_telefono"              : tipos.texto(propiedades={"columna": "no", "titulo": "Telefono", "longitud": 64, "reporte": "SI"}),  
     "tercero_telefono_movil"        : tipos.texto(propiedades={"columna": "no", "titulo": "Telefono movil", "longitud": 64, "reporte": "SI"}),  
@@ -56,9 +56,9 @@ campos = {
     "tercero_nombres_apellidos"     : tipos.texto(propiedades={"columna": "no", "titulo": "Nombre", "longitud": 256, "reporte": "SI"}),  
     
     #######################
-    # Informaci�n gesti�n #
+    # Información gestión #
     #######################
-    "gestion_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Gesti�n id", "longitud": 64}),
+    "gestion_id": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión id", "longitud": 64}),
     
     # Dependencia responde
     "dependencia_responde_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Dependencia id",     "longitud": 64}),
@@ -85,8 +85,15 @@ campos = {
     "firmado_electronica"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tiene firma electronica", "propiedad": salida_propiedades.firmado_electronica}), 
     "firmado_electronica_por": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Quien firmo electronicamente", "propiedad": salida_propiedades.firmado_electronica_por}), 
 
-    "medio_notificacion": tipos.clave(propiedades={"titulo": "Medio notificaci�n", "longitud": 64, "validador": "clave_lista"}),  
+    "medio_notificacion": tipos.clave(propiedades={"titulo": "Medio notificación", "longitud": 64, "validador": "clave_lista"}),  
+
+    "esta_firmado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Esta firmado", "propiedad": salida_propiedades.esta_firmado}),
     
+    ########
+    # logs #
+    ########
+    "logs": tipos.json(propiedades={"columna": "no", "titulo": "Log radicado"}),
+
     ######################
     # Copia del radicado #
     ######################

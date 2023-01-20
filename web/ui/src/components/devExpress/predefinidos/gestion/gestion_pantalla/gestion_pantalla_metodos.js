@@ -214,6 +214,7 @@ let metodos = {
         this.opciones_ventana.fuente = parametros.fuente; 
         this.opciones_ventana.visible = true;
         this.opciones_ventana.elementos = [this.parametros.id];
+        //this.opciones_ventana.datos =  "{}";
         this.opciones_ventana.gestion = {
             'gestion_id': this.parametros.id,
             'gestion': this.parametros,
@@ -247,9 +248,8 @@ let metodos = {
         };
 
         if ( this.opciones_ventana.accion == "CONSULTA_RADICADO") {
-            let that = this;
             let datos = {
-                "radicado": this.radicado,
+                "radicado": this.radicado,                
                 "modo": "consulta",
                 "llamado_por": "_call_",
                 "call": cerrar
@@ -261,9 +261,24 @@ let metodos = {
             )
         };
 
+        if ( this.opciones_ventana.accion == "CONSULTA_GESTION") {
+            let datos = {
+                "radicado": this.radicado,
+                "gestion": this.opciones_ventana.gestion.gestion,
+                "modo": "consulta",
+                "llamado_por": "_call_",
+                "call": cerrar
+            };
+
+            $save_params(
+                "gestion_datos_consulta", 
+                {"datos": datos}
+            )
+        };
+
         // Información del radicado
         this.opciones_ventana.consulta = {
-            'datos': this.radicado
+            'datos': this.radicado            
         };        
     },
 

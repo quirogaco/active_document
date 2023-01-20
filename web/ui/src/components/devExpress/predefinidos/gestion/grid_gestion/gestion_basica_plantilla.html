@@ -54,6 +54,14 @@
             <template #estado_vencimiento_plantilla="{ data }">
                 <div v-html="plantilla_columna_estado(data)"></div>
             </template>
+
+            <template #plantilla_nro_radicado="{ data }">
+                <div v-html="plantilla_nro_radicado(data)"></div>
+            </template>
+
+            <template #plantilla_origen="{ data }">
+                <div v-html="plantilla_origen(data)"></div>
+            </template>
         
         </DxDataGrid>
     

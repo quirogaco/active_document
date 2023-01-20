@@ -1,17 +1,20 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, datetime, random
 
 from librerias.datos.sql import sqalchemy_insertar, sqalchemy_leer
-from aplicacion.comunes  import pdf_notifica
-from aplicacion.comunes  import indexar_datos
+from aplicacion.comunes import pdf_notifica
+from aplicacion.comunes import indexar_datos
 
 from aplicacion.especificos.radicados.comunes import datos_radicados
 from aplicacion.especificos.radicados.comunes import radicado_global
 
 def crear_radicado(datos_basicos, datos):
-    resultado = sqalchemy_insertar.insertar_registro_estructura("radicados_interno", datos_basicos)
+    resultado = sqalchemy_insertar.insertar_registro_estructura(
+        "radicados_interno", 
+        datos_basicos
+    )
    
     return resultado
 
@@ -29,22 +32,32 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     #"""
 
     # Datos de operacion
-    datos_basicos    = datos_radicados.datos_basicos("INTERNO", "INTERNO", datos_radicado, id_tarea)
-    datos_extendidos = datos_radicados.datos_extendidos("INTERNO", "INTERNO", datos_radicado, id_tarea)
-    datos_copia      = datos_radicados.datos_copia(datos_radicado)
+    datos_basicos = datos_radicados.datos_basicos(
+        "INTERNO", 
+        "INTERNO", 
+        datos_radicado, 
+        id_tarea
+    )
+    datos_extendidos = datos_radicados.datos_extendidos(
+        "INTERNO", 
+        "INTERNO", 
+        datos_radicado, 
+        id_tarea
+    )
+    datos_copia = datos_radicados.datos_copia(datos_radicado)
 
     # Creación del radicado
     datos_basicos["fecha_radicado"] = datetime.datetime.now()
-    datos_basicos["atributos_"]     = datos_extendidos
-    radicado    = crear_radicado(datos_basicos, datos)
+    datos_basicos["atributos_"]  = datos_extendidos
+    radicado = crear_radicado(datos_basicos, datos)
     radicado_id = radicado["id"]
 
     datos_cola = {
-        "tarea_id"     : id_tarea,
+        "tarea_id": id_tarea,
         "radicado_tipo": "INTERNO",
-        "radicado_id"  : radicado_id,
-        "archivos"     : archivos,
-        "radicado"     : radicado
+        "radicado_id": radicado_id,
+        "archivos": archivos,
+        "radicado": radicado
     }
     radicado_global.invoca_tercero_log_anexos_copias(datos_cola)
 
@@ -69,7 +82,11 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         maneja_gestion.actualiza(radicado, gestion_id, id_tarea)
 
     # Indexa de ultimo
-    indexar_datos.indexar_estructura("radicados_interno", radicado_id, retardo=60)
+    indexar_datos.indexar_estructura(
+        "radicados_interno", 
+        radicado_id, 
+        retardo=60
+    )
 
     # Con copia a eventos de RADICACIóN
     #copia_radicados.copia_radicado("SALIDA", "SALIDA", radicado_id, copia_usuarios, copia_grupos, copia_terceros)    
@@ -80,6 +97,5 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
         "mensaje": "",
         "datos"  : radicado
     }
-
     
     return resultado

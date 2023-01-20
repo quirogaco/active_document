@@ -18,15 +18,32 @@ export const methods = {
             }
         }
         else {
-            let datos = {
-                "radicado": data,
-                "modo": "consulta",
-                "llamado_por": "ventanilla_radicado_grid"
-            };
-            $lib.call_component_storage(
-                "forma_radicado_consulta",
-                {"datos": datos}
-            )
+            let usuario_id = window.$usuario["id"];
+            let usuario_dependencia_id = window.$usuario["dependencia_id"];
+            let reserva = data["reserva"];
+            let gestion_responsable_id = data["gestion_responsable_id"];
+            let gestion_dependencia_id = data["gestion_dependencia_id"];
+            let mostrar = true;
+            if (reserva == "SI") {
+                if (usuario_id != gestion_responsable_id) {
+                    mostrar = false
+                }
+            }
+
+            if (mostrar == true) {
+                let datos = {
+                    "radicado": data,
+                    "modo": "consulta",
+                    "llamado_por": "ventanilla_radicado_grid"
+                };
+                $lib.call_component_storage(
+                    "forma_radicado_consulta",
+                    {"datos": datos}
+                )
+            }
+            else {
+                $notify("Documento con reserva!!", "error");
+            }
         }
     },
 

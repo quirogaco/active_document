@@ -1,7 +1,9 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint
+from sqlalchemy import desc
 
+from librerias.datos.sql  import sqalchemy_filtrar
 from librerias.datos.base import globales
 
 #####################
@@ -28,6 +30,51 @@ def firmado_electronica_por(r_):
     firmado       = proceso_firma.get("firmado_electronica_por", "")
 
     return firmado
+
+# Si esta firmado
+def esta_firmado(r_):
+    firmado = "NO"
+    if "DIGITAL" in r_.tipo_firma:
+        firmado = "SI"
+    # FALTA VALIDAR POR FIRMA FISICA O ELECTRONICA
+
+    return firmado
+
+
+########
+# LOGS #
+########
+def logs_salida(sesion, r_):
+    logs = []
+
+    return logs
+
+# def logs_gestion(sesion, r_):
+#     logs = []
+#     # Busca gestion
+#     for gestion_id in r_.gestion_id:
+#         filtros = [ [ "fuente_id", "=", gestion_id ] ]
+#         logs.extend( sqalchemy_filtrar.filtrarOrdena(estructura="logs", filtros=filtros, ordenamientos=[]) )   
+
+#     return logs
+
+def logs_radicado(sesion, r_):
+    filtros = [ [ "fuente_id", "=", r_.id ] ]
+    logs = sqalchemy_filtrar.filtrarOrdena(estructura="logs", filtros=filtros, ordenamientos=[])
+    
+    return logs
+
+def logs(sesion, r_):
+    lista_logs = []
+    # Logs vinculados
+    radicado = logs_radicado(sesion, r_)
+    #gestion = logs_gestion(sesion, r_)
+    
+    # Log ordenado
+    lista_logs.extend(radicado)
+    #lista_logs.extend(gestion)
+    lista_logs.sort(key=lambda x: x["creado_en_"], reverse=True)    
+    setattr(r_, "logs", lista_logs)
 
 ############
 # ARCHIVOS #

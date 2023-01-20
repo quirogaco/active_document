@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-acciones_salida = {
+acciones_interno = {
     # RADICACION (TODOS)
     "RADICAR": {
         "PROCESO"       : "RADICACION",

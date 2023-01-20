@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
@@ -85,7 +85,7 @@ asignar_pqrs = {
         "texto"     : "Asignación y traslado de radicados PQRS",
         "icon"      : "",      
         "navegar"   : "si",
-        "padre"     : "PQRS",
+        "padre"     : "PQRSDF",
         "tipo"      : "importar",
     },   
 
@@ -108,12 +108,12 @@ pqrs_radicado = {
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
-        "padre"     : "PQRS",
+        "padre"     : "PQRSDF",
     },
 
     "forma": {
         "componente": "pqrs_radicado_forma",      
-        "texto"     : "Radicación PQRS",
+        "texto"     : "Radicación PQRSDF",
         "tipo"      : "importar"
     },
 
