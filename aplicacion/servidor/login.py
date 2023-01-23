@@ -42,7 +42,12 @@ def ingreso_directorio(codigo, clave):
    #codigo   = codigo.upper()
    #clave    = clave.upper()
    filtros  = [ [ "codigo", "=", codigo ] ]
-   usuarios = sqalchemy_filtrar.filtrarOrdena(estructura="usuarios", filtros=filtros, ordenamientos=[])     
+   usuarios = sqalchemy_filtrar.filtrarOrdena(
+      estructura="usuarios", 
+      filtros=filtros, 
+      ordenamientos=[]
+   )     
+   print("usuarios:", usuarios)
    if len(usuarios) > 0:
       registro_usuario = usuarios[0]
    
@@ -103,8 +108,14 @@ async def ingreso_sistema(requerimiento: Request):
          estado = "NEGADO"   
    else:
       # Usuario directorio activo
-      da = directorio_activo.validar_usuario(codigo, clave, ldap_ip, ldap_puerto)
-      if (da == ""):
+      da = directorio_activo.validar_usuario(
+         codigo, 
+         clave, 
+         ldap_ip, 
+         ldap_puerto
+      )
+      print("DAAAA:", da)
+      if (da in  ["", None]):
          registro_usuario = ingreso_directorio(codigo, clave)
          if (registro_usuario == None):
             mensaje = "Usuario NO registrado en la APLICACION"

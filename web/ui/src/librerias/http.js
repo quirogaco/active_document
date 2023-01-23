@@ -229,8 +229,10 @@ let llamadoRestPost = function( url, params, callback=null, componente_id=null, 
 // Llamado sincronico, se usa XMLHttpRequest
 let llamadoRestSincGet = function( url, params) {    
     let parametros = '?';
+    let param = "";
     for (const p in params) {
-        parametros += `${p}=${params[p]}&`;
+        param = encodeURIComponent(params[p]);
+        parametros += `${p}=${param}&`;
     }
     parametros = parametros.slice(0, -1);
     let ruta   = url + parametros;

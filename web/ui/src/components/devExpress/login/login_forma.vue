@@ -74,7 +74,8 @@ let atributos_forma = {
 
 // envia datos servidor
 async function enviar_datos() {    
-    let datos = that.dataForm.validateData();  
+    let datos = that.dataForm.validateData(); 
+    //console.log("LGIN DATOS:", datos) 
     if (datos.isValid == true) {
         window.$mostrar_esperar();
         let parametros = datos["formData"];                
