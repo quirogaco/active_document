@@ -31,13 +31,21 @@ def clase_radicado(_r):
 
 def nro_radicado(_r):
     nro = ""
-    if (_r.origen_tipo == "ENTRADA"):
-        carga_radicado(_r)
+    carga_radicado(_r)
+    # print("")
+    # print("")
+    # pprint.pprint(_r._radicado)
+    if (_r.origen_tipo == "ENTRADA"):        
         nro = _r._radicado.get("nro_radicado", "")
+
     elif (_r.origen_tipo == "SALIDA"):
         nro = "BORRADOR"
+
     elif (_r.origen_tipo == "INTERNO"):
-        nro = "BORRADOR"
+        if _r.clase_radicado == "BORRADOR":
+            nro = "BORRADOR"
+        else:
+            nro = _r._radicado.get("nro_radicado", "")
     
     return nro
 
@@ -249,7 +257,7 @@ def etapa_gestion(_r):
 
 def etapa_estado(_r):
     etapa = ""
-    logs  = _r.logs_gestion
+    logs = _r.logs_gestion
     if len(logs) > 0:
         etapa = logs[-1]["estado"]
     
@@ -264,3 +272,19 @@ def tipo_gestion(_r):
         tipo = "COLABORATIVA"
         
     return tipo 
+
+#############
+# HISTORICO #
+#############
+def dependencias_id(_r):
+    logs = _r.logs_gestion
+    logs = sorted(logs, key=lambda x: x['creado_en_'])
+    dependencias = []
+    for log in logs:
+        usuario = sqalchemy_leer.leer_un_registro("agn_tipo_documental_trd",tipo_id)
+        if (usuario != None) and (usuario["dependencia_id"] not in ["", None]):
+            dependencias.append(usuario["dependencia_id"])
+    dependencias = [log[""] in logs ]
+    #dependencias = [_r.dependencia_id]
+
+    

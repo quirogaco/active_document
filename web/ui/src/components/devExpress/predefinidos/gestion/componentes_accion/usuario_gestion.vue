@@ -5,39 +5,44 @@
         shading-color   = "rgba(0,0,0,0.4)"
     />
 
-    <div class="bg_tab_panel">
+    <div class="">
 
-        <div class="full-width-content ">
-            <div class="dx-fieldset">
-
-                <div class="dx-field">
-                    <div class="dx-field-label">Usuario:</div>
-                    <div class="dx-field-value">
-                        <DxSelectBox
-                            :data-source    = "fuente"
-                            v-model:value   = "usuario"
-                            display-expr    = "nombre"
-                            value-expr      = "id"
-                            search-enabled   = "true"
-                            :showClearButton = "true"
-                        >
-                            <DxValidator>
-                                <DxRequiredRule />                            
-                            </DxValidator>
-                        </DxSelectBox>
-                        
+        <div class=" full-width-content ">
+            <div class="dx-fieldset">                
+                    <div class="dx-field">
+                        <div class='row'>
+                            <div class="col-2 ">Usuario:</div>
+                            <div class="col-10 ">
+                                <DxSelectBox
+                                    :data-source    = "fuente"
+                                    v-model:value   = "usuario"
+                                    display-expr    = "nombre_completo"
+                                    value-expr      = "id"
+                                    
+                                    search-enabled   = "true"
+                                    :showClearButton = "true"
+                                >
+                                    <DxValidator>
+                                        <DxRequiredRule />                            
+                                    </DxValidator>
+                                </DxSelectBox>
+                                
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="dx-field">
-                    <div class="dx-field-label">Comentario:</div>
-                    <div class="dx-field-value">
-                        <DxTextArea
-                            :height       = "90"
-                            v-model:value = "comentario"
-                        />
+                    <div class="dx-field">
+                        <div class='row'>
+                            <div class="col-2 ">Comentario:</div>
+                            <div class="col-10 ">
+                                <DxTextArea                                 
+                                    :height       = "90"
+                                    v-model:value = "comentario"
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
+
 
             </div>
 
@@ -173,3 +178,9 @@ let usuario_gestion =  {
 export default usuario_gestion;
 
 </script>
+
+<style scoped>
+.label-width {
+    width: 200px;
+}
+</style>

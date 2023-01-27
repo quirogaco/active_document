@@ -3,14 +3,14 @@
 
 import pprint
 
-from librerias.utilidades         import basicas  
-from librerias.datos.sql          import sqalchemy_insertar
-from librerias.datos.estructuras  import estructura_operaciones
-from librerias.datos.sql          import sqalchemy_modificar, sqalchemy_leer, sqalchemy_filtrar
+from librerias.utilidades import basicas  
+from librerias.datos.sql import sqalchemy_insertar
+from librerias.datos.estructuras import estructura_operaciones
+from librerias.datos.sql import sqalchemy_modificar, sqalchemy_leer, sqalchemy_filtrar
 
-from aplicacion.comunes           import manejo_archivos
-from aplicacion.comunes           import indexar_datos
-from .                            import notifica_gestion, logs
+from aplicacion.comunes import manejo_archivos
+from aplicacion.comunes import indexar_datos
+from . import notifica_gestion, logs
  
 # Cambia CLASE DE RADICADO 
 def actualiza_radicado(radicado_id, clase_radicado, comentario_traslado, id_tarea):
@@ -56,31 +56,55 @@ def crea_registro_gestion(datos, archivos, id_tarea):
     clase_radicado = datos.get("clase_radicado", "PQRSD")
     
     # Dependencia y responsable
-    peticion_id = datos["gestion_peticion_id"]
-    peticion = sqalchemy_leer.leer_un_registro(
-        "tipo_peticiones", 
-        peticion_id
-    )
-    # if clase_radicado == "TRAMITE":
-    #     dependencia_id = peticion["dependencias_ids"][0]
-    # else:        
-    dependencia_id = datos['gestion_dependencia_id']
-    dependencia = sqalchemy_leer.leer_un_registro(
-                      "dependencias", 
-                      dependencia_id
-                   )
+    if clase_radicado == "INTERNO":
+        accion = "ASIGNAR_RESPONSABLE"
+        estructura = "radicados_interno" 
+        tipo = "INTERNO"
+        peticion_id = "*"
+        dependencia_id = datos['dependencia_recibe_id']
+        dependencia = sqalchemy_leer.leer_un_registro(
+            "dependencias", 
+            dependencia_id
+        )
+        nombre_dependencia = dependencia["nombre_completo"]
 
-    if clase_radicado == "DOCUMENTO":                
-        responsable_id = dependencia["correspondencia_id"]
-        responsable_nombre = dependencia["correspondencia_nombre"]
-    else:
-        responsable_id = dependencia["pqrs_id"]
-        responsable_nombre = dependencia["pqrs_nombre"]
+        responsable_id = datos['funcionario_recibe_id']
+        usuario = sqalchemy_leer.leer_un_registro(
+            "usuarios", 
+            responsable_id
+        )
+        responsable_nombre = usuario["nombre"]
+
+        gestion_prioridad = "NORMAL"
+    else:   
+        accion = "ASIGNAR_DEPENDENCIA"
+        estructura = "radicados_entrada"  
+        tipo = "ENTRADA"   
+        peticion_id = datos["gestion_peticion_id"]
+        peticion = sqalchemy_leer.leer_un_registro(
+            "tipo_peticiones", 
+            peticion_id
+        )
+        
+        dependencia_id = datos['gestion_dependencia_id']
+        dependencia = sqalchemy_leer.leer_un_registro(
+            "dependencias", 
+            dependencia_id
+        )
+        nombre_dependencia = dependencia["nombre_completo"]
+        if clase_radicado == "DOCUMENTO":                
+            responsable_id = dependencia["correspondencia_id"]
+            responsable_nombre = dependencia["correspondencia_nombre"]
+        else:
+            responsable_id = dependencia["pqrs_id"]
+            responsable_nombre = dependencia["pqrs_nombre"]
+
+        gestion_prioridad = datos["gestion_prioridad"]
 
     detalle = (
         "ASIGNACIÓN POR COMPETENCIA A " +  
         responsable_nombre + ", DE " + 
-        dependencia["nombre_completo"]
+        nombre_dependencia
     )    
     horas_dias = datos.get("gestion_horas_dias", None)
     total_tiempo = datos.get("gestion_total_tiempo", None)    
@@ -100,26 +124,29 @@ def crea_registro_gestion(datos, archivos, id_tarea):
     
     # Registro gestión
     data_registro = {
-        'creado_por_id' : "*",
+        'creado_por_id': "*",
         "responsable_id": responsable_id,
         "dependencia_id": dependencia_id,
         "gestion_inicio": basicas.fechaHora(),
-        "peticion_id"   : peticion_id,
-        "total_tiempo"  : total_tiempo,
-        "horas_dias"    : horas_dias,
-        "prioridad"     : datos["gestion_prioridad"],
-        "rapida"        : "NO",
-        "colaborativa"  : "",
-        "atributos_"    : atributos_
+        "peticion_id": peticion_id,
+        "total_tiempo": total_tiempo,
+        "horas_dias": horas_dias,
+        "prioridad": gestion_prioridad,
+        "rapida": "NO",
+        "colaborativa": "",
+        "atributos_": atributos_
     }
 
-    resultado  = sqalchemy_insertar.insertar_registro_estructura("peticiones", data_registro)
+    resultado  = sqalchemy_insertar.insertar_registro_estructura(
+        "peticiones", 
+        data_registro
+    )
     gestion_id = resultado["id"]
     
     # Crear relación GESTIóN    
     datos_relacion = {
         'fuente'    : clase_radicado,
-        'tipo'      : "ENTRADA",
+        'tipo'      : tipo,
         'origen_id' : radicado_id,
         'relacion'  : "GENERADOR",
         'gestion_id': gestion_id
@@ -128,7 +155,7 @@ def crea_registro_gestion(datos, archivos, id_tarea):
     
     # Crea archivos
     manejo_archivos.manejo(
-        "radicados_entrada", 
+        estructura, 
         "insertar", 
         {"id": radicado_id}, 
         archivos, 
@@ -137,10 +164,10 @@ def crea_registro_gestion(datos, archivos, id_tarea):
 
     # Log de creación registro gestión
     datos_log = {
-        "accion"         : "ASIGNAR_DEPENDENCIA",
+        "accion": accion,
         "destinatario_id": responsable_id,     
-        "id"             : gestion_id, 
-        "detalle"        : detalle
+        "id": gestion_id, 
+        "detalle": detalle
     }
     logs.log_gestion(datos_log, id_tarea)
 
@@ -152,10 +179,10 @@ def crea_registro_gestion(datos, archivos, id_tarea):
             atributos_["finalizado"]["finalizado_por_nombre"]
         )
         datos_log = {
-            "accion"         : "FINALIZAR_PRIMER_CONTACTO",
+            "accion": "FINALIZAR_PRIMER_CONTACTO",
             "destinatario_id": None,     
-            "id"             : gestion_id, 
-            "detalle"        : mensaje
+            "id": gestion_id, 
+            "detalle": mensaje
         }
         logs.log_gestion(datos=datos_log, id_tarea=id_tarea, retardo=60)
 
@@ -167,7 +194,7 @@ def crea_registro_gestion(datos, archivos, id_tarea):
    
     
     # Indexar estructuras
-    indexar_datos.indexar_estructura("radicados_entrada", radicado_id, 90)
+    indexar_datos.indexar_estructura(estructura, radicado_id, 90)
     indexar_datos.indexar_estructura("peticiones", gestion_id, 90)
 
 # Crea COLABORATIVA
@@ -223,7 +250,7 @@ def crea_gestion_colaborativa(datos, peticion_id, id_tarea):
     
     # Log de creación registro gestión
     datos_log = {
-        "accion"         : "ASIGNAR_DEPENDENCIA",
+        "accion"         : "ASIGNAR_RESPONSABLE",
         "destinatario_id": responsable_id,     
         "id"             : peticion_id, 
         "detalle"        : ("SOLICITA COLABORATIVA: " + comentario)

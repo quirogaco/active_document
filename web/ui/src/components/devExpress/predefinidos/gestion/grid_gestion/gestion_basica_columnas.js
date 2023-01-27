@@ -18,6 +18,7 @@ let lista_acciones =  [
     { id: 'ASIGNADO_RESPONSABLE',              nombre: 'ASIGNADO_RESPONSABLE' },  
     { id: 'MIS_APROBACIONES',                  nombre: 'MIS APROBACIONES' },    
     { id: 'ASIGNADOS',                         nombre: 'ASIGNADOS' },    
+    { id: 'APROBADO_RESPUESTA',                nombre: 'APROBADO PARA RADICAR'}
 ]
 lista_acciones.sort(function(a, b) {
     if (a.nombre < b.nombre) {

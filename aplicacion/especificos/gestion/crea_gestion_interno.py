@@ -4,7 +4,7 @@
 import pprint
 
 from librerias.utilidades import basicas  
-from librerias.datos.sql  import sqalchemy_insertar
+from librerias.datos.sql import sqalchemy_insertar
 from librerias.datos.elastic import elastic_operaciones
 from aplicacion.especificos.radicados.gestion import logs
  

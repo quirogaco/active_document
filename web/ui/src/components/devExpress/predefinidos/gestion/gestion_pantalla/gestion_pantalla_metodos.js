@@ -1,5 +1,6 @@
-import visores_archivo               from "../../../../../librerias/visores_archivo.js"
-import gestion_acciones_elementos    from "../gestion_acciones_elementos/gestion_acciones_elementos.js"
+import visores_archivo from "../../../../../librerias/visores_archivo.js"
+import gestion_acciones_elementos  
+from "../gestion_acciones_elementos/gestion_acciones_elementos.js"
 import gestion_pantalla_definiciones from "./gestion_pantalla_definiciones.js"
 
 let metodos = {
@@ -24,24 +25,32 @@ let metodos = {
     },
 
     // Invoca validación remota
-    'valida_mostrar_pdf': function(origen_id, estructura="radicados_entrada") {
+    'valida_mostrar_pdf': function(origen_id, tipo_documento) {
+        console.log("valida_mostrar_pdf>>>", tipo_documento)
+        let estructura = "radicados_entrada";
+        if (tipo_documento == "INTERNO") {
+            estructura = "radicados_interno";
+        };
+
         let parametros = {
             datos : {
                 origen_id: origen_id,
                 estructura : estructura
             },
             accion: "gestion_pdf_principal"
-        };        
+        };
+        
+        console.log("parametros>>>", parametros)       
         let urlCompleta = (
             window.$direcciones.servidorDatos + '/especifico_acciones'
         );   
-        this.indicador_visible = true 
+        this.indicador_visible = true;
         window.$f["http"].llamadoRestPost( 
             urlCompleta, 
             parametros, 
             this.retorna_pdf, 
             ""
-        )               
+        );               
     },
 
     "pdf_visible": function(pdf_informacion) {
@@ -78,7 +87,10 @@ let metodos = {
             this.clase_pdf = "col-12 shadow-sm p-3 mb-3 bg-body rounded"
         }      
         this.repintar_pdf += 1;
-        this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(this)
+        this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(
+            this,
+            this.parametros
+        )
     },
 
     // ************************ //
@@ -125,7 +137,7 @@ let metodos = {
         if (colaborativa != "") modo = "lectura"
         
         // Muestra editor
-        let parametros = window.$lib.unifica_datos_visor({
+        let parametros_editor = window.$lib.unifica_datos_visor({
             titulo_general: "Consulta de Plantillas",
             archivo_id    : borrador_id, 
             tipo_documento: "docx", 
@@ -134,7 +146,7 @@ let metodos = {
             descarga      : 'no'
         })        
         
-        this.editor.mostrar_editor(parametros)
+        this.editor.mostrar_editor(parametros_editor)
         this.verBorrador         = true
         this.borrador_existe     = true
         if (this.pdf_existe == true) {
@@ -144,7 +156,11 @@ let metodos = {
         else {
             this.clase_borrador = "col-12 shadow-sm p-3 mb-3 bg-body rounded"
         }  
-        this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(this)
+        this.barra_elementos_visuales = 
+            gestion_pantalla_definiciones.barra_elementos(
+                this,
+                this.parametros
+            )
     },
 
     elemento_click(e) {
@@ -289,8 +305,8 @@ let metodos = {
         this.asigna_parametros(parametros)
         this.emergente_key += 1;
     }
-}
+};
 
 export default {
     metodos        : metodos
-}
+};

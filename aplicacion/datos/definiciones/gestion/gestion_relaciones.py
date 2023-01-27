@@ -21,6 +21,9 @@ def carga_radicado(_r):
         radicado = {}
         if (_r.tipo == "ENTRADA"):
             radicado = sqalchemy_leer.leer_un_registro("radicados_entrada", _r.origen_id)
+
+        if (_r.tipo == "INTERNO"):
+            radicado = sqalchemy_leer.leer_un_registro("radicados_interno", _r.origen_id)
         
         setattr(_r, "_radicado", radicado)
 

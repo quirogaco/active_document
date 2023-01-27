@@ -3,10 +3,10 @@
 
 import pprint, datetime, builtins, base64
 
-from librerias.datos.base    import globales
-from librerias.datos.sql     import sqalchemy_leer
-from librerias.datos.sql     import sqalchemy_comunes
-from aplicacion.especificos.gestion.acciones  import acciones_detalle
+from librerias.datos.base import globales
+from librerias.datos.sql import sqalchemy_leer
+from librerias.datos.sql import sqalchemy_comunes
+from aplicacion.especificos.gestion.acciones import acciones_detalle
 from aplicacion.especificos.radicados.gestion import logs
 
 from . import crea_gestion_salida
@@ -16,11 +16,6 @@ from . import colaborativa_gestion
 
 # Asigna responsable gestión
 def asignar_responsable(accion, datos={}, archivo=[], id_tarea=""):    
-    print("")
-    print("asignar_responsable:")
-    pprint.pprint(datos)
-    print("")
-    print("")    
     peticiones_id = datos["peticiones"]
     anterior_id   = datos["_usuario_"]["id"]
     usuario_id    = datos["usuario"]
@@ -62,7 +57,6 @@ def asignar_responsable(accion, datos={}, archivo=[], id_tarea=""):
 
 # Devuelve a asistencial dependencia
 def devolver_dependencia_asignadora(accion, datos={}, archivo=[], id_tarea=""): 
-    GESTION_CLASE = globales.lee_clase("gestor_peticiones")
     GESTION_RELACIONES_CLASE = globales.lee_clase("gestor_peticion_relaciones")
     sesion = sqalchemy_comunes.nuevaSesion("base")    
 
@@ -150,7 +144,6 @@ def enviar_visto_bueno(accion, datos={}, archivo=[], id_tarea=""):
     responsable    = sqalchemy_leer.leer_un_registro("usuarios", responsable_id) 
     peticiones_id  = datos["peticiones"]
     comentario     = datos["comentario"]
-    print("enviar_visto_bueno-0:")
     for peticion_id in peticiones_id:
         # Modifica registro
         datos_modificados = {
@@ -159,7 +152,6 @@ def enviar_visto_bueno(accion, datos={}, archivo=[], id_tarea=""):
             "dependencia_id": dependencia_id
         }
         comunes_gestion.modifica_peticion(peticion_id, datos_modificados)
-        print("enviar_visto_bueno-1:")
 
         # Log de acción
         datos_log = {
@@ -173,7 +165,6 @@ def enviar_visto_bueno(accion, datos={}, archivo=[], id_tarea=""):
         }
         # Log indexa la peticion
         logs.log_gestion(datos=datos_log, id_tarea=id_tarea, encolar=False)
-        print("enviar_visto_bueno-0:")
     
     return {}
 

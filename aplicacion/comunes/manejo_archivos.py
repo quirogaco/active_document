@@ -47,6 +47,7 @@ def buca_anexo_especifico_id(origen_id, tipo_anexo="notificacion"):
         [ "origen_id", "=", origen_id ], 
         [ "tipo_relacion", "=", tipo_anexo] 
     ]
+    #print("buca_anexo_especifico_id >>> FILTROS:", filtros)
     relaciones = sqalchemy_filtrar.filtrarOrdena(
         estructura="archivos_relacion", 
         filtros=filtros, 

@@ -12,6 +12,7 @@ from librerias.datos.sql                    import sqalchemy_clase_dinamica
 
 from . import interno_campos
 from . import interno_referencias
+from . import interno_propiedades
 
 # Campos elastic
 camposElastic      = interno_campos.campos.copy()
@@ -36,6 +37,7 @@ definicion = {
     "indexamiento": {}
 }
 
+
 # Publica
 elementos_comunes.publicaValidaElastic(definicion, camposElastic)
 
@@ -44,8 +46,20 @@ sqalchemy_clase_dinamica.prepara_relaciones_proxy(definicion["clase"], definicio
 sqalchemy_clase_dinamica.clase_serializar(definicion["clase"], definicion["campos"])
 sqalchemy_clase_dinamica.clase_propiedades(definicion["clase"], definicion["campos"])
 
+# Evento al cargar
+CLASE = globales.lee_clase(definicion["clase"])
+
+# Eventos de clase y objeto
+def al_cargar(target, context):
+    interno_propiedades.archivos_nombres(context.session, target)
+    interno_propiedades.pdf_base(context.session, target)
+    interno_propiedades.logs(context.session, target)
+    
+sqalchemy_clase_dinamica.asigna_evento(CLASE, "load", al_cargar)
+
+
 # Procesos pre, post, ultimo
 from . import interno_procesamiento
 
-# Normalización
+# Normalizaciï¿½n
 from . import interno_estructura_funciones

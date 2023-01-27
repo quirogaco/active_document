@@ -66,6 +66,5 @@ referencias = [
         "campoDestino"     : "fuente_id",            
     },
 
-    archivos.referencia_archivo,
-    #archivos.referencia_borrador
+    archivos.referencia_archivo
 ]

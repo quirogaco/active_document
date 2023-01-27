@@ -47,22 +47,36 @@ campos = {
     "funcionario_recibe_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Funcionario recibe id",     "longitud": 64}),
     "funcionario_recibe_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Funcionario recibe nombre"}),
 
+
+
+    #######################
+    # Información gestión #
+    #######################
+    "gestion_id": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión id", "longitud": 64}),
+    
+
     # Tipo de firma
     "tipo_firma"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de firma",     "longitud": 64}),
 
+    # Tipo respuesta
+    "respuesta_tipo"   : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Respuesta tipo", "longitud": 64}),
+
+    # Radicado que contesta
+    "radicado_responde": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado responde", "longitud": 64}),
+
     # Reserva del documento
-    "reserva"            : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Reserva", "longitud": 20}), 
+    "reserva": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Reserva", "longitud": 20}), 
 
-    # Firmado
-    "firmado"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Canal id", "longitud": 64, "default": "NO"}),
-    "firmado_por": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Canal", "longitud": 512}),
-
+    # Firma digital
+    "firma_electronica"      : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Requiere firma electronica", "propiedad": interno_propiedades.firma_electronica}), 
+    "firmado_electronica"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tiene firma electronica", "propiedad": interno_propiedades.firmado_electronica}), 
+    "firmado_electronica_por": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Quien firmo electronicamente", "propiedad": interno_propiedades.firmado_electronica_por}), 
     "esta_firmado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Esta firmado", "propiedad": interno_propiedades.esta_firmado}),
-
-    #######################
-    # Informaci�n gesti�n #
-    #######################
-    "gestion_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Gesti�n id", "longitud": 64}),
+    
+    ########
+    # logs #
+    ########
+    "logs": tipos.json(propiedades={"columna": "no", "titulo": "Log radicado"}),
 
     ######################
     # Copia del radicado #
@@ -73,8 +87,8 @@ campos = {
     ############
     # archivos #
     ############
-    "archivos"              : tipos.clave(propiedades={"columna": "no", "titulo": "Archivos"}),      
-    "pdf_base"        : tipos.json(propiedades={"columna": "no", "titulo": "Archivos pdf base"}),  
+    "archivos"         : tipos.clave(propiedades={"columna": "no", "titulo": "Archivos"}),  
+    "pdf_base"        : tipos.json(propiedades={"columna": "no", "titulo": "Archivos pdf base"}), 
 }
 campos.update(base_general_campos.campos)
 

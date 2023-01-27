@@ -68,19 +68,19 @@ from datetime import datetime
 def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     querytime = globales.lee_modelo_querytime(estructura)
     parametros = parametros["params"]
+
     # Crea objeto de busqueda
-    #"""
-    # print("")
-    # print("")    
-    # print("BUSQUEDA PARAMETROS------------->", estructura)
-    # pprint.pprint(parametros) 
-    # #pprint.pprint(definicion)
-    # #print("")
-    # print("***************XXXXXXXXXXXXXXX**********************************")
-    # print("")
-    # print("")
-    # print("")   
-    #""" 
+    print("")
+    print("")    
+    print("BUSQUEDA PARAMETROS------------->", estructura)
+    pprint.pprint(parametros) 
+    #pprint.pprint(definicion)
+    #print("")
+    print("***************XXXXXXXXXXXXXXX**********************************")
+    print("")
+    print("")
+    print("")   
+    
     #pprint.pprint(querytime)
     conexion  = globales.lee_conexion_elastic("base")
     busqueda  = Search(using=conexion, index=estructura)
@@ -122,12 +122,12 @@ def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
 
     # Ejecuta busqueda y procesa respuesta
     #"""
-    # print("")
-    # print("")
-    # print("diccionario:")
-    # pprint.pprint(busqueda.to_dict())
-    # print("")
-    # print("")
+    print("")
+    print("")
+    print("diccionario:")
+    pprint.pprint(busqueda.to_dict())
+    print("")
+    print("")
     #"""
 
     elementos      =  busqueda.execute().to_dict()["hits"] 

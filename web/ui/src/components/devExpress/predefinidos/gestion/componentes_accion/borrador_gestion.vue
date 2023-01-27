@@ -7,25 +7,29 @@
     />
 
 
-    <div class=" shadow-lg p-3 bg-light.bg-gradient rounded"> 
+    <div class="  p-3 bg-light.bg-gradient "> 
 
         <div class="dx-fieldset">
 
             <div class="dx-field">
-                <div class="dx-field-label">Seleccione plantilla:</div>
-                <div class="dx-field-value">
-                    <DxSelectBox
-                        :data-source    = "fuente"
-                        v-model:value   = "plantilla"
-                        display-expr    = "descripcion"
-                        value-expr      = "id"
-                        :showClearButton = "true"
-                    >
-                        <DxValidator>
-                            <DxRequiredRule />                            
-                        </DxValidator>
-                    </DxSelectBox>
-                    
+                <div class='row'>
+                    <div class="col-2 ">Seleccione plantilla:</div>
+                    <div class="col-10 ">
+                        <div class="">
+                            <DxSelectBox
+                                :data-source    = "fuente"
+                                v-model:value   = "plantilla"
+                                display-expr    = "descripcion"
+                                value-expr      = "id"
+                                :showClearButton = "true"
+                            >
+                                <DxValidator>
+                                    <DxRequiredRule />                            
+                                </DxValidator>
+                            </DxSelectBox>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
 

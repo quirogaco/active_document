@@ -29,7 +29,7 @@ def actualiza(radicado_datos, peticion_id, id_tarea):
     # Actualiza petición
     atributos_               = gestion["atributos_"]
     atributos_["finalizado"] = {
-        "fecha_respuesta"      : datetime.datetime.now(),        
+        "fecha_respuesta": datetime.datetime.now(),        
         "finalizado_comentario": (
             "RADICADO CON # [" + radicado_datos["nro_radicado"] + "] "
         ),

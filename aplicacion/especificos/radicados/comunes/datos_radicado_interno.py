@@ -5,8 +5,11 @@ import pprint, datetime, random
 
 from . import datos_comunes
 from librerias.utilidades import basicas
-from librerias.datos.sql import sqalchemy_filtrar 
-from librerias.datos.sql import sqalchemy_modificar 
+from librerias.datos.sql import (
+    sqalchemy_filtrar,
+    sqalchemy_modificar,
+    sqalchemy_leer
+) 
 
 ##################
 # BASICOS SALIDA #
@@ -46,7 +49,6 @@ def datos_basicos(datos, tarea_id):
     radicado = "I-" + basicas.ano() + "-" + consecutivo    
     tipo_firma = ",".join(datos['tipo_firma'])
     medio_notificacion = ",".join(datos['medio_notificacion'])
-    usuario = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)
     datos_especificos = {
         'radicado_en': radicado_en,
         'radicado_por': radicado_por,

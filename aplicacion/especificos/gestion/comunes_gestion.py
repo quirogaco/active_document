@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, datetime, builtins, base64
 
@@ -24,8 +24,7 @@ def modifica_peticion(peticion_id, datos):
 
 
 def peticion_real(peticion_id):
-    peticion = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)   
-    print("peticion[colaborativa]:", peticion["colaborativa"])
+    peticion = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)  
     if (peticion["colaborativa"] not in ["", None]):
         peticion_id = peticion["colaborativa"]
 

@@ -372,16 +372,24 @@ def crear_filtros(definicion, filtros):
 # Crea todos los filtros de la busqueda
 def prepararFiltros(busqueda, parametros, definicion):
     # Filtro sencillo (ej. select, tagbox)
-    filtro = crear_filtro_sencillo(parametros, definicion)    
-    if (filtro != None):        
+    sencillo = crear_filtro_sencillo(parametros, definicion)    
+    
+    # if (filtro != None):        
+    #     busqueda = busqueda.query(filtro)
+    # else:
+        
+    # Filtros panel, busqueda y encabezados
+    filtros = parametros.get("filtros", []) 
+    # print("&&&&&&&&&&&&&&&&&&&&&&&&")
+    # print(filtros)
+    filtro  = crear_filtros(definicion, filtros)
+    if (filtro != None):
+        if sencillo != None:
+            filtro = Q_dsl( sencillo & filtro )
         busqueda = busqueda.query(filtro)
     else:
-        # Filtros panel, busqueda y encabezados
-        filtros = parametros.get("filtros", []) 
-        # print("&&&&&&&&&&&&&&&&&&&&&&&&")
-        # print(filtros)
-        filtro  = crear_filtros(definicion, filtros)
-        if (filtro != None):
+        if sencillo != None:
+            filtro = sencillo
             busqueda = busqueda.query(filtro)
 
     return busqueda

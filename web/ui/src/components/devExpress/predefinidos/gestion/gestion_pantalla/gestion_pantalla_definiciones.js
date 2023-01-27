@@ -2,13 +2,17 @@ import gestion_acciones_elementos from "../gestion_acciones_elementos/gestion_ac
 import gestion_pantalla_metodos from "./gestion_pantalla_metodos.js"
 import gestion_pantalla_ventanas from "./gestion_pantalla_ventanas.js" 
 
-const barra_elementos = function(forma) {
+const barra_elementos = function(forma, datos) {
     let barra_botones = [                   
         {
             widget  : "dxDropDownButton",
             location: "after",
             options : {
-                items      : gestion_acciones_elementos.items_gestion(forma, "ventana_gestion"),  
+                items      : gestion_acciones_elementos.items_gestion(
+                    forma, 
+                    "ventana_gestion",
+                    datos
+                ),  
                 displayExpr: 'titulo',
                 keyExpr    : 'id',
                 icon       : 'fas fa-mouse',  
@@ -37,6 +41,6 @@ const barra_elementos = function(forma) {
 }
 
 export default {
-    metodos        : gestion_pantalla_metodos.metodos,
+    metodos : gestion_pantalla_metodos.metodos,
     barra_elementos: barra_elementos
 }

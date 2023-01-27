@@ -19,6 +19,7 @@ def crear_radicado(datos_basicos, datos):
     return resultado
 
 from . import maneja_gestion
+from aplicacion.especificos.radicados.gestion import gestion
 
 def radicar(accion, datos={}, archivos=[], id_tarea=""):
     datos_radicado = datos["datos"]
@@ -51,7 +52,7 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     datos_basicos["atributos_"]  = datos_extendidos
     radicado = crear_radicado(datos_basicos, datos)
     radicado_id = radicado["id"]
-
+    datos_radicado["id"] = radicado_id
     datos_cola = {
         "tarea_id": id_tarea,
         "radicado_tipo": "INTERNO",
@@ -72,15 +73,24 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     # Lee información gestión
     gestion_id = datos_radicado.get("gestion_id", None)
     if gestion_id != None:
-        gestion = sqalchemy_leer.leer_un_registro("peticiones", gestion_id) 
-        datos_completos["borrador_id"] = gestion["borrador_id"]
+        peticion = sqalchemy_leer.leer_un_registro("peticiones", gestion_id) 
+        datos_completos["borrador_id"] = peticion["borrador_id"]
 
+    # Correo destinatario notificacion
+    destinatario = sqalchemy_leer.leer_un_registro(
+        "usuarios", 
+        datos_radicado['funcionario_recibe_id']
+    ) 
+    datos_completos["correo_electronico"] = destinatario["correo"]
     pdf_notifica.pdf_notificacion("INTERNO", datos_completos, id_tarea)
 
-    # Actualiza gestión
+    # Actualiza gestión del borrador
     if gestion_id not in ["", None]:
         maneja_gestion.actualiza(radicado, gestion_id, id_tarea)
 
+    # Crea gestion para destinatario
+    gestion.asigna_interno(accion, datos_radicado, archivos, id_tarea)
+    
     # Indexa de ultimo
     indexar_datos.indexar_estructura(
         "radicados_interno", 

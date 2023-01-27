@@ -19,15 +19,15 @@ def validar_usuario(username, password, servidor_ip, servidor_puerto):
 
     #username = "fabigonz" 
     #username = "nohora.correa" 
-    username = "astrid.amaya"
+    #username = "astrid.amaya"
     # fully qualified AD user name
     LDAP_USERNAME = '%s@esap.edu.co' % username
 
     # your password
-    #LDAP_PASSWORD = password
+    LDAP_PASSWORD = password
     #LDAP_PASSWORD = "Npcb1580*"
     #LDAP_PASSWORD = "Contraesap2*"
-    LDAP_PASSWORD = "Esap.2023"
+    #LDAP_PASSWORD = "Esap.2023"
     
     print(
         "LDAP_PASSWORD:", 

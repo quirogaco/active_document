@@ -1,7 +1,7 @@
 let elemento_parametros = function(elemento_id) {   
     let parametros = {}
     parametros["alto"]  = 400
-    parametros["ancho"] = 1000
+    parametros["ancho"] = 1200
 
     //HABILITAR_RESPUESTA_RAPIDA
     switch (elemento_id) {
@@ -19,7 +19,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "DEVOLVER_DEPENDENCIA";   
             parametros["boton_mensaje"] = "Devolver"; 
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 1000; 
+            parametros["ancho"]         = 1200; 
             break;
 
         case 3:
@@ -35,7 +35,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ENVIAR_VISTO_BUENO";   
             parametros["boton_mensaje"] = "Enviar";    
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
 
         case 5:
@@ -44,7 +44,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "FINALIZAR_MANUAL";   
             parametros["boton_mensaje"] = "Finalizar";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
 
         case 6:
@@ -53,7 +53,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "SELECCION_PLANTILLA";  
             parametros["boton_mensaje"] = "Crear borrador";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
         
         case 7:
@@ -71,7 +71,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "DEVOLVER_ASIGNADOR";   
             parametros["boton_mensaje"] = "Devolver";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
 
         case 9:
@@ -80,7 +80,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ASIGNA_TRD";  
             parametros["boton_mensaje"] = "Asignar";     
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
 
         case 10:
@@ -89,7 +89,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ASIGNA_TEMA_SUBTEMA";   
             parametros["boton_mensaje"] = "Asignar" ;    
             parametros["alto"]          = 300;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
 
         case 11:
@@ -98,7 +98,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "ANEXA_ARCHIVO";  
             parametros["boton_mensaje"] = "Anexar";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;    
             
         case 12:
@@ -107,7 +107,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_COMENTARIO";   
             parametros["boton_mensaje"] = "Crear";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break; 
 
         case 13:
@@ -116,7 +116,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_COLABORATIVA";   
             parametros["boton_mensaje"] = "Solicitar ayuda cooperativa";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             parametros["fuente"]        = "usuarios";
             break;   
             
@@ -126,7 +126,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "APROBAR_RADICAR";  
             parametros["boton_mensaje"] = "Aprobar";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break;
 
         case 15:
@@ -135,7 +135,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "DEVOLVER_REVISION";
             parametros["boton_mensaje"] = "Devolver";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             break; 
 
         case 16:
@@ -152,7 +152,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["titulo"]        = "Consulta Radicado";
             parametros["accion"]        = "CONSULTA_RADICADO";   
             parametros["boton_mensaje"] = "";    
-            parametros["alto"]          = 1000;
+            parametros["alto"]          = 1200;
             parametros["ancho"]         = 1200;
             break;
 
@@ -161,7 +161,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["titulo"]        = "Consulta datos gestión";
             parametros["accion"]        = "CONSULTA_GESTION";   
             parametros["boton_mensaje"] = "";     
-            parametros["alto"]          = 1000;
+            parametros["alto"]          = 1200;
             parametros["ancho"]         = 1200;
             break;
         
@@ -172,7 +172,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_BORRADOR_SALIDA";
             parametros["boton_mensaje"] = "Crear borrador SALIDA";    
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             parametros["borrador"]      = true;
             break; 
 
@@ -183,7 +183,7 @@ let elemento_parametros = function(elemento_id) {
             parametros["accion"]        = "CREA_BORRADOR_INTERNO";
             parametros["boton_mensaje"] = "Crear borrador INTERNO";     
             parametros["alto"]          = 400;
-            parametros["ancho"]         = 1000;
+            parametros["ancho"]         = 1200;
             parametros["borrador"]      = true;
             break; 
 
@@ -192,26 +192,116 @@ let elemento_parametros = function(elemento_id) {
     }
     
     return parametros;
-} 
+};
+
+let asignar_responsable = { 
+    id: 1, 
+    titulo: 'Asignar responsable', 
+    icon: "fas fa-user-check" 
+};
+
+let devolver_ventanilla = { 
+    id: 2, 
+    titulo: 'Devolver (Ventanilla, Servicio ciudadano)', 
+    icon: "fas fa-backward" 
+};
+
+let trasladar_dependencia = { 
+    id: 3, 
+    titulo: 'Trasladar a otra dependencia', 
+    icon: "fas fa-forward" 
+};
+
+let enviar_a_visto_bueno =  { 
+    id: 4,  
+    titulo: 'Enviar a visto bueno', 
+    icon: "fas fa-clipboard-check" 
+};
+
+let finalizar = { 
+    id: 5,  
+    titulo: 'Finalizar', 
+    icon: "fas fa-window-close" 
+};
+
+let crear_borrador = { 
+    id: 6,  
+    titulo: 'Crear borrador', 
+    icon: "fas fa-file-import" 
+};
+
+let radicar_borrador = {
+    id: 7,  
+    titulo: 'Radicar borrador', 
+    icon: "fas fa-edit" 
+};
+
+let devolver_asignador = { 
+    id: 8,  
+    titulo: 'Devolver a encargado/enlace dependencia', 
+    icon: "fas fa-backspace"
+};
+
+let asigna_trd = { 
+    id: 9,  
+    titulo: 'Asigna expediente y tipo documental (TRD)', 
+    icon: "fas fa-folder-plus" 
+};
+
+let anexar_archivo = { 
+    id: 11, 
+    titulo: 'Anexar archivo de gestión', 
+    icon: "fas fa-file" 
+};
+
+let crea_comentario  = { 
+    id: 12, 
+    titulo: 'Crea comentario', 
+    icon: "fas fa-comments" 
+};
+
+let ayuda_cooperativa =  { 
+    id: 13, 
+    titulo: 'Solicitar ayuda cooperativa', 
+    icon: "fas fa-hands-helping" 
+};
+
+let aprobar = { 
+    id: 14, 
+    titulo: 'Aprobar para radicar', 
+    icon: "fas fa-thumbs-up" 
+};
+
+let devolver = { 
+    id: 15, 
+    titulo: 'Devolver para revisión', 
+    icon: "fas fa-undo-alt" 
+};
+
+let respuesta_rapida = { 
+    id: 16, 
+    titulo: 'Respuesta rapída', 
+    icon: "fas fa-shipping-fast"
+};
 
 // componente: grid, forma
-let items_gestion = function(componente, contexto) {
+let items_gestion = function(componente, contexto, datos={}) {
     let items = [
         //{ id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
         //{ id: 16, titulo: 'Respuesta rapída',    icon: "fas fa-shipping-fast" },
     ]
-
+    
     if (contexto=="grid_gestion") {        
         if (
                 (window.$usuario.roles_especificos.indexOf('CORRESPONDENCIA') > -1) || 
                 (window.$usuario.roles_especificos.indexOf('PQRSD') > -1)
             ) {
             items = [
-                { id: 1, titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
-                { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
-                { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }          
+                asignar_responsable,
+                //respuesta_rapida
+                trasladar_dependencia,
+                devolver_ventanilla,
+                finalizar          
             ]
         }
         else {
@@ -221,122 +311,137 @@ let items_gestion = function(componente, contexto) {
     else {      
         if ( componente.parametros.colaborativa != "" ) {
             items = [
-                { id: 11, titulo: 'Anexar archivo de gestión', icon: "fas fa-file" },
-                { id: 12, titulo: 'Crea comentario', icon: "fas fa-comments" },
-                { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }
+                anexar_archivo,
+                crea_comentario,
+                finalizar
             ]
         }  
         else {
-            let etapa_estado = componente.parametros.etapa_estado
-            let borrador_existe = componente.parametros.borrador_existe;
-            //console.log("GESTION: ", etapa_estado, borrador_existe) 
-            switch (etapa_estado) {
-                case "ASIGNADO_DEPENDENCIA":
-                    items = [
-                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
-                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
-                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
-                    ]
-                    break
-                
-                case "ASIGNADO_RESPONSABLE":
-                    items = [
-                        { id: 6,  titulo: 'Crear borrador', icon: "fas fa-file-import" },                                            
-                        { id: 9,  titulo: 'Asigna expediente y tipo documental (TRD)', icon: "fas fa-folder-plus" },
-                        { id: 11, titulo: 'Anexar archivo de gestión', icon: "fas fa-file" },
-                        { id: 12, titulo: 'Crea comentario', icon: "fas fa-comments" },
-                        { id: 8,  titulo: 'Devolver a encargado/enlace dependencia', icon: "fas fa-backward" },
-                        { id: 13, titulo: 'Solicitar ayuda cooperativa', icon: "fas fa-hands-helping" }                   
-                    ]
-
-                    if (componente.parametros.total_tiempo == 0) {
-                        items.push({ id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" })
-                    }
+            console.log("datos.clase_radicado:", datos.clase_radicado)
+            if (datos.clase_radicado == "INTERNO") {
+                items = [ 
+                    finalizar        
+                ]
+            }
+            else {
+                let etapa_estado = componente.parametros.etapa_estado
+                let borrador_existe = componente.parametros.borrador_existe;
+                if (borrador_existe) {};
+                //console.log("GESTION: ", etapa_estado, borrador_existe) 
+                switch (etapa_estado) {
+                    case "ASIGNADO_DEPENDENCIA":
+                        items = [
+                            asignar_responsable,
+                            trasladar_dependencia,
+                            devolver_ventanilla,
+                            finalizar
+                            //respuesta_rapida
+                        ]
+                        break
                     
-                    //if ( borrador_existe ) {
-                        items.push({ id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" })
-                        items.push({ id: 7,  titulo: 'Radicar borrador', icon: "fas fa-edit" })
-                    //}
-                    break
+                    case "ASIGNADO_RESPONSABLE":
+                        items = [
+                            crear_borrador,                                          
+                            asigna_trd,
+                            anexar_archivo,
+                            crea_comentario,
+                            devolver_asignador,
+                            ayuda_cooperativa     
+                        ]
 
-                case "DEVUELTO_ASIGNADORA":
-                    items = [
-                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
-                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
-                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
-                    ]
-                    break
-                
-                case "DEVUELTO_ASIGNADOR":   
-                    items = [
-                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
-                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
-                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
-                    ]
-                    break
-                
-                case "TRASLADO_DEPENDENCIA":                    
-                    items = [
-                        { id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-                        { id: 3, titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                        { id: 2, titulo: 'Devolver (Ventanilla, Servicio ciudadano)', icon: "fas fa-backward" },
-                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" }  
-                        //{ id: 16, titulo: 'Respuesta rapída', icon: "fas fa-shipping-fast" },
-                    ]
-                    break
+                        if (componente.parametros.total_tiempo == 0) {
+                            items.push(finalizar)
+                        }
+                        
+                        //if ( borrador_existe ) {
+                            items.push(enviar_a_visto_bueno)
+                            items.push(radicar_borrador)
+                        //}
+                        break
 
-                case "VISTO_BUENO":
-                    items = [
-                        { id: 8,  titulo: 'Devolver a asignador dependencia', icon: "fas fa-backspace" },
-                        { id: 14, titulo: 'Aprobar para radicar', icon: "fas fa-thumbs-up" },
-                        { id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" },
-                        { id: 15, titulo: 'Devolver para revisión', icon: "fas fa-undo-alt" },
-                        { id: 3,  titulo: 'Trasladar a otra dependencia', icon: "fas fa-forward" },
-                    ]  
-                    break
-
-                case "DEVUELTO_REVISION":
-                    items = [
-                        { id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" },                    
-                        { id: 6,  titulo: 'Crear borrador', icon: "fas fa-file-import" },                 
-                    ]
-                    break
-                
-                case "APROBADO_RESPUESTA":
-                    items = [
-                        { id: 7,  titulo: 'Radicar', icon: "fas fa-edit" }, 
-                        { id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" }                       
-                    ]
-                    break
-
-                default:
-                    items = [
-                        { id: 6,  titulo: 'Crear borrador', icon: "fas fa-file-import" },                                            
-                        { id: 11, titulo: 'Anexar archivo de gestión', icon: "fas fa-file" },
-                        { id: 12, titulo: 'Crea comentario', icon: "fas fa-comments" },
-                    ]
-
-                    if (componente.parametros.total_tiempo == 0) {
-                        items.push({ id: 5,  titulo: 'Finalizar', icon: "fas fa-window-close" })
-                    }
+                    case "DEVUELTO_ASIGNADORA":
+                        items = [
+                            asignar_responsable,
+                            trasladar_dependencia,
+                            devolver_ventanilla,
+                            finalizar
+                            //respuesta_rapida
+                        ]
+                        break
                     
-                    //if ( borrador_existe ) {
-                        items.push({ id: 4,  titulo: 'Enviar a visto bueno', icon: "fas fa-clipboard-check" })
-                        items.push({ id: 7,  titulo: 'Radicar borrador', icon: "fas fa-edit" })
-                    //}
-                    break
+                    case "DEVUELTO_ASIGNADOR":   
+                        items = [
+                            asignar_responsable,
+                            trasladar_dependencia,
+                            devolver_ventanilla,
+                            finalizar
+                            //respuesta_rapida
+                        ]
+                        break
+                    
+                    case "TRASLADO_DEPENDENCIA":                    
+                        items = [
+                            asignar_responsable,
+                            trasladar_dependencia,
+                            devolver_ventanilla,
+                            finalizar
+                            //respuesta_rapida
+                        ]
+                        break
+
+                    case "VISTO_BUENO":
+                        items = [
+                            devolver_asignador,
+                            aprobar,
+                            finalizar,
+                            devolver,
+                            trasladar_dependencia
+                        ]  
+                        break
+
+                    case "DEVUELTO_REVISION":
+                        items = [
+                            enviar_a_visto_bueno,           
+                            crear_borrador,
+                            asigna_trd,
+                            anexar_archivo,
+                            crea_comentario,
+                            ayuda_cooperativa                 
+                        ]
+                        break
+                    
+                    case "APROBADO_RESPUESTA":
+                        items = [
+                            radicar_borrador, 
+                            enviar_a_visto_bueno,
+
+                            crear_borrador
+                        ]
+                        break
+
+                    default:
+                        items = [
+                            crear_borrador,                                          
+                            anexar_archivo,
+                            crea_comentario,
+                        ]
+
+                        if (componente.parametros.total_tiempo == 0) {
+                            items.push(finalizar)
+                        }
+                        
+                        //if ( borrador_existe ) {
+                            items.push(enviar_a_visto_bueno)
+                            items.push(radicar_borrador)
+                        //}
+                        break
+                }
             }        
         }        
     }
 
     return items
-}
+};
 
 let items_borradores = function(componente, contexto) {    
     let items = [
@@ -345,10 +450,10 @@ let items_borradores = function(componente, contexto) {
     ]
 
     return items
-}
+};
 
 export default {
     items_gestion: items_gestion,
     items_borradores: items_borradores,
     elemento_parametros: elemento_parametros
-}
+};

@@ -16,11 +16,21 @@ def recuperar(conexion, estructura):
     modelo = globales.lee_modelo_elastic(estructura)
     desde  = 0
 
-    resultado = sqalchemy_leer.leer_todos("base", estructura, desde=0, hasta=10000)
-    bulk = elastic_operaciones.bulk_indexar(conexion, modelo["modelo"], modelo["indice"], resultado)
+    resultado = sqalchemy_leer.leer_todos(
+        "base", 
+        estructura, 
+        desde=0, 
+        hasta=10000
+    )
+    bulk = elastic_operaciones.bulk_indexar(
+        conexion, 
+        modelo["modelo"], 
+        modelo["indice"], 
+        resultado
+    )
     print("")
     
-    # #print("RESULTADO>>>" + estructura, len(resultado))    
+    print("RESULTADO>>>" + estructura, len(resultado))    
     # print("")
 
     # for r in resultado:
@@ -29,11 +39,21 @@ def recuperar(conexion, estructura):
     #     for archivo in r["archivos"]:
     #         nombre_archivo = leer_archivo.salva_archivo_minio(archivo["id"])  
     #         print(r["nro_radicado"], nombre_archivo)
+    
     pprint.pprint(resultado)
+
+    # for r in resultado:
+    #     if r["coordinadores_ids"]:
+    #         pprint.pprint(r)
+
+    # for r in resultado:
+    #     if r["roles_especificos"]:
+    #         pprint.pprint(r)
+
     # # nombre_archivo = leer_archivo.salva_archivo_minio(archivos[0]["id"])
     # print("")
 
-#CONFIGURACIÓN
+# CONFIGURACIÓN
 # recuperar(conexion, "configuracion_general")
 # recuperar(conexion, "canales_comunicacion")
 # recuperar(conexion, "roles")
@@ -48,7 +68,7 @@ def recuperar(conexion, estructura):
 # recuperar(conexion, "festivos")
 # recuperar(conexion, "reportes_dinamicos")
 # recuperar(conexion, "plantillas")
-# recuperar(conexion, "consecutivos")
+# recuperar(conexion, "consecutivos")cls
 # recuperar(conexion, "tipo_identificaciones")
 # recuperar(conexion, "genero")
 # recuperar(conexion, "tipo_poblacion")
@@ -72,10 +92,10 @@ def recuperar(conexion, estructura):
 
 #"""
 # RADICACION GESTION
-#recuperar(conexion, "radicados_entrada")
-recuperar(conexion, "radicados_salida")
-#recuperar(conexion, "radicados_interno")
-#recuperar(conexion, "peticiones")
+# recuperar(conexion, "radicados_entrada")
+# recuperar(conexion, "radicados_salida")
+# recuperar(conexion, "radicados_interno")
+recuperar(conexion, "peticiones")
 # recuperar(conexion, "copias")
 
 # recuperar(conexion,"correos_descargados")
