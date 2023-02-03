@@ -85,6 +85,7 @@ async function enviar_datos() {
             window.$rutasNavegacion = crear_rutas_navegacion.creaRutasNavegacion(respuesta.datos.opciones);                   
             window._APLICACION_.use(window.$rutasNavegacion.ruta);
             window.$router = window.$rutasNavegacion.ruta;
+            //console.log("respuesta.datos.usuario:", respuesta.datos.usuario)
             window.sessionStorage.setItem("usuario", JSON.stringify(respuesta.datos.usuario));
             window.sessionStorage.setItem("sesion", JSON.stringify(respuesta.datos.sesion));
             await window.$ns['aplicacion'].asignaRuta('cajon', 'components/devExpress/cajon/cajon.vue');  

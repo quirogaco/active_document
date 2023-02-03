@@ -40,10 +40,10 @@ resultado = elastic_operaciones.eliminaIndice("dependencias", "base")
 #"""
 # RADICACION GESTION
 resultado = elastic_operaciones.eliminaIndice("radicados_entrada", "base")
-resultado = elastic_operaciones.eliminaIndice("radicados_salida", "base")
-resultado = elastic_operaciones.eliminaIndice("radicados_interno", "base")
-resultado = elastic_operaciones.eliminaIndice("peticiones", "base")
-resultado = elastic_operaciones.eliminaIndice("copias", "base")
+# resultado = elastic_operaciones.eliminaIndice("radicados_salida", "base")
+# resultado = elastic_operaciones.eliminaIndice("radicados_interno", "base")
+# resultado = elastic_operaciones.eliminaIndice("peticiones", "base")
+# resultado = elastic_operaciones.eliminaIndice("copias", "base")
 #"""
 
 

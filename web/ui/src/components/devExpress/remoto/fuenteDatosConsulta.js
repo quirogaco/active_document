@@ -59,6 +59,9 @@ const cargaDatosConsulta = function(
     // Hasta
     //let hasta = 10000;
     let hasta = 200;
+    if (tipoComponente == "grid") {
+        hasta = 10000;        
+    }
     if ( (opcionesCarga.take != null) && (opcionesCarga.take != undefined) ) 
         hasta = opcionesCarga.take;
 
@@ -122,15 +125,23 @@ const cargaDatosConsulta = function(
     }    
    
     // post es necesarios para que interprete bien los arrays de objetos
-    let urlCompleta = window.$direcciones.servidorDatos + '/estructuras/consulta/' + rutaRemota;     
-    let data        = window.$f["http"].post(urlCompleta,  {params: enviar}).then(respuesta => {              
+    let urlCompleta = (
+        window.$direcciones.servidorDatos + 
+        '/estructuras/consulta/' + rutaRemota
+    );     
+    let data  = window.$f["http"].post(
+        urlCompleta,  
+        {params: enviar}
+    ).then(respuesta => {              
         const resultado = respuesta.data.data;
         let datos = [];        
         if (resultado.items.agrupado == true) {
             datos = resultado.items            
         }
         else {
-            let resaltados = (resultado.resaltados !== undefined ? resultado.resaltados : []);
+            let resaltados = (
+                resultado.resaltados !== undefined ? resultado.resaltados : []
+            );
             datos = {
                 "totalCount": resultado.total,
                 "data"      : resultado.items,

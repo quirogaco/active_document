@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint
  
 # Base general con atributos basicos
@@ -25,7 +25,7 @@ campos = {
     "canal_radicado_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Canal Radicación", "longitud": 256, "reporte": "SI"}),
     
     # Información basica
-    "nro_radicado"      : tipos.clave_obligatorio(propiedades={"titulo": "Numero de radicado", "longitud": 64, "reporte": "SI"}),
+    "nro_radicado"      : tipos.clave_obligatorio(propiedades={"titulo": "Número de radicado", "longitud": 64, "reporte": "SI"}),
     "fecha_radicado"    : tipos.fecha_obligatorio(propiedades={"titulo": "Fecha radicado", "reporte": "SI", 
                                                 "formato": {"nombre": "fecha_radicado_", "tipo": "fecha_hora"}}),    
     "medio_notificacion": tipos.clave(propiedades={"columna": "no", "titulo": "Medio notificación", "longitud": 64, "validador": "clave_lista", "reporte": "SI"}),  
@@ -40,15 +40,15 @@ campos = {
     "empresa_mensajeria_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Empresa mensajeria id", "longitud": 64}),
     "empresa_mensajeria_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Empresa mensajeria", "longitud": 64, "reporte": "SI"}),    
 
-    "numero_guia"       : tipos.texto(propiedades={"columna": "no", "titulo": "Numero guia", "longitud": 64, "reporte": "SI"}),  
-    "nro_folios"        : tipos.entero(propiedades={"columna": "no", "titulo": "Numero de folios", "reporte": "SI"}),
+    "numero_guia"       : tipos.texto(propiedades={"columna": "no", "titulo": "Número guia", "longitud": 64, "reporte": "SI"}),  
+    "nro_folios"        : tipos.entero(propiedades={"columna": "no", "titulo": "Número de folios", "reporte": "SI"}),
     "anexos"            : tipos.texto(propiedades={"columna": "no", "titulo": "Anexos", "reporte": "SI"}),
     "entidad_traslada"  : tipos.texto(propiedades={"columna": "no", "titulo": "Entidad que traslada","longitud": 256, "reporte": "SI"}),  
     "persona_traslada"  : tipos.texto(propiedades={"columna": "no", "titulo": "Persona que traslada","longitud": 256, "reporte": "SI"}),
 
     # Reserva del documento
     "reserva"           : tipos.clave_obligatorio(propiedades={"titulo": "Reserva", "longitud": 20, "reporte": "SI"}), 
-    "manejo_informacion": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Majeno de información", "longitud": 10, "reporte": "SI"}),
+    "manejo_informacion": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Manejo de información", "longitud": 10, "reporte": "SI"}),
 
 
     ###############################
@@ -95,27 +95,28 @@ campos = {
     "gestion_relacion"         : tipos.clave(propiedades={"columna": "no", "titulo": "Tipo relación gestion"}),
 
     # Dependencia
-    "gestion_dependencia_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Dependencia responsable id"}),
-    "gestion_dependencia_nombre": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencia responsable", "reporte": "SI"}),
+    "gestion_dependencia_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión dependencia responsable id"}),
+    "gestion_dependencia_nombre": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión dependencia responsable", "reporte": "SI"}),
     
     # Usuario
     "gestion_responsable_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Usuario responsable id"}),
-    "gestion_responsable_nombre": tipos.clave(propiedades={"columna": "no", "titulo": "Usuario responsable", "reporte": "SI"}),
+    "gestion_responsable_nombre": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión Usuario responsable", "reporte": "SI"}),
     
     # Petición
-    "gestion_peticion_id"      : tipos.clave(propiedades={"columna": "no", "titulo": "Petición id",    "longitud": 256}),
-    "gestion_peticion_nombre"  : tipos.clave(propiedades={"columna": "no", "titulo": "Petición",    "longitud": 256, "reporte": "SI"}),
+    "gestion_peticion_id"      : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión Petición id",    "longitud": 256}),
+    "gestion_peticion_nombre"  : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión tipo de petición",    "longitud": 256, "reporte": "SI"}),
     
     # Terminos de respuesta basicos, prioridad
-    "gestion_horas_dias"   : tipos.texto(propiedades={"columna": "no", "titulo": "Plazo en HORAS, DIAS", "longitud": 60, "reporte": "SI"}), 
-    "gestion_total_tiempo" : tipos.entero(propiedades={"columna": "no", "titulo": "Plazo total", "reporte": "SI"}),  
-    "gestion_prioridad"    : tipos.clave(propiedades={"columna": "no", "titulo": "Prioridad", "longitud": 60, "reporte": "SI"}), 
+    "gestion_horas_dias"   : tipos.texto(propiedades={"columna": "no", "titulo": "Gestión Plazo en HORAS, DIAS", "longitud": 60, "reporte": "SI"}), 
+    "gestion_total_tiempo" : tipos.entero(propiedades={"columna": "no", "titulo": "Gestión Plazo total", "reporte": "SI"}),  
+    "gestion_prioridad"    : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión Prioridad", "longitud": 60, "reporte": "SI"}), 
 
     # Estado de gestion
-    "gestion_inicio"       : tipos.fecha(propiedades={"columna": "no", "titulo": "Inicia en", "reporte": "SI"}), 
-    "gestion_vence_en"     : tipos.fecha(propiedades={"columna": "no", "titulo": "Vence en", "reporte": "SI"}), 
-    "gestion_estado"       : tipos.clave(propiedades={"columna": "no", "titulo": "Estado", "longitud": 60, "reporte": "SI"}), 
-    "gestion_etapa"        : tipos.clave(propiedades={"columna": "no", "titulo": "Etapa", "longitud": 60, "reporte": "SI"}), 
+    "gestion_inicio"       : tipos.fecha(propiedades={"columna": "no", "titulo": "Gestión inicia en", "reporte": "SI"}), 
+    "gestion_vence_en"     : tipos.fecha(propiedades={"columna": "no", "titulo": "Gestión vence en", "reporte": "SI"}), 
+    "gestion_estado"       : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado", "longitud": 60, "reporte": "SI"}), 
+    "gestion_etapa"        : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión etapa", "longitud": 60, "reporte": "SI"}), 
+    "gestion_estado_vencimiento": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado vencimiento", "longitud": 60, "reporte": "SI"}), 
     
     ######################
     # Copia del radicado #

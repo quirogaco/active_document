@@ -63,8 +63,8 @@ campos = {
     "finalizado_comentario": tipos.fecha(propiedades={"columna": "no", "titulo": "Finalizado comentario", "propiedad": gestion_atributos.finalizado_comentario}),
   
     # Trzabilidad
-    # "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id", "propiedad": gestion_atributos.dependencias_id}), 
-    # "funcionarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Funcionarios id", "propiedad": gestion_atributos.funcionarios_id}), 
+    "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id", "propiedad": gestion_atributos.dependencias_id}), 
+    "funcionarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Funcionarios id", "propiedad": gestion_atributos.funcionarios_id}), 
 
     # Valores para tablero de control
     "valor"              : tipos.entero(propiedades={"columna": "no", "titulo": "Valor", "propiedad": gestion_atributos.valor_gestion}), 

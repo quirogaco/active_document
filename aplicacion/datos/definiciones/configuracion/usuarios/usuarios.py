@@ -3,17 +3,29 @@
 import pprint
 
 # Definiciones sql
-from librerias.datos.base                import globales
+from librerias.datos.base import globales
+from librerias.datos.sql import sqalchemy_leer
 
 # Base general con atributos basicos
-from aplicacion.datos.clases.clases_base    import base_general
-from librerias.datos.sql                    import sqalchemy_tipo_campos as tipos
-from librerias.datos.sql                    import sqalchemy_clase_dinamica
-from librerias.datos.base                   import globales
+from aplicacion.datos.clases.clases_base import base_general
+from librerias.datos.sql import sqalchemy_tipo_campos as tipos
+from librerias.datos.sql import sqalchemy_clase_dinamica
+from librerias.datos.base import globales
 from aplicacion.datos.definiciones._comunes import elementos_comunes
 
 def roles_especificos(r_):
     roles = []
+
+    dependencia = None
+    if r_.dependencia_id not in ["", None]:
+        dependencia = sqalchemy_leer.leer_un_registro(
+            "dependencias", 
+            r_.dependencia_id
+        )
+        coordinadores_ids = dependencia["coordinadores_ids"]
+        if (r_.id in coordinadores_ids):
+            roles.append("COORDINADOR")
+        
     if (r_.id == r_.jefe_id):
         roles.append("JEFE")
 
@@ -26,7 +38,7 @@ def roles_especificos(r_):
     if (r_.id == r_.pqrs_id):
         roles.append("PQRSD")
 
-    #if roles:
+    # if roles:
     #    print("roles_especificos:", r_.codigo, r_.nombre, roles)
 
     return roles

@@ -6,26 +6,30 @@ let attributes = {
     },
 
     selection: {
-        allowSelectAll    : true,
-        deferred          : false,
+        allowSelectAll: true,
+        deferred: false,
         // 'multiple' | 'none' | 'single'  
-        mode              : "single",           
+        mode: "single",           
         // 'allPages' | 'page' 
-        selectAllMode     : "allPages", 
+        selectAllMode: "allPages", 
         // 'always' | 'none' | 'onClick' | 'onLongTap'    
         showCheckBoxesMode: "onClick" , 
     },
 
-    ref                   : "grid",
-    height                : "500px",
-    width                 : "600px",
-    allowColumnReordering : true,
-    allowColumnResizing   : true,
-    rowAlternationEnabled : true,
-    showBorders           : false,
-    showColumnLines       : false,
-    wordWrapEnabled       : true,
-    remoteOperations      : {
+    sorting: {
+        mode: "multiple"
+    },
+
+    ref: "grid",
+    height: "500px",
+    width: "600px",
+    allowColumnReordering: true,
+    allowColumnResizing: true,
+    rowAlternationEnabled: true,
+    showBorders: false,
+    showColumnLines: false,
+    wordWrapEnabled: true,
+    remoteOperations: {
         groupPaging: true,
         paging: true,
         filtering: true,
@@ -35,31 +39,31 @@ let attributes = {
     },
 
     // datagrid columns
-    columns               : [],
+    columns: [],
 
     searchPanel: {
-        visible             : true,                
-        width               : "80%",
-        placeholder         : "Buscar",
-        highlightSearchText : false
+        visible: true,                
+        width: "80%",
+        placeholder: "Buscar",
+        highlightSearchText: false
     },
 
     filterRow: {
         applyFilter: "auto", //"onClick",
-        visible    : true
+        visible: true
     },
 
     pager: {
-        allowedPageSizes     : [5, 10, 25, 50],
-        displayMode          : "full",
-        showInfo             : true,
+        allowedPageSizes: [5, 10, 25, 50],
+        displayMode: "full",
+        showInfo: true,
         showNavigationButtons: true,
-        showPageSizeSelector : true,
-        visible              : true
+        showPageSizeSelector: true,
+        visible: true
     },
 
     paging: {
-        enabled : true,
+        enabled: true,
         pageSize: 10
     },
 
@@ -69,8 +73,8 @@ let attributes = {
 
     toolbar: {
         disabled: false,
-        items   : [],
-        visible : true
+        items: [],
+        visible: true
     },
 
     accessKey: null,

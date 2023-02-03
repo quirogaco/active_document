@@ -83,16 +83,26 @@ def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     
     #pprint.pprint(querytime)
     conexion  = globales.lee_conexion_elastic("base")
+    #estructura = ["radicados_entrada", "radicados_salida", "radicados_interno"]
     busqueda  = Search(using=conexion, index=estructura)
     busqueda  = busqueda.extra(track_total_hits=True)
 
     # Ordenamientos sort
-    busqueda = elastic_ordenamientos.prepararOrdenamiento(busqueda, estructura, parametros, definicion)
+    busqueda = elastic_ordenamientos.prepararOrdenamiento(
+        busqueda, 
+        estructura, 
+        parametros, 
+        definicion
+    )
 
     # Querys y filtros
     resaltar = parametros.get('resaltar', [])
     definicion["resaltar"] = resaltar
-    busqueda = elastic_filtros.prepararFiltros(busqueda, parametros, definicion)
+    busqueda = elastic_filtros.prepararFiltros(
+        busqueda, 
+        parametros, 
+        definicion
+    )
 
     # Rango de busqueda 
     inicio   = parametros["desde"]
@@ -130,8 +140,8 @@ def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     print("")
     #"""
 
-    elementos      =  busqueda.execute().to_dict()["hits"] 
-    resultado      = procesaResultado(elementos,  parametros)
+    elementos = busqueda.execute().to_dict()["hits"] 
+    resultado = procesaResultado(elementos,  parametros)
     
     return resultado
 

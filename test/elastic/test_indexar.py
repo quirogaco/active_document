@@ -31,7 +31,8 @@ def recuperar(conexion, estructura):
     print("")
     
     print("RESULTADO>>>" + estructura, len(resultado))    
-    # print("")
+    print("")
+    #pprint.pprint(resultado)
 
     # for r in resultado:
     #     print("")
@@ -39,13 +40,13 @@ def recuperar(conexion, estructura):
     #     for archivo in r["archivos"]:
     #         nombre_archivo = leer_archivo.salva_archivo_minio(archivo["id"])  
     #         print(r["nro_radicado"], nombre_archivo)
-    
-    pprint.pprint(resultado)
 
+    # Usuarios, Dependencias
     # for r in resultado:
-    #     if r["coordinadores_ids"]:
+    #     if r.get("coordinadores_ids", []):
     #         pprint.pprint(r)
 
+    # # Usuarios
     # for r in resultado:
     #     if r["roles_especificos"]:
     #         pprint.pprint(r)

@@ -30,7 +30,8 @@ def gestion_asignada_peticion(sesion, r_):
         "gestion_inicio"  : "gestion_inicio",
         "gestion_vence_en": "vence_en",
         "gestion_estado"  : "estado_gestion",
-        "gestion_etapa"   : "etapa_gestion"
+        "gestion_etapa"   : "etapa_gestion",
+        "gestion_estado_vencimiento": "estado_vencimiento"
     }
     # Valores por defecto
     for label, valor in campos.items():
@@ -43,22 +44,20 @@ def gestion_asignada_peticion(sesion, r_):
     GESTION_CLASE = globales.lee_clase("gestor_peticiones")
     GESTION_RELACIONES_CLASE = globales.lee_clase("gestor_peticion_relaciones")
     relaciones = sesion.query(GESTION_RELACIONES_CLASE).filter( GESTION_RELACIONES_CLASE.origen_id == r_.id ). \
-                        order_by( desc( GESTION_RELACIONES_CLASE.creado_en_) ).all()
+                    order_by( desc( GESTION_RELACIONES_CLASE.creado_en_) ).all()
     for relacion in relaciones:
         setattr(r_, "gestion_relacion", relacion.estado_)
-        if relacion != None: # and relacion.estado_ == "ACTIVO": # estado_ -> DEVUELTO, cuando se regresa a servicio ciudadano o ventanilla
-            peticion  = sesion.query(GESTION_CLASE).filter( relacion.gestion_id == GESTION_CLASE.id ).first()
+        if relacion is not None: # and relacion.estado_ == "ACTIVO": # estado_ -> DEVUELTO, cuando se regresa a servicio ciudadano o ventanilla
+            peticion = sesion.query(GESTION_CLASE).filter( relacion.gestion_id == GESTION_CLASE.id ).first()
             if peticion != None:
                 atributos_ = getattr(r_, "atributos_", {})                    
                 gestion_id.append(peticion.id) # id de gestion
-                print("relacion.estado_", r_.nro_radicado, relacion.estado_)
                 if relacion.estado_ == "ACTIVO": # si esta asigando para filtrar por pendientes de asignacion
-                    asignada = "SI"                 
-                
-                    for label_radicado, label_gestion in campos.items():
-                        valor = getattr(peticion, label_gestion)
-                        atributos_[label_radicado] = valor
-                        setattr(r_, label_radicado, valor)
+                    asignada = "SI"                                 
+                for label_radicado, label_gestion in campos.items():
+                    valor = getattr(peticion, label_gestion)
+                    atributos_[label_radicado] = valor
+                    setattr(r_, label_radicado, valor)
                 #setattr(r_, "label_radicado", label_radicado)
     
     setattr(r_, "gestion_id", gestion_id)

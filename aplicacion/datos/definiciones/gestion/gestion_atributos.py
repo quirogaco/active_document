@@ -281,10 +281,38 @@ def dependencias_id(_r):
     logs = sorted(logs, key=lambda x: x['creado_en_'])
     dependencias = []
     for log in logs:
-        usuario = sqalchemy_leer.leer_un_registro("agn_tipo_documental_trd",tipo_id)
-        if (usuario != None) and (usuario["dependencia_id"] not in ["", None]):
-            dependencias.append(usuario["dependencia_id"])
-    dependencias = [log[""] in logs ]
-    #dependencias = [_r.dependencia_id]
+        if str(log["accionante_tipo"]).lower() == "usuario" and \
+        log["accionante_id"] not in ["", None]:
+            usuario = sqalchemy_leer.leer_un_registro(
+                "usuarios",
+                log["accionante_id"]
+            )
+            if (usuario != None) and \
+            (usuario["dependencia_id"] not in ["", None]):
+                dependencias.append(usuario["dependencia_id"])
 
+    dependencias = list(set(dependencias))
     
+    print("")
+    print("DEPENDENCIAS:")
+    pprint.pprint(dependencias)
+    
+    return dependencias
+
+
+def funcionarios_id(_r):
+    logs = _r.logs_gestion
+    logs = sorted(logs, key=lambda x: x['creado_en_'])
+    funcionarios = []
+    for log in logs:
+        if str(log["accionante_tipo"]).lower() == "usuario" and \
+        log["accionante_id"] not in ["", None]:
+            funcionarios.append(log["accionante_id"])
+
+    funcionarios = list(set(funcionarios))
+    
+    print("")
+    print("FUNCIONARIOS:")
+    pprint.pprint(funcionarios)
+    
+    return funcionarios

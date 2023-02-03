@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, os, shutil, tempfile
 import builtins
@@ -8,8 +8,8 @@ from typing import List
 import rapidjson
 from rapidjson import DM_ISO8601, DM_SHIFT_TO_UTC, DM_NAIVE_IS_UTC, DM_IGNORE_TZ
 from fastapi.responses import ORJSONResponse
-from fastapi           import Form, Request
-from fastapi           import File, UploadFile
+from fastapi import Form, Request
+from fastapi import File, UploadFile
 from fastapi.responses import FileResponse
 
 from librerias.utilidades import basicas 
@@ -29,7 +29,11 @@ from servicios import estructuras
 
 modoFecha = DM_ISO8601 | DM_SHIFT_TO_UTC | DM_NAIVE_IS_UTC | DM_IGNORE_TZ
 @_app.post( '/estructuras/comandos/{estructura}' )
-async def estructuras_comandos(estructura:str, archivos: List[UploadFile] = File, datos: str = Form(...)):    
+async def estructuras_comandos(
+   estructura:str, 
+   archivos: List[UploadFile] = File, 
+   datos: str = Form(...)
+):    
    datos    = rapidjson.loads( datos, datetime_mode=modoFecha )
    archivos = prepara_archivos(archivos)
    # Datos generales de la tarea
@@ -47,7 +51,12 @@ async def estructuras_comandos(estructura:str, archivos: List[UploadFile] = File
    # print("")
    # print("")
    #"""
-   resultado = estructuras.ejecutar(estructura, datos, archivos, id_tarea=id_tarea)   
+   resultado = estructuras.ejecutar(
+      estructura, 
+      datos, 
+      archivos, 
+      id_tarea=id_tarea
+   )   
    resultado["peticion"] = {
       "estructura": estructura, 
       "parametros": datos
@@ -93,7 +102,13 @@ async def estructuras_consulta(estructura:str, requerimiento: Request ):
    return resultado
 
 @_app.get( '/manejo_pdf/{operacion}/{clase}/{descarga}/{pdf_id}' )
-async def manejo_pdf(operacion:str, clase:str, descarga:str, pdf_id:str, requerimiento: Request ):
+async def manejo_pdf(
+   operacion:str, 
+   clase:str, 
+   descarga:str, 
+   pdf_id:str, 
+   requerimiento: Request
+):
    global total_leidos, contador
 
    encabezados    = dict(requerimiento.headers)
@@ -105,7 +120,13 @@ async def manejo_pdf(operacion:str, clase:str, descarga:str, pdf_id:str, requeri
    return funcion(operacion, clase, descarga, encabezados, parametros, pdf_id, id_tarea)
 
 @_app.get( '/manejo_archivo/{operacion}/{clase}/{descarga}/{archivo_id}' )
-async def manejo_archivo(operacion:str, clase:str, descarga:str, archivo_id:str, requerimiento: Request):
+async def manejo_archivo(
+   operacion:str, 
+   clase:str, 
+   descarga:str, 
+   archivo_id:str, 
+   requerimiento: Request
+):
    global total_leidos, contador
 
    encabezados    = dict(requerimiento.headers)
@@ -118,7 +139,15 @@ async def manejo_archivo(operacion:str, clase:str, descarga:str, archivo_id:str,
    funcion        = CONFIGURACION_GENERAL["manejo_archivo"].get(operacion, None)
    #print("manejo_archivo------>>>>>", operacion, parametros, " - funcion:", funcion)
 
-   return funcion(operacion, clase, descarga, encabezados, parametros, archivo_id, id_tarea)
+   return funcion(
+      operacion, 
+      clase, 
+      descarga, 
+      encabezados, 
+      parametros, 
+      archivo_id, 
+      id_tarea
+   )
 
 @_app.get( '/definiciones_visuales/{clase}/{tipo}' )
 async def definiciones(clase:str, tipo:str, requerimiento: Request ):
@@ -142,7 +171,6 @@ async def logo_ingreso():
 #############################################
 # TOCA MOVERLO CADA UNO A SU PROPIO ESPACIO #
 #############################################
-
 from .especificos import * 
 from .radicados   import * 
 from .test        import * 
