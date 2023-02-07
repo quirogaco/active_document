@@ -8,6 +8,7 @@ from librerias.datos.sql import sqalchemy_tipo_campos as tipos
 from . import radicado_propiedades
 
 campos = {
+    "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "defecto": "ENTRADA", "propiedad": radicado_propiedades.tipo_radicado}),
     # Sitio de radicación
     "radicado_en"    : tipos.clave_obligatorio(propiedades={"titulo": "Radicado en id",   "longitud": 64}),
     "radicado_en_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en", "reporte": "SI"}),
@@ -37,7 +38,7 @@ campos = {
     "radicado_remitente": tipos.texto(propiedades={"columna": "no", "titulo": "Radicado remitente", "longitud": 64, "reporte": "SI"}),  
     
     # Empresa de mensajeria
-    "empresa_mensajeria_id"    : tipos.clave(propiedades={"columna": "no", "titulo": "Empresa mensajeria id", "longitud": 64}),
+    "empresa_mensajeria_id": tipos.clave(propiedades={"columna": "no", "titulo": "Empresa mensajeria id", "longitud": 64}),
     "empresa_mensajeria_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Empresa mensajeria", "longitud": 64, "reporte": "SI"}),    
 
     "numero_guia"       : tipos.texto(propiedades={"columna": "no", "titulo": "Número guia", "longitud": 64, "reporte": "SI"}),  
@@ -117,6 +118,10 @@ campos = {
     "gestion_estado"       : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado", "longitud": 60, "reporte": "SI"}), 
     "gestion_etapa"        : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión etapa", "longitud": 60, "reporte": "SI"}), 
     "gestion_estado_vencimiento": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado vencimiento", "longitud": 60, "reporte": "SI"}), 
+
+    # Trazabilidad
+    "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id"}), 
+    "funcionarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Funcionarios id"}), 
     
     ######################
     # Copia del radicado #

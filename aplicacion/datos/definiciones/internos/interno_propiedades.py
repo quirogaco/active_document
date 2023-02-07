@@ -6,6 +6,9 @@ from sqlalchemy import desc
 from librerias.datos.sql  import sqalchemy_filtrar
 from librerias.datos.base import globales
 
+def tipo_radicado(r_):
+    return "INTERNO"
+
 #####################
 # FIRMA ELECTRONICA #
 #####################
@@ -92,7 +95,22 @@ def pdf_base(sesion, r_):
         if archivo['tipo_archivo'] == 'pdf':
             relacion = sesion.query(RELACION_CLASE).filter( RELACION_CLASE.archivo_id == archivo["id"] ).first()        
             if (relacion != None) and (relacion.tipo_relacion == "respuesta"):
-                print("archivo_id", archivo["id"])
+                #print("archivo_id", archivo["id"])
                 pdf = archivo     
     setattr(r_, "pdf_base", pdf)
+
+
+################
+# TRAZABILIDAD #
+################
+
+def dependencias_id(r_):
+    return list(set([r_.dependencia_envia_id, r_.dependencia_recibe_id]))
+
+def funcionarios_id(r_):   
+    return list(set([
+        r_.radicado_por_id, 
+        r_.funcionario_envia_id,
+        r_.funcionario_recibe_id
+    ]))
 

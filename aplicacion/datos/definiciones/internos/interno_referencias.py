@@ -53,7 +53,7 @@ referencias = [
     {
         "campoReferencia"    : "dependencia_recibe_id",
         "atributosReferencia": [{
-            "dependencia_envia_nombre": "nombre"
+            "dependencia_recibe_nombre": "nombre"
         }],
         "estructuraDestino": "dependencias",
     },

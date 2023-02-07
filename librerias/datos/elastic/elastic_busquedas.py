@@ -68,11 +68,17 @@ from datetime import datetime
 def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     querytime = globales.lee_modelo_querytime(estructura)
     parametros = parametros["params"]
-
+    
     # Crea objeto de busqueda
+    index = estructura
+    definicion = globales.lee_definicion(estructura)
+    if definicion.get("mixta") is not None:
+        index = definicion["mixta"]
     print("")
     print("")    
+    #estructura = "radicados_entrada,radicados_salida,radicados_interno"
     print("BUSQUEDA PARAMETROS------------->", estructura)
+    print("    INDEX-->", index)
     pprint.pprint(parametros) 
     #pprint.pprint(definicion)
     #print("")
@@ -84,7 +90,7 @@ def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     #pprint.pprint(querytime)
     conexion  = globales.lee_conexion_elastic("base")
     #estructura = ["radicados_entrada", "radicados_salida", "radicados_interno"]
-    busqueda  = Search(using=conexion, index=estructura)
+    busqueda  = Search(using=conexion, index=index)
     busqueda  = busqueda.extra(track_total_hits=True)
 
     # Ordenamientos sort

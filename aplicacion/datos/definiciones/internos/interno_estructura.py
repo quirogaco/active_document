@@ -51,6 +51,9 @@ CLASE = globales.lee_clase(definicion["clase"])
 
 # Eventos de clase y objeto
 def al_cargar(target, context):
+    # print("")
+    # print("................")    
+    # print("INTERNO")
     interno_propiedades.archivos_nombres(context.session, target)
     interno_propiedades.pdf_base(context.session, target)
     interno_propiedades.logs(context.session, target)

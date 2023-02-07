@@ -1,14 +1,14 @@
     #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
 from inspect import isfunction
 
 from . import elastic_tiposCampos
-from librerias.datos.base    import globales
+from librerias.datos.base import globales
 from librerias.datos.elastic import elastic_operaciones
-from .                       import elastic_campos_script
+from . import elastic_campos_script
 
 """
         "settings" : {

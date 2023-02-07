@@ -16,16 +16,27 @@ from aplicacion.datos.definiciones._comunes import elementos_comunes
 ############################
 # INFORMACION DEL RADICADO #
 ############################
-def carga_radicado(_r):
+def carga_radicado(_r):    
     if getattr(_r, "_radicado", None) is None:
+        # print("")
+        # print("")
+        # print("")
+        # print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        # print("RELACIONES", _r.tipo, _r.origen_id)
         radicado = {}
         if (_r.tipo == "ENTRADA"):
             radicado = sqalchemy_leer.leer_un_registro("radicados_entrada", _r.origen_id)
 
+        if (_r.tipo == "SALIDA"):
+            radicado = sqalchemy_leer.leer_un_registro("radicados_salida", _r.origen_id)
+
         if (_r.tipo == "INTERNO"):
             radicado = sqalchemy_leer.leer_un_registro("radicados_interno", _r.origen_id)
         
-        setattr(_r, "_radicado", radicado)
+        if radicado == None:
+            setattr(_r, "_radicado", {})
+        else:
+            setattr(_r, "_radicado", radicado)
 
 def nro_radicado(_r):
     carga_radicado(_r)

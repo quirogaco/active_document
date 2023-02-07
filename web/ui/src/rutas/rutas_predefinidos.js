@@ -85,8 +85,7 @@ let rutas_componentes = {
     'gestion_basica_grid': () => import('../components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'),
     'gestion_pantalla': () => import('../components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'),
     'tablero_general': () => import('../components/devExpress/tablero_control/tablero_general.vue'),
-    'grid_gestion_salida': () => import('../components/devExpress/predefinidos/radicados_vue/salida/gestion_oficina/grid_gestion_salida.vue'),
-    'forma_salida_consulta': () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_salida/forma_salida_consulta.vue'),
+    'grid_gestion_consulta': () => import('../components/devExpress/predefinidos/gestion/gestion_oficina/grid_gestion_consulta.vue'),
     
     // ######
     // PQRS #
@@ -106,13 +105,14 @@ let rutas_componentes = {
 
     // SALIDAS
     'grid_ventanilla_salida' : () => import('../components/devExpress/predefinidos/radicados_vue/salida/consulta/grid_ventanilla_salida.vue'),
-    'salida_forma_radicado'  : () => import('../components/devExpress/predefinidos/radicados_vue/salida/radicacion_formulario/salida_forma_radicado.vue'),    
+    'salida_forma_radicado'  : () => import('../components/devExpress/predefinidos/radicados_vue/salida/radicacion_formulario/salida_forma_radicado.vue'), 
+    'forma_salida_consulta': () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_salida/forma_salida_consulta.vue'),   
     
     
     // INTERNOS
     //'grid_ventanilla_interno': () => import('../components/devExpress/predefinidos/radicados_vue/interno/consulta/grid_ventanilla_interno.vue'),
     'interno_forma_radicado' : () => import('../components/devExpress/predefinidos/radicados_vue/interno/radicacion_formulario/interno_forma_radicado.vue'),
-    //'forma_interno_consulta' : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_interno/forma_interno_consulta.vue'),
+    'forma_interno_consulta' : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_interno/forma_interno_consulta.vue'),
 
     // CORREOS POR DESCARGAR
     'correos_grid': () => import('../components/devExpress/predefinidos/correos/correos_grid.vue'), 

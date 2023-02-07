@@ -3,8 +3,11 @@
 import pprint
 from sqlalchemy import desc
 
-from librerias.datos.sql  import sqalchemy_filtrar
+from librerias.datos.sql import sqalchemy_filtrar
 from librerias.datos.base import globales
+
+def tipo_radicado(r_):
+    return "SALIDA"
 
 #####################
 # FIRMA ELECTRONICA #
@@ -20,14 +23,14 @@ def firma_electronica(r_):
 # Se firmado electronicamente
 def firmado_electronica(r_):
     proceso_firma = r_.atributos_.get("proceso_firma", {})
-    firmado       = proceso_firma.get("firmado_electronica", "NO")
+    firmado = proceso_firma.get("firmado_electronica", "NO")
 
     return firmado
 
 # Se firmado electronicamente
 def firmado_electronica_por(r_):
     proceso_firma = r_.atributos_.get("proceso_firma", {})
-    firmado       = proceso_firma.get("firmado_electronica_por", "")
+    firmado = proceso_firma.get("firmado_electronica_por", "")
 
     return firmado
 
@@ -60,7 +63,11 @@ def logs_salida(sesion, r_):
 
 def logs_radicado(sesion, r_):
     filtros = [ [ "fuente_id", "=", r_.id ] ]
-    logs = sqalchemy_filtrar.filtrarOrdena(estructura="logs", filtros=filtros, ordenamientos=[])
+    logs = sqalchemy_filtrar.filtrarOrdena(
+        estructura="logs", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )
     
     return logs
 
@@ -87,11 +94,28 @@ def archivos_nombres(sesion, r_):
 # Pdf base
 def pdf_base(sesion, r_):
     RELACION_CLASE = globales.lee_clase("global_base_relacion_archivo")
-    pdf            = {}
+    pdf = {}
     for archivo in r_.archivos:
         if archivo['tipo_archivo'] == 'pdf':
-            relacion = sesion.query(RELACION_CLASE).filter( RELACION_CLASE.archivo_id == archivo["id"] ).first()        
+            relacion = sesion.query(RELACION_CLASE).filter( 
+                RELACION_CLASE.archivo_id == archivo["id"] 
+            ).first()        
             if (relacion != None) and (relacion.tipo_relacion == "respuesta"):
-                print("archivo_id", archivo["id"])
+                #print("archivo_id", archivo["id"])
                 pdf = archivo     
     setattr(r_, "pdf_base", pdf)
+
+
+################
+# TRAZABILIDAD #
+################
+
+def dependencias_id(r_):
+    return [r_.dependencia_responde_id]
+
+def funcionarios_id(r_):
+    return [
+        r_.radicado_por_id, 
+        r_.funcionario_responde_id,
+        r_.gestion_responsable_id
+    ]

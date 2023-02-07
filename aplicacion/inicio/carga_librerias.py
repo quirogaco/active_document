@@ -112,6 +112,7 @@ from aplicacion.datos.definiciones.migrados.ventanilla import *
 from aplicacion.datos.definiciones.radicados import *
 from aplicacion.datos.definiciones.salidas import *
 from aplicacion.datos.definiciones.internos import *
+from aplicacion.datos.definiciones.radicados_unico import *
 from aplicacion.datos.definiciones.correos import *
 from aplicacion.datos.definiciones.copias import *
 

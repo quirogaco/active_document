@@ -1,5 +1,5 @@
     #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 from datetime import datetime
@@ -33,9 +33,23 @@ def creaIndice(estructura="", ruta="base"):
         pprint.pprint(modelo["mapa"] )          
         mapping = modelo["mapa"]['mappings']
         setting = modelo["mapa"]['settings']
-        print( conexion.indices.create( index=nombreIndice, mappings=mapping, settings=setting, ignore=400) )   
+        print( 
+            conexion.indices.create( 
+                index=nombreIndice, 
+                mappings=mapping, 
+                settings=setting, 
+                ignore=400
+            ) 
+        )   
 
-    globales.carga_modelo_elastic(estructura="", modelo={}, mapa={}, indexamiento={}, indice="", campoId=None)
+    globales.carga_modelo_elastic(
+        estructura="", 
+        modelo={}, 
+        mapa={}, 
+        indexamiento={}, 
+        indice="", 
+        campoId=None
+    )
     globales.carga_modelo_elastic(
         estructura, 
         modelo["modelo"], 
@@ -71,7 +85,11 @@ def bulk_indexar(conexion, modelo, indice, datos=[], campoId="id"):
     
     # Salva paquete de datos
     try:
-        sale = helpers.bulk( client=conexion, actions=datos_bulk, raise_on_exception=False )
+        sale = helpers.bulk( 
+            client=conexion, 
+            actions=datos_bulk, 
+            raise_on_exception=False 
+        )
         conexion.indices.flush( index=indice )
     except Exception as e:
         print("BULK INDEXAR:", str(e))
@@ -106,14 +124,21 @@ def cargaDatos(datos, modelo):
 
 def salvaDocumento(conexion, indice, datos_documento, campoId="id", flush=False):
     try:        
-        conexion.index( index=indice, id=datos_documento[campoId], body=datos_documento )             
+        conexion.index( 
+            index=indice, 
+            id=datos_documento[campoId], 
+            body=datos_documento 
+        )             
         if flush:
             conexion.indices.flush(index=indice)
         else:
             conexion.indices.refresh(index=indice)            
     except Exception as error:
         print(" EEEEEEEEEEEERRR ->no se esta reportando ", str(error))
-        datos_documento = "Elastic indexar registrar datos:" + type(error).__name__ + " : " + str(error)
+        datos_documento = (
+            "Elastic indexar registrar datos:" + 
+            type(error).__name__ + " : " + str(error)
+        )
         
 def indexar(conexion, modelo, indice, datos={}, campoId="id", flush=False):
     # JCR !! VALIDAR ERRORES
@@ -121,7 +146,13 @@ def indexar(conexion, modelo, indice, datos={}, campoId="id", flush=False):
     datos_documento = {}
     datos_documento = cargaDatos(datos, modelo)    
     if continuar:
-        salvaDocumento(conexion, indice, datos_documento, campoId=campoId, flush=flush)
+        salvaDocumento(
+            conexion, 
+            indice, 
+            datos_documento, 
+            campoId=campoId, 
+            flush=flush
+        )
 
     return datos_documento
 
@@ -129,7 +160,14 @@ def indexar(conexion, modelo, indice, datos={}, campoId="id", flush=False):
 def indexar_documento(ruta, estructura, datos, flush=False):
     conexion  = globales.lee_conexion_elastic(ruta)
     modelo    = globales.lee_modelo_elastic(estructura)
-    resultado = indexar(conexion, modelo["modelo"], modelo["indice"], datos, modelo["campoId"], flush)     
+    resultado = indexar(
+        conexion, 
+        modelo["modelo"], 
+        modelo["indice"], 
+        datos, 
+        modelo["campoId"], 
+        flush
+    )     
     
     return resultado
 
@@ -168,7 +206,10 @@ def eliminar(conexion, indice, registroId, campoId="id", flush=False):
             else:
                 conexion.indices.refresh(indice)            
     except Exception as error:
-        datos_documento = "Elastic eliminar registrar datos:" + type(error).__name__ + " : " + str(error)
+        datos_documento = (
+            "Elastic eliminar registrar datos:" + 
+            type(error).__name__ + " : " + str(error)
+        )
     
     return {"id": registroId}
 
@@ -176,14 +217,26 @@ def eliminar(conexion, indice, registroId, campoId="id", flush=False):
 def indexar_elimina_documento(ruta, estructura, registroId, flush=False):
     conexion  = globales.lee_conexion_elastic(ruta)
     
-    resultado = eliminar(conexion, estructura, registroId, campoId="id", flush=False)
+    resultado = eliminar(
+        conexion, 
+        estructura, 
+        registroId, 
+        campoId="id", 
+        flush=False
+    )
     
     return resultado
 
 # ELIMINA UN REGISTRO
 def eliminar_registro(estructura, registroId, flush=True):
     conexion  = globales.lee_conexion_elastic("base")
-    resultado = eliminar(conexion, estructura, registroId, campoId="id", flush=False)
+    resultado = eliminar(
+        conexion, 
+        estructura, 
+        registroId, 
+        campoId="id", 
+        flush=False
+    )
     
     return resultado
 
@@ -196,7 +249,10 @@ def leerUno(conexion, indice, registroId):
     try:            
         datos_documento = conexion.get(index=indice, id=registroId)                    
     except Exception as error:
-        datos_documento = "Elastic un leer registro datos:" + type(error).__name__ + " : " + str(error)
+        datos_documento = (
+            "Elastic un leer registro datos:" + 
+            type(error).__name__ + " : " + str(error)
+        )
     
     return datos_documento
 

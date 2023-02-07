@@ -5,14 +5,13 @@ import configuracion_base
 
 from librerias.datos.elastic import elastic_operaciones
 
-
 # CONFIGURACIÓN
 # resultado = elastic_operaciones.eliminaIndice("configuracion_general", "base")
 # resultado = elastic_operaciones.eliminaIndice("canales_comunicacion", "base")
 # resultado = elastic_operaciones.eliminaIndice("roles", "base")
 # resultado = elastic_operaciones.eliminaIndice("ubicaciones", "base")
-resultado = elastic_operaciones.eliminaIndice("usuarios", "base")
-resultado = elastic_operaciones.eliminaIndice("dependencias", "base")
+# resultado = elastic_operaciones.eliminaIndice("usuarios", "base")
+# resultado = elastic_operaciones.eliminaIndice("dependencias", "base")
 # resultado = elastic_operaciones.eliminaIndice("continentes", "base")
 # resultado = elastic_operaciones.eliminaIndice("paises", "base")
 # resultado = elastic_operaciones.eliminaIndice("departamentos", "base")
@@ -39,9 +38,10 @@ resultado = elastic_operaciones.eliminaIndice("dependencias", "base")
 
 #"""
 # RADICACION GESTION
-resultado = elastic_operaciones.eliminaIndice("radicados_entrada", "base")
+# resultado = elastic_operaciones.eliminaIndice("radicados_entrada", "base")
 # resultado = elastic_operaciones.eliminaIndice("radicados_salida", "base")
 # resultado = elastic_operaciones.eliminaIndice("radicados_interno", "base")
+# resultado = elastic_operaciones.eliminaIndice("radicados_unico", "base")
 # resultado = elastic_operaciones.eliminaIndice("peticiones", "base")
 # resultado = elastic_operaciones.eliminaIndice("copias", "base")
 #"""

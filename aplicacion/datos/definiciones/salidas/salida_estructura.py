@@ -50,6 +50,9 @@ CLASE = globales.lee_clase(definicion["clase"])
 
 # Eventos de clase y objeto
 def al_cargar(target, context):
+    # print("")
+    # print("................")
+    # print("SALIDA")
     salida_propiedades.archivos_nombres(context.session, target)
     salida_propiedades.pdf_base(context.session, target)
     salida_propiedades.logs(context.session, target)
@@ -57,10 +60,10 @@ def al_cargar(target, context):
 sqalchemy_clase_dinamica.asigna_evento(CLASE, "load", al_cargar)
 
 # Procesos pre, post, ultimo
-from . import salida_procesamiento
+#from . import salida_procesamiento
 
 # Normalización
-from . import salida_estructura_funciones
+#from . import salida_estructura_funciones
 
 
 # # Eventos de clase y objeto

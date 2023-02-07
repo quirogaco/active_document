@@ -8,6 +8,7 @@ from librerias.datos.sql import sqalchemy_tipo_campos as tipos
 from . import salida_propiedades
 
 campos = {
+    "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "defecto": "ENTRADA", "propiedad": salida_propiedades.tipo_radicado}),
     # Sitio de radicación
     "radicado_en_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en id",   "longitud": 64}),
     "radicado_en_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en"}),
@@ -88,6 +89,10 @@ campos = {
     "medio_notificacion": tipos.clave(propiedades={"titulo": "Medio notificación", "longitud": 64, "validador": "clave_lista"}),  
 
     "esta_firmado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Esta firmado", "propiedad": salida_propiedades.esta_firmado}),
+
+    # Trazabilidad
+    "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id", "propiedad": salida_propiedades.dependencias_id}), 
+    "funcionarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Funcionarios id", "propiedad": salida_propiedades.funcionarios_id}), 
     
     ########
     # logs #
@@ -97,8 +102,8 @@ campos = {
     ######################
     # Copia del radicado #
     ######################
-    "copia_usuarios_id" : tipos.clave(propiedades={"columna": "no", "titulo": "Con copia a usuarios", "longitud": 256, "validador": "clave_lista"}),  
-    "copia_grupos_id"   : tipos.clave(propiedades={"columna": "no", "titulo": "Con copia a grupos", "longitud": 256, "validador": "clave_lista"}),  
+    "copia_usuarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Con copia a usuarios", "longitud": 256, "validador": "clave_lista"}),  
+    "copia_grupos_id": tipos.clave(propiedades={"columna": "no", "titulo": "Con copia a grupos", "longitud": 256, "validador": "clave_lista"}),  
     
     ############
     # archivos #

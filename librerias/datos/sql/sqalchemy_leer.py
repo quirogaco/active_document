@@ -3,7 +3,7 @@
  
 import pprint, operator, copy
 
-from librerias.datos.base        import globales 
+from librerias.datos.base import globales 
 from librerias.datos.estructuras import estructura_operaciones
 from . import sqalchemy_comunes
 
@@ -41,7 +41,12 @@ def crea_query_id(sesion, CLASE, registroId, campoId="id"):
     return query    
 
 # Lee un registro
-def leer_registroSimple(ruta, CLASE, registroId, campoId="id", retornar="diccionario"):
+def leer_registroSimple(
+    ruta, 
+    CLASE, 
+    registroId, 
+    campoId="id", 
+    retornar="diccionario"):
     resultado = None    
     columna   = getattr(CLASE, campoId, None)
     if (type(columna) !=  type(None)): 
@@ -95,8 +100,15 @@ def referenciasLectura(ruta, referencia, normalizado):
         print("")
 
     if (valorReferencia not in [None, "", "None", "none", "NONE"]):            
-        registro         = leer_registroExtendido(ruta, estructuraDestino, definicionDestino, CLASEDESTINO, valorReferencia, campoDestino)
-        datosDestino     = {}
+        registro = leer_registroExtendido(
+            ruta, 
+            estructuraDestino, 
+            definicionDestino, 
+            CLASEDESTINO, 
+            valorReferencia, 
+            campoDestino
+        )
+        datosDestino = {}
         for atributo in atributosReferencia:
             for local, referencia in atributo.items(): 
                 datosDestino[local] = registro.get(referencia, None)    
@@ -106,26 +118,54 @@ def referenciasLectura(ruta, referencia, normalizado):
 
 # Retorna la informaci�n extendida del reistro
 def informacionExtendida(ruta, estructura, definicion, resultado):
-    normalizado = estructura_operaciones.normaliza_estructura_datos(estructura, resultado, False)
+    normalizado = estructura_operaciones.normaliza_estructura_datos(
+        estructura, 
+        resultado, 
+        False
+    )
     referencias = list(definicion.get("referencias", []))    
     for referencia in referencias:   
         nombreFuncion           = referencia.get('funcion', None)
         if nombreFuncion != None:
-            funcion     = globales.lee_funcion_referencia(estructura, nombreFuncion)
-            normalizado = referenciasFuncion(ruta,funcion, referencia, normalizado)
+            funcion = globales.lee_funcion_referencia(
+                estructura, 
+                nombreFuncion
+            )
+            normalizado = referenciasFuncion(
+                ruta,
+                funcion, 
+                referencia, 
+                normalizado
+            )
         else:
             normalizado = referenciasLectura(ruta, referencia, normalizado)    
     
     return normalizado
 
 # Lee registros con referencias
-def leer_registroExtendido(ruta, estructura, definicion, CLASE, registroId, campoId):
+def leer_registroExtendido(
+    ruta, 
+    estructura, 
+    definicion, 
+    CLASE, 
+    registroId, 
+    campoId
+):
     normalizado = leer_registroSimple(ruta, CLASE, registroId, campoId)
     #normalizado = informacionExtendida(ruta, estructura, definicion, resultado)
     return normalizado
 
 # Lee un registro
-def leer_registroId(ruta, estructura, definicion, CLASE, registroId, campoId="id", extendido=False, retornar="diccionario"):
+def leer_registroId(
+    ruta, 
+    estructura, 
+    definicion, 
+    CLASE, 
+    registroId, 
+    campoId="id", 
+    extendido=False, 
+    retornar="diccionario"
+):
     #if extendido == False:
     resultado = leer_registroSimple(ruta, CLASE, registroId, campoId)
     #else:
@@ -137,17 +177,30 @@ def leer_registroId(ruta, estructura, definicion, CLASE, registroId, campoId="id
 def leer_un_registro(estructura, registro_id):
     definicion = globales.lee_definicion(estructura)
     CLASE      = globales.lee_clase(definicion["clase"])
-    resultado  = leer_registroId("base", estructura, definicion, CLASE, registro_id)
+    resultado  = leer_registroId(
+        "base", 
+        estructura, 
+        definicion, 
+        CLASE, 
+        registro_id
+    )
     
     return resultado
 
 # Lee todos los registros
-def leer_todos(ruta, estructura, extendido=False, retornar="diccionario", desde=0, hasta=1000):
+def leer_todos(
+    ruta, 
+    estructura, 
+    extendido=False, 
+    retornar="diccionario", 
+    desde=0, 
+    hasta=1000
+):
     definicion = globales.lee_definicion(estructura)
-    CLASE      = globales.lee_clase(definicion["clase"])
-    sesion     = sqalchemy_comunes.nuevaSesion(ruta)   
-    registros  = sesion.query(CLASE)[desde:hasta]
-    resultado  = []
+    CLASE = globales.lee_clase(definicion["clase"])
+    sesion = sqalchemy_comunes.nuevaSesion(ruta)   
+    registros = sesion.query(CLASE)[desde:hasta]
+    resultado = []
     if (extendido == False) and (retornar == "objeto"):
         resultado = registros
     else:
@@ -156,11 +209,19 @@ def leer_todos(ruta, estructura, extendido=False, retornar="diccionario", desde=
             if (retornar == "objeto"):
                 normalizado = registro
             else:
-                normalizado = sqalchemy_comunes.retornar_datos(registro, retornar) 
+                normalizado = sqalchemy_comunes.retornar_datos(
+                    registro, 
+                    retornar
+                ) 
 
             # Datos extendidos
             if extendido == True:
-                normalizado = informacionExtendida(ruta, estructura, definicion, normalizado)  
+                normalizado = informacionExtendida(
+                    ruta, 
+                    estructura, 
+                    definicion, 
+                    normalizado
+                )  
 
             resultado.append( normalizado )
                 
@@ -169,7 +230,14 @@ def leer_todos(ruta, estructura, extendido=False, retornar="diccionario", desde=
     return resultado
 
 # Leer todos los registros por rango
-def leer_rango(ruta, estructura, desde=0, hasta=0, extendido=False, retornar="diccionario"):
+def leer_rango(
+    ruta, 
+    estructura, 
+    desde=0, 
+    hasta=0, 
+    extendido=False, 
+    retornar="diccionario"
+):
     definicion = globales.lee_definicion(estructura)
     CLASE      = globales.lee_clase(definicion["clase"])
     sesion     = sqalchemy_comunes.nuevaSesion(ruta)      
@@ -179,7 +247,12 @@ def leer_rango(ruta, estructura, desde=0, hasta=0, extendido=False, retornar="di
     for registro in registros:  
         normalizado = sqalchemy_comunes.retornar_datos(registro, retornar)         
         if extendido == True:
-            normalizado = informacionExtendida(ruta, estructura, definicion, normalizado)     
+            normalizado = informacionExtendida(
+                ruta, 
+                estructura, 
+                definicion, 
+                normalizado
+            )     
         resultado.append( normalizado )    
     sesion.close()
 

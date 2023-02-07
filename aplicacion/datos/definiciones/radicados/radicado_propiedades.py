@@ -6,6 +6,9 @@ from sqlalchemy import desc
 from librerias.datos.sql  import sqalchemy_filtrar
 from librerias.datos.base import globales
 
+def tipo_radicado(r_):
+    return "ENTRADA"
+
 def gestion_asignada_peticion(sesion, r_):
     campos = {
         #"gestion_id"                : "id",
@@ -31,7 +34,11 @@ def gestion_asignada_peticion(sesion, r_):
         "gestion_vence_en": "vence_en",
         "gestion_estado"  : "estado_gestion",
         "gestion_etapa"   : "etapa_gestion",
-        "gestion_estado_vencimiento": "estado_vencimiento"
+        "gestion_estado_vencimiento": "estado_vencimiento",
+
+        # Log gestion
+        "dependencias_id": "dependencias_id",
+        "funcionarios_id": "funcionarios_id"
     }
     # Valores por defecto
     for label, valor in campos.items():
@@ -62,6 +69,7 @@ def gestion_asignada_peticion(sesion, r_):
     
     setattr(r_, "gestion_id", gestion_id)
     setattr(r_, "gestion_asignada_peticion", asignada)
+    #print(r_.nro_radicado, r_.dependencias_id, r_.funcionarios_id)
 
 #############
 # CON COPIA #
@@ -70,8 +78,12 @@ def con_copia(sesion, r_):
     lista_copia = []
     # Busca copias
     contador = 0
-    filtros  = [ [ "radicado_id", "=", r_.id ] ]
-    copias   = sqalchemy_filtrar.filtrarOrdena(estructura="copias", filtros=filtros, ordenamientos=[])  
+    filtros = [ [ "radicado_id", "=", r_.id ] ]
+    copias = sqalchemy_filtrar.filtrarOrdena(
+        estructura="copias", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )  
     for copia in copias:
         contador += 1
         lista_copia.append({
@@ -89,14 +101,18 @@ def con_copia(sesion, r_):
 # RADICADOS RELACIONADOS #
 ##########################
 def relacionados(sesion, r_):
-    contador           = 0
+    contador = 0
     lista_relacionados = []
-    relacionados_id    = r_.atributos_.get("relacionados_id", [])   
+    relacionados_id = r_.atributos_.get("relacionados_id", [])   
     # Busca copias
     for relacionado_id in relacionados_id:
-        contador    += 1
-        filtros      = [ [ "id", "=", relacionado_id ] ]
-        relacionados = sqalchemy_filtrar.filtrarOrdena(estructura="radicados_entrada", filtros=filtros, ordenamientos=[])  
+        contador += 1
+        filtros = [ [ "id", "=", relacionado_id ] ]
+        relacionados = sqalchemy_filtrar.filtrarOrdena(
+            estructura="radicados_entrada", 
+            filtros=filtros, 
+            ordenamientos=[]
+        )  
         for relacionado in relacionados:                
             lista_relacionados.append({
                 "id"            : contador,
@@ -120,22 +136,30 @@ def logs_gestion(sesion, r_):
     # Busca gestion
     for gestion_id in r_.gestion_id:
         filtros = [ [ "fuente_id", "=", gestion_id ] ]
-        logs.extend( sqalchemy_filtrar.filtrarOrdena(estructura="logs", filtros=filtros, ordenamientos=[]) )   
+        logs.extend( sqalchemy_filtrar.filtrarOrdena(
+            estructura="logs", 
+            filtros=filtros, 
+            ordenamientos=[]) 
+        )   
 
     return logs
 
 def logs_radicado(sesion, r_):
     filtros = [ [ "fuente_id", "=", r_.id ] ]
-    logs    = sqalchemy_filtrar.filtrarOrdena(estructura="logs", filtros=filtros, ordenamientos=[])
+    logs = sqalchemy_filtrar.filtrarOrdena(
+        estructura="logs", 
+        filtros=filtros, 
+        ordenamientos=[]
+    )
     
     return logs
 
 def logs(sesion, r_):
     lista_logs = []
     # Logs vinculados
-    radicado   = logs_radicado(sesion, r_)
-    gestion    = logs_gestion(sesion, r_)
-    salida     = logs_salida(sesion, r_)
+    radicado = logs_radicado(sesion, r_)
+    gestion = logs_gestion(sesion, r_)
+    salida = logs_salida(sesion, r_)
     
     # Log ordenado
     lista_logs.extend(radicado)
@@ -159,10 +183,12 @@ def archivos_total(sesion, r_):
 # Pdf base
 def pdf_base(sesion, r_):
     RELACION_CLASE = globales.lee_clase("global_base_relacion_archivo")
-    pdf            = {}
+    pdf = {}
     for archivo in r_.archivos:
         if archivo['tipo_archivo'] == 'pdf':
-            relacion = sesion.query(RELACION_CLASE).filter( RELACION_CLASE.archivo_id == archivo["id"] ).first()        
+            relacion = sesion.query(RELACION_CLASE).filter( 
+                RELACION_CLASE.archivo_id == archivo["id"] 
+            ).first()        
             if (relacion != None) and (relacion.tipo_relacion == "principal"):
                 pdf = archivo     
     setattr(r_, "pdf_base", pdf)

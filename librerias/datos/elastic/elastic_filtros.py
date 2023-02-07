@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 import pprint
 from elasticsearch_dsl import Q as Q_dsl
 from nested_lookup import nested_lookup
@@ -107,13 +107,22 @@ def crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusque
         tipoCampo  = definicionCampo.get("tipoElastic", "texto")  
 
         # Expresiòn en espaòol de operacion contiene, igual, etc
-        expresionFiltro = elastic_filtros_tipo.expresionesEspanol.get(operacionBusqueda, "contiene")   
+        expresionFiltro = elastic_filtros_tipo.expresionesEspanol.get(
+            operacionBusqueda, 
+            "contiene"
+        )   
             
         # Diccionario de tipos de filtro por tipo de campo: texto, clave, 
-        tipoFiltroDiccionario = elastic_filtros_tipo.filtrosElasticTipo.get(tipoCampo, "texto") #definicionCampo
+        tipoFiltroDiccionario = elastic_filtros_tipo.filtrosElasticTipo.get(
+            tipoCampo, 
+            "texto"
+        ) #definicionCampo
         
         # Filtro por tipo de campo y expresiòn
-        elasticFiltroFuncion  = tipoFiltroDiccionario.get(expresionFiltro, "texto")        
+        elasticFiltroFuncion  = tipoFiltroDiccionario.get(
+            expresionFiltro, 
+            "texto"
+        )        
         if not isinstance(elasticFiltroFuncion, str):    
             elasticFiltro = elasticFiltroFuncion(campoBusqueda, valorBusqueda)    
             if nested != None:
@@ -134,9 +143,18 @@ def crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusque
                             }
                         }
                     }   
-                    elasticFiltro = Q_dsl( "nested", path=nested, query = elasticFiltro, inner_hits=inner_hits )
+                    elasticFiltro = Q_dsl( 
+                        "nested", 
+                        path=nested, 
+                        query = elasticFiltro, 
+                        inner_hits=inner_hits 
+                    )
                 else:
-                    elasticFiltro = Q_dsl( "nested", path=nested, query = elasticFiltro)
+                    elasticFiltro = Q_dsl( 
+                        "nested", 
+                        path=nested, 
+                        query = elasticFiltro
+                    )
         
     return elasticFiltro
 
@@ -195,7 +213,11 @@ def creaFiltroGrupo(definicion, filtro):
                 segundoQuery = crear_filtros(definicion, elemento)
             
             if (agrupador != None) and (segundoQuery != None):
-                elasticFiltro = filtroGrupo(agrupador, elasticFiltro, segundoQuery)  
+                elasticFiltro = filtroGrupo(
+                    agrupador, 
+                    elasticFiltro, 
+                    segundoQuery
+                )  
                 agrupador     = None
                 segundoQuery  = None
 
@@ -224,18 +246,31 @@ def lista_binarios(definicion, filtros):
         definicionCampo, nested = traeDefinicionCampo(definicion, campo)
         tipoCampo = definicionCampo.get("tipoElastic", "texto")
         # Operacion de busqueda
-        expresionFiltro = elastic_filtros_tipo.expresionesEspanol.get(operacion, "contiene")   
+        expresionFiltro = elastic_filtros_tipo.expresionesEspanol.get(
+            operacion, 
+            "contiene"
+        )   
         # Diccionario de operaciones asociadas al tipo de campo
-        tipoFiltroDiccionario = elastic_filtros_tipo.filtrosElasticTipo.get(tipoCampo, "texto") #definicionCampo
+        tipoFiltroDiccionario = elastic_filtros_tipo.filtrosElasticTipo.get(
+            tipoCampo, 
+            "texto"
+        ) #definicionCampo
         # Operacion especifica por tipo de campo
-        elasticFiltroFuncion = tipoFiltroDiccionario.get(expresionFiltro, "texto")        
+        elasticFiltroFuncion = tipoFiltroDiccionario.get(
+            expresionFiltro, 
+            "texto"
+        )        
         # Filtro elastic
         #elasticFiltro = elasticFiltroFuncion(campo, valor)
         elasticFiltro = crear_filtro_campo(definicion, campo, operacion, valor)
         print("expresionFiltro -->", expresionFiltro, elasticFiltro)
 
         if (filtro_ultimo is not None) and (conector_anterior is not None):
-            elasticFiltro = filtroGrupo(conector_anterior, filtro_ultimo, elasticFiltro)
+            elasticFiltro = filtroGrupo(
+                conector_anterior, 
+                filtro_ultimo, 
+                elasticFiltro
+            )
             filtro_ultimo = elasticFiltro
             conector_anterior = conector
             filtros_elastic.append(elasticFiltro)
@@ -261,8 +296,14 @@ def crear_filtro_sencillo(parametros, definicion):
     operacionBusqueda = parametros.get('operacionBusqueda', None)
     campoBusqueda     = parametros.get('campoBusqueda', None)
     valorBusqueda     = parametros.get('valorBusqueda', None)        
-    if (campoBusqueda != None) and (operacionBusqueda != None) and (valorBusqueda not in [None, '']):
-        elasticFiltro = crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusqueda)    
+    if (campoBusqueda != None) and (operacionBusqueda != None) and \
+    (valorBusqueda not in [None, '']):
+        elasticFiltro = crear_filtro_campo(
+            definicion, 
+            campoBusqueda, 
+            operacionBusqueda, 
+            valorBusqueda
+        )    
 
     return elasticFiltro
 
@@ -271,7 +312,12 @@ def crearFiltroBinario(definicion, filtro):
     campoBusqueda     = filtro[0] 
     operacionBusqueda = filtro[1] 
     valorBusqueda     = filtro[2]
-    elasticFiltro     = crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusqueda)
+    elasticFiltro     = crear_filtro_campo(
+        definicion, 
+        campoBusqueda, 
+        operacionBusqueda, 
+        valorBusqueda
+    )
 
     return elasticFiltro
 

@@ -8,6 +8,7 @@ from librerias.datos.sql import sqalchemy_tipo_campos as tipos
 from . import interno_propiedades
 
 campos = {
+    "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "defecto": "ENTRADA", "propiedad": interno_propiedades.tipo_radicado}),    
     # Sitio de radicación
     "radicado_en_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en id",   "longitud": 64}),
     "radicado_en_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en"}),
@@ -47,8 +48,6 @@ campos = {
     "funcionario_recibe_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Funcionario recibe id",     "longitud": 64}),
     "funcionario_recibe_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Funcionario recibe nombre"}),
 
-
-
     #######################
     # Información gestión #
     #######################
@@ -73,6 +72,11 @@ campos = {
     "firmado_electronica_por": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Quien firmo electronicamente", "propiedad": interno_propiedades.firmado_electronica_por}), 
     "esta_firmado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Esta firmado", "propiedad": interno_propiedades.esta_firmado}),
     
+
+    # Trazabilidad
+    "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id", "propiedad": interno_propiedades.dependencias_id}), 
+    "funcionarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Funcionarios id", "propiedad": interno_propiedades.funcionarios_id}), 
+
     ########
     # logs #
     ########

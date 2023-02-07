@@ -26,6 +26,7 @@ import ventana_emergente_firma from
 // Anula
 import ventana_emergente_anula from 
 './ventana_emergente_anula/ventana_emergente_anula.vue'
+  
 
 // Columnas
 import grid_ventanilla_salida_columnas 
@@ -35,9 +36,9 @@ import grid_ventanilla_salida_metodos
 from './grid_gestion_salida_metodos.js'
 
 let filtros_grid = [ 
-    ["dependencia_responde_id", "=", window.$usuario.dependencia_id], 
-    // ["estado_gestion", "=", "PENDIENTE"], 
-    // ["estado_", "=", "ACTIVO"] 
+    ["dependencia_responde_id", "=", window.$usuario.dependencia_id],
+    ["estado_gestion", "=", "PENDIENTE"], 
+    ["estado_", "=", "ACTIVO"] 
 ]
 
 // Grid de gestión

@@ -27,15 +27,15 @@ gestion_basica = {
     }
 }
 
-salidas_gestion = {
+consulta_gestion = {
     "definicion": {
         "id"    : "533",
-        "nombre": "GESTIÓN - Manejo de salidas"
+        "nombre": "GESTIÓN - Dependencia"
     },
 
     "grid": {
-        "componente": "grid_gestion_salida",     
-        "texto"     : "Gestión de Salidas oficina",
+        "componente": "grid_gestion_consulta",     
+        "texto"     : "Gestión dependencia consulta",
         "icon"      : "",      
         "navegar"   : "si",
         "padre"     : "Gestión",
@@ -43,10 +43,24 @@ salidas_gestion = {
     },
 
     "forma": {
-        "componente": "forma_salida_consulta",      
-        "texto"     : "Consulta Salidas",
-        "tipo"      : "importar"
-    }
+        "componente": "forma_salida_consulta",     
+        "texto"     : "Gestión consulta salidas",
+        "tipo"      : "importar",
+    },
+
+    "adicionales": [
+        {
+            "componente": "forma_radicado_consulta",      
+            "texto"     : "Consulta Radicados Entrada",
+            "tipo"      : "importar"
+        },
+
+        {
+            "componente": "forma_interno_consulta",      
+            "texto"     : "Consulta Radicados",
+            "tipo"      : "importar"
+        }
+    ]
 }
 
 gestion_pantalla = {
@@ -82,5 +96,5 @@ opciones = [
     gestion_basica,
     tablero_general,
     gestion_pantalla,
-    salidas_gestion
+    consulta_gestion
 ]
