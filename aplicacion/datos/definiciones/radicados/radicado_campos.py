@@ -8,7 +8,7 @@ from librerias.datos.sql import sqalchemy_tipo_campos as tipos
 from . import radicado_propiedades
 
 campos = {
-    "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "defecto": "ENTRADA", "propiedad": radicado_propiedades.tipo_radicado}),
+    "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "propiedad": radicado_propiedades.tipo_radicado}),
     # Sitio de radicación
     "radicado_en"    : tipos.clave_obligatorio(propiedades={"titulo": "Radicado en id",   "longitud": 64}),
     "radicado_en_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en", "reporte": "SI"}),
@@ -164,7 +164,15 @@ campos = {
     #############
     # Con copia #
     #############
-    "con_copia": tipos.json(propiedades={"columna": "no", "titulo": "Con copia a"})
+    "con_copia": tipos.json(propiedades={"columna": "no", "titulo": "Con copia a"}),
+
+    #####################
+    # Información comun #
+    #####################
+    "remite_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente entidad/dependencia", "propiedad": radicado_propiedades.remite_ent_dep_nombre}),
+    "remite_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente persona/funcionario", "propiedad": radicado_propiedades.remite_per_fun_nombre}),
+    "recibe_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe entidad/dependencia", "propiedad": radicado_propiedades.recibe_ent_dep_nombre}),
+    "recibe_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe persona/funcionario", "propiedad": radicado_propiedades.recibe_per_fun_nombre})
 }
 campos.update(base_general_campos.campos)
 

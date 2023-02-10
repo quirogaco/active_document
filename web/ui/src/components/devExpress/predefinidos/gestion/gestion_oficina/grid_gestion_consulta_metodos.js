@@ -29,7 +29,6 @@ let metodos = {
         let estructura = "radicados_entrada";
         let forma = "forma_radicado_consulta";
 
-        console.log("data:", e.data)
         if (e.data.tipo_radicado == "SALIDA") {
             estructura = "radicados_salida";
             forma = "forma_salida_consulta";
@@ -49,7 +48,7 @@ let metodos = {
             "id": data.id,
             "radicado": registro,
             "modo": "consulta",
-            "llamado_por": "grid_gestion_consulta"
+            "llamado_por": this.retorna_grid
         };
         $lib.call_component_storage(
             forma,

@@ -7,28 +7,28 @@ from aplicacion.datos.comunes.referencias import archivos, terceros
 referencias = [
     # Sitio de radicaci�n 
     {
-        "campoReferencia"    : "radicado_en_id",
+        "campoReferencia"    : "radicado_en",
         "atributosReferencia": [{
             "radicado_en_nombre": "nombre",
             "radicado_en_id"    : "id"
         }],
         "estructuraDestino": "ubicaciones",
-        "externa"          : {
-            "tipo_relacion": "SITIO_DE_RADICACION"            
-        } 
+        # "externa"          : {
+        #     "tipo_relacion": "SITIO_DE_RADICACION"            
+        # } 
     },
 
     # Usuario que radico 
     {
-        "campoReferencia"    : "radicado_por_id",
+        "campoReferencia"    : "radicado_por",
         "atributosReferencia": [{
             "radicado_por_nombre": "nombre",
             "radicado_por_id"    : "id"
         }],
         "estructuraDestino": "usuarios",
-        "externa"          : {
-            "tipo_relacion": "RADICADOR"            
-        } 
+        # "externa"          : {
+        #     "tipo_relacion": "RADICADOR"            
+        # } 
     },
 
     # Dependencia envia

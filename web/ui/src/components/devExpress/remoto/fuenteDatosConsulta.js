@@ -249,7 +249,8 @@ const fuenteDatosGlobalConsulta = function(
             };
 
             if (cargar_datos_antes != null) {
-                opciones = cargar_datos_antes(opciones, idComponente)
+                opciones = cargar_datos_antes(opciones, idComponente);
+                console.log("opciones:", opciones)
             } 
             return opciones;
         },

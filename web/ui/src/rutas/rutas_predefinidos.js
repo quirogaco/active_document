@@ -86,6 +86,7 @@ let rutas_componentes = {
     'gestion_pantalla': () => import('../components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'),
     'tablero_general': () => import('../components/devExpress/tablero_control/tablero_general.vue'),
     'grid_gestion_consulta': () => import('../components/devExpress/predefinidos/gestion/gestion_oficina/grid_gestion_consulta.vue'),
+    'grid_gestion_funcionario_consulta': () => import('../components/devExpress/predefinidos/gestion/gestion_oficina/grid_gestion_funcionario_consulta.vue'),
     
     // ######
     // PQRS #

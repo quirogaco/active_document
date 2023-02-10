@@ -294,6 +294,14 @@ let basicos_salida_consulta = [
         "titulo": "Documento con reserva",
     },
     {
+        "id"    : "dependencia_responde_nombre",
+        "titulo": "Enviado por dependencia",
+    },
+    {
+        "id"    : "funcionario_responde_nombre",
+        "titulo": "Enviado por funcionario",
+    },
+    {
         "id"    : "radicado_por_nombre",
         "titulo": "Radicado por",
     },

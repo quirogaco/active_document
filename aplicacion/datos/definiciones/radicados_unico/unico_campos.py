@@ -26,5 +26,14 @@ campos = {
     # Trazabilidad
     "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id"}), 
     "funcionarios_id": tipos.clave(propiedades={"columna": "no", "titulo": "Funcionarios id"}),
+
+    #####################
+    # Información comun #
+    #####################
+    "gestion_estado": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado"}),
+    "remite_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente entidad/dependencia"}),
+    "remite_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente persona/funcionario"}),
+    "recibe_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe entidad/dependencia"}),
+    "recibe_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe persona/funcionario"})
 }
 campos.update(base_general_campos.campos)

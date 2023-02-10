@@ -41,7 +41,6 @@ let basica = {
     "estructura": "peticiones",
     "filtros_grid": [ 
         ["responsable_id", "=", window.$usuario.id], 
-        //["funcionarios_id", "contain", window.$usuario.id], 
         ["estado_gestion", "=", "PENDIENTE"], 
         ["estado_", "=", "ACTIVO"] 
     ],

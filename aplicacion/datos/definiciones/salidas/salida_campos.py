@@ -10,11 +10,11 @@ from . import salida_propiedades
 campos = {
     "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "defecto": "ENTRADA", "propiedad": salida_propiedades.tipo_radicado}),
     # Sitio de radicación
-    "radicado_en_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en id",   "longitud": 64}),
+    "radicado_en"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en id",   "longitud": 64}),
     "radicado_en_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en"}),
 
     # Usuario que radico
-    "radicado_por_id"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicador id",     "longitud": 64}),
+    "radicado_por"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicador id",     "longitud": 64}),
     "radicado_por_nombre": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicador"}),
 
     # Responde radicado
@@ -110,6 +110,15 @@ campos = {
     ############
     "archivos"         : tipos.clave(propiedades={"columna": "no", "titulo": "Archivos"}),  
     "pdf_base"        : tipos.json(propiedades={"columna": "no", "titulo": "Archivos pdf base"}), 
+
+    #####################
+    # Información comun #
+    #####################
+    "gestion_estado": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado", "propiedad": salida_propiedades.gestion_estado}),
+    "remite_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente entidad/dependencia", "propiedad": salida_propiedades.remite_ent_dep_nombre}),
+    "remite_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente persona/funcionario", "propiedad": salida_propiedades.remite_per_fun_nombre}),
+    "recibe_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe entidad/dependencia", "propiedad": salida_propiedades.recibe_ent_dep_nombre}),
+    "recibe_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe persona/funcionario", "propiedad": salida_propiedades.recibe_per_fun_nombre})
 }
 campos.update(base_general_campos.campos)
 

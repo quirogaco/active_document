@@ -9,6 +9,64 @@ from librerias.datos.base import globales
 def tipo_radicado(r_):
     return "INTERNO"
 
+
+def gestion_asignada_peticion(sesion, r_):
+    campos = {
+        #"gestion_id"                : "id",
+        # Responsable
+        "gestion_responsable_id"    : "responsable_id",
+        "gestion_responsable_nombre": "responsable_nombre",
+        
+        # Dependencia responsable            
+        "gestion_dependencia_id"    : "dependencia_id",
+        "gestion_dependencia_nombre": "dependencia_nombre",
+        
+        # Petición
+        "gestion_peticion_id"    : "peticion_id",
+        "gestion_peticion_nombre": "peticion_nombre",
+        
+        # Terminos de respuesta basicos            
+        "gestion_horas_dias"  : "horas_dias",
+        "gestion_total_tiempo": "total_tiempo",
+        "gestion_prioridad"   : "prioridad",
+        
+        # Estado, vencimiento
+        "gestion_inicio"  : "gestion_inicio",
+        "gestion_vence_en": "vence_en",
+        "gestion_estado"  : "estado_gestion",
+        "gestion_etapa"   : "etapa_gestion",
+        "gestion_estado_vencimiento": "estado_vencimiento"
+    }
+    # Valores por defecto
+    for label, valor in campos.items():
+        setattr(r_, label, None)
+    setattr(r_, "gestion_relacion", None)
+
+    # Valores de gestion    
+    gestion_id = [] 
+    asignada = "NO"
+    GESTION_CLASE = globales.lee_clase("gestor_peticiones")
+    GESTION_RELACIONES_CLASE = globales.lee_clase("gestor_peticion_relaciones")
+    relaciones = sesion.query(GESTION_RELACIONES_CLASE).filter( GESTION_RELACIONES_CLASE.origen_id == r_.id ). \
+                    order_by( desc( GESTION_RELACIONES_CLASE.creado_en_) ).all()
+    for relacion in relaciones:
+        setattr(r_, "gestion_relacion", relacion.estado_)
+        if relacion is not None: # and relacion.estado_ == "ACTIVO": # estado_ -> DEVUELTO, cuando se regresa a servicio ciudadano o ventanilla
+            peticion = sesion.query(GESTION_CLASE).filter( relacion.gestion_id == GESTION_CLASE.id ).first()
+            if peticion != None:
+                atributos_ = getattr(r_, "atributos_", {})                    
+                gestion_id.append(peticion.id) # id de gestion
+                if relacion.estado_ == "ACTIVO": # si esta asigando para filtrar por pendientes de asignacion
+                    asignada = "SI"                                 
+                for label_radicado, label_gestion in campos.items():
+                    valor = getattr(peticion, label_gestion)
+                    atributos_[label_radicado] = valor
+                    setattr(r_, label_radicado, valor)
+                #setattr(r_, "label_radicado", label_radicado)
+    
+    setattr(r_, "gestion_id", gestion_id)
+    setattr(r_, "gestion_asignada_peticion", asignada)
+
 #####################
 # FIRMA ELECTRONICA #
 #####################
@@ -114,3 +172,38 @@ def funcionarios_id(r_):
         r_.funcionario_recibe_id
     ]))
 
+
+#####################
+# Información comun #
+#####################
+
+def remite_ent_dep_nombre(r_):
+    dato = ""
+    if (r_.dependencia_envia_nombre not in ["", None]):
+        dato = str(r_.dependencia_envia_nombre)
+    
+    return dato
+
+
+def remite_per_fun_nombre(r_):
+    dato = ""
+    if (r_.funcionario_envia_nombre not in ["", None]):
+       dato = str(r_.funcionario_envia_nombre)
+    
+    return dato
+
+
+def recibe_ent_dep_nombre(r_):
+    dato = ""
+    if (r_.dependencia_recibe_nombre not in ["", None]):
+       dato = str(r_.dependencia_recibe_nombre)
+    
+    return dato
+
+
+def recibe_per_fun_nombre(r_):
+    dato = ""
+    if (r_.funcionario_recibe_nombre not in ["", None]):
+       dato = str(r_.funcionario_recibe_nombre)
+    
+    return dato

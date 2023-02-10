@@ -192,3 +192,55 @@ def pdf_base(sesion, r_):
             if (relacion != None) and (relacion.tipo_relacion == "principal"):
                 pdf = archivo     
     setattr(r_, "pdf_base", pdf)
+
+
+#####################
+# Información comun #
+#####################
+
+def remite_ent_dep_nombre(r_):
+    dato = ""
+    match r_.tercero_clase:
+        case "JURIDICA":
+            dato = r_.tercero_razon_social
+
+        case "NATURAL":
+            dato = "PERSONA NATURAL"
+
+        case "ANONIMO":
+            dato = "ANONIMO"
+        
+    return dato
+
+
+def remite_per_fun_nombre(r_):
+    dato = ""
+    match r_.tercero_clase:
+        case "JURIDICA":
+            dato = str(r_.tercero_nombres) + " " + str(r_.tercero_apellidos)
+
+        case "NATURAL":
+            dato = str(r_.tercero_nombres) + " " + str(r_.tercero_apellidos)
+
+        case "ANONIMO":
+            dato = "ANONIMO"
+        
+    return dato
+
+
+def recibe_ent_dep_nombre(r_):
+    dato = ""
+    if (r_.gestion_dependencia_nombre not in ["", None]):
+        dato = str(r_.gestion_dependencia_nombre)
+    
+    return dato
+
+
+def recibe_per_fun_nombre(r_):
+    dato = ""
+    if (r_.gestion_responsable_nombre not in ["", None]):
+       dato = str(r_.gestion_responsable_nombre)
+    
+    return dato
+
+#estado_gestion

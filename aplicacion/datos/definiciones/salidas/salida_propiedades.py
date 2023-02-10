@@ -111,11 +111,67 @@ def pdf_base(sesion, r_):
 ################
 
 def dependencias_id(r_):
-    return [r_.dependencia_responde_id]
+    return [
+        r_.dependencia_responde_id
+        #
+    ]
 
 def funcionarios_id(r_):
     return [
-        r_.radicado_por_id, 
+        r_.radicado_por, 
         r_.funcionario_responde_id,
         r_.gestion_responsable_id
     ]
+
+
+#####################
+# Información comun #
+#####################
+
+def gestion_estado(r_):
+    return ""
+
+def remite_ent_dep_nombre(r_):
+    dato = ""
+    if (r_.dependencia_responde_nombre not in ["", None]):
+        dato = str(r_.dependencia_responde_nombre)
+    
+    return dato
+
+
+def remite_per_fun_nombre(r_):
+    dato = ""
+    if (r_.funcionario_responde_nombre not in ["", None]):
+       dato = str(r_.funcionario_responde_nombre)
+    
+    return dato
+
+
+def recibe_ent_dep_nombre(r_):
+    dato = ""
+    match r_.tercero_clase:
+        case "JURIDICA":
+            dato = r_.tercero_razon_social
+
+        case "NATURAL":
+            dato = "PERSONA NATURAL"
+
+        case "ANONIMO":
+            dato = "ANONIMO"
+        
+    return dato
+
+
+def recibe_per_fun_nombre(r_):
+    dato = ""
+    match r_.tercero_clase:
+        case "JURIDICA":
+            dato = str(r_.tercero_nombres) + " " + str(r_.tercero_apellidos)
+
+        case "NATURAL":
+            dato = str(r_.tercero_nombres) + " " + str(r_.tercero_apellidos)
+
+        case "ANONIMO":
+            dato = "ANONIMO"
+        
+    return dato

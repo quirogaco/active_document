@@ -14,7 +14,7 @@ from librerias.utilidades import vencimientos
 def carga_radicado(_r):        
     #global contador
     if getattr(_r, "_radicado", None) is None:
-        contador += 1
+        #contador += 1
         #print("contador->:", contador)
         radicado = {}
         filtros = [ [ "gestion_id", "=", _r.id ] ]

@@ -23,13 +23,12 @@ from './grid_gestion_consulta_columnas.js'
 import grid_gestion_consulta_metodos
 from './grid_gestion_consulta_metodos.js'
 
-
-let valor_filtro = window.$usuario.dependencia_id;
+let valor_filtro = window.$usuario.id;
 let filtros_grid = [ 
-    ["dependencias_id", "contain", valor_filtro]
+    ["funcionarios_id", "contain", valor_filtro]
 ];
 
-let campo_filtro = "gestion_dependencia_id";
+let campo_filtro = "gestion_responsable_id";
 let eventos = {
     "cargar_datos_antes": function(opciones, idComponente) {
         console.log("ANTES DE CARGAR>>:", opciones, campo_filtro);
@@ -89,7 +88,7 @@ let grid =  {
                 'radicados_unico', 
                 'radicados_unico', 
                 filtros_grid, 
-                eventos
+                {}
             ),            
             pageSizes: [10, 25, 50, 100],
             displayMode: 'full',
@@ -107,8 +106,8 @@ let grid =  {
                 visible: false
             },            
             emergente_key_anula:0,
-            titulo_grid: "DOCUMENTOS GESTIONADOS EN LA DEPENDENCIA",
-            retorna_grid: "grid_gestion_consulta"
+            titulo_grid: "DOCUMENTOS GESTIONADOS POR EL FUNCIONARIO",
+            retorna_grid: "grid_gestion_funcionario_consulta"
         }
     }
 }

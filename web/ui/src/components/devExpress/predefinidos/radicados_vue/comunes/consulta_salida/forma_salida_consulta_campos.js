@@ -1,10 +1,22 @@
-import forma_definiciones     from "../../../comunes_vue/forma/forma.js"
-import campos_basicos_comunes from "../../../comunes_vue/forma/campos_basicos_comunes.js"
-import basicos_definiciones   from "../../../radicados_vue/comunes/basicos/basicos_definiciones.js"
-import tercero_definiciones   from "../../../radicados_vue/comunes/basicos/tercero_definiciones.js"
-import archivo_definiciones   from "../../../radicados_vue/comunes/basicos/archivo_definiciones.js"
-import log_definiciones       from "../../../radicados_vue/comunes/basicos/log_definiciones.js"
-import copia_definiciones     from "../../../radicados_vue/comunes/basicos/copia_definiciones.js"
+import forma_definiciones from "../../../comunes_vue/forma/forma.js";
+
+import campos_basicos_comunes 
+from "../../../comunes_vue/forma/campos_basicos_comunes.js";
+
+import basicos_definiciones 
+from "../../../radicados_vue/comunes/basicos/basicos_definiciones.js";
+
+import tercero_definiciones 
+from "../../../radicados_vue/comunes/basicos/tercero_definiciones.js";
+
+import archivo_definiciones 
+from "../../../radicados_vue/comunes/basicos/archivo_definiciones.js";
+
+import log_definiciones 
+from "../../../radicados_vue/comunes/basicos/log_definiciones.js";
+
+import copia_definiciones 
+from "../../../radicados_vue/comunes/basicos/copia_definiciones.js";
 
 let barra_botones = function(forma, basicas) {
     return  [       
@@ -35,7 +47,10 @@ let basico_grupo = function(forma) {
         'basico',        
         {
             "titulo"   : "Información basica",
-            "elementos": forma_definiciones.genera_campos_lectura(forma, basicos_definiciones.basicos_salida_consulta)
+            "elementos": forma_definiciones.genera_campos_lectura(
+                forma, 
+                basicos_definiciones.basicos_salida_consulta
+            )
         }
     )
 }
@@ -48,7 +63,10 @@ let tercero_grupo = function(forma) {
         'tercero',        
         {
             "titulo"   : "Información de destinatario",
-            "elementos": forma_definiciones.genera_campos_lectura(forma, tercero_definiciones.tercero_campos_consulta)
+            "elementos": forma_definiciones.genera_campos_lectura(
+                forma, 
+                tercero_definiciones.tercero_campos_consulta
+            )
         }
     )
 }

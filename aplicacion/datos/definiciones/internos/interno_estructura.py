@@ -54,6 +54,7 @@ def al_cargar(target, context):
     # print("")
     # print("................")    
     # print("INTERNO")
+    interno_propiedades.gestion_asignada_peticion(context.session, target)
     interno_propiedades.archivos_nombres(context.session, target)
     interno_propiedades.pdf_base(context.session, target)
     interno_propiedades.logs(context.session, target)
@@ -61,8 +62,8 @@ def al_cargar(target, context):
 sqalchemy_clase_dinamica.asigna_evento(CLASE, "load", al_cargar)
 
 
-# Procesos pre, post, ultimo
-from . import interno_procesamiento
+# # Procesos pre, post, ultimo
+# from . import interno_procesamiento
 
-# Normalizaci�n
-from . import interno_estructura_funciones
+# # Normalizaci�n
+# from . import interno_estructura_funciones

@@ -33,11 +33,11 @@ def recuperar(conexion, estructura):
     print("RESULTADO>>>" + estructura, len(resultado))    
     print("")
 
+    pprint.pprint(resultado)
+
     # Peticiones
     # for r in resultado:
-    #     print(r["tipo_radicado"], r["dependencias_id"])
-
-    # pprint.pprint(resultado)
+    #     print(r["tipo_radicado"], r["funcionarios_id"])
 
     # for r in resultado:
     #     print("")
@@ -89,7 +89,6 @@ def recuperar(conexion, estructura):
 # recuperar(conexion, "motivos_devolucion")
 # recuperar(conexion, "permisos_archivo")
 
-
 #recuperar(conexion, "global_base_general")
 #recuperar(conexion, "tipo_peticiones")
 #recuperar(conexion, "tramites")
@@ -100,8 +99,8 @@ def recuperar(conexion, estructura):
 recuperar(conexion, "radicados_entrada")
 recuperar(conexion, "radicados_salida")
 recuperar(conexion, "radicados_interno")
-#recuperar(conexion, "peticiones")
-# recuperar(conexion, "copias")
+recuperar(conexion, "peticiones")
+recuperar(conexion, "copias")
 
 # recuperar(conexion,"correos_descargados")
 #"""
