@@ -28,3 +28,8 @@ def prepara_archivos(archivos):
             lista_archivos.append(data)
 
    return lista_archivos
+
+
+def pre_procesa_busqueda(id_tarea, parametros):
+   
+   return parametros

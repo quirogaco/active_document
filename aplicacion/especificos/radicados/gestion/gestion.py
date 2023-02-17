@@ -21,7 +21,6 @@ from . import crea_gestion_base
 ##########################
 #  RUTINAS DE VENTANILLA #
 ##########################    
-# Radicado
 def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
     datos_ventanilla = datos["datos"]    
     radicado_id = datos_ventanilla["id"]
@@ -48,8 +47,9 @@ def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
         "mensaje": "",
         "datos": {}
     }
-    
+
     return resultado
+
 
 ####################
 #  RUTINAS DE PQRS #
@@ -82,6 +82,7 @@ def pqrs_gestion(estructura, accion, datos, tarea, archivos, id_tarea):
     return resultado
 
 # Radicado por formulario completo
+# Radicado
 def asigna_pqrs(accion, datos={}, archivos=[], id_tarea=""):   
     datos_pqrs = datos["datos"]    
     radicado_id = datos_pqrs["id"]

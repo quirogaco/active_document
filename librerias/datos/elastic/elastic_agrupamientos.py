@@ -1,5 +1,5 @@
     #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint
 from librerias.datos.base import globales
 
@@ -52,7 +52,7 @@ def gruposRespuesta(grupos, datos):
         "data"      : data,
         "groupCount": grupos_primer_nivel,
         "totalCount": len(datos),      
-        "agrupado"  : True # indicar agrupación               
+        "agrupado"  : True # indicar agrupaciï¿½n               
     }     
     pprint.pprint(resultado['data'])
     print("NUMERO DE ITEMS>>>>>>>>>>>>>:", len(resultado['data']))

@@ -1,25 +1,30 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, datetime, random 
 
-from librerias.datos.sql         import sqalchemy_modificar, sqalchemy_leer, sqalchemy_insertar, sqalchemy_borrar
-from librerias.datos.elastic     import elastic_operaciones
-from librerias.flujos            import flujos_insertar_sql
-from librerias.utilidades        import basicas  
+from librerias.datos.sql import (
+    sqalchemy_modificar, 
+    sqalchemy_leer, 
+    sqalchemy_insertar, 
+    sqalchemy_borrar
+)
+from librerias.datos.elastic import elastic_operaciones
+from librerias.flujos import flujos_insertar_sql
+from librerias.utilidades import basicas  
 from librerias.datos.estructuras import estructura_operaciones
 
 from .radicados.entradas import entradas
 from .radicados.internos import internos
-from .radicados.salidas  import salidas
-from .radicados.gestion  import gestion
+from .radicados.salidas import salidas
+from .radicados.gestion import gestion
 
 acciones_funcion = {    
     # INTERNOS
     "radicar_interno": internos.radicar,
 
     # SALIDAS
-    "radicar_salida" : salidas.radicar,
+    "radicar_salida": salidas.radicar,
 
     # FORMULARIOS WEB
     "radicar_entrada": entradas.radicar,
@@ -31,7 +36,8 @@ acciones_funcion = {
     "radicar_pqrs": entradas.radicar_peticion,
 
     # GESTIÓN
-    "asigna_pqrs": gestion.asigna_pqrs
+    "asigna_pqrs": gestion.asigna_pqrs,
+    "asigna_ventanilla": gestion.asigna_ventanilla
 }
 
 def acciones_ejecuta(datos={}, archivos=[], id_tarea=""):

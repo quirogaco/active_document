@@ -67,7 +67,7 @@ async def estructuras_comandos(
 from servicios import consultas
 @_app.post( '/estructuras/consulta/{estructura}' )
 async def estructuras_consulta(estructura:str, requerimiento: Request ):
-   forma      =  await requerimiento.body()
+   forma =  await requerimiento.body()
    """
    print("")
    print('/estructuras/consulta/{estructura}:', estructura)  
@@ -77,6 +77,7 @@ async def estructuras_consulta(estructura:str, requerimiento: Request ):
    # Datos generaes de la tarea
    id_tarea = basicas.uuidTexto() 
    publica_tarea(id_tarea, parametros)
+   parametros = pre_procesa_busqueda(id_tarea, parametros)
    
    #"""
    # print('parametros-2:')
@@ -85,9 +86,9 @@ async def estructuras_consulta(estructura:str, requerimiento: Request ):
    # print("")
    # print("")
    #"""
-   data       = consultas.ejecutar(estructura, parametros, id_tarea)
+   data = consultas.ejecutar(estructura, parametros, id_tarea)
    
-   resultado  = {
+   resultado = {
       "data"   : data, 
       "error"  : "no",
       "mensaje": ""

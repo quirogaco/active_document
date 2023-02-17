@@ -33,18 +33,21 @@ def recuperar(conexion, estructura):
     print("RESULTADO>>>" + estructura, len(resultado))    
     print("")
 
-    pprint.pprint(resultado)
+    #pprint.pprint(resultado)
 
     # Peticiones
     # for r in resultado:
     #     print(r["tipo_radicado"], r["funcionarios_id"])
 
-    # for r in resultado:
-    #     print("")
-    #     print("....................")
-    #     for archivo in r["archivos"]:
-    #         nombre_archivo = leer_archivo.salva_archivo_minio(archivo["id"])  
-    #         print(r["nro_radicado"], nombre_archivo)
+    for r in resultado:
+        print("")
+        print("....................")
+        print(r["nro_radicado"], r["clase_radicado"], r["gestion_asignada_peticion"])
+
+        
+        # for archivo in r["archivos"]:
+        #     nombre_archivo = leer_archivo.salva_archivo_minio(archivo["id"])  
+        #     print(r["nro_radicado"], nombre_archivo)
 
     # Usuarios, Dependencias
     # for r in resultado:
@@ -97,10 +100,10 @@ def recuperar(conexion, estructura):
 #"""
 # RADICACION GESTION
 recuperar(conexion, "radicados_entrada")
-recuperar(conexion, "radicados_salida")
-recuperar(conexion, "radicados_interno")
-recuperar(conexion, "peticiones")
-recuperar(conexion, "copias")
+# recuperar(conexion, "radicados_salida")
+# recuperar(conexion, "radicados_interno")
+# recuperar(conexion, "peticiones")
+# recuperar(conexion, "copias")
 
 # recuperar(conexion,"correos_descargados")
 #"""

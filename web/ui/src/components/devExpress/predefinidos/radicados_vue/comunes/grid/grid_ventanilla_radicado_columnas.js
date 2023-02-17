@@ -99,6 +99,22 @@ let columnas = [
         width       : 300,
         allowSorting: true
     },
+
+    {
+        caption     : "Radicado en",
+        dataField   : "radicado_en_nombre",
+        dataType    : "string",        
+        width       : 250,
+        allowSorting: true 
+    },
+
+    {
+        caption     : "Radicado por",
+        dataField   : "radicado_por_nombre",
+        dataType    : "string",        
+        width       : 250,
+        allowSorting: true 
+    }
 ]
 
 export default {
