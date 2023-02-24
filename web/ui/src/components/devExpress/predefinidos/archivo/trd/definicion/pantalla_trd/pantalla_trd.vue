@@ -68,11 +68,16 @@ function callBackButtons(evento, modo) {
 }
 
 // Funcion llamada por evento mounted DataForma
-async function dataFormaMounted(DataForma) {};
+async function dataFormaMounted(DataForma) {
+    //that.dataForm = DataForma.instance;
+    that.dataForm = DataForma;
+    console.log("that.dataForm:", that.dataForm);
+    that.dataForm.formData(attributes.datos);  
+};
 
-onMounted(() => {
-    that.dataForm = that.$refs.formRef;
-    that.dataForm.formData(attributes.datos);    
+onMounted(() => {    
+    // that.dataForm = that.$refs.formRef;    
+    // that.dataForm.formData(attributes.datos);    
     window.$pantalla_trd = that;  
     if (attributes.mode == "modificar") {
         arbol_visible.value = true        
@@ -88,15 +93,17 @@ import forma_campos from "./forma_campos";
 import forma_barra from "./forma_barra";
 
 let atributos_forma = {
-    id      : name,
-    formData: {},
-    items   : forma_campos.items(attributes.importar),
-    colCount: 1                     
+    config: {
+        id: name,
+        formData: {},
+        items: forma_campos.items(attributes.importar),
+        colCount: 1    
+    }                 
 } 
 
 let atributos_barra = {
     items   : forma_barra.getItems({
-        "mode"    : attributes.mode,
+        "mode": attributes.mode,
         "callBack": callBackButtons
     })
 }  

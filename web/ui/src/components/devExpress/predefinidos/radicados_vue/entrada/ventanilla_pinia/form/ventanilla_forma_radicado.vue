@@ -1,5 +1,26 @@
 <template>
     <div class="shadow-sm bg-body rounded ">
+        <div 
+            :class ="clase_pdf"
+            :width = "pdf_ancho"
+            :height = "pdf_alto"  
+            v-show = "verPdf"
+        >                      
+        
+            <pdf_componente 
+                ref          = "visor_pdf" 
+                :nombrePdf   = "opciones_pdf.nombrePdf" 
+                :buscarTexto = "opciones_pdf.buscarTexto" 
+                :operacion   = "opciones_pdf.operacion" 
+                :clase       = "opciones_pdf.clase" 
+                :descarga    = "opciones_pdf.descarga"
+                :datos       = "opciones_pdf.datos" 
+                :opciones    = "opciones_pdf.opciones"  
+                :key         = "repintar_pdf"                      
+            />
+
+        </div>
+
         <DataForma                 
             ref="dataForma"  
             :attributes="atributos_forma"
@@ -45,7 +66,11 @@ let atributos_forma = {
         name: component_name,
         colCount: 2,
         items: campos["elementos"],
-        fields_format: "devexpress"
+        fields_format: "devexpress",
+        // formData: ref({
+        //     numero_guia: "NUEVO ASUNTO-000",
+        //     tercero_clase: "NATURAL"
+        // })
     }                  
 }; 
 
@@ -53,13 +78,34 @@ let atributos_barra = {
     items: campos["barra_botones"]
 }; 
 
+// Visor de PDF
+// Pdf
+let verPdf = ref(true); 
+let repintar_pdf = ref(0);
+let pdf_existe = ref(false);
+let pdf_ancho = ref("100%");
+let pdf_alto = ref("100%");
+//let clase_pdf = ref("col-12 shadow-sm p-3 mb-3 bg-body rounded");
+let clase_pdf = ref("shadow-sm p-3 mb-3 bg-body rounded");
+// Opciones visor PDF
+let opciones_pdf = ref({});
+
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
     that.forma = DataForma.instance;
-    // console.log("EVENT: Mounted -> THAT", that);     
-    // console.log("EVENT: Mounted -> DataForma.dxForm", that.forma.option);    
-    // console.log("EVENT: Mounted -> THAT.$refs.formRef", that.$refs.dataForma); 
-    // console.log("EVENT: Mounted -> THAT.$refs.formRef.instance", that.$refs.dataForma.instance);     
+    that.retorna = "ventanilla_radicado_grid";
+    let datos = $get_params("ventanilla_radicado_forma")?.datos;    
+    if (datos._modo_ == "CORREO") {
+        that.retorna = "correos_grid";
+        datos["tercero_clase"] = "JURIDICA";
+        datos["es_pqrs"] = "DOCUMENTO";
+        setTimeout(() => {
+            that.forma_datos(datos);
+        }, 1500);
+    }
+    else {
+
+    } 
 };
 
 onMounted(() => {});

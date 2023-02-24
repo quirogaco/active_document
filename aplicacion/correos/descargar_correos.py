@@ -1,12 +1,11 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import sys, pprint, builtins
 
 #########################
 # Variables de ambiente #
 #########################
 from dotenv import dotenv_values
-
 
 try:
     _ambiente_ = dotenv_values(".env") 
@@ -17,17 +16,16 @@ if len(_ambiente_.keys()) == 0:
     _ambiente_ = dotenv_values("../../.env") 
     
 print( "ambiente  TRABAJDADOR >>>>>>>>>>>>>>")
-
 pprint.pprint(_ambiente_)
+
 builtins._appServicios = _ambiente_['CFG_SERVICIOS_URL']
 builtins._appAnfitrion = _ambiente_['CFG_DATA_HOST']
-builtins._appPuerto    = _ambiente_['CFG_DATA_PORT']
+builtins._appPuerto = _ambiente_['CFG_DATA_PORT']
 
-sys.path.append('C:/active_document')
+sys.path.append('/active_document')
 import rutaGlobal
 rutaGlobal.publicaRutas(builtins._appServicios)
 import carga_inicial
-
 
 # APLICACION
 from email.parser import BytesParser, Parser
@@ -36,10 +34,9 @@ import email, getpass, imaplib, os, re, pprint
 from datetime import datetime
 from email.header import Header, decode_header, make_header
 
-from librerias.datos.sql     import sqalchemy_insertar
+from librerias.datos.sql import sqalchemy_insertar
 from librerias.datos.elastic import elastic_operaciones
-from aplicacion.comunes      import manejo_archivos
-
+from aplicacion.comunes import manejo_archivos
 
 #####################
 # Manejo de correos #  
@@ -47,8 +44,10 @@ from aplicacion.comunes      import manejo_archivos
 from subprocess import *
 def jarWrapper(*args):
   #process = Popen(['java', '-jar']+list(args), stdout=PIPE, stderr=PIPE)
-  process = Popen(['java', '-jar']+list(args) )
-  ret     = []
+  parametros = ['java', '-jar'] + args[0]
+  print(">>>>>>>>> list(args)", parametros)
+  process = Popen(parametros)
+  ret = []
   return ret
 
 def conectarCorreo( data ):
@@ -65,14 +64,15 @@ def conectarCorreo( data ):
   return mailserver
 
 def buscarCorreos( mailserver, cuales='(UNSEEN)' ):
-  status, response = mailserver.status('INBOX', "(UNSEEN)")
+  #status, response = mailserver.status('INBOX', "(UNSEEN)")
+  #status, response = mailserver.status('INBOX', "(UNSEEN)")
   print( 'buscarCorreos:') #, status, response )  
-  typ, data = mailserver.search( None, cuales)
+  typ, data = mailserver.search(None, 'ALL') #cuales)
     
   return data
 
 def descargaCorreo( mailserver, ruta, numCorreo ):
-  print( '------------- descargaCorreo:', numCorreo, int(numCorreo) )# int(numCorreo), str(numCorreo).decode() )
+  print( '------------- descargaCorreo:', numCorreo, int(numCorreo) )
   # Lee un archivo
   nombreEml = None
   try:
@@ -103,10 +103,10 @@ def extraeAnexos( nombreEml, ruta, numCorreo, cual ):
         filename = anexo.get_filename()          
         if filename != None:
           if ( anexo.get_content_disposition() != "inline" ):                
-            maintype      = anexo.get_content_maintype()
-            subtype       = anexo.get_content_subtype()
-            es_imagen     = ( subtype in imagenes )
-            content_id    = str( anexo.get("Content-Id") )
+            maintype = anexo.get_content_maintype()
+            subtype = anexo.get_content_subtype()
+            es_imagen = ( subtype in imagenes )
+            content_id = str( anexo.get("Content-Id") )
             imagen_inline = False
             if es_imagen:
               # Trata de validar que no sean imagenes inline no detectadas
@@ -116,8 +116,10 @@ def extraeAnexos( nombreEml, ruta, numCorreo, cual ):
               
             if not imagen_inline:
               try:
-                # error nombre de anexo, si tiene varias cuentas numcorreo se puede duplicar, es consecutivo por cuenta.
-                filename = ruta + os.sep + cual + "-" + str( int(numCorreo) ) + '_' +  filename
+                filename = (
+                  ruta + os.sep + cual + "-" + 
+                  str( int(numCorreo) ) + '_' +  filename
+                )
                 #print( 'filename:', filename )
                 open( filename, 'wb').write( anexo.get_payload(decode=True) )
                 anexos.append( filename )
@@ -161,23 +163,30 @@ def cargarCorreos():
 
   return datosCorreos
 
-def descargarCorreos(  cuantos = 1, cual="email" ):
+def descargarCorreos( cuantos = 1, cual="email" ):
     ruta_basica = builtins.rutaBase + '/email_data/'
     print("ruta_basica:", ruta_basica)
-    config     = cargarCorreos()
+    config = cargarCorreos()
     mailserver = conectarCorreo( config )   
-    count      = 0
-    data       = buscarCorreos( mailserver, '(UNSEEN)' )[0].split()
+    count = 0
+    data = buscarCorreos( mailserver, '(UNSEEN)' )[0].split()
     data.reverse()
     # Invertir el correo para que tome los mas recientes !!!!
-    #data      = buscarCorreos( mailserver, '(SEEN)' )
+    #data = buscarCorreos( mailserver, '(SEEN)' )
     
     # Para cada correo
     for numCorreo in data:
       count += 1
-      nombreEml       = descargaCorreo( mailserver, ruta_basica, numCorreo )   
+      nombreEml = descargaCorreo( mailserver, ruta_basica, numCorreo )   
       anexos, message = extraeAnexos( nombreEml, ruta_basica, numCorreo, cual )
       if message != None:
+        # Conviente EML to PDF
+        parametros = [(
+          builtins.rutaBase + "/utilitarios/emailconverter-2.5.3-all.jar"
+        )]
+        #parametros.append("-o " + nombreEml.replace(".eml", ".pdf"))
+        parametros.append(nombreEml)
+        jarWrapper(parametros)
         From = message['From']
         print( count, numCorreo, From )
         if From != None:
@@ -190,10 +199,10 @@ def descargarCorreos(  cuantos = 1, cual="email" ):
             
             # Listado de archivos
             archivos  = []
-            for  nombre in anexos:
+            for nombre in anexos:
               data = {
                 "nombre_completo": nombre,
-                "nombre"         : os.path.basename( nombre )
+                "nombre": os.path.basename( nombre )
               }
               archivos.append(data)
 
@@ -208,24 +217,32 @@ def descargarCorreos(  cuantos = 1, cual="email" ):
             print("")
             print("datos correo:", count)
             pprint.pprint(dataTemporal)
-            resultado = sqalchemy_insertar.insertar_registro_estructura("correos_descargados", dataTemporal)
-            elastic_operaciones.indexar_registro("correos_descargados", resultado["id"])
+            resultado = sqalchemy_insertar.insertar_registro_estructura(
+              "correos_descargados", 
+              dataTemporal
+            )
+            elastic_operaciones.indexar_registro(
+              "correos_descargados", 
+              resultado["id"]
+            )
             print("")
             print("ANEXOS:")
-            pprint.pprint(anexos)
+            pprint.pprint(archivos)
             print("")
             print("")          
-            manejo_archivos.manejo("correos", "insertar", {"id":resultado["id"]}, archivos, "", cubeta = "correos")
+            manejo_archivos.manejo(
+              "correos", 
+              "insertar", 
+              {"id":resultado["id"]}, 
+              archivos, 
+              "", 
+              cubeta = "correos",
+              tipo_relacion = "anexos"
+            )
             
             print("")
             print("")
             
-            """
-            temporal = CORREO_ELECTRONICO_TEMPORAL( **dataTemporal )
-            session.add( temporal )
-            session.commit()                      
-            fulltext.indexOneRecord( 'CORREO_ELECTRONICO_TEMPORAL', temporal, connPyes, flush=True)
-            """
       if count > cuantos:
           break
                     
@@ -235,4 +252,4 @@ def descargarCorreos(  cuantos = 1, cual="email" ):
 
 print("builtins.rutaBase:", builtins.rutaBase)
 
-descargarCorreos( 10, cual="email" )
+descargarCorreos( 100, cual="email" )

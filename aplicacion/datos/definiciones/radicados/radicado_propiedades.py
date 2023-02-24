@@ -242,5 +242,3 @@ def recibe_per_fun_nombre(r_):
        dato = str(r_.gestion_responsable_nombre)
     
     return dato
-
-#estado_gestion

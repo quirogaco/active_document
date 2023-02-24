@@ -103,8 +103,14 @@
         async mounted() {
             // Pantalla para invocar en acciones
             window.$pantalla_gestion = this;
-            let temporal = $forma.lee_propiedades(this.$props, "gestion_pantalla").datos;            
-            this.parametros = await utilidades_estructura.leer_registro_id("peticiones", temporal["id"]);
+            let temporal = $forma.lee_propiedades(
+                this.$props, 
+                "gestion_pantalla"
+            ).datos;            
+            this.parametros = await utilidades_estructura.leer_registro_id(
+                "peticiones", 
+                temporal["id"]
+            );
             this.tipo_documento = this.parametros.origen_tipo;
             this.clase_radicado = this.parametros.clase_radicado; 
             // PDF
@@ -122,7 +128,7 @@
             let etapa_estado = this.parametros.etapa_estado; 
 
             // Radicado
-            console.log("this.parametros:", this.parametros)
+            //console.log("this.parametros:", this.parametros)
             let estructura = "radicados_entrada";
             if (this.tipo_documento == "INTERNO") {
                 estructura = "radicados_interno";

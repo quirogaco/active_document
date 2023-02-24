@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: ISO-8859-15 -*-  
+# -*- coding: utf-8 -*-  
 
 from subprocess import Popen
 
@@ -13,7 +13,7 @@ trabajadores = {
     'generales': [
         'celery', '-A', 'aplicacion.trabajadores_base.generales_celery',  
         'worker',  '-Q', 'generales',         
-        '--concurrency=1', 
+        '--concurrency=4', 
         '-Ofair', 
         '-n', 'worker1.%h',
         '--loglevel', 'info'
@@ -22,7 +22,7 @@ trabajadores = {
     'radicados': [
         'celery', '-A', 'aplicacion.trabajadores_base.radicados_celery',  
         'worker',  '-Q', 'radicados',         
-        '--concurrency=1', 
+        '--concurrency=4', 
         '-Ofair', 
         '-n', 'worker2.%h',
         '--loglevel', 'info'

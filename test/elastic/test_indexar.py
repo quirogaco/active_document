@@ -99,13 +99,13 @@ def recuperar(conexion, estructura):
 
 #"""
 # RADICACION GESTION
-recuperar(conexion, "radicados_entrada")
+#recuperar(conexion, "radicados_entrada")
 # recuperar(conexion, "radicados_salida")
 # recuperar(conexion, "radicados_interno")
 # recuperar(conexion, "peticiones")
 # recuperar(conexion, "copias")
 
-# recuperar(conexion,"correos_descargados")
+recuperar(conexion,"correos_descargados")
 #"""
 
 #"""

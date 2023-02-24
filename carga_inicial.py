@@ -4,7 +4,7 @@
 #####################################
 # ConfiguraciÓn inicial del sistema #
 #####################################
-from aplicacion.inicio   import configuracion 
+from aplicacion.inicio  import configuracion 
 configuracion.configuracion_general("base")
 
 # Librerias de servicios

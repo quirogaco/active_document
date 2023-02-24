@@ -220,10 +220,10 @@ else {
     // window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));
     // await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');  
     
-    // await window.$ns['aplicacion'].asignaRuta(
-    //     'trd_basica_grid',  
-    //     '/components/devExpress/predefinidos/archivo/trd/definicion/grid_trd/trd_basica_grid.vue'
-    // );   
+    await window.$ns['aplicacion'].asignaRuta(
+        'trd_basica_grid',  
+        '/components/devExpress/predefinidos/archivo/trd/definicion/grid_trd/trd_basica_grid.vue'
+    );   
 
     // await window.$ns['aplicacion'].asignaRuta(
     //     'trd_pantalla',  
@@ -281,15 +281,15 @@ else {
     //     '/components/devExpress/predefinidos/radicados_vue/comunes/consulta/forma_radicado_consulta.vue'
     // ),
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'grid_pqrs_asigna_grid',  
-        '/components/devExpress/predefinidos/radicados_vue/asignacion/pqrs/grid_pqrs_asigna_grid.vue'
-    );
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'grid_pqrs_asigna_grid',  
+    //     '/components/devExpress/predefinidos/radicados_vue/asignacion/pqrs/grid_pqrs_asigna_grid.vue'
+    // );
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'forma_pqrs_asigna', 
-        '/components/devExpress/predefinidos/radicados_vue/asignacion/pqrs/forma_pqrs_asigna.vue'
-    ),
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'forma_pqrs_asigna', 
+    //     '/components/devExpress/predefinidos/radicados_vue/asignacion/pqrs/forma_pqrs_asigna.vue'
+    // ),
 
     window.$ns['aplicacion'].crea_enrutador();
     await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');      
@@ -297,7 +297,7 @@ else {
     
     setTimeout(() => {
         $router.push({
-            //path: "trd_basica_grid"
+            path: "trd_basica_grid"
             //path: "expediente_basica_grid"
             //path: "expediente_transfiere_grid"
             //path: "expediente_disposicion_grid"
@@ -308,7 +308,7 @@ else {
             //path: "pantalla_expediente"
             //path: "usuarios_grid"
 
-            path: "grid_pqrs_asigna_grid",
+            //path: "grid_pqrs_asigna_grid",
         })
     }, 1000);  
     */

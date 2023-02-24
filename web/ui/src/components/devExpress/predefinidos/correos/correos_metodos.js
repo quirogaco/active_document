@@ -1,20 +1,20 @@
 
 let metodos = {
     'dobleClick':  function(e) {
-        console.log("e.data:", e.data)
-        window.$correo_datos = {
+        console.log("e.data CORRESO:", e.data)
+        let datos = {
+            "_modo_": "CORREO",
             "tercero_correo_electronico": e.data["correo_origen"],
-            "asunto"                    : e.data["asunto"],
-            "fecha_documento"           : e.data["fecha_correo"],
-            "archivos_anexos"           : e.data["archivos"]
+            "asunto": e.data["asunto"],
+            "fecha_documento": e.data["fecha_correo"],
+            "archivos_anexos": e.data["archivos"]
         }
-        this.$router.push({
-            name: "ventanilla_radicado_forma",
-            params: {
-                peticion_id  : e.data.id
-            }
-        })        
-    },
+
+        $lib.call_component_storage(
+            "ventanilla_radicado_forma",
+            {"datos": datos}
+        )
+    }
 }
 
 export default {

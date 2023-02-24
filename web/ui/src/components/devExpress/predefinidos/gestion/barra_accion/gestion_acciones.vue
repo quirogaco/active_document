@@ -14,12 +14,14 @@ import gestion_acciones_elementos from "../gestion_acciones_elementos/gestion_ac
 let componente;
 
 let elemento_click = function(e) {   
+    console.log("elemento_click:", e.itemData)
     let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id)    
-    let evento     = componente.$props.opciones.evento    
+    let evento = componente.$props.opciones.evento    
     componente.$emit(evento, parametros)     
 };
 
-let elemento_click_gestion = function(e) {      
+let elemento_click_gestion = function(e) {    
+    console.log("elemento_click_gestion:", e.itemData)  
     let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id);   
     let evento = componente.$props.opciones.evento_grid_gestion;
     componente.$emit(evento, parametros)     
