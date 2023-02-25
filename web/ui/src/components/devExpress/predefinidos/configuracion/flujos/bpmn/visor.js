@@ -38,6 +38,7 @@ const crea_visor = function(componente, container) {
         additionalModules: [
             //propertiesPanelModule,
             //propertiesProviderModule,
+            
             BpmnPropertiesPanelModule,
             BpmnPropertiesProviderModule,
             gestionPropertiesProviderModule,
