@@ -1,5 +1,5 @@
     #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 from datetime import datetime
@@ -217,12 +217,12 @@ filtrosElasticTipo = {
 
     # CLAVE
     "clave": {
+        #"contiene"   : contiene_texto, 
         "contiene"   : contiene_clave,
         "nocontiene" : no_contiene_texto, 
         "comienzacon": comienza_con, 
         "terminacon" : termina_con, 
         "="          : termino_igual, 
-        #"="          : termino_igual, 
         "<>"         : texto_diferente, 
         "esblanco"   : texto_blanco, 
         "noesblanco" : texto_no_blanco,          
@@ -235,7 +235,6 @@ filtrosElasticTipo = {
         "comienzacon": comienza_con, 
         "terminacon" : termina_con, 
         "="          : texto_igual, 
-        #"="          : termino_igual, 
         "<>"         : texto_diferente, 
         "esblanco"   : texto_blanco, 
         "noesblanco" : texto_no_blanco, 
@@ -343,30 +342,126 @@ filtrosElasticTipo = {
 
 expresionesEspanol = {
     "notcontains": "nocontiene",
-    "contains"   : "contiene",
-    "startswith" : "comienzacon",
-    "endswith"   : "terminacon",
-    "isblank"    : "esblanco",
-    "isnotblank" : "noesblanco",
-    "between"    : "entre",
-    "="          : "=",
-    "<>"         : "<>",
-    "<"          : "<",
-    ">"          : ">",
-    "<="         : "<=",
-    ">="         : ">="
+    "contains": "contiene",
+    "startswith": "comienzacon",
+    "endswith": "terminacon",
+    "isblank": "esblanco",
+    "isnotblank": "noesblanco",
+    "between": "entre",
+    "=": "=",
+    "<>": "<>",
+    "<": "<",
+    ">": ">",
+    "<=": "<=",
+    ">=": ">="
 }
 
 filtrosTipo = {
-    "texto"          : ["contiene", "nocontiene", "comienzacon", "terminacon", "=", "<>", "esblanco", "noesblanco" ],
-    "clave"          : ["=", "<>", "esblanco", "noesblanco" ],
-    "entero"         : [ "=", "<>", "<", ">", "<=", ">=", "entre", "esblanco", "noesblanco" ],
-    "entero_ordenado": [ "=", "<>", "<", ">", "<=", ">=", "entre", "esblanco", "noesblanco" ],
-    "flotante"       : [ "=", "<>", "<", ">", "<=", ">=", "entre", "esblanco", "noesblanco" ],
-    "fecha"          : [ "=", "<>", "<", ">", "<=", ">=", "entre", "esblanco", "noesblanco" ],
-    "fechaHora"      : [ "=", "<>", "<", ">", "<=", ">=", "entre", "esblanco", "noesblanco" ],
-    "logico"         : [ "=", "<>", "esblanco", "noesblanco" ],
-    "objecto"        : [ "esblanco", "noesblanco" ],
-    "lista"          : [ "esblanco", "noesblanco", "contiene", "nocontiene" ],
-    "lista_texto"    : ["contiene", "nocontiene", "comienzacon", "terminacon", "=", "<>", "esblanco", "noesblanco" ],
+    "texto": [
+        "contiene", 
+        "nocontiene", 
+        "comienzacon", 
+        "terminacon", 
+        "=", 
+        "<>", 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "clave": [
+        "=", 
+        "<>", 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "entero": [ 
+        "=", 
+        "<>", 
+        "<", 
+        ">", 
+        "<=", 
+        ">=", 
+        "entre", 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "entero_ordenado": [ 
+        "=", 
+        "<>", 
+        "<", 
+        ">", 
+        "<=", 
+        ">=", 
+        "entre", 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "flotante": [ 
+        "=", 
+        "<>", 
+        "<", 
+        ">", 
+        "<=", 
+        ">=", 
+        "entre",
+         "esblanco", 
+         "noesblanco" 
+    ],
+
+    "fecha": [ 
+        "=", 
+        "<>", 
+        "<", 
+        ">", 
+        "<=", 
+        ">=", 
+        "entre", 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "fechaHora": [ 
+        "=", 
+        "<>", 
+        "<", 
+        ">", 
+        "<=", 
+        ">=", 
+        "entre", 
+        "esblanco", 
+        "noesblanco"
+    ],
+
+    "logico": [ 
+        "=", 
+        "<>", 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "objecto": [ 
+        "esblanco", 
+        "noesblanco" 
+    ],
+
+    "lista": [ 
+        "esblanco", 
+        "noesblanco", 
+        "contiene", 
+        "nocontiene" 
+    ],
+
+    "lista_texto": [
+        "contiene", 
+        "nocontiene", 
+        "comienzacon", 
+        "terminacon", 
+        "=", 
+        "<>", 
+        "esblanco", 
+        "noesblanco" 
+    ]
 }

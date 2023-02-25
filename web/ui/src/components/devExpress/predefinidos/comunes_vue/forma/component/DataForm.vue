@@ -157,6 +157,7 @@ onMounted(() => {
 
     // required for events, methods and fields of the form
     // validar sin no viene con config... ver 1
+    console.log("that.parameters_received:", that.parameters_received)
     that.instance.basicas = {
         "forma_id": that.parameters_received.config.id
     };

@@ -3,12 +3,12 @@
 
 <script>
 import DxToolbar, {DxItem} from 'devextreme-vue/toolbar'
-import DxButton              from 'devextreme-vue/button'
-import { DxScrollView }      from 'devextreme-vue/scroll-view'
-import { DxSortable }        from 'devextreme-vue/sortable'
-import DxSelectBox           from 'devextreme-vue/select-box'
-import ArrayStore            from 'devextreme/data/array_store'
-import DataSource            from 'devextreme/data/data_source'
+import DxButton from 'devextreme-vue/button'
+import { DxScrollView } from 'devextreme-vue/scroll-view'
+import { DxSortable } from 'devextreme-vue/sortable'
+import DxSelectBox from 'devextreme-vue/select-box'
+import ArrayStore from 'devextreme/data/array_store'
+import DataSource from 'devextreme/data/data_source'
 
 import {
     DxDataGrid,
@@ -38,6 +38,8 @@ import DxForm, {
 
 import notify from 'devextreme/ui/notify'
 
+import forma_general from "../../comunes_vue/forma/forma.js";
+
 import atributos_campos from './formulario_campos.vue'
 
 // Metodos
@@ -45,7 +47,7 @@ import reporte_diseno_metodos from "./formulario_metodos.js"
 
 const nueva_fuente_datos = function(datos=[]) {
     const tienda = new ArrayStore({
-        key : 'id',
+        key: 'id',
         data: datos
     })
 
@@ -102,25 +104,29 @@ export default {
         this.fuentes_select = this.forma.getEditor("fuentes")  
         this.grid_reporte   = this.$refs.grid_reporte.instance         
         
-        this.nueva_fuente_datos = nueva_fuente_datos        
-        this.notify             = notify  
-        this.leer_fuentes("leer_fuentes", {})          
-        window.$_disenador      = this
+        this.nueva_fuente_datos = nueva_fuente_datos;       
+        this.notify = notify;  
+        this.leer_fuentes("leer_fuentes", {});
+        window.$_disenador = this;
         
         // Datos reporte
-        this.parametros        = JSON.parse(this.datos)
-        this.datos_forma       = {}
-        console.log("DATOS PARAMETROS>>:", this.parametros.mod )
+        let datos = forma_general.lee_propiedades(
+            this.$props, 
+            "formulario_reportes_dinamicos"
+        );
+        this.parametros = datos.datos;
+        this.datos_form = {};
         if (this.parametros.modo == "modificar") {
             this.datos_forma = {
-                "id"     : this.parametros.datos.id,
-                "codigo" : this.parametros.datos.codigo,
-                "nombre" : this.parametros.datos.nombre,
-                "fuentes": this.parametros.datos.diseno.diseno.fuente
+                "id"     : this.parametros.reporte.id,
+                "codigo" : this.parametros.reporte.codigo,
+                "nombre" : this.parametros.reporte.nombre,
+                "fuentes": this.parametros.reporte.diseno.diseno.fuente
             }
             setTimeout(() => {
-                this.columnas_reporte = this.parametros.datos.diseno.diseno.columnas;
-                this.cambia_grid()
+                this.columnas_reporte = 
+                    this.parametros.reporte.diseno.diseno.columnas;
+                this.cambia_grid();
             }, 3000);            
         }
         this.mostrar_botones()                
@@ -128,20 +134,20 @@ export default {
 
     data() {
         return {
-            pageSizes           : [10, 25, 50, 100],
-            displayMode         : 'full',
+            pageSizes: [10, 25, 50, 100],
+            displayMode: 'full',
             showPageSizeSelector: true,
-            showInfo            : true,
-            showNavButtons      : true,
+            showInfo: true,
+            showNavButtons: true,
 
             // Prametros del reporte
-            parametros : {},
+            parametros: {},
             datos_forma: {},
 
             // Opciones CODIGO
             opciones_codigo: {
                 label: {
-                    text    : "Codigo",
+                    text: "Codigo",
                     location: "top"
                 }
             },
@@ -149,21 +155,21 @@ export default {
             // Opciones NOMBRE
             opciones_nombre: {
                 label: {
-                    text    : "Nombre",
+                    text: "Nombre",
                     location: "top"
                 }
             },
 
             // Opciones FUENTE
             opciones_fuente: {
-                dataSource  : nueva_fuente_datos([]),
+                dataSource: nueva_fuente_datos([]),
                 displayValue: "nombre",
-                displayExpr : "nombre",
-                searchExpr  : "nombre",
+                displayExpr: "nombre",
+                searchExpr: "nombre",
                 searchEnabled: true,
-                valueExpr   : "id",                
-                label       : {
-                    text    : "Fuente de datos",
+                valueExpr: "id",                
+                label: {
+                    text: "Fuente de datos",
                     location: "top"
                 },
                 onSelectionChanged: this.cambia_fuente,
@@ -182,21 +188,21 @@ export default {
             },
                               
             // Parametros para editor de atributos
-            contador_campos  : 0,
-            emergente_key    : 0,
+            contador_campos: 0,
+            emergente_key: 0,
             opciones_atributo: {
                 visible: false,
-                datos  : {}
+                datos: {}
             },
 
             // Barra de acciones            
             barra_botones: reporte_diseno_metodos.barra_botones(this),   
 
             // Manejo de prevista
-            prevista_grid    : true,
+            prevista_grid: true,
             // Columnas grid reporte
-            ver_grid         : false,
-            columnas_grid    : [], 
+            ver_grid: false,
+            columnas_grid: [], 
             fuente_datos_grid: [],            
         }
     },

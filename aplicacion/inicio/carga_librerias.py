@@ -1,9 +1,9 @@
 #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 from aplicacion.datos.clases.clases_base import *
-from aplicacion.datos.clases.genericas   import *
-from librerias.datos.sql                 import sqalchemy_clase_dinamica
+from aplicacion.datos.clases.genericas import *
+from librerias.datos.sql import sqalchemy_clase_dinamica
 
 ###################
 # BASES GENERALES #
@@ -11,9 +11,10 @@ from librerias.datos.sql                 import sqalchemy_clase_dinamica
 
 ######## ARCHIVOS ###########
 # Archivos anexos generales
-from aplicacion.datos.definiciones.genericas.archivo_electronico          import *
+from aplicacion.datos.definiciones.genericas.archivo_electronico import *
 # Relación a arhivos anexos con las  estructuras
-from aplicacion.datos.definiciones.genericas.archivo_electronico_relacion import *
+from aplicacion.datos.definiciones.genericas.archivo_electronico_relacion \
+import *
 # Estructura de archivo
 from aplicacion.datos.definiciones.archivos import archivos
 
@@ -111,6 +112,7 @@ from aplicacion.datos.definiciones.migrados.ventanilla import *
 from aplicacion.datos.definiciones.radicados import *
 from aplicacion.datos.definiciones.salidas import *
 from aplicacion.datos.definiciones.internos import *
+from aplicacion.datos.definiciones.radicados_unico import *
 from aplicacion.datos.definiciones.correos import *
 from aplicacion.datos.definiciones.copias import *
 

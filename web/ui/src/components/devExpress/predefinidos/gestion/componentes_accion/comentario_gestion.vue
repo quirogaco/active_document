@@ -77,10 +77,22 @@ let comentario_gestion =  {
             this.indicador_visible = false
             this.$parent.$parent.$_instance.hide() 
             let acciones_refresca = ["DEVOLVER_DEPENDENCIA"]
-            let acciones_cierra   = ["DEVOLVER_ASIGNADOR", "ENVIAR_VISTO_BUENO", "DEVOLVER_REVISION", "APROBAR_RADICAR", "FINALIZAR_MANUAL"]        
-            let grid              = window.$grid_gestion               
-            if (acciones_cierra.indexOf(this.datos.accion) > -1) {                
+            let acciones_cierra   = [
+                "DEVOLVER_DEPENDENCIA",
+                "DEVOLVER_ASIGNADOR", 
+                "ENVIAR_VISTO_BUENO", 
+                "DEVOLVER_REVISION", 
+                "APROBAR_RADICAR", 
+                "FINALIZAR_MANUAL",
+                "CREA_BORRADOR_SALIDA",
+                "CREA_BORRADOR_INTERNO"
+            ]        
+            let grid = window.$grid_gestion;
+            console.log("this.datos.accion:", this.datos.accion) 
+            if (acciones_cierra.indexOf(this.datos.accion) > -1) { 
+                console.log("REFESCAS")               
                 this.$router.push({path: "gestion_basica_grid"})
+                grid.refresh()
             }                       
             if (acciones_refresca.indexOf(this.datos.accion) > -1) {                
                 grid.refresh()                    
@@ -91,36 +103,37 @@ let comentario_gestion =  {
     data() {
         return {
             indicador_visible: false,
-            fuente         : fuenteDatos.creaFuenteDatosUniversal("select", "usuario", "usuarios", null, [], []),
-            comentario     : null,
-            usuario        : null,
+            fuente: fuenteDatos.creaFuenteDatosUniversal(
+                "select", 
+                "usuario", 
+                "usuarios", 
+                null, 
+                [], 
+                []
+            ),
+            comentario: null,
+            usuario: null,
             accion_opciones: {
                 text: this.datos.boton_mensaje,
                 type: "success",
-                onClick: () => {
-                    /*
-                    if ( (this.comentario == null) || (this.comentario == "") ) {
-                        notify(
-                            {
-                                message: "Comentario es obligatorio",                             
-                                position: {
-                                    my: 'center top',
-                                    at: 'center top'
-                                }
-                            },
-                            "warning", 
-                        )
-                    }
-                    else {
-                        */
+                onClick: () => {                
                         let parametros = {
                             comentario: this.comentario,
                             peticiones: this.datos.elementos,
-                            accion    : this.datos.accion
+                            accion: this.datos.accion
                         }
+                        //console.log("parametrod comentarios:", parametros)
                         this.indicador_visible = true
-                        let urlCompleta = window.$direcciones.servidorDatos + '/gestion_acciones'    
-                        window.$f["http"].llamadoRestPost( urlCompleta, parametros, this.retorna, "")   
+                        let urlCompleta = (
+                            window.$direcciones.servidorDatos + 
+                            '/gestion_acciones'
+                        )
+                        window.$f["http"].llamadoRestPost( 
+                            urlCompleta, 
+                            parametros, 
+                            this.retorna, 
+                            ""
+                        )   
                         this.$parent.$_instance.option("disabled", true);                                          
                    // }
                 }

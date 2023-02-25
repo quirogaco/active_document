@@ -96,7 +96,7 @@ let ventana =  {
     mounted() {
         this.popup_visible = ref(this.opciones.visible);
         window.$ventana_emergente = this;
-        let that = this;
+        console.log("EERGENETE:", this.opciones);
         switch (this.opciones.accion) {
             case "RADICAR_DOCUMENTO":
                 this.datos = JSON.stringify(this.opciones);
@@ -104,14 +104,16 @@ let ventana =  {
                 
             case "CONSULTA_RADICADO":
                 // los datos se pasan desde forma de gestion
+                //this.datos = {}
                 break; 
 
             case "CONSULTA_GESTION":
-                this.datos = JSON.stringify({"datos": this.opciones});
+                //this.datos = JSON.stringify({"datos": this.opciones});
+                //this.datos = {}
                 break; 
             
             default:
-                this.datos = this.opciones;
+                this.datos = this.opciones
                 break;
         }       
     },
@@ -120,7 +122,7 @@ let ventana =  {
         return {
             popup_visible: ref(false),
             componente_visible: "",
-            datos: {}
+            datos: ref({})
         }
     }
 }

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import pprint, datetime, random 
 
-from librerias.datos.base   import globales
-from librerias.datos.sql    import sqalchemy_leer, sqalchemy_filtrar
+from librerias.datos.base import globales
+from librerias.datos.sql import sqalchemy_leer, sqalchemy_filtrar
 from aplicacion.datos.redis import redis_datos
 
 def pre_procesa(estructura, operacion, datos, id_tarea):

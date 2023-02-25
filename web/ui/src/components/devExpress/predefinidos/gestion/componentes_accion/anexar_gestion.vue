@@ -102,7 +102,10 @@ let comentario_gestion =  {
 
             // Carga de archivos
             opciones_anexo: {
-                uploadMode           : "useForm"
+                //uploadMode: "useForm",
+                uploadMode: "useButtons",
+                multiple: true,
+                allowCanceling: true
             },  
 
             accion_opciones: {

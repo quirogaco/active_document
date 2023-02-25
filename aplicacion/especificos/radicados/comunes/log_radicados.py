@@ -1,28 +1,43 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint, datetime, random 
 
 from aplicacion.trabajadores_base import radicados_celery
-from aplicacion.datos.redis       import redis_datos
-from aplicacion.trabajadores      import utilidades
+from aplicacion.datos.redis import redis_datos
+from aplicacion.trabajadores import utilidades
 
 ###############
 # ACCIONANTES #
 ###############
 def accionante_datos(accion, datos, datos_tarea):
     accionante_tipo = "usuario"
-    accionante_id   = datos_tarea['_usuario_']['id']
+    accionante_id = datos_tarea['_usuario_']['id']
 
     return accionante_tipo, accionante_id
 
 def accionante_lee(radicado_tipo, radicado_clase, accion, datos, datos_tarea):
     accionante_tipo = ""
-    accionante_id   = ""
+    accionante_id = ""
     if radicado_tipo == "SALIDA":
-        accionante_tipo, accionante_id = accionante_datos(accion, datos, datos_tarea)
+        accionante_tipo, accionante_id = accionante_datos(
+            accion, 
+            datos, 
+            datos_tarea
+        )
 
     if radicado_tipo == "ENTRADA":
-        accionante_tipo, accionante_id = accionante_datos(accion, datos, datos_tarea)
+        accionante_tipo, accionante_id = accionante_datos(
+            accion, 
+            datos, 
+            datos_tarea
+        )
+
+    if radicado_tipo == "INTERNO":
+        accionante_tipo, accionante_id = accionante_datos(
+            accion, 
+            datos, 
+            datos_tarea
+        )
 
     return accionante_tipo, accionante_id
 
@@ -33,23 +48,43 @@ def destinatario_salida(accion, datos, datos_tarea):
     destinatario_tipo = "tercero"
     ## TERCERO ID DEBE ESTAR CREADO DE ANTEMANO PARA QUE ESTO FUNCIONE
     ## SI NO LOS SABEMOS LO FORZAMOS A CREAR CON ID PREDEFINIDO
-    destinatario_id   = datos['tercero_id']
+    destinatario_id = datos['tercero_id']
 
     return destinatario_tipo, destinatario_id
+
+def destinatario_interno(accion, datos, datos_tarea):
+    destinatario_tipo = "usuario"
+    destinatario_id = datos['funcionario_recibe_id']
+
+    return destinatario_tipo, destinatario_id
+
 
 def destinatario_lee(radicado_tipo, radicado_clase, accion, datos, datos_tarea):
     destinatario_tipo = ""
     destinatario_id   = ""
     if radicado_tipo == "SALIDA":
-        destinatario_tipo, destinatario_id = destinatario_salida(accion, datos, datos_tarea)
+        destinatario_tipo, destinatario_id = destinatario_salida(
+            accion, datos, 
+            datos_tarea
+        )
+    
+    if radicado_tipo == "INTERNO":
+        destinatario_tipo, destinatario_id = destinatario_interno(
+            accion, 
+            datos, 
+            datos_tarea
+        )
         
     return destinatario_tipo, destinatario_id
 
 ####################
 # ACCIONES DETALLE #
 ####################
-from aplicacion.especificos.radicados.comunes import acciones_detalle_salida
-from aplicacion.especificos.radicados.comunes import acciones_detalle_entrada
+from aplicacion.especificos.radicados.comunes import (
+    acciones_detalle_salida,
+    acciones_detalle_entrada,
+    acciones_detalle_interno
+)
 
 def acciones_salida(accion, atributo, datos, datos_tarea):
     resultado = acciones_detalle_salida.acciones_salida[accion][atributo]
@@ -61,13 +96,28 @@ def acciones_entrada(accion, atributo, datos, datos_tarea):
 
     return resultado
 
-def acciones_lee(radicado_tipo, radicado_clase, accion, atributo, datos, datos_tarea):
+def acciones_interno(accion, atributo, datos, datos_tarea):
+    resultado = acciones_detalle_interno.acciones_interno[accion][atributo]
+
+    return resultado
+
+def acciones_lee(
+    radicado_tipo, 
+    radicado_clase, 
+    accion, 
+    atributo, 
+    datos, 
+    datos_tarea
+):
     resultado = ""
     if radicado_tipo == "SALIDA":
         resultado = acciones_salida(accion, atributo, datos, datos_tarea)
 
     if radicado_tipo == "ENTRADA":
         resultado = acciones_entrada(accion, atributo, datos, datos_tarea)
+
+    if radicado_tipo == "INTERNO":
+        resultado = acciones_interno(accion, atributo, datos, datos_tarea)
 
     return resultado
 
@@ -108,7 +158,7 @@ def log_radicado(radicado_tipo, radicado_clase, accion, datos, id_tarea, remoto=
         "fuente"           : fuente,
         "fuente_id"        : datos['id'], 
         "accion"           : accion_,  
-        "detalle"          : ( "RADICACI�N CON #: " + datos["nro_radicado"]),
+        "detalle"          : ( "RADICACION CON #: " + datos["nro_radicado"]),
         "estado"           : estado,  
         "detalle_estado"   : destalle_
     }

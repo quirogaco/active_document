@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint, datetime
 
 # Definiciones sql
@@ -53,6 +53,9 @@ CLASE = globales.lee_clase(definicion["clase"])
 # Eventos de clase y objeto
 def al_cargar(target, context):
     # Primero trae Id de gestión para logs
+    # print("")
+    # print("................")    
+    # print("ENTRADA")
     radicado_propiedades.gestion_asignada_peticion(context.session, target)
     radicado_propiedades.logs(context.session, target)
     radicado_propiedades.archivos_nombres(context.session, target)

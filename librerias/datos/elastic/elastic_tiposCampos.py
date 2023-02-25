@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 #########
 # TEXTO #
@@ -60,7 +60,7 @@ fecha = {
 clave = {
     'store': True,
     'type' : "keyword",
-    'fields'     : { 
+    'fields': { 
         'normalizado': {
             "type"      : "keyword",
             "normalizer": "normalizado" 
@@ -134,7 +134,7 @@ texto_ordenado = {
 
 # CLAVE CON CAMPOS PARA ORDENAMIENTO
 # Aunque su valor por defecto permite ordenadar
-# La rutina le adiciona la expresión ".sort"
+# La rutina le adiciona la expresiï¿½n ".sort"
 clave_ordenado = {
     'store'      : True,
     'type'       : "text",

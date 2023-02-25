@@ -1,20 +1,28 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint, datetime
 
 # Base general con atributos basicos
-from librerias.datos.sql  import sqalchemy_leer
-from librerias.datos.sql  import sqalchemy_filtrar
+from librerias.datos.sql import sqalchemy_leer
+from librerias.datos.sql import sqalchemy_filtrar
 from librerias.utilidades import vencimientos
 
 ############################
 # INFORMACION DEL RADICADO #
 ############################
-def carga_radicado(_r):    
+#contador = 0
+def carga_radicado(_r):        
+    #global contador
     if getattr(_r, "_radicado", None) is None:
+        #contador += 1
+        #print("contador->:", contador)
         radicado = {}
-        filtros    = [ [ "gestion_id", "=", _r.id ] ]
-        relaciones = sqalchemy_filtrar.filtrarOrdena(estructura="gestor_peticion_relaciones", filtros=filtros, ordenamientos=[])         
+        filtros = [ [ "gestion_id", "=", _r.id ] ]
+        relaciones = sqalchemy_filtrar.filtrarOrdena(
+            estructura="gestor_peticion_relaciones", 
+            filtros=filtros, 
+            ordenamientos=[]
+        )         
         for relacion in relaciones:
             radicado = relacion  
         setattr(_r, "_radicado", radicado )
@@ -30,14 +38,33 @@ def clase_radicado(_r):
     return _r._radicado.get("fuente", "VENTANILLA")
 
 def nro_radicado(_r):
-    carga_radicado(_r)
+    nro = ""
+    carga_radicado(_r)    
+    if (_r.origen_tipo == "ENTRADA"):        
+        nro = _r._radicado.get("nro_radicado", "")
+
+    elif (_r.origen_tipo == "SALIDA"):
+        nro = "BORRADOR"
+
+    elif (_r.origen_tipo == "INTERNO"):
+        if _r.clase_radicado == "BORRADOR":
+            nro = "BORRADOR"
+        else:
+            nro = _r._radicado.get("nro_radicado", "")
     
-    return _r._radicado.get("nro_radicado", "")
+    return nro
 
 def fecha_radicado(_r):
-    carga_radicado(_r)
+    fecha = ""
+    if (_r.origen_tipo == "ENTRADA"):
+        carga_radicado(_r)
+        fecha = _r._radicado.get("fecha_radicado", "")
+    elif (_r.origen_tipo == "SALIDA"):
+        fecha = _r.gestion_inicio
+    elif (_r.origen_tipo == "INTERNO"):
+        fecha = _r.gestion_inicio
     
-    return _r._radicado.get("fecha_radicado", None)
+    return fecha
 
 def tercero_nombres_apellidos(_r):
     carga_radicado(_r)
@@ -61,12 +88,15 @@ def tercero_tipo_tercero_nombre(_r):
 
 def asunto(_r):
     asunto = ""
-    if   (_r.origen_tipo == "ENTRADA"):
+    if (_r.origen_tipo == "ENTRADA"):
         carga_radicado(_r)
         asunto = _r._radicado.get("asunto", "")
     elif (_r.origen_tipo == "SALIDA"):
         salida_borrador = _r.atributos_.get("salida_borrador", {})
-        asunto          = salida_borrador.get("asunto", "")
+        asunto = salida_borrador.get("asunto", "")
+    elif (_r.origen_tipo == "INTERNO"):
+        interno_borrador = _r.atributos_.get("interno_borrador", {})
+        asunto = interno_borrador.get("asunto", "")
     
     return asunto
 
@@ -79,36 +109,45 @@ def origen_id(_r):
 # INFORMACION TRD #
 ###################
 def trd_dependencia_nombre(_r):
-    nombre        = ""
-    trd           = _r.atributos_.get("trd", {})
+    nombre = ""
+    trd = _r.atributos_.get("trd", {})
     expediente_id = trd.get("expediente", None)
     if expediente_id != None:
-        expediente = sqalchemy_leer.leer_un_registro("agn_expedientes_trd", expediente_id)
+        expediente = sqalchemy_leer.leer_un_registro(
+            "agn_expedientes_trd", 
+            expediente_id
+        )
         if (expediente != None):
             serie_id = expediente["serie_id"]
-            serie    = sqalchemy_leer.leer_un_registro("agn_serie_trd", serie_id)
+            serie = sqalchemy_leer.leer_un_registro("agn_serie_trd", serie_id)
             if (serie != None):
                 nombre = serie["dependencia_nombre"]
     
     return nombre
 
 def expediente_nombre(_r):        
-    nombre        = ""
-    trd           = _r.atributos_.get("trd", {})
+    nombre = ""
+    trd = _r.atributos_.get("trd", {})
     expediente_id = trd.get("expediente", None)
     if expediente_id != None:
-        expediente = sqalchemy_leer.leer_un_registro("agn_expedientes_trd", expediente_id)
+        expediente = sqalchemy_leer.leer_un_registro(
+            "agn_expedientes_trd", 
+            expediente_id
+        )
         if (expediente != None):
             nombre = expediente["nombre"]
     
     return nombre
 
 def tipo_nombre(_r):
-    nombre  = ""
-    trd     = _r.atributos_.get("trd", {})
+    nombre = ""
+    trd = _r.atributos_.get("trd", {})
     tipo_id = trd.get("tipo_documental", None)
     if tipo_id != None:
-        tipo = sqalchemy_leer.leer_un_registro("agn_tipo_documental_trd",tipo_id)
+        tipo = sqalchemy_leer.leer_un_registro(
+            "agn_tipo_documental_trd",
+            tipo_id
+        )
         if (tipo != None):
             nombre = tipo["nombre"]
     
@@ -122,52 +161,71 @@ def valor_gestion(_r):
     return 1
 
 # Fecha de vencimiento
+dias_festivos = sqalchemy_leer.leer_todos(
+    "base", 
+    "festivos", 
+    desde=0, 
+    hasta=1000
+)   
 def vence_en(_r):
-    festivos      = [] # Cargarlos de base de datos
-    dias_festivos = sqalchemy_leer.leer_todos("base", "festivos", desde=0, hasta=1000)
-    for dia_festivo in dias_festivos:
+    global dias_festivos
+    festivos = [] # Cargarlos de base de datos
+    if getattr(_r, "_dias_festivos", None) is None:
+        # dias_festivos = sqalchemy_leer.leer_todos(
+        #     "base", 
+        #     "festivos", 
+        #     desde=0, 
+        #     hasta=1000
+        # )   
+        setattr(_r, "_dias_festivos", dias_festivos)
+
+    for dia_festivo in _r._dias_festivos:
         festivo = dia_festivo["festivo"]
         if isinstance(festivo, str) == True:
             festivo = datetime.datetime.fromisoformat(festivo)
         festivos.append(festivo)
     
-    # No tiene en cuenta HORA O DIAS
-    vence = vencimientos.siguiente_fecha_habil_dias(_r.gestion_inicio, _r.total_tiempo, festivos)
+    # # No tiene en cuenta HORA O DIAS
+    vence = vencimientos.siguiente_fecha_habil_dias(
+        _r.gestion_inicio, 
+        _r.total_tiempo, 
+        festivos
+    )
     
     return vence
 
 # Fecha de respuesta
 def fecha_respuesta(_r):
     finalizado = _r.atributos_.get("finalizado", {})
-    fecha      = finalizado.get("fecha_respuesta", None)
+    fecha = finalizado.get("fecha_respuesta", None)
 
     return fecha
 
 # Finalizador ID, Finalizacion MANUAL
 def finalizado_por_id(_r):
     finalizado = _r.atributos_.get("finalizado", {})
-    valor      = finalizado.get("finalizado_por_id", "")
+    valor = finalizado.get("finalizado_por_id", "")
     
     return valor
 
 # Finalizador NOMBRE, Finalizacion MANUAL
 def finalizado_por_nombre(_r):
     finalizado = _r.atributos_.get("finalizado", {})
-    valor      = finalizado.get("finalizado_por_nombre", "")
+    valor = finalizado.get("finalizado_por_nombre", "")
     
     return valor
 
 # Finalizador FECHA, Finalizacion MANUAL
 def finalizado_en(_r):
     finalizado = _r.atributos_.get("finalizado", {})
-    valor      = finalizado.get("finalizado_en", None)
+    valor = finalizado.get("finalizado_en", None)
     
     return valor
 
 # Finalizador COMENTARIO, Finalizacion MANUAL
 def finalizado_comentario(_r):
     finalizado = _r.atributos_.get("finalizado", {})
-    valor      = finalizado.get("finalizado_comentario", "")
+    valor = finalizado.get("finalizado_comentario", "")
     
     return valor
 
@@ -175,7 +233,8 @@ def finalizado_comentario(_r):
 def estado_gestion(_r):
     estado = "PENDIENTE"     
     # Estado por gestión
-    if (_r.fecha_respuesta is not None) or (_r.finalizado_por_id not in [None, ""]):
+    if (_r.fecha_respuesta is not None) or \
+    (_r.finalizado_por_id not in [None, ""]):
         estado = "FINALIZADO"
     else:
         if (_r.estado_ == "DEVUELTO"):
@@ -189,14 +248,14 @@ def finalizado_modo(_r):
     if _r.fecha_respuesta is not None:
         modo = "RESPUESTA"
     elif _r.finalizado_por_id not in [None, ""]:
-        estado = "MANUAL"
+        modo = "MANUAL"
     
     return modo
 
 # Estado vencimiento (TERMINOS, VENCIDO)
 def estado_vencimiento(_r):
     comparar = datetime.datetime.now() 
-    vence    = _r.vence_en
+    vence = _r.vence_en
     # Si no tiene fecha de respuesta, compara fecha actual
     if _r.fecha_respuesta != None:
         comparar = _r.fecha_respuesta
@@ -213,18 +272,26 @@ def dias_vencimiento(_r):
     festivos  = [] # Cargarlos de base de datos
     # No tiene en cuenta HORA O DIAS
     fecha_hoy = datetime.datetime.now() 
-    dias      = vencimientos.diferencia_en_dias_habiles( fecha_hoy, _r.vence_en, festivos )
+    dias = vencimientos.diferencia_en_dias_habiles( 
+        fecha_hoy, 
+        _r.vence_en, 
+        festivos 
+    )
 
     return dias
 
 def logs_gestion(_r):
-    logs = list(_r.logs)
-    
-    return sorted(logs, key=lambda x: x['creado_en_'])
+    #inicio = datetime.datetime.now()
+    if getattr(_r, "_logs", None) is None:
+        logs = list(_r.logs)
+        setattr(_r, "_logs", sorted(logs, key=lambda x: x['creado_en_']))
+    #print(datetime.datetime.now()-inicio)
+
+    return _r._logs
 
 def etapa_gestion(_r):
     etapa = ""
-    logs  = _r.logs_gestion
+    logs = _r.logs_gestion
     if len(logs) > 0:
         etapa = logs[-1]["detalle_estado"]
     
@@ -232,7 +299,7 @@ def etapa_gestion(_r):
 
 def etapa_estado(_r):
     etapa = ""
-    logs  = _r.logs_gestion
+    logs = _r.logs_gestion
     if len(logs) > 0:
         etapa = logs[-1]["estado"]
     
@@ -241,9 +308,56 @@ def etapa_estado(_r):
 # Tipo de gestión
 def tipo_gestion(_r):
     tipo = "GESTION"     
-    if   (_r.rapida == "SI"):
+    if (_r.rapida == "SI"):
         tipo = "RAPIDA"
     elif (_r.colaborativa not in ["", None]):
         tipo = "COLABORATIVA"
         
     return tipo 
+
+#############
+# HISTORICO #
+#############
+def dependencias_id(_r):
+    # print("")
+    # print("................", id(_r))
+    # print("GESTION")
+    logs = _r.logs_gestion    
+    dependencias = [_r.dependencia_id]
+    for log in logs:
+        if str(log["accionante_tipo"]).lower() == "usuario" and \
+        log["accionante_id"] not in ["", None]:
+            usuario = sqalchemy_leer.leer_un_registro(
+                "usuarios",
+                log["accionante_id"]
+            )
+            if (usuario != None) and \
+            (usuario["dependencia_id"] not in ["", None]):
+                dependencias.append(usuario["dependencia_id"])
+
+    dependencias = list(set(dependencias))
+    
+    # print("")
+    # print("", _r.id)
+    # print("DEPENDENCIAS:")
+    # pprint.pprint(dependencias)
+    
+    return dependencias
+
+
+def funcionarios_id(_r):
+    logs = _r.logs_gestion
+    funcionarios = [_r.responsable_id]
+    for log in logs:
+        if str(log["accionante_tipo"]).lower() == "usuario" and \
+        log["accionante_id"] not in ["", None]:
+            funcionarios.append(log["accionante_id"])
+
+    funcionarios = list(set(funcionarios))
+    
+    # print("")
+    # print("", _r.id)
+    # print("FUNCIONARIOS:")
+    # pprint.pprint(funcionarios)
+    
+    return funcionarios

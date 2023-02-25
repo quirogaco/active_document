@@ -1,5 +1,5 @@
     #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint
 from elasticsearch_dsl import Search
 
@@ -68,31 +68,47 @@ from datetime import datetime
 def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
     querytime = globales.lee_modelo_querytime(estructura)
     parametros = parametros["params"]
+    
     # Crea objeto de busqueda
-    #"""
-    # print("")
-    # print("")    
-    # print("BUSQUEDA PARAMETROS------------->", estructura)
-    # pprint.pprint(parametros) 
-    # #pprint.pprint(definicion)
-    # #print("")
-    # print("***************XXXXXXXXXXXXXXX**********************************")
-    # print("")
-    # print("")
-    # print("")   
-    #""" 
+    index = estructura
+    definicion = globales.lee_definicion(estructura)
+    if definicion.get("mixta") is not None:
+        index = definicion["mixta"]
+    print("")
+    print("")    
+    #estructura = "radicados_entrada,radicados_salida,radicados_interno"
+    print("BUSQUEDA PARAMETROS------------->", estructura)
+    print("    INDEX-->", index)
+    pprint.pprint(parametros) 
+    #pprint.pprint(definicion)
+    #print("")
+    print("***************XXXXXXXXXXXXXXX**********************************")
+    print("")
+    print("")
+    print("")   
+    
     #pprint.pprint(querytime)
     conexion  = globales.lee_conexion_elastic("base")
-    busqueda  = Search(using=conexion, index=estructura)
+    #estructura = ["radicados_entrada", "radicados_salida", "radicados_interno"]
+    busqueda  = Search(using=conexion, index=index)
     busqueda  = busqueda.extra(track_total_hits=True)
 
     # Ordenamientos sort
-    busqueda = elastic_ordenamientos.prepararOrdenamiento(busqueda, estructura, parametros, definicion)
+    busqueda = elastic_ordenamientos.prepararOrdenamiento(
+        busqueda, 
+        estructura, 
+        parametros, 
+        definicion
+    )
 
     # Querys y filtros
     resaltar = parametros.get('resaltar', [])
     definicion["resaltar"] = resaltar
-    busqueda = elastic_filtros.prepararFiltros(busqueda, parametros, definicion)
+    busqueda = elastic_filtros.prepararFiltros(
+        busqueda, 
+        parametros, 
+        definicion
+    )
 
     # Rango de busqueda 
     inicio   = parametros["desde"]
@@ -122,16 +138,16 @@ def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
 
     # Ejecuta busqueda y procesa respuesta
     #"""
-    # print("")
-    # print("")
-    # print("diccionario:")
-    # pprint.pprint(busqueda.to_dict())
-    # print("")
-    # print("")
+    print("")
+    print("")
+    print("diccionario:")
+    pprint.pprint(busqueda.to_dict())
+    print("")
+    print("")
     #"""
 
-    elementos      =  busqueda.execute().to_dict()["hits"] 
-    resultado      = procesaResultado(elementos,  parametros)
+    elementos = busqueda.execute().to_dict()["hits"] 
+    resultado = procesaResultado(elementos,  parametros)
     
     return resultado
 

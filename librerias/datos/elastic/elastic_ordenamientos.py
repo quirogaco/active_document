@@ -1,5 +1,5 @@
     #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint
 from librerias.datos.base import globales
 
@@ -28,9 +28,11 @@ def asigna_ordenamientos(busqueda, orden_lista):
     return busqueda
 
 def prepararOrdenamiento(busqueda, estructura, parametros, definicion):
-    ordenamientos = parametros.get("ordenamientos", []) 
+    ordenamientos = parametros.get("ordenamientos", [])     
     listaOrdenamiento = crear_ordenamientos(ordenamientos)
-    for orden in listaOrdenamiento:
-        busqueda = busqueda.sort(orden)
+    # for orden in listaOrdenamiento:
+    #     print("ORDEN:", orden)
+    #     busqueda = busqueda.sort(orden)
+    busqueda = busqueda.sort(*listaOrdenamiento)
 
     return busqueda

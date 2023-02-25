@@ -51,7 +51,14 @@ let grid =  {
     data() {
         return {
             columnas      : grid_columnas.columnas, // Columnas grid
-            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta('grid', null, fuente_general, fuente_general, [], []),            
+            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta(
+                'grid', 
+                null, 
+                fuente_general, 
+                fuente_general, 
+                [], 
+                []
+            ),            
             pageSizes     : [10, 25, 50, 100],                        
         }
     }

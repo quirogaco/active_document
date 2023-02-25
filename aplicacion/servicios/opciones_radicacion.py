@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
@@ -85,7 +85,7 @@ asignar_pqrs = {
         "texto"     : "Asignación y traslado de radicados PQRS",
         "icon"      : "",      
         "navegar"   : "si",
-        "padre"     : "PQRS",
+        "padre"     : "PQRSDF",
         "tipo"      : "importar",
     },   
 
@@ -108,12 +108,12 @@ pqrs_radicado = {
         "icon"      : "",
         "tipo"      : "importar",
         "navegar"   : "si",
-        "padre"     : "PQRS",
+        "padre"     : "PQRSDF",
     },
 
     "forma": {
         "componente": "pqrs_radicado_forma",      
-        "texto"     : "Radicación PQRS",
+        "texto"     : "Radicación PQRSDF",
         "tipo"      : "importar"
     },
 
@@ -129,6 +129,30 @@ pqrs_radicado = {
 #######################
 # VENTANILLA RADICADO #
 #######################
+
+asignar_ventanilla = {
+    "definicion": {
+        "id"    : "411",
+        "nombre": "RADICACIóN - Asignación y traslado de radicados VENTANILLA"
+    },
+
+    "grid": {
+        "componente": "grid_ventanilla_asigna_grid",     
+        "texto"     : "Asignación y traslado de radicados",
+        "icon"      : "",      
+        "navegar"   : "si",
+        "padre"     : "Ventanilla Radicación",
+        "tipo"      : "importar",
+    },   
+
+    "forma": {
+        "componente": "forma_ventanilla_asigna",      
+        "texto"     : "Asignación y traslado",
+        "tipo"      : "importar"
+    }
+}
+
+
 ventanilla_radicado = {
     "definicion": {
         "id"    : "41",
@@ -163,7 +187,7 @@ ventanilla_radicado = {
 
 ventanilla_radicado_consulta = {
     "definicion": {
-        "id"    : "41",
+        "id"    : "411",
         "nombre": "RADICACIóN - Consulta Radicados"
     },
 
@@ -173,6 +197,43 @@ ventanilla_radicado_consulta = {
         "tipo"      : "importar"
     }
 }
+
+ventanilla_radicado_gestion = {
+    "definicion": {
+        "id"    : "4111",
+        "nombre": "RADICACIóN - Consulta (Entrada, Salida, Interno)"
+    },
+
+    "grid": {
+        "componente": "grid_gestion_consulta_entidad",     
+        "texto"     : "Radicada consulta TODOS",
+        "icon"      : "",      
+        "navegar"   : "si",
+        "padre"     : "Ventanilla Radicación",
+        "tipo"      : "importar",
+    },
+
+    "forma": {
+        "componente": "forma_salida_consulta",     
+        "texto"     : "Gestión consulta salidas",
+        "tipo"      : "importar",
+    },
+
+    "adicionales": [
+        {
+            "componente": "forma_radicado_consulta",      
+            "texto"     : "Consulta Radicados Entrada",
+            "tipo"      : "importar"
+        },
+
+        {
+            "componente": "forma_interno_consulta",      
+            "texto"     : "Consulta Radicados",
+            "tipo"      : "importar"
+        }
+    ]
+}
+
 
 #####################
 # VENTANILLA SALIDA #
@@ -289,15 +350,16 @@ opciones = [
     radicado_web_anonimo,
 
     asignar_pqrs,
-    
     pqrs_radicado,
 
+    asignar_ventanilla,
     ventanilla_radicado,
     ventanilla_radicado_consulta,
+    ventanilla_radicado_gestion,
 
     #ventanilla_salida,
-
     #ventanilla_interno,
+
     ventanilla_interno_consulta,
 
     consulta_radicados_web,

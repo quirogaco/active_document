@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 # Definiciones sql
 from librerias.datos.sql  import sqalchemy_declarativa_base as dbase
@@ -48,7 +48,7 @@ class GESTOR_RADICADOS_SALIDA(base_general.DB_BASE_GENERAL, globales.CLASE_BASE_
     # ESTRUCTURA
     estructura_    = dbase.Column( dbase.Unicode(64), index=True, nullable=False, default="*")
 
-    # SITIO DE RADICACIÓN
+    # SITIO DE RADICACIï¿½N
     radicado_en    = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="*")
     
     # RADICADOR
@@ -66,8 +66,8 @@ class GESTOR_RADICADOS_SALIDA(base_general.DB_BASE_GENERAL, globales.CLASE_BASE_
     # Asunto
     asunto         = dbase.Column( dbase.Unicode(2048), index=True, nullable=False)
 
-    # Medio de notificación
-    medio_notificacion = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="DIRECCIÓN FISICA")  
+    # Medio de notificaciï¿½n
+    medio_notificacion = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="DIRECCION FISICA")  
 
     # Tipo respuesta
     respuesta_tipo    = dbase.Column( dbase.Unicode(64), index=True, nullable=False, default="FINAL")

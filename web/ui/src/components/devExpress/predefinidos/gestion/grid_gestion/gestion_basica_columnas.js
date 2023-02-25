@@ -18,6 +18,7 @@ let lista_acciones =  [
     { id: 'ASIGNADO_RESPONSABLE',              nombre: 'ASIGNADO_RESPONSABLE' },  
     { id: 'MIS_APROBACIONES',                  nombre: 'MIS APROBACIONES' },    
     { id: 'ASIGNADOS',                         nombre: 'ASIGNADOS' },    
+    { id: 'APROBADO_RESPUESTA',                nombre: 'APROBADO PARA RADICAR'}
 ]
 lista_acciones.sort(function(a, b) {
     if (a.nombre < b.nombre) {
@@ -140,28 +141,40 @@ let columnas = [
             valueExpr  : 'id', 
             displayExpr: 'nombre',           
         }, 
-        width         : "110px"
+        width         : "110px",
+        cellTemplate: "plantilla_origen"
     },
 
     // Numero de radicado
     {
-        caption       : "# Radicado",
-        dataField     : "nro_radicado",
-        dataType      : "string",
-        allowSorting  : true,
+        caption: "# Radicado",
+        dataField: "nro_radicado",
+        dataType: "string",
+        allowSorting: true,
         allowFiltering: true,
-        width         : "120px"
+        width: "120px",
+        cellTemplate: "plantilla_nro_radicado"
     },
 
-     // Radicado
+     // Fecha radicado
      {
-        caption       : "Fecha de radicación",
+        caption       : "Fecha radicación / creación",
         dataField     : "fecha_radicado",
         dataType      : "date",
         allowSorting  : true,
         allowFiltering: true,
         width         : "130px",
         format        : 'y-MM-dd HH:MM'
+    },
+
+    // Asunto
+    {
+        caption       : "Asunto",
+        dataField     : "asunto",
+        dataType      : "string",         
+        width         : "200px",
+        allowSorting  : false,
+        allowFiltering: true,
     },
 
     // Fuente
@@ -217,16 +230,6 @@ let columnas = [
         dataType      : "string",         
         width         : "150px",
         allowSorting  : true,
-        allowFiltering: true,
-    },
-
-     // Asunto
-     {
-        caption       : "Asunto",
-        dataField     : "asunto",
-        dataType      : "string",         
-        width         : "120px",
-        allowSorting  : false,
         allowFiltering: true,
     },
 

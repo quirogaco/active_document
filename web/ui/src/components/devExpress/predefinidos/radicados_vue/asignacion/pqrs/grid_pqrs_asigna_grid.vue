@@ -18,7 +18,8 @@ import fuenteDatos from '../../../../remoto/fuenteDatos.js'
 
 // Columnas
 // Columnas
-import ventanilla_radicado_columnas from '../../comunes/grid/grid_ventanilla_radicado_columnas.js'
+import ventanilla_radicado_columnas from 
+'../../comunes/grid/grid_ventanilla_radicado_columnas.js'
 
 // Metodos
 import grid_pqrs_asigna_metodos from './grid_pqrs_asigna_metodos.js'
@@ -29,7 +30,7 @@ let basica = {
         ["gestion_asignada_peticion", "=", "NO"],
         ["clase_radicado", "=", "PQRSD"]
     ],
-    "titulo_grid": "PQRSD - Asignación y traslado de radicados"
+    "titulo_grid": "PQRSDF - Asignación y traslado de radicados"
 }
 
 // Grid de gestión
@@ -59,7 +60,14 @@ let grid =  {
         return {
             basica        : basica,
             columnas      : ventanilla_radicado_columnas.columnas, // Columnas grid
-            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta('grid', null, basica.estructura, basica.estructura, basica.filtros_grid, {})            
+            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta(
+                'grid', 
+                null, 
+                basica.estructura, 
+                basica.estructura, 
+                basica.filtros_grid, 
+                {}
+            )            
         }
     }
 }

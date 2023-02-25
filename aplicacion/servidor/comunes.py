@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, os, shutil, tempfile
 
@@ -28,3 +28,8 @@ def prepara_archivos(archivos):
             lista_archivos.append(data)
 
    return lista_archivos
+
+
+def pre_procesa_busqueda(id_tarea, parametros):
+   
+   return parametros

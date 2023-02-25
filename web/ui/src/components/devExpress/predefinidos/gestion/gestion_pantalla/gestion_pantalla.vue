@@ -103,13 +103,23 @@
         async mounted() {
             // Pantalla para invocar en acciones
             window.$pantalla_gestion = this;
-            let temporal = $forma.lee_propiedades(this.$props, "gestion_pantalla").datos;            
-            this.parametros = await utilidades_estructura.leer_registro_id("peticiones", temporal["id"]);
-            
+            let temporal = $forma.lee_propiedades(
+                this.$props, 
+                "gestion_pantalla"
+            ).datos;            
+            this.parametros = await utilidades_estructura.leer_registro_id(
+                "peticiones", 
+                temporal["id"]
+            );
+            this.tipo_documento = this.parametros.origen_tipo;
+            this.clase_radicado = this.parametros.clase_radicado; 
             // PDF
             this.visor_pdf = this.$refs.visor_pdf;
             // Si tiene PDF PRINCIPAL
-            this.valida_mostrar_pdf(this.parametros.origen_id);
+            this.valida_mostrar_pdf(
+                this.parametros.origen_id, 
+                this.tipo_documento
+            );
 
             // EDITOR
             this.editor      = this.$refs.editor;
@@ -118,36 +128,73 @@
             let etapa_estado = this.parametros.etapa_estado; 
 
             // Radicado
+            //console.log("this.parametros:", this.parametros)
+            let estructura = "radicados_entrada";
+            if (this.tipo_documento == "INTERNO") {
+                estructura = "radicados_interno";
+            };
             this.radicado = await utilidades_estructura.leer_registro_id(
-                "radicados_entrada", 
+                estructura, 
                 this.parametros.origen_id
             );
         
             // BARRA DE ACCIONES
-            this.barra_elementos_visuales = gestion_pantalla_definiciones.barra_elementos(this);
+            this.barra_elementos_visuales = 
+                gestion_pantalla_definiciones.barra_elementos(
+                    this,
+                    this.parametros
+                );
             
-            // Mensaje tipo de documento en gestión
-            this.tipo_documento = this.parametros.origen_tipo            
+            // Mensaje tipo de documento en gestión    
+            let accion_datos = (
+                this.parametros.anterior_nombre + " - " +             
+                this.parametros.etapa_gestion + " : "
+            )
             if (this.tipo_documento == "ENTRADA") {
                 if (this.parametros.colaborativa == "") {
                     if (this.parametros.rapida == "SI") {
-                        this.titulo_gestion = "Gestión de respuesta RAPIDA [ ENTRADA - "  + this.parametros.nro_radicado + " ] "
+                        this.titulo_gestion = (
+                            accion_datos + "Respuesta RAPIDA [ ENTRADA "  + 
+                            this.parametros.nro_radicado + " ] "
+                        )
                     }
                     else {
-                        this.titulo_gestion = "Gestión de respuesta radicado [ ENTRADA - "  + this.parametros.nro_radicado + " ] "
+                        this.titulo_gestion = (
+                            accion_datos + "[ ENTRADA "  + 
+                            this.parametros.nro_radicado + " ] " 
+                        )
                     }
                 }
                 else {
-                    this.titulo_gestion = "Gestión de respuesta COLABORATIVA [ ENTRADA - "  + this.parametros.nro_radicado + " ] "
+                    this.titulo_gestion = (
+                        accion_datos + "COLABORATIVA [ ENTRADA "  + 
+                        this.parametros.nro_radicado + " ] "
+                    )
                 } 
             }
 
-            if (this.tipo_documento == "SALIDA") {
+            if ( 
+                (this.tipo_documento == "SALIDA") && 
+                (this.clase_radicado == "BORRADOR") 
+            ) {
                 this.titulo_gestion = "Gestión de borrador de SALIDA"
             }
 
-            if (this.tipo_documento == "INTERNO") {
+            if (
+                (this.tipo_documento == "INTERNO") && 
+                (this.clase_radicado == "BORRADOR") 
+            ) {
                 this.titulo_gestion = "Gestión de borrador INTERNO"
+            }
+
+            if (
+                (this.tipo_documento == "INTERNO") && 
+                (this.clase_radicado == "INTERNO") 
+            ) {
+                this.titulo_gestion = (
+                    "Gestión de radicado [ INTERNO - "  + 
+                    this.parametros.nro_radicado + " ] "
+                )
             }
         },
 

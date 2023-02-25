@@ -1,37 +1,55 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 import pprint, datetime
 
 from aplicacion.datos.comunes.referencias import archivos, terceros
 
 referencias = [
-    # Sitio de radicación 
+    # Sitio de radicaciï¿½n 
     {
-        "campoReferencia"    : "radicado_en_id",
+        "campoReferencia"    : "radicado_en",
         "atributosReferencia": [{
             "radicado_en_nombre": "nombre",
             "radicado_en_id"    : "id"
         }],
         "estructuraDestino": "ubicaciones",
-        "externa"          : {
-            "tipo_relacion": "SITIO_DE_RADICACION"            
-        } 
+        # "externa"          : {
+        #     "tipo_relacion": "SITIO_DE_RADICACION"            
+        # } 
     },
 
     # Usuario que radico 
     {
-        "campoReferencia"    : "radicado_por_id",
+        "campoReferencia"    : "radicado_por",
         "atributosReferencia": [{
             "radicado_por_nombre": "nombre",
             "radicado_por_id"    : "id"
         }],
         "estructuraDestino": "usuarios",
-        "externa"          : {
-            "tipo_relacion": "RADICADOR"            
-        } 
+        # "externa"          : {
+        #     "tipo_relacion": "RADICADOR"            
+        # } 
     },
 
-    # Datos de gestión
+    # Usuario DEPENDENCIA
+    {
+        "campoReferencia"    : "funcionario_responde_id",
+        "atributosReferencia": [{
+            "funcionario_responde_nombre": "nombre",
+        }],
+        "estructuraDestino": "usuarios"
+    },
+
+    # DEPENDENCIA
+    {
+        "campoReferencia"    : "dependencia_responde_id",
+        "atributosReferencia": [{
+            "dependencia_responde_nombre": "nombre",
+        }],
+        "estructuraDestino": "dependencias"
+    },
+
+    # Datos de gestiï¿½n
     {
         "campoReferencia"    : "gestion_id",
         "atributosReferencia": [{
@@ -42,7 +60,7 @@ referencias = [
             "gestion_dependencia_id"     : "dependencia_id",
             "gestion_dependencia_nombre" : "dependencia_nombre",   
 
-            # Petición
+            # Peticiï¿½n
             "gestion_peticion_id"        : "peticion_id",  
             "gestion_peticion_nombre"    : "peticion_nombre",     
 

@@ -7,8 +7,8 @@ const mensaje_archivo = function(id=null, atributos={}) {
             <div class="shadow-sm p-3 m-3 rounded ">
                 <div class="fs-6">
                     Los anexos permitidos son de tipo <b>(word, excel, pdf, gif, png, zip)</b>,      
-                    <b>Tamaño individual maximo de 5 megas</b>,     
-                    <b>Tamaño total maximo 25 megas (sumatoria de todos los archivos)</b>.
+                    <b>Tamaño individual maximo de 50 megas</b>,     
+                    <b>Tamaño total maximo 50 megas (sumatoria de todos los archivos)</b>.
                     Prepare sus archivos en una carpeta comun.
                 </div>
             </div>
@@ -28,7 +28,7 @@ const archivos_anexos = function(id=null, atributos={}) {
     let atributos_base = {
         'titulo'       : 'Anexos electrónicos',
         "multiple"     : true,
-        "tamano_maximo": 5000000,
+        "tamano_maximo": 55000000,
         'extensiones'  : acepta_archivos
     }
     

@@ -50,6 +50,12 @@ let campos = [
         "fuente"     : "usuarios",
     }),
 
+    forma_objeto.tag_objeto({
+        "campo"      : "dependencias_ids",
+        "titulo"     : "Dependencia de gestion", 
+        "fuente"     : "dependencias",
+    }),
+
     forma_objeto.select_objeto({
         "campo"      : "padre_id",
         "titulo"     : "Dependencia padre", 
@@ -60,7 +66,7 @@ let campos = [
         "campo"      : "estado_",
         "titulo"     : "Estado", 
         "elementos"  : ["ACTIVO", "INACTIVO"],
-        //"valor"      : "ACTIVO",    
+        "valor"      : "ACTIVO",    
         'obligatorio': 'si'
     })
 ]

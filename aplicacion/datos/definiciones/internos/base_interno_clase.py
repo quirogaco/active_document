@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 # Definiciones sql
 from librerias.datos.sql  import sqalchemy_declarativa_base as dbase
@@ -18,11 +18,14 @@ class GESTOR_RADICADOS_INTERNO(base_general.DB_BASE_GENERAL, globales.CLASE_BASE
         'nro_radicado',
         'fecha_radicado',
         'asunto',
+        'medio_notificacion',
+        'respuesta_tipo',
         'dependencia_envia_id',
         'funcionario_envia_id',
         'dependencia_recibe_id',
         'funcionario_recibe_id',
         'tipo_firma',
+        'gestion_id',
         'atributos_'
     ])
     
@@ -33,18 +36,21 @@ class GESTOR_RADICADOS_INTERNO(base_general.DB_BASE_GENERAL, globales.CLASE_BASE
         'nro_radicado',
         'fecha_radicado',
         'asunto',
+        'medio_notificacion',
+        'respuesta_tipo',
         'dependencia_envia_id',
         'funcionario_envia_id',
         'dependencia_recibe_id',
         'funcionario_recibe_id',
         'tipo_firma',
+        'gestion_id',
         'atributos_'
     ]
 
     # ESTRUCTURA
     estructura_    = dbase.Column( dbase.Unicode(64), index=True, nullable=False, default="*")
 
-    # SITIO DE RADICACIÓN
+    # SITIO DE RADICACIï¿½N
     radicado_en    = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="*")
     
     # RADICADOR
@@ -59,6 +65,12 @@ class GESTOR_RADICADOS_INTERNO(base_general.DB_BASE_GENERAL, globales.CLASE_BASE
     # Asunto
     asunto         = dbase.Column( dbase.Unicode(2048), index=True, nullable=False)
 
+    # Medio de notificaciï¿½n
+    medio_notificacion = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="DIRECCION FISICA")  
+
+    # Tipo respuesta
+    respuesta_tipo    = dbase.Column( dbase.Unicode(64), index=True, nullable=False, default="FINAL")
+
     # Dependencia remitente
     dependencia_envia_id = dbase.Column( dbase.Unicode(64), index=True, nullable=False, default="") 
 
@@ -71,10 +83,13 @@ class GESTOR_RADICADOS_INTERNO(base_general.DB_BASE_GENERAL, globales.CLASE_BASE
     # Funcionario recibe
     funcionario_recibe_id = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="*") 
 
-    # Tipo firma
+   # Tipo firma
     tipo_firma              = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="FISICA")
 
+    # GESTION ID ORIGEN
+    gestion_id    = dbase.Column( dbase.Unicode(64), index=True, nullable=True, default="*") 
+
     # Atrbutos especificos del RADICADO
-    atributos_     = dbase.Column( dbase.json.JSONType, default={} )    
+    atributos_     = dbase.Column( dbase.json.JSONType, default={} )  
     
 globales.carga_clase("gestor_radicados_interno", GESTOR_RADICADOS_INTERNO)

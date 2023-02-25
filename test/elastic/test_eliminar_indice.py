@@ -5,7 +5,6 @@ import configuracion_base
 
 from librerias.datos.elastic import elastic_operaciones
 
-
 # CONFIGURACIÓN
 # resultado = elastic_operaciones.eliminaIndice("configuracion_general", "base")
 # resultado = elastic_operaciones.eliminaIndice("canales_comunicacion", "base")
@@ -36,14 +35,15 @@ from librerias.datos.elastic import elastic_operaciones
 # resultado = elastic_operaciones.eliminaIndice("permisos_archivo", "base")
 # resultado = elastic_operaciones.eliminaIndice("tramites", "base")
 
-
 #"""
 # RADICACION GESTION
-# resultado = elastic_operaciones.eliminaIndice("radicados_entrada", "base")
-resultado = elastic_operaciones.eliminaIndice("radicados_salida", "base")
+# resultado = elastic_operaciones.eliminaIndice("radicados_unico", "base")
+#resultado = elastic_operaciones.eliminaIndice("radicados_entrada", "base")
+# resultado = elastic_operaciones.eliminaIndice("radicados_salida", "base")
 # resultado = elastic_operaciones.eliminaIndice("radicados_interno", "base")
 # resultado = elastic_operaciones.eliminaIndice("peticiones", "base")
 # resultado = elastic_operaciones.eliminaIndice("copias", "base")
+resultado = elastic_operaciones.eliminaIndice("correos_descargados", "base")
 #"""
 
 

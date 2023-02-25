@@ -294,9 +294,96 @@ let basicos_salida_consulta = [
         "titulo": "Documento con reserva",
     },
     {
+        "id"    : "dependencia_responde_nombre",
+        "titulo": "Enviado por dependencia",
+    },
+    {
+        "id"    : "funcionario_responde_nombre",
+        "titulo": "Enviado por funcionario",
+    },
+    {
         "id"    : "radicado_por_nombre",
         "titulo": "Radicado por",
     },
+    {
+        "id"    : "radicado_en_nombre",
+        "titulo": "Radicado en",
+    }
+]   
+
+let basicos_interno_consulta = [
+    {
+        "id"    : "nro_radicado",
+        "titulo": "Número de radicado",
+    },
+    {
+        "id"    : "fecha_radicado",
+        "titulo": "Fecha de radicación",
+    },
+    {
+        "id"    : "fecha_documento",
+        "titulo": "Fecha documento",
+    },
+
+    {
+        "id"    : "dependencia_envia_nombre",
+        "titulo": "Dependencia remitente",
+    },
+
+    {
+        "id"    : "funcionario_envia_nombre",
+        "titulo": "Funcionario remitente",
+    },
+
+    {
+        "id"    : "dependencia_recibe_nombre",
+        "titulo": "Dependencia recibe",
+    },
+
+    {
+        "id"    : "funcionario_recibe_nombre",
+        "titulo": "Funcionario recibe",
+    },
+   
+    {
+        "id"    : "tipo_firma",
+        "titulo": "Firma",
+    },
+
+    {
+        "id"    : "reserva",
+        "titulo": "Tiene reserva ?",
+    },
+
+    {
+        "id"    : "medio_notificacion",
+        "titulo": "Medio(s) notificación",
+    },
+
+    {
+        "id"    : "asunto",
+        "titulo": "Asunto",
+        "tipo"  : "texto_area"
+    },
+    {
+        "id"    : "nro_folios",
+        "titulo": "Número de folios",
+    },
+    {
+        "id"    : "anexos",
+        "titulo": "Anexos",
+        "tipo"  : "texto_area"
+    },
+    {
+        "id"    : "medio_notificacion",
+        "titulo": "Medio de notificación",
+    },
+   
+    {
+        "id"    : "radicado_por_nombre",
+        "titulo": "Radicado por",
+    },
+    
     {
         "id"    : "radicado_en_nombre",
         "titulo": "Radicado en",
@@ -320,5 +407,6 @@ export default {
     repone_id              : repone_id,
 
     basicos_campos_consulta: basicos_campos_consulta,
-    basicos_salida_consulta: basicos_salida_consulta
+    basicos_salida_consulta: basicos_salida_consulta,
+    basicos_interno_consulta: basicos_interno_consulta
 }

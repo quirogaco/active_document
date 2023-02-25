@@ -19,6 +19,7 @@
                             v-model:value   = "expediente"
                             display-expr    = "nombre"
                             value-expr      = "id"
+                            search-enabled   = "true"
                             :showClearButton = "true"
                         >
                             <DxValidator>

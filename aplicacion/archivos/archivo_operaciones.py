@@ -75,9 +75,12 @@ def crear_archivo(
    ############################
    # Crea registro de archivo #
    ############################
-   datos_tarea = redis_datos.lee_tarea_ejecucion(id_tarea)
-   usuario_id  = datos_tarea.get('_usuario_', {}).get('id', None)
-   CLASE  = globales.lee_clase("global_base_archivo_electronico")
+   usuario_id = None
+   if id_tarea not in [None, "none", ""]:
+      datos_tarea = redis_datos.lee_tarea_ejecucion(id_tarea)
+      usuario_id = datos_tarea.get('_usuario_', {}).get('id', None)
+   
+   CLASE = globales.lee_clase("global_base_archivo_electronico")
    data = {
       'cubeta'       : cubeta,
       'nombre'       : nombre_destino,

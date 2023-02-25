@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, datetime
 
@@ -21,7 +21,6 @@ from . import crea_gestion_base
 ##########################
 #  RUTINAS DE VENTANILLA #
 ##########################    
-# Radicado
 def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
     datos_ventanilla = datos["datos"]    
     radicado_id = datos_ventanilla["id"]
@@ -29,7 +28,7 @@ def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
     if es_pqrs == "PQRSD":
         crea_gestion_base.actualiza_radicado(
             radicado_id, 
-            "PQRDS", 
+            "PQRSD", 
             "", 
             id_tarea
         )        
@@ -48,8 +47,9 @@ def asigna_ventanilla(accion, datos={}, archivos=[], id_tarea=""):
         "mensaje": "",
         "datos": {}
     }
-    
+
     return resultado
+
 
 ####################
 #  RUTINAS DE PQRS #
@@ -82,6 +82,7 @@ def pqrs_gestion(estructura, accion, datos, tarea, archivos, id_tarea):
     return resultado
 
 # Radicado por formulario completo
+# Radicado
 def asigna_pqrs(accion, datos={}, archivos=[], id_tarea=""):   
     datos_pqrs = datos["datos"]    
     radicado_id = datos_pqrs["id"]
@@ -115,6 +116,28 @@ def asigna_pqrs(accion, datos={}, archivos=[], id_tarea=""):
     # Indexar radicado de nuevo, inmediato para refrescar
     # Deberia ser un flush corto solo un campo JCR
     elastic_operaciones.indexar_registro("radicados_entrada", radicado_id)
+    resultado  =  {
+        "accion": accion,
+        "estado": "",
+        "mensaje": "",
+        "datos": {}
+    }
+    
+    return resultado
+
+
+# Gestion radicado interno
+def asigna_interno(accion, datos={}, archivos=[], id_tarea=""):   
+    datos_interno = datos
+    radicado_id = datos_interno["id"]
+    datos_interno["clase_radicado"] = "INTERNO"
+    datos_interno["gestion_horas_dias"] = "DIAS"
+    datos_interno["gestion_total_tiempo"] = 0
+    crea_gestion_base.crea_registro_gestion(datos_interno, archivos, id_tarea)
+
+    # Indexar radicado de nuevo, inmediato para refrescar
+    # Deberia ser un flush corto solo un campo JCR
+    elastic_operaciones.indexar_registro("radicados_interno", radicado_id)
     resultado  =  {
         "accion": accion,
         "estado": "",

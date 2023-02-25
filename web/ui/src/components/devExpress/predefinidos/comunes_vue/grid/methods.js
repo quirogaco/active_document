@@ -116,9 +116,9 @@ export const methodDataGrid = function(that) {
             return response;
         },
 
-        //###############################
+        //##################################
         // shortcuts to dxGridRef.instance #
-        //###############################
+        //##################################
         getSelectedRowKeys() {
             return that.dxGrid.instance.getSelectedRowKeys()
         },

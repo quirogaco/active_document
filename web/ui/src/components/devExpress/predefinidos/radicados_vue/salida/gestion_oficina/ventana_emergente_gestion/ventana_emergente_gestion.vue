@@ -29,24 +29,11 @@
                 editor-type     = "dxTextBox"
                 :editor-options = "opciones_codigo"
             >
-                <DxLabel text="Usuario firma electronica"/>
-                <DxRequiredRule message="Usuario firma electronica obligatorio"/> 
+                <DxLabel text="Correo electronico"/>
+                <DxRequiredRule message="Correo electronico es obligatorio"/> 
                 <DxStringLengthRule
-                    :max="50"
-                    message="Maximo 50 caracteres"
-                />                      
-            </DxSimpleItem>
-
-            <DxSimpleItem
-                data-field      = "clave"
-                editor-type     = "dxTextBox"
-                :editor-options = "opciones_clave"
-            >
-                <DxLabel text="Clave"/>
-                <DxRequiredRule message="Clave obligatoria"/> 
-                <DxStringLengthRule
-                    :max="50"
-                    message="Maximo 50 caracteres"
+                    :max="256"
+                    message="Maximo 256 caracteres"
                 />                      
             </DxSimpleItem>
 
@@ -57,7 +44,7 @@
         <div class="centered">
             <DxButton
                 @click = "firmar()"
-                icon   = "fas fa-pen-nib"
+                icon   = "far fa-paper-plane"
                 :text   = "opciones.titulo_boton"
                 type   = "success"  
             />
@@ -112,9 +99,9 @@ let ventana =  {
     },
 
     mounted() {    
-        this.forma             = this.$refs.forma.instance
-        this.notify            = notify 
-        this.indicador_visible = false
+        this.forma = this.$refs.forma.instance;
+        this.notify = notify;
+        this.indicador_visible = false;
     },
 
     data() {
@@ -147,7 +134,7 @@ let ventana =  {
             if ( valido == true) {
                 let parametros = {
                     datos       : {
-                        "firmar_ids": datos.firmar_ids,
+                        "notificar_ids": datos.firmar_ids,
                         "usuario"   : datos.codigo,
                         "clave"     : datos.clave
                     },

@@ -6,18 +6,18 @@ import fuenteDatos from '../../../remoto/fuenteDatos.js';
 import { formatMessage, loadMessages } from 'devextreme/localization';
 let messages = {
     "en": {
-        "selectRecord"        : "Select a record, please !!",
+        "selectRecord": "Select a record, please !!",
         "selectedTheseRecords": "Select {0} record (s), please !!",
-        "selectedRecords"     : "Please select at least one record !!",
-        "youSure"             : "<i>Are you sure ?</i>",
-        "confirm"             : "Confirm"
+        "selectedRecords": "Please select at least one record !!",
+        "youSure": "<i>Are you sure ?</i>",
+        "confirm": "Confirm"
     },
     "es": {
-        "selectRecord"        : "Seleccione un registro, por favor !!",
+        "selectRecord": "Seleccione un registro, por favor !!",
         "selectedTheseRecords": "Seleccione {0} registro(s), por favor !!",
-        "selectedRecords"     : "Seleccione al menos un registro, por favor !!",
-        "youSure"             : "<i>Esta seguro ?</i>",
-        "confirm"             : "Confirme"
+        "selectedRecords": "Seleccione al menos un registro, por favor !!",
+        "youSure": "<i>Esta seguro ?</i>",
+        "confirm": "Confirme"
     }
 }
 loadMessages(messages)
@@ -25,12 +25,13 @@ loadMessages(messages)
 // ## COLUMNS ## 
 // basic definition column
 let columnBasic = function(columnAttribute={}) {
+    //console.log("columnBasic:", columnAttribute)
     let basicDefinition = {
-        caption       : ".",
-        dataField     : ".",
-        dataType      : "string",     
-        width         : 50,
-        allowEditing  : false
+        caption: ".",
+        dataField: ".",
+        dataType: "string",     
+        width: 50,
+        allowEditing: false
     }
     
     let column = {

@@ -3,8 +3,11 @@
 
 import pprint, datetime, random
 
-from aplicacion.datos.redis import redis_datos
-from . import datos_radicado_salida, datos_radicado_entrada, datos_radicado_interno
+from . import (
+    datos_radicado_salida, 
+    datos_radicado_entrada, 
+    datos_radicado_interno
+)
 
 #######################
 # BASICOS, EXTENDIDOS #

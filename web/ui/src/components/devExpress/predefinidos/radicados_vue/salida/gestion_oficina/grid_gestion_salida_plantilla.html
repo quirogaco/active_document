@@ -5,6 +5,11 @@
         :opciones = "opciones_ventana"
         :key      = "emergente_key"
     />
+
+    <ventana_emergente_anula               
+        :opciones = "opciones_ventana_anula"
+        :key      = "emergente_key_anula"
+    />
     
     <div class="shadow p-1 mb-2 bg-light rounded">
 
@@ -44,6 +49,24 @@
             <DxPaging 
                 :page-size="10"
             />
+
+            <template #notificarButton>
+                <DxButton
+                    @click = "notificar()"
+                    icon   = "far fa-paper-plane"
+                    text   = "Notificar"
+                    type   = "success"  
+                />
+            </template>
+
+            <!-- <template #anularButton>
+                <DxButton
+                    @click = "anular()"
+                    icon   = "fas fa-ban"
+                    text   = "Anular"
+                    type   = "danger"  
+                />
+            </template> -->
             
             <template #icono_pdf_template="{ data }">
                 <div v-html="icono_pdf_template(data)"></div>

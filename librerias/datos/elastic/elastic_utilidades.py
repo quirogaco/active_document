@@ -1,14 +1,14 @@
     #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
 from inspect import isfunction
 
 from . import elastic_tiposCampos
-from librerias.datos.base    import globales
+from librerias.datos.base import globales
 from librerias.datos.elastic import elastic_operaciones
-from .                       import elastic_campos_script
+from . import elastic_campos_script
 
 """
         "settings" : {
@@ -37,7 +37,7 @@ def generaMapa(modelo, runtime, opciones):
     mapa = {
         "settings" : {
             "index.mapping.nested_objects.limit": 100000,
-            #"index.max_result_window": 1000000,            
+            "index.max_result_window": 1000000,            
             "analysis" : {                
                 "analyzer":{
                     "no_accent": {
@@ -59,7 +59,8 @@ def generaMapa(modelo, runtime, opciones):
         'mappings': {
             #'dynamic'   : 'runtime',
             'properties': modelo,
-            # Es solo descriptivo se usa para generar campo al momento del query, elastic_busquedas
+            # Es solo descriptivo se usa para generar 
+            # campo al momento del query, elastic_busquedas
             'runtime'   : runtime
         },
     }
@@ -67,9 +68,23 @@ def generaMapa(modelo, runtime, opciones):
     return mapa
 
 # Registra modelo elastic
-def registraModelo(estructura="", modelo={}, indexamiento={}, campoId="id", runtime={}, querytime={}):
+def registraModelo(
+    estructura="", 
+    modelo={}, 
+    indexamiento={}, 
+    campoId="id", 
+    runtime={}, 
+    querytime={}
+):
     mapa = generaMapa(modelo, runtime, indexamiento)
-    globales.carga_modelo_elastic(estructura, modelo, mapa, indexamiento, "", campoId)
+    globales.carga_modelo_elastic(
+        estructura, 
+        modelo, 
+        mapa, 
+        indexamiento, 
+        "", 
+        campoId
+    )
     globales.carga_modelo_querytime(estructura, querytime)
     
 diccionario_tipos = {
@@ -124,8 +139,8 @@ def propiedades_anidadas(parametros):
         tipoElastic = valor.get("tipoElastic", None)
         if tipoElastic != None:  
             if isinstance(tipoElastic, dict): 
-                define_tipo           = diccionario_tipos[tipoElastic['tipo']]
-                valores               = propiedades_anidadas(tipoElastic['propiedades'])     
+                define_tipo = diccionario_tipos[tipoElastic['tipo']]
+                valores = propiedades_anidadas(tipoElastic['propiedades'])     
                 propiedades[etiqueta] = define_tipo(valores)        
             else:
                 propiedades[etiqueta] = diccionario_tipos[tipoElastic]
@@ -138,7 +153,7 @@ def tipoFullText(tipo):
     if isinstance(tipo, dict): 
         define_tipo = diccionario_tipos[tipo['tipo']]
         propiedades = propiedades_anidadas(tipo['propiedades'])
-        resultado   = define_tipo(propiedades)               
+        resultado = define_tipo(propiedades)               
     else:
         resultado =  diccionario_tipos[tipo]
 
@@ -155,18 +170,23 @@ def generaModelo(campos={}, opciones={}, estructura=""):
     for campo, valores in campos.items(): 
         campog = campo  
         tipoElastic = valores.get("tipoElastic", None)
-        formato     = valores.get("formato", None)
+        formato = valores.get("formato", None)
         if tipoElastic != None:
             modelo[campo] = tipoFullText(tipoElastic)
             if formato != None:   
-                querytime[formato["nombre"]] = elastic_campos_script.campo_guion(campo, formato["tipo"])   
+                querytime[formato["nombre"]] = \
+                    elastic_campos_script.campo_guion(campo, formato["tipo"])   
 
     return modelo, runtime, querytime
 
 # Crea modelo elastic, basado en campos y atributos
 def generaRegistraModelo(campos={}, definicion={}):
     if len(campos.keys()) > 0:
-        elastic_modelo, elastic_runtime, elastic_querytime = generaModelo(campos, definicion["indexamiento"], definicion["estructura"])
+        elastic_modelo, elastic_runtime, elastic_querytime = generaModelo(
+            campos, 
+            definicion["indexamiento"], 
+            definicion["estructura"]
+        )
 
         # Registra modelo de elastic
         registraModelo(

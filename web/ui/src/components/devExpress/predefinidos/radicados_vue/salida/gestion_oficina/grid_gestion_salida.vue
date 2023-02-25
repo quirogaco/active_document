@@ -13,20 +13,33 @@ import {
     DxFilterRow
 } from 'devextreme-vue/data-grid';
 
-import DxDropDownButton from 'devextreme-vue/drop-down-button'
-import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } from 'devextreme-vue/responsive-box'
-import { locale, loadMessages, formatMessage } from 'devextreme/localization'
+import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } 
+from 'devextreme-vue/responsive-box'
 import notify from 'devextreme/ui/notify'
 
 import fuenteDatos from '../../../../remoto/fuenteDatos.js'
 
-// Firmado
-import ventana_emergente_firma from './ventana_emergente_gestion/ventana_emergente_gestion.vue'
+// Notificar
+import ventana_emergente_firma from 
+'./ventana_emergente_gestion/ventana_emergente_gestion.vue'
+
+// Anula
+import ventana_emergente_anula from 
+'./ventana_emergente_anula/ventana_emergente_anula.vue'
+  
 
 // Columnas
-import grid_ventanilla_salida_columnas from '../../comunes/grid/grid_gestion_columnas.js'
+import grid_ventanilla_salida_columnas 
+from '../../comunes/grid/grid_gestion_columnas.js'
 // Metodos
-import grid_ventanilla_salida_metodos from './grid_gestion_salida_metodos.js'
+import grid_ventanilla_salida_metodos 
+from './grid_gestion_salida_metodos.js'
+
+let filtros_grid = [ 
+    ["dependencia_responde_id", "=", window.$usuario.dependencia_id],
+    ["estado_gestion", "=", "PENDIENTE"], 
+    ["estado_", "=", "ACTIVO"] 
+]
 
 // Grid de gestión
 let grid =  {
@@ -47,8 +60,11 @@ let grid =  {
         DxRow,
         DxItem,
 
-        // Ventana firma
-        ventana_emergente_firma
+        // Ventana notifica
+        ventana_emergente_firma,
+
+        // Ventana anula
+        ventana_emergente_anula
     },
 
     methods: grid_ventanilla_salida_metodos.metodos,
@@ -60,26 +76,31 @@ let grid =  {
 
     data() {
         return {
-            columnas      : grid_ventanilla_salida_columnas.columnas, // Columnas grid
-            fuente_datos  : fuenteDatos.creaFuenteDatosConsulta(
+            columnas: grid_ventanilla_salida_columnas.columnas,
+            fuente_datos: fuenteDatos.creaFuenteDatosConsulta(
                 'grid', 
                 null, 
                 'radicados_salida', 
                 'radicados_salida', 
-                [], 
-                []
+                filtros_grid, 
+                {}
             ),            
-            pageSizes           : [10, 25, 50, 100],
-            displayMode         : 'full',
+            pageSizes: [10, 25, 50, 100],
+            displayMode: 'full',
             showPageSizeSelector: true,
-            showInfo            : true,
-            showNavButtons      : true,
+            showInfo: true,
+            showNavButtons: true,
 
-            // Ventana PRESTAMO
+            // Ventanas emergentes
             opciones_ventana: {
                 visible: false
             },
             emergente_key: 0,
+
+            opciones_ventana_anula: {
+                visible: false
+            },            
+            emergente_key_anula:0
         }
     }
 }

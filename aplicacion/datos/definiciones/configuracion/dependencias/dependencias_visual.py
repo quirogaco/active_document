@@ -89,7 +89,7 @@ coordinadores_ids = adaptadores_grid_forma.adaptador_campo_forma(
     {
         'tipoeditor': 'tag', 
         "fuente"    : "usuarios",
-        #"filtros"   : [["estado_", "=", "activo"]]
+        "filtros"   : [["estado_", "=", "activo"]]
     }
 )
 padre_id = adaptadores_grid_forma.adaptador_campo_forma(
@@ -101,6 +101,15 @@ padre_id = adaptadores_grid_forma.adaptador_campo_forma(
         "busqueda_expresion": "nombre_completo",
         "muestra_expresion" : "nombre_completo",
         "filtros"           : [["estado_", "=", "activo"]]
+    }
+)
+dependencias_ids = adaptadores_grid_forma.adaptador_campo_forma(
+    "dependencias_ids", 
+    definicion["campos"]["dependencias_ids"], 
+    {
+        'tipoeditor': 'tag', 
+        "fuente"    : "dependencias",
+        "filtros"   : [["estado_", "=", "activo"]]
     }
 )
 estado_ =  adaptadores_grid_forma.adaptador_campo_forma(
@@ -118,6 +127,7 @@ campos = [
     pqrs_id,
     coordinadores_ids,
     padre_id,
+    dependencias_ids,
     estado_
 ]
 

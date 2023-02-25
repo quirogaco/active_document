@@ -85,8 +85,10 @@ let rutas_componentes = {
     'gestion_basica_grid': () => import('../components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'),
     'gestion_pantalla': () => import('../components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'),
     'tablero_general': () => import('../components/devExpress/tablero_control/tablero_general.vue'),
-    'grid_gestion_salida': () => import('../components/devExpress/predefinidos/radicados_vue/salida/gestion_oficina/grid_gestion_salida.vue'),
-    
+    'grid_gestion_consulta': () => import('../components/devExpress/predefinidos/gestion/gestion_oficina/grid_gestion_consulta.vue'),
+    'grid_gestion_funcionario_consulta': () => import('../components/devExpress/predefinidos/gestion/gestion_oficina/grid_gestion_funcionario_consulta.vue'),
+    'grid_gestion_consulta_entidad': () => import('../components/devExpress/predefinidos/gestion/gestion_oficina/grid_gestion_consulta_entidad.vue'),
+
     // ######
     // PQRS #
     // ######
@@ -102,16 +104,20 @@ let rutas_componentes = {
     'ventanilla_radicado_grid' : () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/grid/grid_ventanilla_radicado_grid.vue'),
     'ventanilla_radicado_forma': () => import('../components/devExpress/predefinidos/radicados_vue/entrada/ventanilla_pinia/form/ventanilla_forma_radicado.vue'),    
     'forma_radicado_consulta'  : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta/forma_radicado_consulta.vue'),
+    // Traslado y asignación
+    'grid_ventanilla_asigna_grid': () => import('../components/devExpress/predefinidos/radicados_vue/asignacion/ventanilla/grid_ventanilla_asigna_grid.vue'),
+    'forma_ventanilla_asigna'    : () => import('../components/devExpress/predefinidos/radicados_vue/asignacion/ventanilla/forma_ventanilla_asigna.vue'),
 
     // SALIDAS
     'grid_ventanilla_salida' : () => import('../components/devExpress/predefinidos/radicados_vue/salida/consulta/grid_ventanilla_salida.vue'),
-    'salida_forma_radicado'  : () => import('../components/devExpress/predefinidos/radicados_vue/salida/radicacion_formulario/salida_forma_radicado.vue'),    
-    'forma_salida_consulta'  : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_salida/forma_salida_consulta.vue'),
+    'salida_forma_radicado'  : () => import('../components/devExpress/predefinidos/radicados_vue/salida/radicacion_formulario/salida_forma_radicado.vue'), 
+    'forma_salida_consulta': () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_salida/forma_salida_consulta.vue'),   
+    
     
     // INTERNOS
     //'grid_ventanilla_interno': () => import('../components/devExpress/predefinidos/radicados_vue/interno/consulta/grid_ventanilla_interno.vue'),
     'interno_forma_radicado' : () => import('../components/devExpress/predefinidos/radicados_vue/interno/radicacion_formulario/interno_forma_radicado.vue'),
-    //'forma_interno_consulta' : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_interno/forma_interno_consulta.vue'),
+    'forma_interno_consulta' : () => import('../components/devExpress/predefinidos/radicados_vue/comunes/consulta_interno/forma_interno_consulta.vue'),
 
     // CORREOS POR DESCARGAR
     'correos_grid': () => import('../components/devExpress/predefinidos/correos/correos_grid.vue'), 

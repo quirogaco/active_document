@@ -24,7 +24,8 @@
 
 <script setup lang="ts">
 import { getCurrentInstance, ref, onMounted } from "vue";
-import crear_rutas_navegacion from '../../../librerias/crear_rutas_navegacion.js';
+import crear_rutas_navegacion from 
+'../../../librerias/crear_rutas_navegacion.js';
 
 // Este componente
 let that = getCurrentInstance().ctx;
@@ -73,7 +74,8 @@ let atributos_forma = {
 
 // envia datos servidor
 async function enviar_datos() {    
-    let datos = that.dataForm.validateData();  
+    let datos = that.dataForm.validateData(); 
+    //console.log("LGIN DATOS:", datos) 
     if (datos.isValid == true) {
         window.$mostrar_esperar();
         let parametros = datos["formData"];                
@@ -83,6 +85,7 @@ async function enviar_datos() {
             window.$rutasNavegacion = crear_rutas_navegacion.creaRutasNavegacion(respuesta.datos.opciones);                   
             window._APLICACION_.use(window.$rutasNavegacion.ruta);
             window.$router = window.$rutasNavegacion.ruta;
+            //console.log("respuesta.datos.usuario:", respuesta.datos.usuario)
             window.sessionStorage.setItem("usuario", JSON.stringify(respuesta.datos.usuario));
             window.sessionStorage.setItem("sesion", JSON.stringify(respuesta.datos.sesion));
             await window.$ns['aplicacion'].asignaRuta('cajon', 'components/devExpress/cajon/cajon.vue');  
