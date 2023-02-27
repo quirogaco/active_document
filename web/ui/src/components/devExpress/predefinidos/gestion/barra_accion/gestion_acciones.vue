@@ -14,17 +14,35 @@ import gestion_acciones_elementos from "../gestion_acciones_elementos/gestion_ac
 let componente;
 
 let elemento_click = function(e) {   
-    console.log("elemento_click:", e.itemData)
     let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id)    
     let evento = componente.$props.opciones.evento    
     componente.$emit(evento, parametros)     
 };
 
+let valida_termino_accion = function(accion_id) {   
+    let aprueba = true;
+    if ([3,2].indexOf(accion_id) > -1) {        
+        let gestion_registro = $get_params("gestion_registro"); 
+        // let creado_en = Date.parse(gestion_registro.creado_en_);
+        // var hours = Math.abs(Date.now() - creado_en) / 36e5;
+        // if (hours > 48) {
+        if (gestion_registro.dias_gestion > 1) {
+            $alertar("Ya pasaron mas de 2 dias habiles, no se puede trasladar o devolver! ", "Alerta");
+            aprueba = false;       
+        };         
+    };
+
+    return aprueba;
+};
+
+
 let elemento_click_gestion = function(e) {    
-    console.log("elemento_click_gestion:", e.itemData)  
-    let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id);   
-    let evento = componente.$props.opciones.evento_grid_gestion;
-    componente.$emit(evento, parametros)     
+    console.log("elemento_click_gestion:", e.itemData);
+    if ( valida_termino_accion(e.itemData.id) ) {
+        let parametros = gestion_acciones_elementos.elemento_parametros(e.itemData.id);   
+        let evento = componente.$props.opciones.evento_grid_gestion;
+        componente.$emit(evento, parametros);
+    }    
 };
 
 let barra_elementos = function(that) {

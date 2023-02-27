@@ -48,10 +48,10 @@ let metodos_forma = function(that) {
             let valida = that.forma_validacion();
             let datos = that.forma_datos();
             datos["clase_radicado"] = datos["es_pqrs"];
-            datos["formulario_web"] = null;
+            datos["formulario_web"] = null;            
             // OJO CON CORREOS//
             switch (accion) {
-                case 'radicar_ventanilla': 
+                case 'radicar_ventanilla':
                     let parametros = {
                         "accion": accion,
                         "datos" : datos
@@ -83,12 +83,13 @@ let metodos_forma = function(that) {
 
                 case 'regresar':       
                     window.scroll(0,0);  
-                    let datos = $get_params("ventanilla_radicado_forma")?.datos;
-                    if (datos )
-                    $lib.call_component_storage(
-                        that.retorna, 
-                        {"datos": {}}
-                    );
+                    let dat_p = $get_params("ventanilla_radicado_forma")?.datos;
+                    if (dat_p) {
+                        $lib.call_component_storage(
+                            that.retorna, 
+                            {"datos": {}}
+                        );
+                    }
                     break;
             }
         },

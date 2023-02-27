@@ -43,6 +43,15 @@ trabajadores = {
         '--loglevel', 'info'
     ],
 
+    'vencimientos': [
+        'celery', '-A', 'aplicacion.trabajadores_base.vencimientos',  
+        'worker',  '-Q', 'vencimientos',         
+        '--concurrency=1', 
+        '-Ofair', 
+        '-n', 'worker3.%h',
+        '--loglevel', 'info'
+    ],
+
 }
 
 def invoca_trabajadores():
@@ -61,6 +70,10 @@ def invoca_trabajadores():
 
     comando = trabajadores['conversion_pdf']  
     process = Popen( comando, shell=False, stdin=None, stdout=None, stderr=None, close_fds=True) #, creationflags=DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP ) 
+
+    comando = trabajadores['vencimientos']  
+    process = Popen( comando, shell=False, stdin=None, stdout=None, stderr=None, close_fds=True) #, creationflags=DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP ) 
+
 
 print("")
 print("***************************************************************************************************************************")

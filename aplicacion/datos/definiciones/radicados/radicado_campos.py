@@ -111,7 +111,10 @@ campos = {
     "gestion_horas_dias"   : tipos.texto(propiedades={"columna": "no", "titulo": "Gestión Plazo en HORAS, DIAS", "longitud": 60, "reporte": "SI"}), 
     "gestion_total_tiempo" : tipos.entero(propiedades={"columna": "no", "titulo": "Gestión Plazo total", "reporte": "SI"}),  
     "gestion_prioridad"    : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión Prioridad", "longitud": 60, "reporte": "SI"}), 
-
+    "fecha_respuesta"      : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha respuesta"}),
+    "dias_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Dias en gestion"}),  
+    "nro_respuesta": tipos.entero(propiedades={"columna": "no", "titulo": "Radicado que contesta"}),  
+    
     # Estado de gestion
     "gestion_inicio"       : tipos.fecha(propiedades={"columna": "no", "titulo": "Gestión inicia en", "reporte": "SI"}), 
     "gestion_vence_en"     : tipos.fecha(propiedades={"columna": "no", "titulo": "Gestión vence en", "reporte": "SI"}), 

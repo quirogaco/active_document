@@ -11,9 +11,15 @@ let metodos = {
         )
     },
 
+    'click':  function(e) {  
+        let datos = this.$refs.grid.instance.getSelectedRowsData();
+        //console.log("DATOS:", datos[0])
+        $save_params("gestion_registro", datos[0]);          
+    },
+
     'muestra_ventana_emergente_grid': function(parametros){
         let seleccionados = this.$refs.grid.instance.getSelectedRowKeys();
-        let datos         = this.$refs.grid.instance.getSelectedRowsData();
+        let datos = this.$refs.grid.instance.getSelectedRowsData();
         if ( seleccionados.length == 1) {
             this.emergente_key += 1;
             this.opciones_ventana.alto               = parametros.alto 

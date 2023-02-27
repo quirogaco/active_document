@@ -3,6 +3,7 @@
  
 import pprint, operator, copy
 
+from sqlalchemy import desc
 from librerias.datos.base import globales 
 from librerias.datos.estructuras import estructura_operaciones
 from . import sqalchemy_comunes
@@ -239,11 +240,11 @@ def leer_rango(
     retornar="diccionario"
 ):
     definicion = globales.lee_definicion(estructura)
-    CLASE      = globales.lee_clase(definicion["clase"])
-    sesion     = sqalchemy_comunes.nuevaSesion(ruta)      
-    registros  = sesion.query(CLASE)[desde : hasta]
-    resultado  = []
-    print(len(registros))
+    CLASE = globales.lee_clase(definicion["clase"])
+    sesion = sqalchemy_comunes.nuevaSesion(ruta)      
+    registros = sesion.query(CLASE).order_by(desc(CLASE.creado_en_))[desde:hasta]
+    resultado = []
+    #print(len(registros))
     for registro in registros:  
         normalizado = sqalchemy_comunes.retornar_datos(registro, retornar)         
         if extendido == True:
@@ -253,7 +254,7 @@ def leer_rango(
                 definicion, 
                 normalizado
             )     
-        resultado.append( normalizado )    
+        resultado.append(normalizado)    
     sesion.close()
 
     return resultado

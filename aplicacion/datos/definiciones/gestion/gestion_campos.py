@@ -54,6 +54,7 @@ campos = {
     "vence_en"             : tipos.fecha_obligatorio(propiedades={"columna": "no", "titulo": "Fecha vencimiento", "propiedad": gestion_atributos.vence_en}), 
     "estado_gestion"       : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Estado gestión", "longitud": 60, "propiedad": gestion_atributos.estado_gestion}),
     "dias_vencimiento"     : tipos.entero(propiedades={"columna": "no", "titulo": "Dias vencimiento", "propiedad": gestion_atributos.dias_vencimiento}),   
+    "dias_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Dias en gestion", "propiedad": gestion_atributos.dias_gestion}),   
     "finalizado_modo"      : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Modo de finalización", "longitud": 60, "propiedad": gestion_atributos.finalizado_modo}),
     "estado_vencimiento"   : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Estado vencimiento", "longitud": 60, "propiedad": gestion_atributos.estado_vencimiento}),
     "fecha_respuesta"      : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha respuesta", "propiedad": gestion_atributos.fecha_respuesta}),
@@ -61,6 +62,7 @@ campos = {
     "finalizado_por_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Finalizado por nombre", "propiedad": gestion_atributos.finalizado_por_nombre}),
     "finalizado_en"        : tipos.fecha(propiedades={"columna": "no", "titulo": "Finalizado fecha", "propiedad": gestion_atributos.finalizado_en}),
     "finalizado_comentario": tipos.fecha(propiedades={"columna": "no", "titulo": "Finalizado comentario", "propiedad": gestion_atributos.finalizado_comentario}),
+    "nro_respuesta": tipos.fecha(propiedades={"columna": "no", "titulo": "Nro radicado de respuesta", "propiedad": gestion_atributos.nro_respuesta}),
   
     # Trzabilidad
     "dependencias_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias id", "propiedad": gestion_atributos.dependencias_id}), 

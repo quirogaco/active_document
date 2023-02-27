@@ -14,23 +14,42 @@ conexion = globales.lee_conexion_elastic("base")
 
 def recuperar(conexion, estructura):
     modelo = globales.lee_modelo_elastic(estructura)
-    desde  = 0
+    definicion = globales.lee_definicion(estructura) 
 
-    resultado = sqalchemy_leer.leer_todos(
-        "base", 
-        estructura, 
-        desde=0, 
-        hasta=10000
-    )
-    bulk = elastic_operaciones.bulk_indexar(
-        conexion, 
-        modelo["modelo"], 
-        modelo["indice"], 
-        resultado
-    )
+    # desde  = 0
+    # resultado = sqalchemy_leer.leer_todos(
+    #     "base", 
+    #     estructura, 
+    #     desde=0, 
+    #     hasta=10000
+    # )
+
+    total = sqalchemy_leer.contar_registros("base", estructura)
+    paso = 5
+    for posicion in range(0, total, paso):
+        print("")
+        print(estructura, posicion, (posicion+paso), total, end=' - ')
+        resultado = sqalchemy_leer.leer_rango(
+            "base", 
+            estructura, 
+            desde=posicion, 
+            hasta=(posicion+paso), 
+            retornar="diccionario"
+        )
+        bulk = elastic_operaciones.bulk_indexar(
+            conexion, 
+            modelo["modelo"], 
+            modelo["indice"], 
+            resultado
+        )
+        # for r in resultado:
+        #     #pprint.pprint(r)
+        #     #print(r["atributos_"], r["nro_respuesta"])
+        #     print(r["nro_respuesta"])
+
     print("")
     
-    print("RESULTADO>>>" + estructura, len(resultado))    
+    print("RESULTADO>>>" + estructura, total)    
     print("")
 
     #pprint.pprint(resultado)
@@ -39,10 +58,10 @@ def recuperar(conexion, estructura):
     # for r in resultado:
     #     print(r["tipo_radicado"], r["funcionarios_id"])
 
-    for r in resultado:
-        print("")
-        print("....................")
-        print(r["nro_radicado"], r["clase_radicado"], r["gestion_asignada_peticion"])
+    # for r in resultado:
+    #     print("")
+    #     print("....................")
+    #     print(r["nro_radicado"], r["clase_radicado"], r["gestion_asignada_peticion"])
 
         
         # for archivo in r["archivos"]:
@@ -99,13 +118,12 @@ def recuperar(conexion, estructura):
 
 #"""
 # RADICACION GESTION
-#recuperar(conexion, "radicados_entrada")
-# recuperar(conexion, "radicados_salida")
-# recuperar(conexion, "radicados_interno")
-# recuperar(conexion, "peticiones")
-# recuperar(conexion, "copias")
-
-recuperar(conexion,"correos_descargados")
+recuperar(conexion, "radicados_entrada")
+recuperar(conexion, "radicados_salida")
+recuperar(conexion, "radicados_interno")
+recuperar(conexion, "peticiones")
+recuperar(conexion, "copias")
+# recuperar(conexion,"correos_descargados")
 #"""
 
 #"""

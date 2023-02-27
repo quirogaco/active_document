@@ -3,15 +3,26 @@
 
 import pprint, builtins
 
-from kombu                 import Queue, Exchange
-from celery.schedules      import crontab
-from librerias.datos.base  import globales
+from kombu import Queue, Exchange
+from celery.schedules import crontab
+from librerias.datos.base import globales
 
 from . import crea_celery_app
 
 programadas_app = crea_celery_app.simple_celery('programadas_app')
+
 programadas_app.conf.task_queues = (
-   Queue('conversion_pdf',        exchange=Exchange('conversion_pdf'),        routing_key='conversion_pdf'),
+   Queue(
+      'conversion_pdf', 
+      exchange=Exchange('conversion_pdf'), 
+      routing_key='conversion_pdf'
+   ),
+   
+   Queue(
+      'vencimientos', 
+      exchange=Exchange('vencimientos'), 
+      routing_key='vencimientos'
+   )
 )
 
 
@@ -20,5 +31,11 @@ programadas_app.conf.beat_schedule = {
       "task"    : "conversion_pdf",
       "schedule": crontab(minute='*/5'),
       "options" : {'queue': 'conversion_pdf'}
+   },
+
+   "vencimientos": {
+      "task"    : "vencimientos",
+      "schedule": crontab(minute=0, hour='*/6'),
+      "options" : {'queue': 'vencimientos'}
    }
 }

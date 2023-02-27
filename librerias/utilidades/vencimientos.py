@@ -66,16 +66,16 @@ def siguiente_fecha_habil_dias( fecha_inicial, dias=0, festivos=[] ):
 # Calcula el numero de dias habiles entre dos fechas
 def diferencia_en_dias_habiles( fecha_hoy, fecha_vence, festivos=[] ):
     # Festivos dias sin horas
-    festivos    = prepara_festivos( festivos )
-    un_dia      = datetime.timedelta(1)
-    cero_dia    = datetime.timedelta(0)
+    festivos = prepara_festivos( festivos )
+    un_dia = datetime.timedelta(1)
+    cero_dia = datetime.timedelta(0)
     # Fechas rango
-    fecha_hoy   = datetime.datetime( fecha_hoy.year,   fecha_hoy.month,   fecha_hoy.day,   0, 0, 0, 0 )
+    fecha_hoy = datetime.datetime( fecha_hoy.year, fecha_hoy.month, fecha_hoy.day,   0, 0, 0, 0 )
     fecha_vence = datetime.datetime( fecha_vence.year, fecha_vence.month, fecha_vence.day, 0, 0, 0, 0 )
     # Fechas rango habiles 
-    fecha_base  = siguiente_habil( fecha_hoy,   festivos )
+    fecha_base = siguiente_habil( fecha_hoy,   festivos )
     fecha_final = siguiente_habil( fecha_vence, festivos )
-    dias        = 0    
+    dias = 0    
     if ( fecha_base - fecha_final ) < cero_dia:
         # Dentro de los terminos
         # Cuenta dias hasta fecha final

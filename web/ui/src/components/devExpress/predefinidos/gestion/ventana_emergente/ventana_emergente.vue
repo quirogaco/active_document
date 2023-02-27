@@ -96,7 +96,6 @@ let ventana =  {
     mounted() {
         this.popup_visible = ref(this.opciones.visible);
         window.$ventana_emergente = this;
-        console.log("EERGENETE:", this.opciones);
         switch (this.opciones.accion) {
             case "RADICAR_DOCUMENTO":
                 this.datos = JSON.stringify(this.opciones);

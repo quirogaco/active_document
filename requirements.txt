@@ -1,4 +1,5 @@
-SQLAlchemy==1.4.46       # Manejo de bases de datos SQL
+#SQLAlchemy==1.4.46       # Manejo de bases de datos SQL
+SQLAlchemy               # Manejo de bases de datos SQL
 sqlalchemy-utils         # Utilidades Sqlalchemy
 cx_Oracle                # driver oracle
 pycamunda                # Bpmn camunda

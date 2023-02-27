@@ -1,7 +1,20 @@
-import visores_archivo from "../../../../../librerias/visores_archivo.js"
-import gestion_acciones_elementos  
-from "../gestion_acciones_elementos/gestion_acciones_elementos.js"
-import gestion_pantalla_definiciones from "./gestion_pantalla_definiciones.js"
+import visores_archivo from "../../../../../librerias/visores_archivo.js";
+import gestion_acciones_elementos
+from "../gestion_acciones_elementos/gestion_acciones_elementos.js";
+import gestion_pantalla_definiciones from "./gestion_pantalla_definiciones.js";
+
+let valida_termino_accion = function(accion_id) {   
+    let aprueba = true;
+    if ([3,2,8].indexOf(accion_id) > -1) {        
+        let gestion_registro = $get_params("gestion_registro"); 
+        if (gestion_registro.dias_gestion > 1) {
+            $alertar("Ya pasaron mas de 2 dias habiles, no se puede trasladar o devolver! ", "Alerta");
+            aprueba = false;       
+        };         
+    };
+
+    return aprueba;
+};
 
 let metodos = {
     // ######################################## //
@@ -298,12 +311,15 @@ let metodos = {
         };        
     },
 
-    accion_click(e) {        
-        let parametros = gestion_acciones_elementos.elemento_parametros(
-            e.itemData.id
-        )  
-        this.asigna_parametros(parametros)
-        this.emergente_key += 1;
+    accion_click(e) {           
+        console.log("accion_click:", e.itemData.id);
+        if ( valida_termino_accion(e.itemData.id) ) {
+            let parametros = gestion_acciones_elementos.elemento_parametros(
+                e.itemData.id
+            )  
+            this.asigna_parametros(parametros)
+            this.emergente_key += 1;
+        }
     }
 };
 

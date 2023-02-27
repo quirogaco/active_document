@@ -32,6 +32,8 @@ def gestion_asignada_peticion(sesion, r_):
         
         # Estado, vencimiento
         "gestion_inicio"  : "gestion_inicio",
+        "dias_gestion"  : "dias_gestion",
+        "fecha_respuesta": "fecha_respuesta",
         "gestion_vence_en": "vence_en",
         "gestion_estado"  : "estado_gestion",
         "gestion_etapa"   : "etapa_gestion",

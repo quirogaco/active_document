@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import re
 import pprint, datetime
 
 # Base general con atributos basicos
@@ -166,25 +167,30 @@ dias_festivos = sqalchemy_leer.leer_todos(
     "festivos", 
     desde=0, 
     hasta=1000
-)   
-def vence_en(_r):
+)  
+
+def leer_festivos(_r):
     global dias_festivos
+
     festivos = [] # Cargarlos de base de datos
     if getattr(_r, "_dias_festivos", None) is None:
-        # dias_festivos = sqalchemy_leer.leer_todos(
-        #     "base", 
-        #     "festivos", 
-        #     desde=0, 
-        #     hasta=1000
-        # )   
         setattr(_r, "_dias_festivos", dias_festivos)
 
-    for dia_festivo in _r._dias_festivos:
-        festivo = dia_festivo["festivo"]
-        if isinstance(festivo, str) == True:
-            festivo = datetime.datetime.fromisoformat(festivo)
-        festivos.append(festivo)
+    if getattr(_r, "_festivos", None) is None:
+        for dia_festivo in _r._dias_festivos:
+            festivo = dia_festivo["festivo"]
+            if isinstance(festivo, str) == True:
+                festivo = datetime.datetime.fromisoformat(festivo)
+            festivos.append(festivo)
+        setattr(_r, "_festivos", festivos)
+    else:
+        festivo = getattr(_r, "_festivos", [])
     
+
+    return festivos
+
+def vence_en(_r):    
+    festivos = leer_festivos(_r)
     # # No tiene en cuenta HORA O DIAS
     vence = vencimientos.siguiente_fecha_habil_dias(
         _r.gestion_inicio, 
@@ -229,6 +235,21 @@ def finalizado_comentario(_r):
     
     return valor
 
+regex = r"(?<=\[)([^]]+)(?=\])"
+
+def nro_respuesta(_r):
+    global regex
+    nro = ""
+    if _r.finalizado_modo == "RESPUESTA":
+        matches = re.findall(
+            regex, 
+            _r.finalizado_comentario
+        )               
+        if matches:
+            nro = matches[0]
+
+    return nro
+
 # Estado general (PENDIENTE, FINALIZADO)
 def estado_gestion(_r):
     estado = "PENDIENTE"     
@@ -269,7 +290,7 @@ def estado_vencimiento(_r):
 
 # Dias para vencer o vencidos
 def dias_vencimiento(_r):
-    festivos  = [] # Cargarlos de base de datos
+    festivos = leer_festivos(_r)
     # No tiene en cuenta HORA O DIAS
     fecha_hoy = datetime.datetime.now() 
     dias = vencimientos.diferencia_en_dias_habiles( 
@@ -277,6 +298,24 @@ def dias_vencimiento(_r):
         _r.vence_en, 
         festivos 
     )
+
+    return dias
+
+# Dias para vencer o vencidos
+def dias_gestion(_r):
+    finalizado = _r.atributos_.get("finalizado", {})
+    valor = finalizado.get("finalizado_en", None)
+    if valor == None:
+        valor = datetime.datetime.now() 
+    
+    festivos = leer_festivos(_r) 
+    dias = vencimientos.diferencia_en_dias_habiles( 
+        _r.creado_en_, 
+        valor,         
+        festivos 
+    )
+
+    #print(_r.creado_en_, valor, dias)
 
     return dias
 

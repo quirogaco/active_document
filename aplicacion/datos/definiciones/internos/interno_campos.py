@@ -79,6 +79,8 @@ campos = {
     "gestion_estado"       : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado", "longitud": 60, "reporte": "SI"}), 
     "gestion_etapa"        : tipos.clave(propiedades={"columna": "no", "titulo": "Gestión etapa", "longitud": 60, "reporte": "SI"}), 
     "gestion_estado_vencimiento": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado vencimiento", "longitud": 60, "reporte": "SI"}), 
+    "fecha_respuesta"      : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha respuesta"}),
+    "dias_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Dias en gestion"}),   
     
 
     # Tipo de firma
