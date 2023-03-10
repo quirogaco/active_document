@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
-        "rootDir": "./src",
+        "rootDir": "/active_document/web/ui/src",
         "paths": {
             "@/*": [
-                "./src/components/devExpress/predefinidos/*"
+                "/active_document/web/ui/src/components/devExpress/predefinidos/*"
             ]
         }
     },
     "include": [
-        "./src/**/*",
-        "./src/**/*.js"
+        "/active_document/web/ui/src/**/*",
+        "/active_document/web/ui/src/**/*.js"
     ],
     "exclude": [
         "node_modules", 

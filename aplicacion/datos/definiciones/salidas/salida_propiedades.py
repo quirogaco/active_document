@@ -131,6 +131,9 @@ def funcionarios_id(r_):
 def gestion_estado(r_):
     return ""
 
+def gestion_estado_vencimiento(r_):
+    return ""
+
 def remite_ent_dep_nombre(r_):
     dato = ""
     if (r_.dependencia_responde_nombre not in ["", None]):

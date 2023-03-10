@@ -5,13 +5,13 @@ import gestion_pantalla_definiciones from "./gestion_pantalla_definiciones.js";
 
 let valida_termino_accion = function(accion_id) {   
     let aprueba = true;
-    if ([3,2,8].indexOf(accion_id) > -1) {        
-        let gestion_registro = $get_params("gestion_registro"); 
-        if (gestion_registro.dias_gestion > 1) {
-            $alertar("Ya pasaron mas de 2 dias habiles, no se puede trasladar o devolver! ", "Alerta");
-            aprueba = false;       
-        };         
-    };
+    // if ([3,2,8].indexOf(accion_id) > -1) {        
+    //     let gestion_registro = $get_params("gestion_registro"); 
+    //     if (gestion_registro.dias_gestion > 1) {
+    //         $alertar("Ya pasaron mas de 2 dias habiles, no se puede trasladar o devolver! ", "Alerta");
+    //         aprueba = false;       
+    //     };         
+    // };
 
     return aprueba;
 };
@@ -140,35 +140,37 @@ let metodos = {
     // ########## //
     // Manejo de BORRADOR
     'carga_borrador': function(borrador_id) {
-        this.verBorrador = false
-        let etapa_estado = this.parametros.etapa_estado
-        let colaborativa = this.parametros.colaborativa
+        this.verBorrador = false;
+        let etapa_estado = this.parametros.etapa_estado;
+        let colaborativa = this.parametros.colaborativa;
 
         // Edición de borrador
-        let modo         = "editar"
-        if (etapa_estado == "APROBADO_RESPUESTA") modo = "lectura"
-        if (colaborativa != "") modo = "lectura"
+        let modo = "editar";
+        if (etapa_estado == "APROBADO_RESPUESTA") modo = "lectura";
+        if (colaborativa != "") modo = "lectura";
         
         // Muestra editor
         let parametros_editor = window.$lib.unifica_datos_visor({
             titulo_general: "Consulta de Plantillas",
-            archivo_id    : borrador_id, 
+            archivo_id: borrador_id, 
             tipo_documento: "docx", 
-            titulo        : "Borrador en gestión",
-            modo          : modo,
-            descarga      : 'no'
+            titulo: "Borrador en gestión",
+            modo: modo,
+            descarga: 'no'
         })        
         
-        this.editor.mostrar_editor(parametros_editor)
-        this.verBorrador         = true
-        this.borrador_existe     = true
+        this.editor.mostrar_editor(parametros_editor);
+        this.parametros.borrador_id = borrador_id;
+        this.verBorrador = true;
+        this.borrador_existe = true;
         if (this.pdf_existe == true) {
-            this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
-            this.clase_pdf      = "col-6 shadow-sm p-3 mb-3 bg-body rounded"
+            this.clase_borrador = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
+            this.clase_pdf      = "col-6 shadow-sm p-3 mb-3 bg-body rounded";
         }
         else {
-            this.clase_borrador = "col-12 shadow-sm p-3 mb-3 bg-body rounded"
+            this.clase_borrador = "col-12 shadow-sm p-3 mb-3 bg-body rounded";
         }  
+
         this.barra_elementos_visuales = 
             gestion_pantalla_definiciones.barra_elementos(
                 this,
@@ -311,8 +313,7 @@ let metodos = {
         };        
     },
 
-    accion_click(e) {           
-        console.log("accion_click:", e.itemData.id);
+    accion_click(e) {             
         if ( valida_termino_accion(e.itemData.id) ) {
             let parametros = gestion_acciones_elementos.elemento_parametros(
                 e.itemData.id

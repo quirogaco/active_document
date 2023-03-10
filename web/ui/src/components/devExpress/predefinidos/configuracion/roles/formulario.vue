@@ -60,7 +60,7 @@ let forma =  {
         this.barra = this.$refs.barra.instance; 
         this.notify = notify;
         //this.parametros = JSON.parse(this.datos);
-        console.log(">>>>", $get_params("roles_formulario"))
+        //console.log(">>>>", $get_params("roles_formulario"))
         this.parametros = $get_params("roles_formulario").datos;
         this.mostrar_botones();
     },
@@ -79,7 +79,7 @@ let forma =  {
             
             // Opciones CAMPOS
             opciones_opciones: {
-                dataSource       : fuenteDatos.creaFuenteDatosConsulta(
+                dataSource: fuenteDatos.creaFuenteDatosConsulta(
                     'select', 
                     null, 
                     'opciones_sistema', 

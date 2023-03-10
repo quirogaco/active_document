@@ -24,7 +24,7 @@
                     />          
 
                     <DxSimpleItem
-                        data-field  = "descripcion"
+                        data-field = "descripcion"
                         editor-type = "dxTextBox"
                     >
                         <DxLabel text="Descripción"/>
@@ -33,20 +33,36 @@
                             :max="255"
                             message="Maximo 255 caracteres"
                         />                      
-                    </DxSimpleItem>                           
+                    </DxSimpleItem>
                     
                     <DxSimpleItem                
-                        data-field      = "dependencia_id"
-                        editor-type     = "dxSelectBox"
-                        :editor-options = "opciones_dependencia"
+                        data-field = "tipo_plantilla"
+                        editor-type = "dxSelectBox"
+                        :editor-options = "tipo_opciones"
                     >
-                        <DxLabel text="Dependencia especifica"/>
+                        <DxLabel text="Tipo general de plantilla"/>
+                    </DxSimpleItem>   
+                    
+                    <DxSimpleItem                
+                        data-field = "territoriales_id"
+                        editor-type = "dxTagBox"
+                        :editor-options = "territorial_opciones"
+                    >
+                        <DxLabel text="Territoriales asociadas"/>
+                    </DxSimpleItem>    
+
+                    <DxSimpleItem                
+                        data-field = "dependencias_id"
+                        editor-type = "dxTagBox"
+                        :editor-options = "dependencia_opciones"
+                    >
+                        <DxLabel text="Dependencias asociadas"/>
                     </DxSimpleItem>    
                 
                     <DxSimpleItem
-                        :visible        = "archivo_visible"
-                        data-field      = "archivos" 
-                        editor-type     = "dxFileUploader"                        
+                        :visible = "archivo_visible"
+                        data-field = "archivos" 
+                        editor-type = "dxFileUploader"                        
                         :editor-options = "opciones_anexo"
                     >
                         <DxLabel text="Archivo electrónico"/>

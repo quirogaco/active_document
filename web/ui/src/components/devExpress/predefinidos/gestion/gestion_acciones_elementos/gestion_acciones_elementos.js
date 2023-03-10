@@ -286,10 +286,7 @@ let respuesta_rapida = {
 
 // componente: grid, forma
 let items_gestion = function(componente, contexto, datos={}) {
-    let items = [
-        //{ id: 1,  titulo: 'Asignar responsable', icon: "fas fa-user-check" },
-        //{ id: 16, titulo: 'Respuesta rapída',    icon: "fas fa-shipping-fast" },
-    ]
+    let items = [];
     
     if (contexto=="grid_gestion") {        
         if (
@@ -317,7 +314,6 @@ let items_gestion = function(componente, contexto, datos={}) {
             ]
         }  
         else {
-            console.log("datos.clase_radicado:", datos.clase_radicado)
             if (datos.clase_radicado == "INTERNO") {
                 items = [ 
                     finalizar        
@@ -325,9 +321,7 @@ let items_gestion = function(componente, contexto, datos={}) {
             }
             else {
                 let etapa_estado = componente.parametros.etapa_estado
-                let borrador_existe = componente.parametros.borrador_existe;
-                if (borrador_existe) {};
-                //console.log("GESTION: ", etapa_estado, borrador_existe) 
+                let borrador_existe = componente.borrador_existe;
                 switch (etapa_estado) {
                     case "ASIGNADO_DEPENDENCIA":
                         items = [
@@ -353,10 +347,10 @@ let items_gestion = function(componente, contexto, datos={}) {
                             items.push(finalizar)
                         }
                         
-                        //if ( borrador_existe ) {
+                        if ( borrador_existe ) {
                             items.push(enviar_a_visto_bueno)
-                            items.push(radicar_borrador)
-                        //}
+                            //items.push(radicar_borrador)
+                        }
                         break
 
                     case "DEVUELTO_ASIGNADORA":
@@ -413,9 +407,8 @@ let items_gestion = function(componente, contexto, datos={}) {
                     case "APROBADO_RESPUESTA":
                         items = [
                             radicar_borrador, 
-                            enviar_a_visto_bueno,
-
-                            crear_borrador
+                            enviar_a_visto_bueno
+                            //crear_borrador
                         ]
                         break
 
@@ -430,10 +423,10 @@ let items_gestion = function(componente, contexto, datos={}) {
                             items.push(finalizar)
                         }
                         
-                        //if ( borrador_existe ) {
+                        if ( borrador_existe ) {
                             items.push(enviar_a_visto_bueno)
-                            items.push(radicar_borrador)
-                        //}
+                            //items.push(radicar_borrador)
+                        }
                         break
                 }
             }        

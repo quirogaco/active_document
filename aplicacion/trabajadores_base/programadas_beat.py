@@ -19,9 +19,9 @@ programadas_app.conf.task_queues = (
    ),
    
    Queue(
-      'vencimientos', 
-      exchange=Exchange('vencimientos'), 
-      routing_key='vencimientos'
+      'vencimientos_peticion', 
+      exchange=Exchange('vencimientos_peticion'), 
+      routing_key='vencimientos_peticion'
    )
 )
 
@@ -33,9 +33,9 @@ programadas_app.conf.beat_schedule = {
       "options" : {'queue': 'conversion_pdf'}
    },
 
-   "vencimientos": {
-      "task"    : "vencimientos",
-      "schedule": crontab(minute=0, hour='*/6'),
-      "options" : {'queue': 'vencimientos'}
+   "vencimientos_peticion": {
+      "task"    : "vencimientos_peticion",
+      "schedule": crontab(minute=0, hour='*/8'),
+      "options" : {'queue': 'vencimientos_peticion'}
    }
 }

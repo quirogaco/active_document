@@ -1,20 +1,19 @@
 <template src="./gestion_pantalla.html">
 </template>
 
-<script>
+<script lang="ts">
     import { 
         ref
     } from 'vue'
     import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } from 'devextreme-vue/responsive-box'
-    import { DxScrollView }  from 'devextreme-vue/scroll-view'
-    import { DxLoadPanel }   from 'devextreme-vue/load-panel'
-    import notify            from 'devextreme/ui/notify'
-    import { DxBox }         from 'devextreme-vue/box'
-    import DxButtonGroup     from 'devextreme-vue/button-group'
-    import DxDropDownButton  from 'devextreme-vue/drop-down-button'
+    import { DxScrollView } from 'devextreme-vue/scroll-view'
+    import { DxLoadPanel } from 'devextreme-vue/load-panel'
+    import { DxBox } from 'devextreme-vue/box'
+    import DxButtonGroup from 'devextreme-vue/button-group'
+    import DxDropDownButton from 'devextreme-vue/drop-down-button'
     import onlyoffice_editor from "../../../../onlyOffice/onlyoffice_editor.vue"
-    import pdf_componente    from "../../../../pdfjs/pdf_componente.vue"
-    import DxToolbar         from 'devextreme-vue/toolbar'
+    import pdf_componente from "../../../../pdfjs/pdf_componente.vue"
+    import DxToolbar from 'devextreme-vue/toolbar'
 
     import utilidades_estructura from '../../../../../librerias/utilidades_estructura.js'
 
@@ -103,7 +102,7 @@
         async mounted() {
             // Pantalla para invocar en acciones
             window.$pantalla_gestion = this;
-            let temporal = $forma.lee_propiedades(
+            let temporal = window.$forma.lee_propiedades(
                 this.$props, 
                 "gestion_pantalla"
             ).datos;            

@@ -196,7 +196,7 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
     }
 }
 else {   
-    // CARGA APLICATIVO    
+    // // CARGA APLICATIVO    
     window.$componentesRutas = rutas_predefinidos.rutas_componentes
     //window.$ns['aplicacion'].crea_enrutador();
     await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
@@ -205,7 +205,8 @@ else {
     
     /* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
-        "id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
+        //"id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
+        "id": "46de06e8-d5f5-11ec-ba28-005056862cfc",
         "codigo": "PROFESIONAL",
         "nombre": "HUMBERTO OSPINA -PROFESIONAL",
         "correo": "QUIROGACO@GMAIL.COM",
@@ -216,14 +217,13 @@ else {
         "reemplaza_id": null,
         "roles_especificos": ['JEFE', 'ARCHIVO', 'CORRESPONDENCIA', 'PQRSD']
     }))
-   
-    // window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));
-    // await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');  
+    window.$usuario = JSON.parse(window.sessionStorage.getItem("usuario"));
+    //await window.$ns['aplicacion'].asignaRuta('cajon', '/components/devExpress/cajon/cajon.vue');  
     
-    await window.$ns['aplicacion'].asignaRuta(
-        'trd_basica_grid',  
-        '/components/devExpress/predefinidos/archivo/trd/definicion/grid_trd/trd_basica_grid.vue'
-    );   
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'trd_basica_grid',  
+    //     '/components/devExpress/predefinidos/archivo/trd/definicion/grid_trd/trd_basica_grid.vue'
+    // );   
 
     // await window.$ns['aplicacion'].asignaRuta(
     //     'trd_pantalla',  
@@ -250,10 +250,15 @@ else {
     //     '/components/devExpress/predefinidos/archivo/expedientes/grid_disposicion/expediente_disposicion_grid.vue'
     // ); 
 
-    // await window.$ns['aplicacion'].asignaRuta(
-    //     'gestion_basica_grid',  
-    //     '/components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'
-    // ); 
+    await window.$ns['aplicacion'].asignaRuta(
+        'gestion_basica_grid',  
+        '/components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'
+    ); 
+
+    await window.$ns['aplicacion'].asignaRuta(
+        'gestion_pantalla',  
+        '/components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'
+    ); 
 
 
     // await window.$ns['aplicacion'].asignaRuta(
@@ -297,11 +302,11 @@ else {
     
     setTimeout(() => {
         $router.push({
-            path: "trd_basica_grid"
+            //path: "trd_basica_grid"
             //path: "expediente_basica_grid"
             //path: "expediente_transfiere_grid"
             //path: "expediente_disposicion_grid"
-            //path: "gestion_basica_grid"
+            path: "gestion_basica_grid"
             //path: "flujos_dinamicos_grid"
             //path: "ventanilla_radicado_grid",
             //path: "ventanilla_radicado_forma",

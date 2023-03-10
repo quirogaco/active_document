@@ -119,20 +119,48 @@ let plantilla =  {
             opciones_id: {
                 visible: false
             },
+
+            // Opciones tipo general de plantilla
+            tipo_opciones: {
+                dataSource: ["NOTIFICACION", "SALIDA", "INTERNO"]
+            },
                 
-            // Opciones CAMPOS
-            opciones_dependencia: {
-                dataSource  : fuenteDatos.creaFuenteDatosConsulta('select', null, 'dependencias', 'dependencias', [], []),
+            // Opciones dependencia
+            dependencia_opciones: {
+                dataSource: fuenteDatos.creaFuenteDatosConsulta(
+                    'select', 
+                    null, 
+                    'dependencias', 
+                    'dependencias', 
+                    [], 
+                    []
+                ),
                 displayValue: "nombre_completo",
-                displayExpr : "nombre_completo",
-                searchExpr  : "nombre_completo",
-                valueExpr   : "id"
+                displayExpr: "nombre_completo",
+                searchExpr: "nombre_completo",
+                valueExpr: "id"
+            },
+
+            // Opciones territoriales
+            territorial_opciones: {
+                dataSource: fuenteDatos.creaFuenteDatosConsulta(
+                    'select', 
+                    null, 
+                    'ubicaciones', 
+                    'ubicaciones', 
+                    [], 
+                    []
+                ),
+                displayValue: "nombre",
+                displayExpr: "nombre",
+                searchExpr: "nombre",
+                valueExpr: "id"
             },
 
             // Carga de archivos
             archivo_visible: true,
             opciones_anexo: {
-                uploadMode           : "useForm",
+                uploadMode: "useForm",
                 allowedFileExtensions: ['.docx']
             },            
             

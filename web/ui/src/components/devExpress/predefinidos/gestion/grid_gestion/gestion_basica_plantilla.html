@@ -16,6 +16,7 @@
             
         <DxDataGrid
             ref = "grid"
+            :height = "650"
             :data-source = "fuente_datos"
             :selection = "{ mode: 'multiple' }"
             :remote-operations = "true"
@@ -23,14 +24,14 @@
             :row-alternation-enabled = "true"
             :show-borders = "true"
             :columns = "columnas"
-            :word-wrap-enabled = "true"
+            :word-wrap-enabled = "true"           
             @row-dbl-click = "dobleClick"
             @row-click = "click"
         >
 
             <DxSearchPanel
                 :visible                  = "true"                
-                :width                    = "300"
+                :width                    = "300"                
                 placeholder               = "Buscar"
                 :highlight-search-text    = "false"
             />

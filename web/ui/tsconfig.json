@@ -3,16 +3,16 @@
         "module": "commonjs",
         "target": "es2016",
         "jsx": "preserve",
-        "rootDir": "./src",
+        "rootDir": "/active_document/web/src",
         "paths": {
             "@/*": [
-                "./src/components/devExpress/predefinidos/*"            
+                "/active_document/web/src/components/devExpress/predefinidos/*"            
             ]
         }
     },
     "include": [
-        "./src/**/*",
-        "./src/**/*.js"
+        "/active_document/web/src/**/*",
+        "/active_document/web/src/**/*.js"
     ],
     "exclude": [
         "node_modules", 

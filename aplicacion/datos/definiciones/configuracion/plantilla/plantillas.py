@@ -30,12 +30,31 @@ def archivo_procesamiento(_r):
     
     return archivos
 
+def tipo_plantilla(_r):
+    tipo = _r.datos.get("tipo_plantilla", "")
+
+    return tipo
+
+def territoriales_id(_r):
+    tipo = _r.datos.get("territoriales_id", [])
+
+    return tipo
+
+def dependencias_id(_r):
+    tipo = _r.datos.get("dependencias_id", [])
+
+    return tipo
+
 campos = {
-    "descripcion"       : tipos.texto_obligatorio(propiedades={"titulo": "Descripción", "longitud": 256, "reporte": "SI"}),     
-    "dependencia_id"    : tipos.clave(propiedades={"titulo": "dependencia_id", "longitud": 60}),  
+    "descripcion": tipos.texto_obligatorio(propiedades={"titulo": "Descripción", "longitud": 256, "reporte": "SI"}),     
+    "dependencia_id": tipos.clave(propiedades={"titulo": "dependencia_id", "longitud": 60}),  
     "dependencia_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia nombre", "longitud": 250}),    
-    "archivos"          : tipos.clave(propiedades={"columna": "no", "titulo": "Archivos","propiedad": archivo_procesamiento}),
-    "tipo_archivo"      : tipos.texto(propiedades={"columna": "no", "titulo": "Tipo Archivo", "propiedad": tipo_archivo}), 
+    "archivos": tipos.clave(propiedades={"columna": "no", "titulo": "Archivos","propiedad": archivo_procesamiento}),
+    "tipo_archivo": tipos.texto(propiedades={"columna": "no", "titulo": "Tipo Archivo", "propiedad": tipo_archivo}), 
+    "datos": tipos.json(propiedades={"titulo": "Tipo de plantilla"}),
+    "tipo_plantilla": tipos.texto(propiedades={"columna": "no", "titulo": "Tipo plantilla", "propiedad": tipo_plantilla}), 
+    "territoriales_id": tipos.texto(propiedades={"columna": "no", "titulo": "Territoriales id", "propiedad": territoriales_id}), 
+    "dependencias_id": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencias id", "propiedad": dependencias_id}), 
 }
 
 referencias = [
@@ -63,7 +82,10 @@ definicion = {
 }
 
 # Crea clase SQLALCHEMY
-CLASE = sqalchemy_clase_dinamica.crea_clase( definicion, (base_general.DB_BASE_SIMPLE, globales.CLASE_BASE_SQL) )
+CLASE = sqalchemy_clase_dinamica.crea_clase( 
+    definicion, 
+    (base_general.DB_BASE_SIMPLE, globales.CLASE_BASE_SQL) 
+)
 globales.carga_clase(definicion["clase"], CLASE)
 
 ############
@@ -77,7 +99,7 @@ indexamiento = {
 
 # Campos elastic
 camposIndexamiento = indexamiento.copy()
-camposElastic      = campos.copy()
+camposElastic = campos.copy()
 camposElastic.update(camposIndexamiento)
 
 # Publica

@@ -35,6 +35,11 @@ def actualiza(radicado_datos, peticion_id, id_tarea):
     datos_tarea = redis_datos.lee_tarea_ejecucion(id_tarea)
     # Trae petición
     gestion = sqalchemy_leer.leer_un_registro("peticiones", peticion_id)
+    # print("")
+    # print("----------------------------------------------")
+    # pprint.pprint(gestion)
+    # print("----------------------------------------------")
+    # print("")
     # Trae radicado Entrada     
     radicado = sqalchemy_leer.leer_un_registro(
         "radicados_entrada", 

@@ -52,7 +52,7 @@ let ventanas_globales = [
         text     : 'Pdf borrador',
     },
     
-    // 6 -regresar
+    // 6 - regresar
     {
         icon     : 'fas fa-backward',
         alignment: 'right',
@@ -80,10 +80,15 @@ const esconde_botones = function(ocultar) {
 // Botones de manejo de ventanas pdf y borrador
 const ver_ventanas = function(forma) {
     let ocultar = []
-
+    console.log("forma.parametros.borrador_id>>", forma.parametros);
     // Ocultar radicado
-    if ( forma.parametros.origen_tipo != "ENTRADA") {
-        ocultar.push("radicado")
+    if ( forma.parametros.origen_tipo == "ENTRADA") {
+        ocultar.push("radicado");
+    }
+
+    if ( forma.parametros.origen_tipo == "INTERNO") {
+        ocultar.push("radicado");
+        ocultar.push("gestion");
     }
 
     // Ocultar borrador
@@ -124,6 +129,6 @@ const ver_ventanas = function(forma) {
 }
 
 export default {
-    ventanas_globales : ventanas_globales,
-    ver_ventanas      : ver_ventanas
+    ventanas_globales: ventanas_globales,
+    ver_ventanas: ver_ventanas
 }

@@ -8,8 +8,16 @@
 <script>
 import librerias from '../../librerias/librerias.js'
 import {manejo_tipo_archivo} from "./tipo_archivos.js"
-let configuracion = {}
-let contador      = 0
+let configuracion = {};
+let contador      = 0;
+
+var onDocumentStateChange = function (event) {
+    if (event.data) {
+        console.log("The document changed");
+    } else {
+        console.log("Changes are collected on document editing service");
+    }
+};
 
 export default {
     props: {      
@@ -42,7 +50,7 @@ export default {
 
         configura_editor(opciones) {     
             let documento = librerias.cargaAtributo(opciones, 'documento', {})
-            let editor    = librerias.cargaAtributo(opciones, 'editor', {})
+            let editor = librerias.cargaAtributo(opciones, 'editor', {})
             configuracion = {
                 // Globales   
                 "documentType": librerias.cargaAtributo(opciones, 'tipo_documento', "word"),                             
@@ -93,6 +101,9 @@ export default {
                         "commentAuthorOnly": false,
                         "showReviewChanges": false
                     })
+                },
+                "events": {
+                    "onDocumentStateChange": onDocumentStateChange
                 }
             }
             //console.log("configuracion---+++:", configuracion)

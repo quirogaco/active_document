@@ -24,6 +24,14 @@ let columnas = [
     },
 
     {
+        caption     : "# Radicado",
+        dataField   : "nro_radicado",
+        dataType    : "string",        
+        width       : 150,
+        allowFiltering: true
+    },
+
+    {
         caption     : "Estado",
         dataField   : "gestion_estado",
         dataType    : "string",        
@@ -47,12 +55,52 @@ let columnas = [
     },
 
     {
-        caption     : "# Radicado",
-        dataField   : "nro_radicado",
+        caption     : "Estado vencimiento",
+        dataField   : "gestion_estado_vencimiento",
         dataType    : "string",        
-        width       : 150,
-        allowFiltering: true
+        width       : 100,
+        lookup        : {
+            dataSource: {
+                store: {
+                    type: 'array',
+                    data: [
+                        { id: 'TERMINOS', nombre: 'TERMINOS' },
+                        { id: 'VENCIDO', nombre: 'VENCIDO' }
+                    ],
+                    key: "id"
+                },
+                
+            },
+            valueExpr  : 'id', 
+            displayExpr: 'nombre',            
+        },
     },
+
+    {
+        caption     : "Dias en gestión",
+        dataField   : "dias_gestion",
+        dataType    : "integer",        
+        width       : 65,
+        allowSorting: false   
+    },
+
+    {
+        caption     : "Fecha respuesta",
+        dataField   : "fecha_respuesta",
+        dataType    : "date",        
+        width       : 120,
+        allowFiltering: false
+    },
+
+    {
+        caption     : "Contestado con",
+        dataField   : "nro_respuesta",
+        dataType    : "string",        
+        width       : 120,
+        allowFiltering: false
+    },
+
+
 
     // Fecha Radicado
     {

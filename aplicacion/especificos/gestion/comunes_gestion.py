@@ -32,7 +32,7 @@ def peticion_real(peticion_id):
 
 def anexar_gestion(accion, datos={}, archivo=[], id_tarea=""):
     peticiones_id = datos["peticiones"]  
-    peticion_id   = peticion_real(peticiones_id[0])  
+    peticion_id = peticion_real(peticiones_id[0])  
     datos_archivo = {
         "datos": {
             "estructura": "peticiones",

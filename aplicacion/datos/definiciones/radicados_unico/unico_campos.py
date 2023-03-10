@@ -31,6 +31,7 @@ campos = {
     # Información comun #
     #####################
     "gestion_estado": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado"}),
+    "gestion_estado_vencimiento": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado vencimiento"}),
     "remite_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente entidad/dependencia"}),
     "remite_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente persona/funcionario"}),
     "recibe_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe entidad/dependencia"}),

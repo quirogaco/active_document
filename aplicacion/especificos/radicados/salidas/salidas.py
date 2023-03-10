@@ -126,7 +126,7 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
 
     
     # Actualiza gestión
-    if gestion_id not in ["", None]:
+    if gestion_id not in ["", None]:        
         maneja_gestion.actualiza(radicado, gestion_id, id_tarea)
 
     # Indexa de ultimo

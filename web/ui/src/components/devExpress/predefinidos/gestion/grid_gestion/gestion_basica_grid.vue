@@ -117,7 +117,7 @@ let grid =  {
             opciones_ventana: {
                 visible: false
             },
-            emergente_key: 0
+            emergente_key: 0            
         }
     }
 }

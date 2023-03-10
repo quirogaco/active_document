@@ -41,20 +41,20 @@ def recuperar_archivo_plantilla(plantilla_id):
 # Busca plantilla
 def seleccion_plantilla(accion, datos={}, archivo=[], id_tarea=""):
     dependencia_id = datos["_usuario_"]["dependencia_id"]
-    usuario_id     = datos["_usuario_"]["id"]
-    peticiones_id  = datos["peticiones"]
-    plantilla_id   = datos["plantilla"]
+    usuario_id = datos["_usuario_"]["id"]
+    peticiones_id = datos["peticiones"]
+    plantilla_id = datos["plantilla"]
 
     for peticion_id in peticiones_id:
-        gestion        = sqalchemy_leer.leer_un_registro(
+        gestion = sqalchemy_leer.leer_un_registro(
             "peticiones", 
             peticion_id
         )     
-        responsable    = sqalchemy_leer.leer_un_registro(
+        responsable = sqalchemy_leer.leer_un_registro(
             "usuarios", 
             usuario_id
         ) 
-        radicado       = sqalchemy_leer.leer_un_registro(
+        radicado = sqalchemy_leer.leer_un_registro(
             "radicados_entrada", 
             gestion["origen_id"]
         ) 
@@ -106,22 +106,22 @@ def seleccion_plantilla(accion, datos={}, archivo=[], id_tarea=""):
 # Recupera archivo borrador gestion
 def recuperar_archivo_borrador_gestion(borrador_id):
     nombre_archivo = ""
-    filtros        = [ 
+    filtros = [ 
         [ "tipo_relacion", "=", "borrador" ], 
         [ "origen_id", "=", borrador_id ] 
     ]
-    relaciones     = sqalchemy_filtrar.filtrarOrdena(
+    relaciones = sqalchemy_filtrar.filtrarOrdena(
         estructura="archivos_relacion", 
         filtros=filtros, 
         ordenamientos=[]
     )
     # Si existen relaciones 
     if len(relaciones) > 0:
-        archivo_id     = relaciones[0]['archivo_id']            
+        archivo_id = relaciones[0]['archivo_id']            
         # Recupera archivo de minio
         nombre_archivo = leer_archivo.salva_archivo_minio(archivo_id) 
-        nombre_byte     = nombre_archivo.encode('ascii')
-        nombre_64       = base64.b64encode( nombre_byte )
+        nombre_byte = nombre_archivo.encode('ascii')
+        nombre_64 = base64.b64encode( nombre_byte )
         nombre_64_texto = str(nombre_64, 'utf-8')
         url = (
             builtins._appServiciosType + "://" + 

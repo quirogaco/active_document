@@ -7,13 +7,13 @@ let columnas = [
         width    : 600       
     },
 
-    // Dependencia
+    // Tipo plantilla
     {
-        caption  : "Dependencia",
-        dataField: "dependencia_nombre",
+        caption  : "Tipo plantilla",
+        dataField: "tipo_plantilla",
         dataType : "date",          
         dataType : "string",        
-        width    : 340
+        width    : 200
     },
 
     // Archivo

@@ -21,7 +21,7 @@ let attributes = {
     },
 
     ref: "grid",
-    height: "500px",
+    height: "700px",
     width: "600px",
     allowColumnReordering: true,
     allowColumnResizing: true,

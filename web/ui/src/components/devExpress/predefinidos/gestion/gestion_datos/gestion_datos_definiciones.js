@@ -3,15 +3,19 @@ import fuente from "../../comunes_vue/forma/fuente.js"
 import forma_general from "../../comunes_vue/forma/forma.js";
 
 let metodos = {
-    montado_especifico: function(basicas) {
-        let datos = forma_general.lee_propiedades(
+    montado_especifico: async function(basicas) {
+        let props = forma_general.lee_propiedades(
             this.$props, 
             "gestion_datos_consulta"
         ).datos;
+
+        // Carga de nuevo registo
+        let datos = await $lib.leer_registro_id("peticiones", props.id);
+        datos.call = props.call;
         this.parametros = datos;
-        
-        // // Anexos
-        let anexos = datos.gestion.archivos;
+
+        // Anexos
+        let anexos = datos.archivos;
         let fuente_anexos = fuente.fuente_arreglo(anexos);
         forma_definiciones.asigna_fuente(
             this, 
@@ -20,7 +24,7 @@ let metodos = {
         );    
         
         // Anotaciones
-        let anotaciones = datos.gestion.atributos_['anotaciones'];
+        let anotaciones = datos.atributos_['anotaciones'];
         if (anotaciones == undefined) {
             anotaciones = []
         };
@@ -51,7 +55,7 @@ let metodos = {
         ); 
 
         // Trd        
-        let trd = datos.gestion.atributos_['trd'];
+        let trd = datos.atributos_['trd'];
         let expedientes = [];
         if (trd !== undefined) {
             expedientes.push({

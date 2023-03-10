@@ -1,10 +1,10 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8-*-
 
 import pprint, datetime, sys
 import os, builtins
 
-sys.path.append('d:/active_document')
+sys.path.append('c:/active_document')
 print("******************************************")
 
 #########################
