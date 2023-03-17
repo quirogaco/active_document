@@ -1,7 +1,7 @@
 let elemento_parametros = function(elemento_id) {   
-    let parametros = {}
-    parametros["alto"]  = 400
-    parametros["ancho"] = 1200
+    let parametros = {};
+    parametros["alto"]  = 400;
+    parametros["ancho"] = 1200;
 
     //HABILITAR_RESPUESTA_RAPIDA
     switch (elemento_id) {
@@ -320,7 +320,7 @@ let items_gestion = function(componente, contexto, datos={}) {
                 ]
             }
             else {
-                let etapa_estado = componente.parametros.etapa_estado
+                let etapa_estado = componente.parametros.etapa_estado;
                 let borrador_existe = componente.borrador_existe;
                 switch (etapa_estado) {
                     case "ASIGNADO_DEPENDENCIA":
@@ -347,10 +347,47 @@ let items_gestion = function(componente, contexto, datos={}) {
                             items.push(finalizar)
                         }
                         
-                        if ( borrador_existe ) {
-                            items.push(enviar_a_visto_bueno)
-                            //items.push(radicar_borrador)
-                        }
+                        // // BORRAR DESDE AQUI
+                        // if (datos.clase_radicado == "ENTRADA") {
+                        //     items.push(enviar_a_visto_bueno);  
+                        //     items.push(radicar_borrador);                          
+                        // }
+
+                        // if (datos.clase_radicado == "SALIDDA") {
+                        //     items.push(radicar_borrador);                          
+                        // }
+                        items.push(enviar_a_visto_bueno);
+                        items.push(radicar_borrador);
+                        // // HASTA AQUI
+
+                        // if ( 
+                        //     ( borrador_existe ) && 
+                        //     (datos.clase_radicado == "ENTRADA") 
+                        // ) {
+                        //     items.push(enviar_a_visto_bueno);  
+                        //     items.push(radicar_borrador);                          
+                        // }
+
+                        // if ( 
+                        //     ( borrador_existe ) && 
+                        //     (datos.clase_radicado == "SALIDA") 
+                        // ) {
+                        //     //items.push(enviar_a_visto_bueno);  
+                        //     items.push(radicar_borrador);                          
+                        // }
+
+                        // if ( 
+                        //     ( borrador_existe ) && 
+                        //     (datos.clase_radicado == "INTERNO") 
+                        // ) {
+                        //     //items.push(enviar_a_visto_bueno);  
+                        //     items.push(radicar_borrador);                          
+                        // }
+
+                        // else {
+                        //     //items.push(enviar_a_visto_bueno);
+                        //     //items.push(radicar_borrador);
+                        // }
                         break
 
                     case "DEVUELTO_ASIGNADORA":

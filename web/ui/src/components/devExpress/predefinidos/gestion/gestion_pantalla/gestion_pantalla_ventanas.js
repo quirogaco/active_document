@@ -82,12 +82,11 @@ const ver_ventanas = function(forma) {
     let ocultar = []
     console.log("forma.parametros.borrador_id>>", forma.parametros);
     // Ocultar radicado
-    if ( forma.parametros.origen_tipo == "ENTRADA") {
+    if ( forma.parametros.origen_tipo == "SALIDA") {
         ocultar.push("radicado");
     }
 
     if ( forma.parametros.origen_tipo == "INTERNO") {
-        ocultar.push("radicado");
         ocultar.push("gestion");
     }
 
