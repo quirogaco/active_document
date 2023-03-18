@@ -116,6 +116,7 @@ campos = {
     #####################
     "gestion_estado": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado", "propiedad": salida_propiedades.gestion_estado}),
     "gestion_estado_vencimiento": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado vencimiento", "propiedad": salida_propiedades.gestion_estado_vencimiento}),
+    "nro_respuesta": tipos.texto(propiedades={"columna": "no", "titulo": "Contestado con", "propiedad": salida_propiedades.nro_respuesta}),
     "remite_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente entidad/dependencia", "propiedad": salida_propiedades.remite_ent_dep_nombre}),
     "remite_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente persona/funcionario", "propiedad": salida_propiedades.remite_per_fun_nombre}),
     "recibe_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe entidad/dependencia", "propiedad": salida_propiedades.recibe_ent_dep_nombre}),

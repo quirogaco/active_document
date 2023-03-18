@@ -7,6 +7,7 @@ from aplicacion.datos.clases.clases_base import base_general_campos
 from librerias.datos.sql import sqalchemy_tipo_campos as tipos
 
 campos = {
+    "radicado_en": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Radicado en id"}),
     "tipo_radicado": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de radicado", "longitud": 64}),
     
     # Sitio de radicación
@@ -31,10 +32,11 @@ campos = {
     # Información comun #
     #####################
     "gestion_estado": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado"}),
+    "nro_respuesta": tipos.texto(propiedades={"columna": "no", "titulo": "Contestado con"}),
     "gestion_estado_vencimiento": tipos.clave(propiedades={"columna": "no", "titulo": "Gestión estado vencimiento"}),
     "remite_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente entidad/dependencia"}),
     "remite_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Remitente persona/funcionario"}),
     "recibe_ent_dep_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe entidad/dependencia"}),
-    "recibe_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe persona/funcionario"})
+    "recibe_per_fun_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Recibe persona/funcionario"}),
 }
 campos.update(base_general_campos.campos)

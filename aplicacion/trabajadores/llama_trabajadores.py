@@ -48,7 +48,7 @@ trabajadores = {
         'worker',  '-Q', 'vencimientos_peticion',         
         '--concurrency=1', 
         '-Ofair', 
-        '-n', 'worker3.%h',
+        '-n', 'worker4.%h',
         '--loglevel', 'info'
     ]
 }

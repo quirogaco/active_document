@@ -82,6 +82,7 @@ campos = {
     "fecha_respuesta"      : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha respuesta"}),
     "dias_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Dias en gestion"}),   
     
+    "nro_respuesta": tipos.texto(propiedades={"columna": "no", "titulo": "Contestado con", "propiedad": interno_propiedades.nro_respuesta}),
 
     # Tipo de firma
     "tipo_firma"    : tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Tipo de firma",     "longitud": 64}),

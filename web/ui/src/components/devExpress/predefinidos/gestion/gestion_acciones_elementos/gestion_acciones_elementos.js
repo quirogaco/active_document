@@ -347,9 +347,15 @@ let items_gestion = function(componente, contexto, datos={}) {
                             items.push(finalizar)
                         }
                         
-                        if ( borrador_existe ) {
-                            items.push(enviar_a_visto_bueno)
-                            //items.push(radicar_borrador)
+                        if ( 
+                            ( borrador_existe ) && 
+                            (datos.clase_radicado == "ENTRADA") 
+                        ) {
+                            items.push(enviar_a_visto_bueno);                            
+                        }
+                        else {
+                            items.push(enviar_a_visto_bueno);
+                            items.push(radicar_borrador);
                         }
                         break
 

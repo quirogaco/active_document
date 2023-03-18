@@ -178,3 +178,9 @@ def recibe_per_fun_nombre(r_):
             dato = "ANONIMO"
         
     return dato
+
+
+def nro_respuesta(r_):
+    dato = ""
+        
+    return dato

@@ -209,3 +209,8 @@ def recibe_per_fun_nombre(r_):
        dato = str(r_.funcionario_recibe_nombre)
     
     return dato
+
+def nro_respuesta(r_):
+    dato = ""
+        
+    return dato

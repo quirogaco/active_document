@@ -81,7 +81,8 @@ let columnas = [
         dataField   : "dias_gestion",
         dataType    : "integer",        
         width       : 65,
-        allowSorting: false   
+        allowSorting: false,
+        allowFiltering: false  
     },
 
     {
@@ -100,8 +101,6 @@ let columnas = [
         allowFiltering: false
     },
 
-
-
     // Fecha Radicado
     {
         caption       : "Fecha radicado",
@@ -109,7 +108,7 @@ let columnas = [
         dataType      : "datetime",          
         width         : 150,
         format        : 'y-MM-dd hh:mm:ss',
-        allowFiltering: true
+        //allowFiltering: true
     },
 
     {
@@ -117,7 +116,7 @@ let columnas = [
         dataField   : "remite_ent_dep_nombre",
         dataType    : "string",        
         width       : 200,
-        allowSorting: false   
+        //allowSorting: false   
     },
 
     {
@@ -125,7 +124,7 @@ let columnas = [
         dataField   : "remite_per_fun_nombre",
         dataType    : "string",        
         width       : 200,
-        allowSorting: false   
+        //allowSorting: false   
     },
 
     {
@@ -133,7 +132,7 @@ let columnas = [
         dataField   : "recibe_ent_dep_nombre",
         dataType    : "string",        
         width       : 200,
-        allowSorting: false   
+        //allowSorting: false   
     },
 
     {
@@ -141,7 +140,7 @@ let columnas = [
         dataField   : "recibe_per_fun_nombre",
         dataType    : "string",        
         width       : 200,
-        allowSorting: false   
+        //allowSorting: false   
     },
 
     // Asunto
@@ -151,6 +150,14 @@ let columnas = [
         dataType    : "string",        
         width       : 400,
         allowSorting: false   
+    },
+
+    // Asunto
+    {
+        caption     : "Radicado en",
+        dataField   : "radicado_en_nombre",
+        dataType    : "string",        
+        width       : 400
     }
 ]
 

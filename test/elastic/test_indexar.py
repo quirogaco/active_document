@@ -95,7 +95,7 @@ def recuperar(conexion, estructura):
 # recuperar(conexion, "grupo_usuarios")
 # recuperar(conexion, "festivos")
 # recuperar(conexion, "reportes_dinamicos")
-recuperar(conexion, "plantillas")
+# recuperar(conexion, "plantillas")
 # recuperar(conexion, "consecutivos")cls
 # recuperar(conexion, "tipo_identificaciones")
 # recuperar(conexion, "genero")
@@ -118,12 +118,12 @@ recuperar(conexion, "plantillas")
 
 #"""
 # RADICACION GESTION
-# recuperar(conexion, "radicados_entrada")
-# recuperar(conexion, "radicados_salida")
-# recuperar(conexion, "radicados_interno")
-# recuperar(conexion, "peticiones")
-# recuperar(conexion, "copias")
-# recuperar(conexion,"correos_descargados")
+recuperar(conexion, "radicados_entrada")
+recuperar(conexion, "radicados_salida")
+recuperar(conexion, "radicados_interno")
+recuperar(conexion, "peticiones")
+recuperar(conexion, "copias")
+recuperar(conexion,"correos_descargados")
 #"""
 
 #"""
