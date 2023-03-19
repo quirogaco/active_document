@@ -19,7 +19,9 @@ that.dataForm = null;
 
 // Propiedades
 const props = defineProps( $forma.forma_propiedades({}) );
-let attributes = $forma.lee_propiedades(props);
+let attributes = $forma.lee_propiedades(props, "trd_pantalla");
+attributes = (attributes != undefined ? attributes.datos : {});
+
 
 // Ver pantalla de dependencias, serie, subserie, etc
 let arbol_visible = ref(false);
@@ -71,13 +73,10 @@ function callBackButtons(evento, modo) {
 async function dataFormaMounted(DataForma) {
     //that.dataForm = DataForma.instance;
     that.dataForm = DataForma;
-    console.log("that.dataForm:", that.dataForm);
     that.dataForm.formData(attributes.datos);  
 };
 
-onMounted(() => {    
-    // that.dataForm = that.$refs.formRef;    
-    // that.dataForm.formData(attributes.datos);    
+onMounted(() => {        
     window.$pantalla_trd = that;  
     if (attributes.mode == "modificar") {
         arbol_visible.value = true        
@@ -85,7 +84,8 @@ onMounted(() => {
     setTimeout(() => {
         that.arbol = that.$refs.componente_arbol
     }, 3000);
-    
+
+    atributos_forma.config.formData = attributes.registro; 
 })
 
 // Atributos forma y barra
@@ -107,127 +107,4 @@ let atributos_barra = {
         "callBack": callBackButtons
     })
 }  
-</script>
-
-<script lang="ts">
-/*
-import { DxLoadPanel } from 'devextreme-vue/load-panel';
-import { 
-    DxForm,
-    DxSimpleItem,
-    DxEmptyItem,
-    DxButtonItem,
-    DxLabel,
-    DxRequiredRule,
-    DxStringLengthRule
-} from 'devextreme-vue/form';
-import DxToolbar, { DxItem } from 'devextreme-vue/toolbar';
-import DxButton              from 'devextreme-vue/button';
-import notify                from 'devextreme/ui/notify';
-import DxValidationGroup     from 'devextreme-vue/validation-group';
-
-import fuenteDatos from '../../../../../remoto/fuenteDatos.js';
-
-import pantalla_trd_definiciones from "./pantalla_trd_definiciones.js";
-import pantalla_trd_campos from "./pantalla_trd_campos.js";
-
-import trd_arbol from "../trd_arbol/trd_arbol.vue";
-
-let dependencia_trd =  {
-    name: 'dependencia_trd',
-
-    components: {
-        // Tarea en ejecución
-        DxLoadPanel,
-
-        // Barra       
-        DxItem,
-        DxButton,        
-        DxToolbar,
-
-        // Forma
-        DxForm,
-        DxSimpleItem,
-        DxEmptyItem,
-        DxButtonItem,
-        DxLabel,
-
-        // Validadores
-        DxRequiredRule, 
-        DxStringLengthRule, 
-        DxValidationGroup,
-        
-        // Arbol de definición
-        trd_arbol
-    },
-
-    props: {
-        datos: ""
-    },
-
-    mounted() {
-        this.indicador_visible = false
-        this.forma             = this.$refs.forma.instance            
-        this.barra             = this.$refs.barra.instance             
-        this.notify            = notify  
-        window.$pantalla_trd   = this  
-
-        setTimeout(() => {
-            this.arbol = this.$refs.componente_arbol
-        }, 3000);
-
-        // Datos trd
-        this.parametros        = JSON.parse(this.datos)
-        if (this.parametros.accion == "modificar") {
-            this.forma.option("formData", parametros.trd_datos)
-        }
-        this.mostrar_botones()
-    },
-
-    methods: pantalla_trd_definiciones.metodos,
-
-    data() {
-        return {    
-            // Datos de la forma
-            parametros: {
-            },
-
-            // Indicador de tareas
-            indicador_visible: false,
-
-            // Ver pantalla de dependencias, serie, subserie, etc
-            arbol_visible: false,
-            opciones_arbol: {},
-
-            // Opciones CAMPOS
-            opciones_fondo: {
-                dataSource  : fuenteDatos.creaFuenteDatosConsulta('select', null, 'agn_fondo_documental', 'agn_fondo_documental', [], []),
-                displayValue: "nombre",
-                displayExpr : "nombre",
-                searchExpr  : "nombre",
-                valueExpr   : "id"
-            },
-
-            opciones_fecha: {
-                dateSerializationFormat: "yyyy-MM-dd",
-                displayFormat          : "yyyy-MM-dd"
-            },
-    
-            opciones_id: {
-                visible: false
-            },
-
-            opciones_estado: {
-                items : ["ACTIVO", "INACTIVO"],
-                layout: "horizontal"
-            },
-            
-            // Barra de acciones
-            barra_botones: pantalla_trd_definiciones.barra_botones(this)        
-        }
-    }
-}
-
-export default dependencia_trd;
-*/
 </script>

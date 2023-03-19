@@ -1,4 +1,4 @@
-import visores_archivo from "../../../../../../../librerias/visores_archivo.js"
+import visores_archivo from "../../../../../../../librerias/visores_archivo.js";
 
 let metodos = {
     onToolbarPreparing(e) {
@@ -23,17 +23,29 @@ let metodos = {
         })
     },
 
-    'dobleClick':  async function(e) {
-        let datos = await $lib.leer_registro_id("agn_trd", e.data.id);
-        $router.push({
-            name: "trd_pantalla",                      
-            params: {
-                "attributes_str": JSON.stringify({
-                    "datos": datos,
-                    "mode": "modificar"
-                })       
-            }                            
-        })
+    'dobleClick':  async function(e) {       
+        let registro = await $lib.leer_registro_id("agn_trd", e.data.id);
+        let datos = {
+            "id": registro.id,
+            "registro": registro,
+            "modo": "modificar"
+            //"llamado_por": this.retorna_grid
+        };
+        $lib.call_component_storage(
+            "trd_pantalla",   
+            {"datos": datos}
+        )      
+
+
+        // $router.push({
+        //     name: "trd_pantalla",                      
+        //     params: {
+        //         "attributes_str": JSON.stringify({
+        //             "datos": datos,
+        //             "mode": "modificar"
+        //         })       
+        //     }                            
+        //})
     },
 
     'crear':  function(e) {
