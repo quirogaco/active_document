@@ -134,6 +134,8 @@ that.parameters_received = general_form.lee_propiedades(props);
 //    basicas para convertir
 let config_form = validate_configuration(that.parameters_received);
 config_form.items = form_field_configuration(config_form);
+console.log("-- config_form --", config_form)
+console.log("-- config_form.items --", config_form.items)
 
 // events
 const emit = defineEmits(['mounted']);

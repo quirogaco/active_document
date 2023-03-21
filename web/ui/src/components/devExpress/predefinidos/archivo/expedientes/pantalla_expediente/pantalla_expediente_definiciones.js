@@ -1,92 +1,97 @@
-let metodos = {
-    retorna: function(retorna) {
-        let accion = retorna["accion"]
-        this.indicador_visible = false
-        this.notify("Operación realizada correctamente", "success")    
-        this.forma.formData(retorna)
-        
-        if (accion=="crear_expediente") {
-            this.parametros.modo = "modificar"            
-            this.mostrar_botones();
-            this.$router.push("expediente_basica_grid");           
-        }
-
-        if (accion=="borrar_expediente") {
-            this.$router.push("expediente_basica_grid")         
-        }
-    },
-
-    mostrar_todos() {
-        let botones = this.barra_botones
-        botones[0].options.visible = true
-        botones[1].options.visible = true
-        botones[2].options.visible = true
-        botones[3].options.visible = true
-    },
-
-    mostrar_botones() {
-        this.mostrar_todos()
-        let botones = this.barra_botones
-        if (this.parametros.modo == "crear") {
-            botones[1].options.visible = false
-            botones[2].options.visible = false
-        }
-
-        if (this.parametros.modo == "modificar") {
-            botones[0].options.visible = false    
-            this.expediente_archivos_visible = true        
-        }
-
-        this.barra.repaint()
-    },
-
-    boton_click(e) {
-        let boton      = e.component.option("hint")
-        let enviar     = true        
-        let parametros = {
-            datos: this.forma.formData()
-        }
-        let validacion;
-        if (boton != "regresar") {
-            validacion = this.forma.validateData();
-        }
-        switch (boton) {
-            case 'crear': 
-                parametros["accion"] = "crear_expediente"
-                break;
-
-            case 'modificar':  
-                parametros["accion"] = "modificar_expediente"              
-                break;
+let metodos = function(that) {
+    return {
+        retorna: function(retorna) {
+            let accion = retorna["accion"]
+            that.indicador_visible = false
+            that.notify("Operación realizada correctamente", "success")    
+            that.forma.formData(retorna)
             
-            case 'borrar':      
-                parametros["accion"] = "borrar_expediente"              
-                break;
-
-            case 'regresar':       
-                enviar = false         
-                this.$router.push("expediente_basica_grid")
-                break;
-        }
-
-        if (boton != "regresar") {
-            if ( ( validacion.isValid == true) && (enviar == true) ) {
-                this.indicador_visible = true
-                let urlCompleta        = window.$direcciones.servidorDatos + '/expediente_acciones'    
-                window.$f["http"].llamadoRestPost( urlCompleta, parametros, this.retorna, "")   
+            if (accion=="crear_expediente") {
+                that.parametros.modo = "modificar"            
+                that.mostrar_botones();
+                that.$router.push("expediente_basica_that");           
             }
-        
-            if ( ( validacion.isValid == false) && (enviar == true ) ) {
-                this.notify("Valores invalidos o incompletos", "error")     
+
+            if (accion=="borrar_expediente") {
+                that.$router.push("expediente_basica_that")         
+            }
+        },
+
+        mostrar_todos() {
+            let botones = that.barra_botones
+            botones[0].options.visible = true
+            botones[1].options.visible = true
+            botones[2].options.visible = true
+            botones[3].options.visible = true
+        },
+
+        mostrar_botones() {
+            that.mostrar_todos()
+            let botones = that.barra_botones
+            if (that.parametros.modo == "crear") {
+                botones[1].options.visible = false
+                botones[2].options.visible = false
+            }
+
+            if (that.parametros.modo == "modificar") {
+                botones[0].options.visible = false    
+                that.expediente_archivos_visible = true        
+            }
+
+            that.barra.repaint()
+        },
+
+        boton_click(e) {
+            let boton = e.component.option("hint")
+            console.log("boton", boton)
+            let enviar = true        
+            let parametros = {
+                datos: that.dataForm.formData()
+            }
+            let validacion;
+            if (boton != "regresar") {
+                validacion = that.dataForm.validateData();
+            }
+            switch (boton) {
+                case 'crear': 
+                    parametros["accion"] = "crear_expediente"
+                    break;
+
+                case 'modificar':  
+                    parametros["accion"] = "modificar_expediente"              
+                    break;
+                
+                case 'borrar':      
+                    parametros["accion"] = "borrar_expediente"              
+                    break;
+
+                case 'regresar':     
+                console.log("REGRESAR")  
+                    enviar = false     
+                    $lib.call_component_storage(
+                        "expediente_basica_grid",   
+                        {}
+                    )     
+                    //that.$router.push("expediente_basica_grid")
+                    break;
+            }
+
+            if (boton != "regresar") {
+                if ( ( validacion.isValid == true) && (enviar == true) ) {
+                    that.indicador_visible = true
+                    let urlCompleta        = window.$direcciones.servidorDatos + '/expediente_acciones'    
+                    window.$f["http"].llamadoRestPost( urlCompleta, parametros, that.retorna, "")   
+                }
+            
+                if ( ( validacion.isValid == false) && (enviar == true ) ) {
+                    that.notify("Valores invalidos o incompletos", "error")     
+                }
             }
         }
-    },
-
-    // Funcion llamada por evento mounted DataForma
-    dataFormaMounted(DataForma) {}
+    }
 }
 
-let barra_botones = function(grid) {
+let barra_botones = function(that) {
     return  [       
         { 
             widget  : "dxButton",           
@@ -97,7 +102,7 @@ let barra_botones = function(grid) {
                 type       : 'success',
                 text       : 'Crear Expediente', 
                 stylingMode: "contained", 
-                onClick    : grid.boton_click,
+                onClick    : that.boton_click,
             } 
         },
         {
@@ -109,7 +114,7 @@ let barra_botones = function(grid) {
                 type       : 'default',
                 text       : 'Modificar Expediente',
                 stylingMode: "contained",    
-                onClick    : grid.boton_click,             
+                onClick    : that.boton_click,             
             }
         },
 
@@ -122,20 +127,20 @@ let barra_botones = function(grid) {
                 type       : 'danger',
                 text       : 'Borrar Expediente',
                 stylingMode: "contained",   
-                onClick    : grid.boton_click,            
+                onClick    : that.boton_click,            
             }
         },
 
         {
             widget  : "dxButton",           
             options :{ //3
-                icon       : 'fas fa-angle-left',
+                icon       : 'fas fa-angle-double-left',
                 alignment  : 'center',
                 hint       : 'regresar',
-                type       : 'back',
-                text       : 'Regresar',   
+                text       : 'Regresar',  
+                type       : 'normal', 
                 stylingMode: "contained",  
-                onClick    : grid.boton_click,         
+                onClick    : that.boton_click,         
             }
         },
                     
@@ -144,6 +149,6 @@ let barra_botones = function(grid) {
 
 
 export default {
-    metodos      : metodos,
+    metodos: metodos,
     barra_botones: barra_botones
 }

@@ -81,7 +81,11 @@ export default {
         this.boton_ocultar_todos()
         this.boton_visibilidad(this.boton_dependencia, true)      
         setTimeout(() => {
-            this.trd_data = $forma.lee_propiedades(window.$pantalla_trd).datos.trd_arbol;
+            //console.log("window.$pantalla_trd>>>>:", window.$pantalla_trd)
+            //let pantalla_trd = $forma.lee_propiedades(window.$pantalla_trd)
+            let pantalla_trd = window.$pantalla_trd
+            console.log("pantalla_trd>>>>:", pantalla_trd)
+            this.trd_data = pantalla_trd.registro.trd_arbol;
         }, 3000);
         this.notify = notify               
     },

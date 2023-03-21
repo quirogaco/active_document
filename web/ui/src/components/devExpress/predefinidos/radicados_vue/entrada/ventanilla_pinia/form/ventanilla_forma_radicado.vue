@@ -25,7 +25,6 @@
             ref="dataForma"  
             :attributes="atributos_forma"
             @mounted="form_mounted"
-
         >            
         </DataForma>
 

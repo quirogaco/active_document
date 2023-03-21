@@ -10,9 +10,9 @@ let metodos = {
     },
 
     retorna: function(retorna) {
-        this.indicador_visible = false;
-        this.grid.refresh();
-        this.notify("Operación realizada correctamente", "success"); 
+        that.indicador_visible = false;
+        that.grid.refresh();
+        that.notify("Operación realizada correctamente", "success"); 
     },
 
     'dobleClick':  function(e) {
@@ -28,17 +28,15 @@ let metodos = {
             }
             window.$f["http"].llamadoRestPost( urlCompleta, parametros, function(){}, "")
 
-
-            this.$router.push({
-                name: "pantalla_expediente",
-                params: {
-                    "parametros_texto": JSON.stringify({
-                        "expediente_id"   : e.data.id,
-                        "expediente_datos": e.data,
-                        "modo"            : "modificar"
-                    })                
-                }
-            })
+            let datos = {
+                "expediente_id": e.data.id,
+                "expediente_datos": e.data,
+                "modo": "modificar"
+            };
+            $lib.call_component_storage(
+                "pantalla_expediente",   
+                {"datos": datos}
+            ) 
         }
         else {
             this.notify(("Expediente con información " + e.data.acceso_modo), "warning") 
@@ -205,7 +203,7 @@ let metodos = {
             })            
         }
         else {
-            this.notify("Seleccione un expediente ", "warning") 
+            that.notify("Seleccione un expediente ", "warning") 
         }
     },
 
@@ -242,8 +240,8 @@ let metodos = {
             accion: "asignar_caja"
         }
         let urlCompleta        = window.$direcciones.servidorDatos + '/expediente_acciones'   
-        this.indicador_visible = true 
-        window.$f["http"].llamadoRestPost( urlCompleta, parametros, this.retorna, "")    
+        that.indicador_visible = true 
+        window.$f["http"].llamadoRestPost( urlCompleta, parametros, that.retorna, "")    
     }
 
 }

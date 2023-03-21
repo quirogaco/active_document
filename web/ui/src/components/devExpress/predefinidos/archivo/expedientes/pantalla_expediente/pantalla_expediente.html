@@ -8,29 +8,24 @@
 
             <DxLoadPanel
                 v-model:visible = "indicador_visible" 
-                message         = "Por favor espere"               
-                shading-color   = "rgba(0,0,0,0.4)"
+                message = "Por favor espere"               
+                shading-color = "rgba(0,0,0,0.4)"
             />
 
-            <div class="shadow-sm p-3 bg-light rounded border">
-                <div class="row justify-content-center"> 
-                    <div class="">
-                        <DataForma     
-                            ref         = "forma"  
-                            :attributes = "atributos_forma"
-                            @mounted    = "dataFormaMounted"
-                        />
-            
-                        <div class="linea_blanco"></div>            
-                    </div>
-                </div>
-    
-                <DxToolbar
-                    ref = "barra"
-                    :items = "barra_botones"
+            <div class="row justify-content-center"> 
+                <DataForma   
+                    ref = "formRef"  
+                    :attributes = "atributos_forma"
+                    @mounted = "dataFormaMounted"
                 />
-                
-            </div>       
+    
+                <div class="linea_blanco"></div>            
+            </div>
+
+            <DxToolbar
+                ref = "barra"
+                :items = "barra_botones"
+            />                
         
         </div>
 
@@ -38,7 +33,7 @@
 
         <div class="col-12" v-if="expediente_archivos_visible">
             <expediente_archivos    
-                ref         = "expediente_archivos"         
+                ref = "ref_expediente_archivos"         
                 :parametros = "expediente_archivos_parametros"
             />
         </div>  

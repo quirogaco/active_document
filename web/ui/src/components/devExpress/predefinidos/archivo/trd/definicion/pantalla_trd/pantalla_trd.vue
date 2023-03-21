@@ -21,6 +21,7 @@ that.dataForm = null;
 const props = defineProps( $forma.forma_propiedades({}) );
 let attributes = $forma.lee_propiedades(props, "trd_pantalla");
 attributes = (attributes != undefined ? attributes.datos : {});
+console.log("attributes:", attributes)
 
 
 // Ver pantalla de dependencias, serie, subserie, etc
@@ -76,21 +77,23 @@ async function dataFormaMounted(DataForma) {
     that.dataForm.formData(attributes.datos);  
 };
 
-onMounted(() => {        
-    window.$pantalla_trd = that;  
+window.$pantalla_trd = that;
+
+onMounted(() => {            
+    atributos_forma.config.formData = attributes.registro;
+    that.registro = attributes.registro;
     if (attributes.mode == "modificar") {
         arbol_visible.value = true        
     };
     setTimeout(() => {
         that.arbol = that.$refs.componente_arbol
     }, 3000);
-
-    atributos_forma.config.formData = attributes.registro; 
+    
 })
 
 // Atributos forma y barra
-import forma_campos from "./forma_campos";
-import forma_barra from "./forma_barra";
+import forma_campos from "./forma_campos"
+import forma_barra from "./forma_barra"
 
 let atributos_forma = {
     config: {

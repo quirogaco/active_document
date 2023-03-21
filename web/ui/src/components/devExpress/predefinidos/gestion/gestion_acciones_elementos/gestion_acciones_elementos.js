@@ -399,7 +399,6 @@ let items_gestion = function(componente, contexto, datos={}) {
                         //     //items.push(enviar_a_visto_bueno);
                         //     //items.push(radicar_borrador);
                         // }
->>>>>>> bb142c325786a0cdce5db1d009721f4c29277eb3
                         break
 
                     case "DEVUELTO_ASIGNADORA":

@@ -1,130 +1,100 @@
 <template src="./pantalla_expediente.html">
 </template>
 
-<script>
+<script setup lang="ts">
+import { getCurrentInstance, ref, onMounted } from "vue"
+let that = getCurrentInstance().ctx
+
 import { DxLoadPanel } from 'devextreme-vue/load-panel'
-import { 
-    DxForm,
-    DxGroupItem,
-    DxSimpleItem,
-    DxEmptyItem,
-    DxButtonItem,
-    DxLabel,
-    DxRequiredRule,
-    DxStringLengthRule
-} from 'devextreme-vue/form'
-import DxToolbar, { DxItem } from 'devextreme-vue/toolbar'
-import DxButton              from 'devextreme-vue/button'
-import notify                from 'devextreme/ui/notify'
-import DxValidationGroup     from 'devextreme-vue/validation-group'
+import { DxToolbar } from 'devextreme-vue/toolbar'
 
-import fuenteDatos from '../../../../remoto/fuenteDatos.js';
+import notify from 'devextreme/ui/notify'
 
-import pantalla_expediente_definiciones from "./pantalla_expediente_definiciones.js";
+import expediente_archivos from "../expediente_archivos/expediente_archivos.vue"
+import pantalla_expediente_definiciones from 
+    "./pantalla_expediente_definiciones.js"
+import forma_campos from "./forma_campos"
 
-import expediente_archivos from "../expediente_archivos/expediente_archivos.vue";
+console.log("expediente_archivos:", expediente_archivos)
 
-import forma_campos from "./forma_campos";
+// Este componente
 
-let expediente_pantalla =  {
-    name: 'expediente_pantalla',
+let name = 'pantalla_expediente'
+let titulo = "Expediente"
+that.dataForm = null 
+let formRef = ref(null)
+let barra = ref(null)
+that.barra = barra
 
-    components: {
-        // Tarea en ejecución
-        DxLoadPanel,
+// Indicador de tareas
+let indicador_visible = ref(false)
 
-        // Barra       
-        DxItem,
-        DxButton,        
-        DxToolbar,
+// Ver pantalla archivos
+let ref_expediente_archivos = ref(null)
+let expediente_archivos_visible = ref(false)
+let opciones_expediente_archivos = ref({})
 
-        // Forma
-        DxForm,
-        DxGroupItem,
-        DxSimpleItem,
-        DxEmptyItem,
-        DxButtonItem,
-        DxLabel,
+// Metodos
+that = $lib.assignAttributes(
+    that, 
+    pantalla_expediente_definiciones.metodos(that)
+);
 
-        // Validadores
-        DxRequiredRule, 
-        DxStringLengthRule, 
-        DxValidationGroup,
-        
-        // Arbol de definición
-        expediente_archivos
-    },
+// Barra de acciones
+let barra_botones = pantalla_expediente_definiciones.barra_botones(that)
+that.barra_botones = barra_botones
 
-    props: {
-        parametros_texto: ""
-    },
+// Propiedades
+const props = defineProps( $forma.forma_propiedades({}) )
+let parametros = $forma.lee_propiedades(props, 'pantalla_expediente')
+parametros = (parametros != undefined ? parametros.datos : {})
+that.parametros = parametros
 
-    mounted() {
-        this.indicador_visible = false;
-        this.forma             = this.$refs.forma;       
-        this.barra             = this.$refs.barra.instance;             
-        this.notify            = notify;  
-        window.$pantalla_expediente = this;  
+// Forma
+let atributos_forma = {
+    config: {
+        id: name,
+        items: forma_campos.items(),
+        colCount: 3   
+    }                 
+} 
+that.atributos_forma = atributos_forma
 
-        // Datos expediente
-        this.parametros             = JSON.parse(this.parametros_texto);
-        this.parametros.padre       = "EXPEDIENTE";
-        this.parametros.padre_id    = this.parametros.expediente_id;
-        this.parametros.padre_datos = this.parametros.expediente_datos;  
-        this.expediente_archivos_parametros = this.parametros;
-        window.$pantalla_expediente.serie_id = null;
-        window.$pantalla_expediente.subserie_id = null;
-        window.$pantalla_expediente.modo = this.parametros.modo;
-        window.$pantalla_expediente.consulta = false;
-        if (this.parametros.modo == "modificar") {
-            window.$pantalla_expediente.consulta = true;            
-            this.forma.formData(this.parametros.expediente_datos);
-            setTimeout(() => {
-                window.$pantalla_expediente.consulta = false;
-                let formData = this.forma.formData();
-                window.$pantalla_expediente.serie_id = formData["serie_id"];
-                window.$pantalla_expediente.subserie_id = formData["subserie_id"];
-            }, 3000);
-        };
-       
-        // Botones de la forma
-        this.mostrar_botones();
-    },
-
-    methods: pantalla_expediente_definiciones.metodos,
-
-    data() {
-        return {    
-            // Datos de la forma
-            parametros: {
-                expediente_datos: {}
-            },
-
-            titulo: "Expediente",
-
-            // Indicador de tareas
-            indicador_visible: false,
-
-            // Ver pantalla archivos
-            expediente_archivos_visible: false,
-            opciones_expediente_archivos: {},
-
-            atributos_forma: {
-                id      : 'pantalla_expediente_trd',
-                formData: {},
-                items   : forma_campos.items(),
-                colCount: 3                     
-            },
-
-            opciones_id: {
-                visible: false
-            },
-
-            // Barra de acciones
-            barra_botones: pantalla_expediente_definiciones.barra_botones(this)        
-        }
-    }
+// Funcion llamada por evento mounted DataForma
+async function dataFormaMounted(DataForm) { 
+    that.dataForm = DataForm
 }
 
-export default expediente_pantalla;
+onMounted(() => {         
+    that.indicador_visible = false
+    that.forma = that.$refs.forma
+    that.barra = that.$refs.barra.instance           
+    that.notify = notify
+    window.$pantalla_expediente = that 
+    that.parametros.padre = "EXPEDIENTE"
+    that.parametros.padre_id = that.parametros.expediente_id
+    that.parametros.padre_datos = that.parametros.expediente_datos  
+    that.expediente_archivos_parametros = that.parametros
+    window.$pantalla_expediente.serie_id = null
+    window.$pantalla_expediente.subserie_id = null
+    window.$pantalla_expediente.modo = that.parametros.modo
+
+    // la instancia toma tiempo cuamdo es muy grande
+    setTimeout(() => {
+        that.dataForm.formData(parametros.expediente_datos)
+    }, 1500)
+
+    if (that.parametros.modo == "modificar") {    
+        expediente_archivos_visible.value = true     
+        window.$pantalla_expediente.consulta = true
+        setTimeout(() => {
+            window.$pantalla_expediente.consulta = false            
+            let formData = that.dataForm.formData()
+            window.$pantalla_expediente.serie_id = formData["serie_id"]
+            window.$pantalla_expediente.subserie_id = formData["subserie_id"]
+        }, 3000);
+    };
+    
+    that.mostrar_botones()
+})
 </script>

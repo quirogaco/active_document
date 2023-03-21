@@ -290,7 +290,8 @@ let grupo_especifico = {
 }
 
 
-let get_items = function() {
+const get_items = function() {
+    //return items_basicos
     return [
         grupo_basico,
         grupo_general,

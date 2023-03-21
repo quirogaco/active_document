@@ -28,35 +28,22 @@ let metodos = {
         let datos = {
             "id": registro.id,
             "registro": registro,
-            "modo": "modificar"
-            //"llamado_por": this.retorna_grid
+            "mode": "modificar"
         };
         $lib.call_component_storage(
             "trd_pantalla",   
             {"datos": datos}
         )      
-
-
-        // $router.push({
-        //     name: "trd_pantalla",                      
-        //     params: {
-        //         "attributes_str": JSON.stringify({
-        //             "datos": datos,
-        //             "mode": "modificar"
-        //         })       
-        //     }                            
-        //})
     },
 
     'crear':  function(e) {
-        $router.push({
-            name: "trd_pantalla",                      
-            params: {
-                "attributes_str": JSON.stringify({
-                    "mode": "crear"
-                })
-            }                            
-        })
+        let datos = {            
+            "mode": "crear"
+        };
+        $lib.call_component_storage(
+            "trd_pantalla",   
+            {"datos": datos}
+        )
     },
 
     'retorna_exportar': function(parametros) {

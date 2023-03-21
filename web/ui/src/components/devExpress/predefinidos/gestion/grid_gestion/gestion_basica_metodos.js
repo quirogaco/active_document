@@ -5,7 +5,7 @@ let metodos = {
         $lib.call_component_storage(
             "gestion_pantalla",
             {"datos": {
-                "id"   : e.data.id,
+                "id": e.data.id,
                 "datos": e.data
             }}
         )
