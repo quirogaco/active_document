@@ -51,7 +51,6 @@ campos = {
     "reserva"           : tipos.clave_obligatorio(propiedades={"titulo": "Reserva", "longitud": 20, "reporte": "SI"}), 
     "manejo_informacion": tipos.clave_obligatorio(propiedades={"columna": "no", "titulo": "Manejo de información", "longitud": 10, "reporte": "SI"}),
 
-
     ###############################
     # Información tercero externa #
     ###############################

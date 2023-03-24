@@ -3,15 +3,16 @@
 import pprint
 
 # Definiciones sql
-from librerias.datos.base                import globales
+from librerias.datos.base import globales
 
 # Base general con atributos basicos
-from aplicacion.datos.clases.clases_base    import base_general
-from librerias.datos.sql                    import sqalchemy_tipo_campos as tipos
-from librerias.datos.sql                    import sqalchemy_clase_dinamica
-from librerias.datos.base                   import globales
+from aplicacion.datos.clases.clases_base import base_general
+from librerias.datos.sql import sqalchemy_tipo_campos as tipos
+from librerias.datos.sql import sqalchemy_clase_dinamica
+from librerias.datos.base import globales
 from aplicacion.datos.definiciones._comunes import elementos_comunes
-from aplicacion.archivos                    import archivo_indexa
+from aplicacion.archivos import archivo_indexa
+
 
 def folios_electronicos(_r):    
     folios   = 0        
@@ -21,6 +22,7 @@ def folios_electronicos(_r):
     
     return folios
 
+
 def tipo_archivo(_r):
     archivos = _r.archivos
     tipo     = ""
@@ -29,6 +31,7 @@ def tipo_archivo(_r):
         
     return tipo
 
+
 def tamano(_r):
     archivos = _r.archivos
     tamano   = ""
@@ -36,6 +39,7 @@ def tamano(_r):
         tamano = archivos[0]["tamano"]
         
     return tamano
+
 
 def archivo_procesamiento(_r):
     if getattr(_r, "_archivos", None) is None:
@@ -46,9 +50,11 @@ def archivo_procesamiento(_r):
 
     return archivos
 
+
 def fecha_incorporado(_r):
     
     return _r.creado_en_
+
 
 campos = {
     # TRD/TVD

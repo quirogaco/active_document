@@ -3,17 +3,24 @@ let metodos = function(that) {
         retorna: function(retorna) {
             let accion = retorna["accion"]
             that.indicador_visible = false
-            that.notify("Operación realizada correctamente", "success")    
-            that.forma.formData(retorna)
+            that.notify("Operación realizada correctamente", "success")  
+            console.log("retorna:", retorna)  
+            that.dataForm.formData(retorna)
             
             if (accion=="crear_expediente") {
                 that.parametros.modo = "modificar"            
                 that.mostrar_botones();
-                that.$router.push("expediente_basica_that");           
+                $lib.call_component_storage(
+                    "expediente_basica_grid",   
+                    {}
+                )          
             }
 
             if (accion=="borrar_expediente") {
-                that.$router.push("expediente_basica_that")         
+                $lib.call_component_storage(
+                    "expediente_basica_grid",   
+                    {}
+                )    
             }
         },
 
@@ -66,13 +73,11 @@ let metodos = function(that) {
                     break;
 
                 case 'regresar':     
-                console.log("REGRESAR")  
                     enviar = false     
                     $lib.call_component_storage(
                         "expediente_basica_grid",   
                         {}
-                    )     
-                    //that.$router.push("expediente_basica_grid")
+                    )
                     break;
             }
 

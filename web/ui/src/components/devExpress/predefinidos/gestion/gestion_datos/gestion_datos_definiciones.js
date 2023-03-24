@@ -9,8 +9,13 @@ let metodos = {
             "gestion_datos_consulta"
         ).datos;
 
+        console.log("PROPS:", props)
+
+        let params = $get_params("gestion_datos_consulta");
+        console.log("params-->:", params.datos)
+
         // Carga de nuevo registo
-        let datos = await $lib.leer_registro_id("peticiones", props.id);
+        let datos = await $lib.leer_registro_id("peticiones", params.datos.gestion.id);
         datos.call = props.call;
         this.parametros = datos;
 
@@ -55,7 +60,7 @@ let metodos = {
         ); 
 
         // Trd        
-        let trd = datos.atributos_['trd'];
+        let trd = params.datos.radicado['trd'];
         let expedientes = [];
         if (trd !== undefined) {
             expedientes.push({

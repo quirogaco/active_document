@@ -3,8 +3,8 @@
 
 import pprint
 
-from librerias.datos.sql     import sqalchemy_insertar
-from aplicacion.comunes      import registro_relacion
+from librerias.datos.sql import sqalchemy_insertar
+from aplicacion.comunes import registro_relacion
 from librerias.datos.elastic import elastic_operaciones 
 
 def crear_registro_tercero( origen, datos, radicado_id, id_tarea=""):

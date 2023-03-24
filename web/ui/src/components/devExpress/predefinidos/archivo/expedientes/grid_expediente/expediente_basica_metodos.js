@@ -156,16 +156,26 @@ let metodos = {
     },
 
     'crear':  function(that) {
-        that.$router.push({
-            name: "pantalla_expediente",
-            params: {
-                "parametros_texto": JSON.stringify({
-                    "expediente_id"   : "",
-                    "expediente_datos": {},
-                    "modo"            : "crear"
-                })
-            }            
-        })
+        let datos = {
+            "expediente_id": "",
+            "expediente_datos": {},
+            "modo": "crear"
+        };
+        $lib.call_component_storage(
+            "pantalla_expediente",   
+            {"datos": datos}
+        ) 
+
+        // that.$router.push({
+        //     name: "pantalla_expediente",
+        //     params: {
+        //         "parametros_texto": JSON.stringify({
+        //             "expediente_id"   : "",
+        //             "expediente_datos": {},
+        //             "modo"            : "crear"
+        //         })
+        //     }            
+        // })
     },
 
     'accesos':  function(that) {

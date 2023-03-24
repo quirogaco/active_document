@@ -1,20 +1,13 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
-import pprint, datetime, builtins, base64
+import pprint, datetime
 
-from librerias.datos.base    import globales
-from librerias.datos.sql     import sqalchemy_modificar, sqalchemy_leer
-from librerias.datos.sql     import sqalchemy_filtrar 
-from librerias.datos.sql     import sqalchemy_comunes
-from librerias.datos.elastic import elastic_operaciones
-from librerias.utilidades    import basicas 
+from librerias.datos.sql import sqalchemy_leer
 
-from aplicacion.comunes                       import indexar_datos
-from aplicacion.especificos.archivos_acciones import acciones
-from aplicacion.especificos.gestion.acciones  import acciones_detalle
 from aplicacion.especificos.radicados.gestion import logs
-from librerias.documentos.conversion          import conversion
+from aplicacion.comunes import registro_relacion
+from aplicacion.expedientes.archivo_base import salvar_archivo
 
 from . import comunes_gestion
 
@@ -80,13 +73,52 @@ def asigna_trd(accion, datos={}, archivo=[], id_tarea=""):
     usuario         = sqalchemy_leer.leer_un_registro("usuarios", usuario_id)
     
     # Asigna TRD
-    gestion         = sqalchemy_leer.leer_un_registro("peticiones", peticiones_id[0])
-    atributos_      = gestion["atributos_"]
-    trd_datos       = {
-        "expediente"     : expediente,
+    gestion = sqalchemy_leer.leer_un_registro("peticiones", peticiones_id[0])
+    atributos_ = gestion["atributos_"]
+    trd_datos = {
+        "expediente": expediente,
         "tipo_documental": tipo_documental
     } 
     atributos_["trd"] = trd_datos
+
+    # Actualiza expediente
+    # expediente_registro = sqalchemy_leer.leer_un_registro(
+    #     "agn_expedientes_trd", expediente        
+    # )
+    documento_expediente = {
+        "expediente_id": expediente,
+        "datos": {
+            "soporte": "DIGITALIZADO",
+            "detalle": gestion["asunto"], # viene de radicado
+            "observacion": (
+                gestion["origen_tipo"] +  ": " + 
+                gestion["nro_radicado"]
+            ),
+
+            "fecha_creacion": gestion["fecha_radicado"], # viene del radicado
+            "tipo_id": tipo_documental,
+            "folios_fisicos": 0, # VIENE DE RADICADO
+        }
+    } 
+    print("documento_expediente>>", documento_expediente)
+    salvar_archivo(
+        accion, 
+        datos=documento_expediente, 
+        archivos=archivo, 
+        id_tarea=id_tarea
+    )
+
+
+    registro_relacion.crear_registro_relacion(   
+        "gestor_radicados_entrada", # Estructura origen
+        gestion["origen_id"], # Id de la estructura origen
+        "PADRE", # Role registro origen
+        "agn_expedientes_trd", # Estructura destino
+        expediente, # Id de la estructura destino
+        "HIJO", # Role registro destino
+        "ENTRADA EXPEDIENTES", # Tipo de relaci�n origen-destino
+        "multiple"# Cardinalida simple, multiple
+    )
     
     for peticion_id in peticiones_id:        
         # Modifica registro
