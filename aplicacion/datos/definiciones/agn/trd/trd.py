@@ -21,15 +21,15 @@ def trd_arbol(_r):
     arbol = []
 
     DEPENDENCIA_CLASE = globales.lee_clase("agn_dependencia_trd")
-    sesion            = sqalchemy_comunes.nuevaSesion("base") 
-    filtros           = and_(DEPENDENCIA_CLASE.trd_id == _r.id, DEPENDENCIA_CLASE.tabla == "TRD")
-    dependencias      = sesion.query(DEPENDENCIA_CLASE).filter( filtros ).all()
+    sesion = sqalchemy_comunes.nuevaSesion("base") 
+    filtros = and_(DEPENDENCIA_CLASE.trd_id == _r.id, DEPENDENCIA_CLASE.tabla == "TRD")
+    dependencias = sesion.query(DEPENDENCIA_CLASE).filter( filtros ).all()
     for dependencia in dependencias:
         dato = {
-            "id"    : dependencia.id,
+            "id": dependencia.id,
             "codigo": dependencia.codigo,  
             "nombre": dependencia.nombre,            
-            "tipo"  : "dependencia"              
+            "tipo": "dependencia"              
         }  
         if dependencia.dependencia_padre_id in ["", None]:           
             # Raiz  
@@ -49,28 +49,28 @@ def trd_arbol(_r):
     return arbol
 
 campos = {
-    "fondo_id"     : tipos.clave_obligatorio(propiedades={"titulo": "Fondo id", "longitud": 60}),
-    "fondo_nombre" : tipos.texto(propiedades={"columna": "no", "titulo": "Fondo documental", "longitud": 250}),   
-    "sigla"        : tipos.clave_obligatorio(propiedades={"titulo": "Sigla fondo", "longitud": 60}),  
-    "nombre"       : tipos.texto_obligatorio(propiedades={"titulo": "Nombre fondo", "longitud": 250}),  
+    "fondo_id": tipos.clave_obligatorio(propiedades={"titulo": "Fondo id", "longitud": 60}),
+    "fondo_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Fondo documental", "longitud": 250}),   
+    "sigla": tipos.clave_obligatorio(propiedades={"titulo": "Sigla fondo", "longitud": 60}),  
+    "nombre": tipos.texto_obligatorio(propiedades={"titulo": "Nombre fondo", "longitud": 250}),  
     "fecha_version": tipos.fecha_obligatorio(propiedades={"titulo": "Fecha versión"}),
-    "version"      : tipos.clave_obligatorio(propiedades={"titulo": "Versión", "longitud": 20}),    
+    "version": tipos.clave_obligatorio(propiedades={"titulo": "Versión", "longitud": 20}),    
     "territorial_codigo": tipos.clave_obligatorio(propiedades={"titulo": "Codigo Territorial/Sede", "longitud": 20}),    
     "territorial_nombre": tipos.clave_obligatorio(propiedades={"titulo": "Nombre Territorial/Sede", "longitud": 200}),    
     
     # TRD COMPLETA
-    "trd_arbol"     : tipos.texto(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd completa", "propiedad": trd_arbol}),   
+    "trd_arbol": tipos.texto(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd completa", "propiedad": trd_arbol}),   
 }
 
 referencias = [
     # Fondo
     {
-        "campoReferencia"    : "fondo_id",
+        "campoReferencia": "fondo_id",
         "atributosReferencia": [{
-            "fondo_nombre": "nombre",
+            "fondo_nombre": "nombre"
         }],
         "estructuraDestino": "agn_fondo_documental",
-        "campoDestino"     : "id",            
+        "campoDestino": "id"            
     }
 ]
 

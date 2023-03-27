@@ -305,20 +305,20 @@ campos = {
     # EXPEDIENTE DATOS #
     ####################
     # TRD/TVD
-    "tabla"              : tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60, "reporte": "SI"}),
-    "nombre"             : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250, "reporte": "SI"}),   
-    "observacion"        : tipos.texto(propiedades={"titulo": "Observacion", "longitud": 512, "reporte": "SI"}),   
-    "codigo"             : tipos.texto_obligatorio(propiedades={"columna": "no", "titulo": "Codigo",  "propiedad": codigo, "reporte": "SI"}),   
-    "carpetas"           : tipos.clave(propiedades={"columna": "no", "titulo": "Carpetas", "propiedad": carpetas, "reporte": "SI"}),       
+    "tabla": tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60, "reporte": "SI"}),
+    "nombre": tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250, "reporte": "SI"}),   
+    "observacion": tipos.texto(propiedades={"titulo": "Observacion", "longitud": 512, "reporte": "SI"}),   
+    "codigo": tipos.texto_obligatorio(propiedades={"columna": "no", "titulo": "Codigo",  "propiedad": codigo, "reporte": "SI"}),   
+    "carpetas": tipos.clave(propiedades={"columna": "no", "titulo": "Carpetas", "propiedad": carpetas, "reporte": "SI"}),       
 
-    "ubicacion"            : tipos.texto(propiedades={"titulo": "Ubicación", "longitud": 60, "defecto":'GESTION', "reporte": "SI"}), 
-    "caja"                 : tipos.texto(propiedades={"titulo": "Caja", "longitud": 60, "defecto":'', "reporte": "SI"}), 
+    "ubicacion": tipos.texto(propiedades={"titulo": "Ubicación", "longitud": 60, "defecto":'GESTION', "reporte": "SI"}), 
+    "caja": tipos.texto(propiedades={"titulo": "Caja", "longitud": 60, "defecto":'', "reporte": "SI"}), 
     "ubicacion_topografica": tipos.texto(propiedades={"titulo": "Ubicación topografica", "longitud": 60, "defecto":'', "reporte": "SI"}), 
-    "etapa"          : tipos.texto(propiedades={"titulo": "Etapa", "longitud": 60, "defecto":'GESTION', "reporte": "SI"}), 
-    "estado"         : tipos.texto(propiedades={"titulo": "Estado", "longitud": 60, "defecto":'ABIERTO', "reporte": "SI"}), 
+    "etapa": tipos.texto(propiedades={"titulo": "Etapa", "longitud": 60, "defecto":'GESTION', "reporte": "SI"}), 
+    "estado": tipos.texto(propiedades={"titulo": "Estado", "longitud": 60, "defecto":'ABIERTO', "reporte": "SI"}), 
     "tipo_expediente": tipos.texto(propiedades={"columna": "no", "titulo": "Tipo expediente", "propiedad": tipo_expediente, "reporte": "SI"}), 
-    "anos_gestion"   : tipos.entero(propiedades={"columna": "no", "titulo": "Años gestion", "propiedad": anos_gestion, "reporte": "SI"}),   
-    "anos_central"   : tipos.entero(propiedades={"columna": "no", "titulo": "Años central", "propiedad": anos_central, "reporte": "SI"}),    
+    "anos_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Años gestion", "propiedad": anos_gestion, "reporte": "SI"}),   
+    "anos_central": tipos.entero(propiedades={"columna": "no", "titulo": "Años central", "propiedad": anos_central, "reporte": "SI"}),    
     
     # Retencion vencimiento
     "vence_gestion": tipos.fecha(propiedades={"columna": "no", "titulo": "Vence en archivo de gestión", "propiedad": vence_gestion, "reporte": "SI"}),
@@ -327,8 +327,8 @@ campos = {
     # Transferencia
     "vencido_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Vencido gestion",  "propiedad": vencido_gestion, "reporte": "SI"}),
     "caja_transferencia": tipos.clave(propiedades={"titulo": "Caja transferencia", "longitud": 60, "reporte": "SI"}), 
-    "anotacion"         : tipos.texto(propiedades={"titulo": "Anotación transferencia", "longitud": 250, "reporte": "SI"}), 
-    "transferido"       : tipos.clave(propiedades={"columna": "no", "titulo": "Si esta transferido",  "propiedad": transferido, "reporte": "SI"}),
+    "anotacion": tipos.texto(propiedades={"titulo": "Anotación transferencia", "longitud": 250, "reporte": "SI"}), 
+    "transferido": tipos.clave(propiedades={"columna": "no", "titulo": "Si esta transferido",  "propiedad": transferido, "reporte": "SI"}),
 
     # Disposicion
     "vencido_central": tipos.clave(propiedades={"columna": "no", "titulo": "Vencido central",  "propiedad": vencido_central, "reporte": "SI"}),
@@ -344,53 +344,55 @@ campos = {
     ##########################
     # Información documentos #
     ##########################
-    "acceso"             : tipos.json(propiedades={"columna": "no", "titulo": "Acceso", "propiedad": acceso}),  
-    "acceso_modo"        : tipos.texto(propiedades={"columna": "no", "titulo": "Acceso modo", "propiedad": acceso_modo, "reporte": "SI"}),   
-    "documentos"         : tipos.clave(propiedades={"columna": "no", "titulo": "Documentos", "propiedad": trd_documentos}),
-    "folios_fisicos"     : tipos.texto(propiedades={"columna": "no", "titulo": "Folios fisicos",      "propiedad": folios_fisicos,      "reporte": "SI"}), 
+    "acceso": tipos.json(propiedades={"columna": "no", "titulo": "Acceso", "propiedad": acceso}),  
+    "acceso_modo": tipos.texto(propiedades={"columna": "no", "titulo": "Acceso modo", "propiedad": acceso_modo, "reporte": "SI"}),   
+    "documentos": tipos.clave(propiedades={"columna": "no", "titulo": "Documentos", "propiedad": trd_documentos}),
+    "folios_fisicos": tipos.texto(propiedades={"columna": "no", "titulo": "Folios fisicos",      "propiedad": folios_fisicos,      "reporte": "SI"}), 
     "folios_electronicos": tipos.texto(propiedades={"columna": "no", "titulo": "Folios electronicos", "propiedad": folios_electronicos, "reporte": "SI"}), 
-    "total_documentos"   : tipos.texto(propiedades={"columna": "no", "titulo": "Total documentos",    "propiedad": total_documentos,    "reporte": "SI"}),
-    "fecha_inicial"      : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha inicial",       "propiedad": fecha_inicial,       "reporte": "SI"}), 
-    "fecha_final"        : tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha final",         "propiedad": fecha_final,         "reporte": "SI"}), 
+    "total_documentos": tipos.texto(propiedades={"columna": "no", "titulo": "Total documentos",    "propiedad": total_documentos,    "reporte": "SI"}),
+    "fecha_inicial": tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha inicial",       "propiedad": fecha_inicial,       "reporte": "SI"}), 
+    "fecha_final": tipos.fecha(propiedades={"columna": "no", "titulo": "Fecha final",         "propiedad": fecha_final,         "reporte": "SI"}), 
 
     ##################################
     # DATOS HEREDADOS SERIE/SUBSERIE #
     ##################################
-    "serie_subserie"            : tipos.texto(propiedades={"columna": "no", "titulo": "Serie/Subserie nombre", "propiedad": serie_subserie, "reporte": "SI"}),
-    "dependencia_nombre"        : tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia nombre", "reporte": "SI"}),    
-    "dependencia_codigo"        : tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia codigo", "reporte": "SI"}),          
-    "dependencia_id"            : tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia id", "reporte": "SI"}), 
-    "dependencia_datos"         : tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}), 
-    "dependencia_gestion"       : tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia datos", "propiedad": dependencias_gestion}), 
+    "serie_subserie": tipos.texto(propiedades={"columna": "no", "titulo": "Serie/Subserie nombre", "propiedad": serie_subserie, "reporte": "SI"}),
+    "ubicacion_id": tipos.texto(propiedades={"titulo": "Ubicacion id", "reporte": "SI"}),
+    "ubicacion_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicacion nombre", "reporte": "SI"}),
+    "dependencia_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia nombre", "reporte": "SI"}),    
+    "dependencia_codigo": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia codigo", "reporte": "SI"}),          
+    "dependencia_id": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia id", "reporte": "SI"}),     
+    "dependencia_datos": tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}), 
+    "dependencia_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia datos", "propiedad": dependencias_gestion}), 
        
     # Serie padre
-    "serie_id"                  : tipos.clave(propiedades={"titulo": "Serie id", "longitud": 60}),
-    "serie_version"             : tipos.entero(propiedades={"columna": "no", "titulo": "Version Trd", "reporte": "SI"}),    
-    "serie_codigo"              : tipos.texto(propiedades={"columna": "no", "titulo": "Serie codigo", "reporte": "SI"}),    
-    "serie_nombre"              : tipos.texto(propiedades={"columna": "no", "titulo": "Serie nombre", "reporte": "SI"}),   
-    "serie_gestion"             : tipos.entero(propiedades={"columna": "no", "titulo": "Retención en gestión serie", "reporte": "SI"}),    
-    "serie_central"             : tipos.entero(propiedades={"columna": "no", "titulo": "Retención en central serie", "reporte": "SI"}), 
-    "serie_eliminacion"         : tipos.texto(propiedades={"columna": "no", "titulo": "Eliminación", "reporte": "SI"}), 
-    "serie_seleccion"           : tipos.texto(propiedades={"columna": "no", "titulo": "Selección", "reporte": "SI"}), 
-    "serie_conservacion"        : tipos.texto(propiedades={"columna": "no", "titulo": "Conservación", "reporte": "SI"}), 
+    "serie_id": tipos.clave(propiedades={"titulo": "Serie id", "longitud": 60}),
+    "serie_version": tipos.entero(propiedades={"columna": "no", "titulo": "Version Trd", "reporte": "SI"}),    
+    "serie_codigo": tipos.texto(propiedades={"columna": "no", "titulo": "Serie codigo", "reporte": "SI"}),    
+    "serie_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Serie nombre", "reporte": "SI"}),   
+    "serie_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Retención en gestión serie", "reporte": "SI"}),    
+    "serie_central": tipos.entero(propiedades={"columna": "no", "titulo": "Retención en central serie", "reporte": "SI"}), 
+    "serie_eliminacion": tipos.texto(propiedades={"columna": "no", "titulo": "Eliminación", "reporte": "SI"}), 
+    "serie_seleccion": tipos.texto(propiedades={"columna": "no", "titulo": "Selección", "reporte": "SI"}), 
+    "serie_conservacion": tipos.texto(propiedades={"columna": "no", "titulo": "Conservación", "reporte": "SI"}), 
     "serie_micro_digitalizacion": tipos.texto(propiedades={"columna": "no", "titulo": "Micro digitalización", "reporte": "SI"}),         
 
     # SubSerie padre
-    "subserie_id"                  : tipos.clave(propiedades={"titulo": "SubSerie id", "longitud": 60}),
-    "subserie_codigo"              : tipos.texto(propiedades={"columna": "no", "titulo": "SubSerie codigo", "reporte": "SI"}), 
-    "subserie_nombre"              : tipos.texto(propiedades={"columna": "no", "titulo": "SubSerie nombre", "reporte": "SI"}),    
-    "subserie_gestion"             : tipos.entero(propiedades={"columna": "no", "titulo": "Retención en gestión Subserie", "reporte": "SI"}),    
-    "subserie_central"             : tipos.entero(propiedades={"columna": "no", "titulo": "Retención en central Subserie", "reporte": "SI"}), 
-    "subserie_eliminacion"         : tipos.texto(propiedades={"columna": "no", "titulo": "Eliminación", "reporte": "SI"}), 
-    "subserie_seleccion"           : tipos.texto(propiedades={"columna": "no", "titulo": "Selección", "reporte": "SI"}), 
-    "subserie_conservacion"        : tipos.texto(propiedades={"columna": "no", "titulo": "Conservación", "reporte": "SI"}), 
+    "subserie_id": tipos.clave(propiedades={"titulo": "SubSerie id", "longitud": 60}),
+    "subserie_codigo": tipos.texto(propiedades={"columna": "no", "titulo": "SubSerie codigo", "reporte": "SI"}), 
+    "subserie_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "SubSerie nombre", "reporte": "SI"}),    
+    "subserie_gestion": tipos.entero(propiedades={"columna": "no", "titulo": "Retención en gestión Subserie", "reporte": "SI"}),    
+    "subserie_central": tipos.entero(propiedades={"columna": "no", "titulo": "Retención en central Subserie", "reporte": "SI"}), 
+    "subserie_eliminacion": tipos.texto(propiedades={"columna": "no", "titulo": "Eliminación", "reporte": "SI"}), 
+    "subserie_seleccion": tipos.texto(propiedades={"columna": "no", "titulo": "Selección", "reporte": "SI"}), 
+    "subserie_conservacion": tipos.texto(propiedades={"columna": "no", "titulo": "Conservación", "reporte": "SI"}), 
     "subserie_micro_digitalizacion": tipos.texto(propiedades={"columna": "no", "titulo": "Micro digitalización", "reporte": "SI"})
 }
 
 referencias = [
     # Serie Trd
     {
-        "campoReferencia"    : "serie_id",
+        "campoReferencia": "serie_id",
         "atributosReferencia": [{
             "dependencia_codigo": "dependencia_codigo",
             "dependencia_nombre": "dependencia_nombre",
@@ -413,7 +415,7 @@ referencias = [
 
     # SubSerie Trd
     {
-        "campoReferencia"    : "subserie_id",
+        "campoReferencia": "subserie_id",
         "atributosReferencia": [{
             "subserie_codigo"              : "codigo",              
             "subserie_nombre"              : "nombre",  

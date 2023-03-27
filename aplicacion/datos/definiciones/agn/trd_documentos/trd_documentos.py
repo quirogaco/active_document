@@ -61,6 +61,7 @@ campos = {
     "tabla"              : tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),
     
     # Tipo documental
+    "padre_id"           : tipos.clave(propiedades={"titulo": "Documento padre", "longitud": 60}),
     "tipo_id"            : tipos.clave(propiedades={"titulo": "Tipo id", "longitud": 60}),
     "tipo_nombre"        : tipos.texto(propiedades={"columna": "no", "titulo": "Tipo nombre", "longitud": 250}),
 

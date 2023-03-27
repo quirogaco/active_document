@@ -110,7 +110,12 @@ let metodos = {
         e.toolbarOptions.items.push({
             location: 'after',
             template: 'crearButton'
-        })      
+        })  
+        
+        e.toolbarOptions.items.push({
+            location: 'after',
+            template: 'crearAnexoButton'
+        })  
     },
 
     mostrar_ventana(parametros) {
@@ -164,6 +169,21 @@ let metodos = {
     'crear':  function(e) {
         this.parametros["datos_archivo"] = {}
         this.llamar_ventana(this.parametros, "crear")
+    },
+
+
+    'crearAnexo':  function(e) {
+        let seleccionados = this.grid_archivos.getSelectedRowKeys()
+        if (seleccionados.length > 0) {                        
+            console.log("--> crearAnexo <--", seleccionados)
+            this.parametros["datos_archivo"] = {   
+                "padre_id": seleccionados[0]             
+            }
+            this.llamar_ventana(this.parametros, "crear")
+        }
+        else {
+            this.notify("Seleccione un documento !", "warning") 
+        }
     },
 
     ejecutar_operacion(operacion, padre_id, datos) {

@@ -52,7 +52,7 @@ def recuperar(conexion, estructura):
     print("RESULTADO>>>" + estructura, total)    
     print("")
 
-    pprint.pprint(resultado)
+    #pprint.pprint(resultado)
 
     # Peticiones
     # for r in resultado:
@@ -118,24 +118,24 @@ def recuperar(conexion, estructura):
 
 #"""
 # RADICACION GESTION
-recuperar(conexion, "radicados_entrada")
-recuperar(conexion, "radicados_salida")
-recuperar(conexion, "radicados_interno")
-recuperar(conexion, "peticiones")
-recuperar(conexion, "copias")
-recuperar(conexion,"correos_descargados")
+# recuperar(conexion, "radicados_entrada")
+# recuperar(conexion, "radicados_salida")
+# recuperar(conexion, "radicados_interno")
+# recuperar(conexion, "peticiones")
+# recuperar(conexion, "copias")
+# recuperar(conexion,"correos_descargados")
 #"""
 
 #"""
 # ARCHIVO
-# recuperar(conexion, "agn_fondo_documental")
-# recuperar(conexion, "agn_trd")
-# recuperar(conexion, "agn_dependencia_trd")
-# recuperar(conexion, "agn_serie_trd")
-# recuperar(conexion, "agn_subserie_trd")
-# recuperar(conexion, "agn_tipo_documental_trd")
-# recuperar(conexion, "agn_documentos_trd")
-# recuperar(conexion, "agn_expedientes_trd")
+recuperar(conexion, "agn_fondo_documental")
+recuperar(conexion, "agn_trd")
+recuperar(conexion, "agn_dependencia_trd")
+recuperar(conexion, "agn_serie_trd")
+recuperar(conexion, "agn_subserie_trd")
+recuperar(conexion, "agn_tipo_documental_trd")
+recuperar(conexion, "agn_documentos_trd")
+recuperar(conexion, "agn_expedientes_trd")
 
 #recuperar(conexion, "datos_formularios_dinamicos")
 #"""

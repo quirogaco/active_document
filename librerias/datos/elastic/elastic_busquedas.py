@@ -185,9 +185,9 @@ def ejecutar(estructura, parametros, definicion, id_tarea):
 
     resultado = ejecutarBusqueda(estructura, parametros, definicion, id_tarea)
     
-    # print("")
-    # print("")
-    # print("resultado:") 
-    # pprint.pprint(resultado)
+    print("")
+    print("")
+    print("resultado:") 
+    pprint.pprint(resultado)
     
     return resultado

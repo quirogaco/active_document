@@ -22,15 +22,15 @@ def trd_dependencia(_r):
 
     # Caga Series
     SERIE_CLASE = globales.lee_clase("agn_serie_trd")
-    sesion      = sqalchemy_comunes.nuevaSesion("base") 
-    series      = sesion.query(SERIE_CLASE).filter( SERIE_CLASE.dependencia_id == _r.id ).all()
+    sesion = sqalchemy_comunes.nuevaSesion("base") 
+    series = sesion.query(SERIE_CLASE).filter( SERIE_CLASE.dependencia_id == _r.id ).all()
     for serie in series:
         datos = {
-            "id"      : serie.id,
-            "codigo"  : serie.codigo,
-            "nombre"  : serie.nombre,
+            "id": serie.id,
+            "codigo": serie.codigo,
+            "nombre": serie.nombre,
             "padre_id": _r.id,
-            "tipo"    : "serie"          
+            "tipo": "serie"          
         }
         arbol.append(datos)
 
@@ -58,25 +58,25 @@ def acceso(_r):
 
 campos = {
     # TRD/TVD
-    "tabla"              : tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),
+    "tabla": tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),
 
     # Trd Informaciósn
-    "trd_id"       : tipos.clave_obligatorio(propiedades={"titulo": "Trd id", "longitud": 60}),
-    "trd_nombre"   : tipos.texto(propiedades={"columna": "no", "titulo": "Trd descripción", "longitud": 250}),   
-    "trd_version"  : tipos.texto(propiedades={"columna": "no", "titulo": "Trd Versión", "longitud": 250}),   
-    "trd_estado"   : tipos.texto(propiedades={"columna": "no", "titulo": "Trd Estao", "longitud": 250}),  
+    "trd_id": tipos.clave_obligatorio(propiedades={"titulo": "Trd id", "longitud": 60}),
+    "trd_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Trd descripción", "longitud": 250}),   
+    "trd_version": tipos.texto(propiedades={"columna": "no", "titulo": "Trd Versión", "longitud": 250}),   
+    "trd_estado": tipos.texto(propiedades={"columna": "no", "titulo": "Trd Estao", "longitud": 250}),  
     
     # Dependencia padre
-    "dependencia_padre_id"    : tipos.clave(propiedades={"titulo": "Dependencia padre id", "longitud": 60}),
+    "dependencia_padre_id": tipos.clave(propiedades={"titulo": "Dependencia padre id", "longitud": 60}),
     "dependencia_padre_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Trd descripción", "longitud": 250}),   
 
-    "codigo"       : tipos.clave_obligatorio(propiedades={"titulo": "Codigo", "longitud": 60}),  
-    "nombre"       : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250}),
+    "codigo": tipos.clave_obligatorio(propiedades={"titulo": "Codigo", "longitud": 60}),  
+    "nombre": tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250}),
     "nombre_largo" : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250, "propiedad": nombre_largo}),
     "dependencia_arbol": tipos.texto(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd dependencia", "propiedad": trd_dependencia}),  
     "datos": tipos.json(propiedades={"titulo": "Datos adicionales", "defecto": 'json'}), 
     # Acceso
-    "acceso"              : tipos.json(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd serie", "propiedad": acceso})
+    "acceso": tipos.json(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd serie", "propiedad": acceso})
 }
 
 referencias = [

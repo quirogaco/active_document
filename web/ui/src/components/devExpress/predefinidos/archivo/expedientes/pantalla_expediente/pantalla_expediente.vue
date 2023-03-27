@@ -15,8 +15,6 @@ import pantalla_expediente_definiciones from
     "./pantalla_expediente_definiciones.js"
 import forma_campos from "./forma_campos"
 
-console.log("expediente_archivos:", expediente_archivos)
-
 // Este componente
 
 let name = 'pantalla_expediente'
@@ -79,21 +77,27 @@ onMounted(() => {
     window.$pantalla_expediente.subserie_id = null
     window.$pantalla_expediente.modo = that.parametros.modo
 
-    // la instancia toma tiempo cuamdo es muy grande
-    setTimeout(() => {
-        that.dataForm.formData(parametros.expediente_datos)
-    }, 1500)
+    console.log("that.parametros>", that.parametros)
 
+    window.$pantalla_expediente.consulta = true
     if (that.parametros.modo == "modificar") {    
-        expediente_archivos_visible.value = true     
-        window.$pantalla_expediente.consulta = true
-        setTimeout(() => {
-            window.$pantalla_expediente.consulta = false            
+        expediente_archivos_visible.value = true  
+        window.$pantalla_expediente.consulta = false          
+        setTimeout(() => {    
             let formData = that.dataForm.formData()
             window.$pantalla_expediente.serie_id = formData["serie_id"]
             window.$pantalla_expediente.subserie_id = formData["subserie_id"]
         }, 3000);
     };
+
+    if (that.parametros.modo == "crear") {    
+        window.$pantalla_expediente.consulta = false  
+    };
+
+    // la instancia toma tiempo cuamdo es muy grande
+    setTimeout(() => {
+        that.dataForm.formData(parametros.expediente_datos)
+    }, 1500)
     
     that.mostrar_botones()
 })

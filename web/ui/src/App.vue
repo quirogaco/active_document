@@ -65,17 +65,23 @@ export default {
     },
 
     mounted() {
-        window.$ns['aplicacion'] = this;
-        window.$mostrar_esperar = this.mostrar_esperar;
+        window.$ns['aplicacion'] = this
+        window.$mostrar_esperar = this.mostrar_esperar
         window.$ocultar_esperar = this.ocultar_esperar;
-        window.$alertar = alert;
-        window.$get_params = this.get_params;
-        window.$save_params = this.save_params;
+        window.$alertar = alert
+
+        // storage params
+        window.$get_params = this.get_params
+        window.$save_params = this.save_params
+        // storage component
+        window.$get_component = this.get_component
+        window.$save_component = this.save_component
 
         const globalStore = defineStore('globalStore', {
             state: () => {
                 return { 
-                    component_parameters: {}                    
+                    component_parameters: {},
+                    components: {}                   
                 }
             },
             // could also be defined as
@@ -87,6 +93,14 @@ export default {
 
                 get_params(componente_name) {
                     return this.component_parameters[componente_name]
+                },
+
+                save_component(componente_name, component) {
+                    this.components[componente_name] = component
+                },
+
+                get_component(componente_name) {
+                    return this.components[componente_name]
                 }
             },
         })
@@ -190,7 +204,20 @@ export default {
         save_params(componente_name, params) {            
             let globalStore = window._APLICACION_.config.globalProperties.globalStore;
             globalStore.save_params(componente_name, params);         
+        },
+
+        get_component(componente_name) {            
+            let globalStore = window._APLICACION_.config.globalProperties.globalStore;
+            let datos = globalStore.get_component(componente_name);
+
+            return datos;
+        },
+
+        save_component(componente_name, component) {            
+            let globalStore = window._APLICACION_.config.globalProperties.globalStore;
+            globalStore.save_component(componente_name, component);         
         }
+
     }
 }
 </script>

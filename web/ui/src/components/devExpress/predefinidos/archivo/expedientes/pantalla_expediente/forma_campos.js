@@ -10,22 +10,65 @@ let items_basicos = [
     {
         "componente": "campo",
         "tipo": "seleccion",
-        "id": "dependencia_id",
-        "titulo": "Dependencia", 
-        "fuente": "agn_dependencia_trd", 
+        "id": "ubicacion_id",
+        "titulo": "Territorial", 
+        "fuente": "ubicaciones",
         "filtros_fuente": ["estado_", "=", "ACTIVO"],
-        "muestra_expresion": "nombre_largo",
-        "muestra_valor": "nombre_largo",
-        "busqueda_expresion": "nombre_largo",
+        "muestra_expresion": "nombre",
+        "muestra_valor": "nombre",
+        "busqueda_expresion": "nombre",
         "obligatorio": true,
         "eventos"           : {
-            "seleccion_cambiada": function(campo, definicion, forma, forma_id) { 
-                let datos = campo.selectedItem;                  
+            "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 
+                let datos = campo.selectedItem   
+                console.log("ubicacion_id:", datos, window.$pantalla_expediente.consulta)                             
                 if (datos != null) {                        
-                    let filtros = ["dependencia_id", "=", datos.id];                                  
-                    if (window.$pantalla_expediente.consulta == false) {                                            
+                    let filtros = ["ubicacion_id", "=", datos.id]                                  
+                    if (window.$pantalla_expediente.consulta == false) {  
+                        console.log("ubicacion_id:", filtros, datos)                                              
+                        forma_definiciones.limpia_campos(forma, ["dependencia_id"]) 
+                        forma_definiciones.asigna_fuente_datos(
+                            forma, 
+                            "dependencia_id", 
+                            "select", 
+                            "dependencias", 
+                            filtros, 
+                            {}
+                        )        
+                    }      
+                };                   
+            }
+        }
+
+    },
+
+    {
+        "componente": "campo",
+        "tipo": "seleccion",
+        "id": "dependencia_id",
+        "titulo": "Dependencia", 
+        "fuente": "dependencias", 
+        "filtros_fuente": ["estado_", "=", "ACTIVO"],
+        "muestra_expresion": "nombre",
+        "muestra_valor": "nombre",
+        "busqueda_expresion": "nombre",
+        "obligatorio": true,
+        "eventos"           : {
+            "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 
+                let datos = campo.selectedItem                
+                if (datos != null) {                        
+                    let filtros = ["dependencia_id", "=", datos.id]                                  
+                    if (window.$pantalla_expediente.consulta == false) { 
+                        console.log("dependencia_id:", filtros, datos)                                              
                         forma_definiciones.limpia_campos(forma, ["serie_id"]) 
-                        forma_definiciones.asigna_fuente_datos(forma, "serie_id", "select", "agn_serie_trd", filtros, {})        
+                        forma_definiciones.asigna_fuente_datos(
+                            forma, 
+                            "serie_id", 
+                            "select", 
+                            "agn_serie_trd", 
+                            filtros, 
+                            {}
+                        )        
                     }      
                 };                   
             }
@@ -51,16 +94,24 @@ let items_basicos = [
                 console.log("FOCO->dependencia_id:", dependencia_id);                           
             },
 
-            "seleccion_cambiada": function(campo, definicion, forma, forma_id) { 
-                let filtros = ["serie_id", "=", ".."];     
-                let datos = campo.selectedItem;
-                window.$pantalla_expediente.serie_id = null;
+            "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 
+                let filtros = ["serie_id", "=", ".."]    
+                let datos = campo.selectedItem                  
+                window.$pantalla_expediente.serie_id = null
                 if (datos != null) {                        
-                     filtros = ["serie_id", "=", datos.id];
-                    window.$pantalla_expediente.serie_id = datos.id;
-                    if (window.$pantalla_expediente.consulta == false) {    
+                    filtros = ["serie_id", "=", datos.id]
+                    window.$pantalla_expediente.serie_id = datos.id                    
+                    if (window.$pantalla_expediente.consulta == false) {  
+                        console.log("serie_id:", filtros, datos)   
                         forma_definiciones.limpia_campos(forma, ["subserie_id"])                                                                                            
-                        forma_definiciones.asigna_fuente_datos(forma, "subserie_id", "select", "agn_subserie_trd", filtros, {})        
+                        forma_definiciones.asigna_fuente_datos(
+                            forma, 
+                            "subserie_id", 
+                            "select", 
+                            "agn_subserie_trd", 
+                            filtros, 
+                            {}
+                        )        
                     }    
                 }                
             }

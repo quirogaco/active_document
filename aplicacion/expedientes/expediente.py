@@ -18,17 +18,18 @@ from aplicacion.trd import logs
 # TRD
 def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
     # Expediente
-    caja                  = datos["datos"].get("caja", 0)
+    caja = datos["datos"].get("caja", 0)
     if caja is None:
         caja = 0
     ubicacion_topografica = datos["datos"].get("ubicacion_topografica", "")  
     datos_expediente = {
-        "tabla"      : "TRD", 
-        "serie_id"   : datos["datos"]["serie_id"], 
+        "tabla": "TRD", 
+        "ubicacion_id": datos["datos"].get("ubicacion_id", ""), 
+        "serie_id": datos["datos"]["serie_id"], 
         "subserie_id": datos["datos"]["subserie_id"], 
-        "nombre"     : datos["datos"]["nombre"],
+        "nombre": datos["datos"]["nombre"],
         "observacion": datos["datos"].get("observacion", ""),
-        "caja"       : caja,
+        "caja": caja,
         "ubicacion_topografica": ubicacion_topografica  
     }
     resultado = sqalchemy_insertar.insertar_registro_estructura(
@@ -70,10 +71,11 @@ def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
 def modificar_expediente(accion, datos={}, archivo=[], id_tarea=""):
     expediente_id = datos["datos"]["id"]
     datos_expediente = {
-        "serie_id"   : datos["datos"]["serie_id"], 
+        "ubicacion_id": datos["datos"].get("ubicacion_id", ""),
+        "serie_id": datos["datos"]["serie_id"], 
         "subserie_id": datos["datos"]["subserie_id"], 
-        "nombre"     : datos["datos"]["nombre"],
-        "caja"       : datos["datos"].get("caja", 0),
+        "nombre": datos["datos"]["nombre"],
+        "caja": datos["datos"].get("caja", 0),
         "observacion": datos["datos"].get("observacion", ""),
         "ubicacion_topografica": datos["datos"].get(
             "ubicacion_topografica", 

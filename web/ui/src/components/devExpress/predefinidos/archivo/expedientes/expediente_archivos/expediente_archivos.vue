@@ -14,19 +14,21 @@ import {
     DxFilterRow,
     DxEditing,
 } from 'devextreme-vue/data-grid';
-import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } from 'devextreme-vue/responsive-box'
+import { DxResponsiveBox, DxItem, DxLocation, DxCol, DxRow } 
+from 'devextreme-vue/responsive-box'
 
 import DxButtonGroup from 'devextreme-vue/button-group'
 import DxToolbar     from 'devextreme-vue/toolbar'
-import { DxFileUploader } from 'devextreme-vue/file-uploader';
+import { DxFileUploader } from 'devextreme-vue/file-uploader'
 
-import fuenteDatos  from '../../../../../../components/devExpress/remoto/fuenteDatos.js';
+import fuenteDatos  
+from '../../../../../../components/devExpress/remoto/fuenteDatos.js'
 
 // Columnas
 import expediente_archivos_columnas from './expediente_archivos_columnas.js'
-import metodos        from './expediente_archivos_metodos.js'
-
-import archivo_expediente from './componentes_expediente/archivo_expediente.vue'
+import metodos from './expediente_archivos_metodos.js'
+import archivo_expediente 
+from './componentes_expediente/archivo_expediente.vue'
 
 export default {
     components: {
@@ -68,9 +70,9 @@ export default {
                 datos: {}
             },
             emergente_key: 0,
-            columnas      : expediente_archivos_columnas.columnas, 
-            fuente_datos  : [],
-            pageSizes     : [10, 25, 50, 100],
+            columnas: expediente_archivos_columnas.columnas, 
+            fuente_datos: [],
+            pageSizes: [10, 25, 50, 100],
             
             // Editable grilla
             opciones_grilla: {
@@ -81,10 +83,11 @@ export default {
     },
 
     mounted() {
-        window.$grid_archivos_expediente = this.$refs.grid_archivos.instance;
-        window.$expediente_archivos = this;
-        console.log("EXPEDIENTE MONTADO --> ARCHIVOS:", this.parametros)    
-        this.notify   = notify
+        window.$grid_archivos_expediente = this.$refs.grid_archivos.instance
+        this.grid_archivos = this.$refs.grid_archivos.instance
+        window.$expediente_archivos = this
+        //console.log("EXPEDIENTE MONTADO --> ARCHIVOS:", this.parametros)    
+        this.notify = notify        
         let filtros = []
         if (this.parametros.padre == "EXPEDIENTE") {
             filtros = [ ["expediente_id", "=", this.parametros.padre_id] ]
@@ -113,7 +116,14 @@ export default {
             }
         }
 
-        this.fuente_datos = fuenteDatos.creaFuenteDatosConsulta('grid', null, 'agn_documentos_trd', 'agn_documentos_trd', filtros, eventos)        
+        this.fuente_datos = fuenteDatos.creaFuenteDatosConsulta(
+            'grid', 
+            null, 
+            'agn_documentos_trd', 
+            'agn_documentos_trd', 
+            filtros, 
+            eventos
+        )        
     },
 
     methods: metodos

@@ -15,7 +15,7 @@ from aplicacion.trd import logs
 from . import indexar_datos
 
 # ARCHIVOS
-def salvar_archivo(accion, datos={}, archivos=[], id_tarea=""):
+def salvar_archivo(accion, datos={}, archivos=[], id_tarea=""): 
     expediente_id = datos['expediente_id']
     # Carpeta id
     filtros = [ [ "expediente_id", "=", expediente_id ] ]
@@ -23,15 +23,16 @@ def salvar_archivo(accion, datos={}, archivos=[], id_tarea=""):
     carpeta_id = carpetas[0]['id']
     soporte = datos["datos"]['soporte']    
     datos_archivos = {
-        "tabla"         : "TRD", 
-        "carpeta_id"    : carpeta_id, 
-        "expediente_id" : expediente_id, 
-        "detalle"       : datos["datos"]["detalle"], 
-        "observacion"   : datos["datos"].get("observacion", ""), 
+        "padre_id": datos["datos"].get("padre_id", ""),
+        "tabla": "TRD", 
+        "carpeta_id": carpeta_id, 
+        "expediente_id": expediente_id, 
+        "detalle": datos["datos"]["detalle"], 
+        "observacion": datos["datos"].get("observacion", ""), 
         "fecha_creacion": datos["datos"]["fecha_creacion"], 
-        "tipo_id"       : datos["datos"]["tipo_id"],
-        "fecha_funcion" : "RSA-MD5",
-        "soporte"       : soporte
+        "tipo_id": datos["datos"]["tipo_id"],
+        "fecha_funcion": "RSA-MD5",
+        "soporte": soporte
     }
     # Atributos por soporte
     datos_archivos["folios_fisicos"] = 0

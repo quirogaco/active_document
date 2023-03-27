@@ -320,8 +320,9 @@ let items_gestion = function(componente, contexto, datos={}) {
                 ]
             }
             else {
-                let etapa_estado = componente.parametros.etapa_estado;
-                let borrador_existe = componente.borrador_existe;
+                let etapa_estado = componente.parametros.etapa_estado
+                let borrador_existe = componente.borrador_existe
+                console.log("BOTONES", etapa_estado, borrador_existe, datos.origen_tipo )
                 switch (etapa_estado) {
                     case "ASIGNADO_DEPENDENCIA":
                         items = [
@@ -348,57 +349,29 @@ let items_gestion = function(componente, contexto, datos={}) {
                         }
                         
                         if ( 
-                            ( borrador_existe ) && 
-                            (datos.clase_radicado == "ENTRADA") 
+                            (borrador_existe) && 
+                            (datos.origen_tipo == "ENTRADA") 
                         ) {
-                            items.push(enviar_a_visto_bueno);                            
+                            items.push(enviar_a_visto_bueno); 
+                            items.push(radicar_borrador);                           
                         }
-                        else {
-                            items.push(enviar_a_visto_bueno);
-                            items.push(radicar_borrador);
+
+
+                        if ( 
+                            (borrador_existe) && 
+                            (datos.origen_tipo == "SALIDA") 
+                        ) {                            
+                            items.push(radicar_borrador);                           
+                        }
+
+                        if ( 
+                            (borrador_existe) && 
+                            (datos.origen_tipo == "INTERNO") 
+                        ) {                            
+                            items.push(radicar_borrador);                           
                         }
                         
-                        // // BORRAR DESDE AQUI
-                        // if (datos.clase_radicado == "ENTRADA") {
-                        //     items.push(enviar_a_visto_bueno);  
-                        //     items.push(radicar_borrador);                          
-                        // }
-
-                        // if (datos.clase_radicado == "SALIDDA") {
-                        //     items.push(radicar_borrador);                          
-                        // }
-                        items.push(enviar_a_visto_bueno);
-                        items.push(radicar_borrador);
-                        // // HASTA AQUI
-
-                        // if ( 
-                        //     ( borrador_existe ) && 
-                        //     (datos.clase_radicado == "ENTRADA") 
-                        // ) {
-                        //     items.push(enviar_a_visto_bueno);  
-                        //     items.push(radicar_borrador);                          
-                        // }
-
-                        // if ( 
-                        //     ( borrador_existe ) && 
-                        //     (datos.clase_radicado == "SALIDA") 
-                        // ) {
-                        //     //items.push(enviar_a_visto_bueno);  
-                        //     items.push(radicar_borrador);                          
-                        // }
-
-                        // if ( 
-                        //     ( borrador_existe ) && 
-                        //     (datos.clase_radicado == "INTERNO") 
-                        // ) {
-                        //     //items.push(enviar_a_visto_bueno);  
-                        //     items.push(radicar_borrador);                          
-                        // }
-
-                        // else {
-                        //     //items.push(enviar_a_visto_bueno);
-                        //     //items.push(radicar_borrador);
-                        // }
+                        
                         break
 
                     case "DEVUELTO_ASIGNADORA":

@@ -133,9 +133,9 @@ that.parameters_received = general_form.lee_propiedades(props);
 // 2. como identificar si  items  son definiciones devexpress o 
 //    basicas para convertir
 let config_form = validate_configuration(that.parameters_received);
-config_form.items = form_field_configuration(config_form);
-console.log("-- config_form --", config_form)
-console.log("-- config_form.items --", config_form.items)
+//config_form.items = form_field_configuration(config_form);
+// console.log("-- config_form --", config_form)
+// console.log("-- config_form.items --", config_form.items)
 
 // events
 const emit = defineEmits(['mounted']);
@@ -148,18 +148,14 @@ that = $lib.assignAttributes(that, methods);
 that = $lib.assignAttributes(that, events);
 
 onMounted(() => {
-    // console.log(" onMounted DATAFORM THAT-0:", that);
-    // console.log(" onMounted DATAFORM that.$refs.dxFormRef:", that.$refs.dxFormRef);
-    // //console.log(" onMounted DATAFORM that.$refs.dxFormRef.instance:", that.$refs.dxFormRef.instance);  
-    // console.log(" onMounted DATAFORM that.parameters_received:", that.parameters_received);  
     // devexpress class, access to attributes
-    that.dxForm = that.$refs.dxFormRef;
+    that.dxForm = that.$refs.dxFormRef
     // devexpress instance (object), acces to functions, ej: option
-    that.instance = that.$refs.dxFormRef.instance;
+    that.instance = that.$refs.dxFormRef.instance
+    config_form.items = form_field_configuration(config_form)
 
     // required for events, methods and fields of the form
     // validar sin no viene con config... ver 1
-    console.log("that.parameters_received:", that.parameters_received)
     that.instance.basicas = {
         "forma_id": that.parameters_received.config.id
     };
@@ -167,5 +163,4 @@ onMounted(() => {
     emit('mounted', that);
 });
 
-//defineExpose( Object.assign({}, that) );
 </script>

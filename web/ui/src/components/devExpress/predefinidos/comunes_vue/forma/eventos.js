@@ -25,8 +25,8 @@ const envoltura = function(forma, definicion, evento, forma_id) {
     return funcion_evento;
 }
 
-const eventos = function(atributos) {
-    let forma = window.$librerias.cargaAtributo(atributos, 'forma', null);     
+const eventos = function(atributos) {    
+    let forma = window.$librerias.cargaAtributo(atributos, 'forma', null)
     let mayuscula = window.$librerias.cargaAtributo(
         atributos, 
         'mayuscula', 

@@ -126,6 +126,10 @@
             let borrador_id  = this.parametros.borrador_id;
             let etapa_estado = this.parametros.etapa_estado; 
 
+            if  ( (borrador_id != "") && (borrador_id != null) ){
+                this.borrador_existe = true;
+            }
+
             // Radicado
             //console.log("this.parametros:", this.parametros)
             let estructura = "radicados_entrada";

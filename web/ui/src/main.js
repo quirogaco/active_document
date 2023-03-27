@@ -230,15 +230,15 @@ else {
     //     '/components/devExpress/predefinidos/archivo/trd/definicion/pantalla_trd/pantalla_trd.vue'
     // );   
     
-    // await window.$ns['aplicacion'].asignaRuta(
-    //     'expediente_basica_grid',  
-    //     '/components/devExpress/predefinidos/archivo/expedientes/grid_expediente/expediente_basica_grid.vue'
-    // );   
+    await window.$ns['aplicacion'].asignaRuta(
+        'expediente_basica_grid',  
+        '/components/devExpress/predefinidos/archivo/expedientes/grid_expediente/expediente_basica_grid.vue'
+    );   
 
-    // await window.$ns['aplicacion'].asignaRuta(
-    //     'pantalla_expediente',  
-    //     '/components/devExpress/predefinidos/archivo/expedientes/pantalla_expediente/pantalla_expediente.vue'
-    // );   
+    await window.$ns['aplicacion'].asignaRuta(
+        'pantalla_expediente',  
+        '/components/devExpress/predefinidos/archivo/expedientes/pantalla_expediente/pantalla_expediente.vue'
+    );   
 
     // await window.$ns['aplicacion'].asignaRuta(
     //     'expediente_transfiere_grid',  
@@ -250,15 +250,15 @@ else {
     //     '/components/devExpress/predefinidos/archivo/expedientes/grid_disposicion/expediente_disposicion_grid.vue'
     // ); 
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'gestion_basica_grid',  
-        '/components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'
-    ); 
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'gestion_basica_grid',  
+    //     '/components/devExpress/predefinidos/gestion/grid_gestion/gestion_basica_grid.vue'
+    // ); 
 
-    await window.$ns['aplicacion'].asignaRuta(
-        'gestion_pantalla',  
-        '/components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'
-    ); 
+    // await window.$ns['aplicacion'].asignaRuta(
+    //     'gestion_pantalla',  
+    //     '/components/devExpress/predefinidos/gestion/gestion_pantalla/gestion_pantalla.vue'
+    // ); 
 
 
     // await window.$ns['aplicacion'].asignaRuta(
@@ -303,14 +303,14 @@ else {
     setTimeout(() => {
         $router.push({
             //path: "trd_basica_grid"
-            //path: "expediente_basica_grid"
+            path: "expediente_basica_grid",
+            //path: "pantalla_expediente",
             //path: "expediente_transfiere_grid"
             //path: "expediente_disposicion_grid"
-            path: "gestion_basica_grid"
+            //path: "gestion_basica_grid"
             //path: "flujos_dinamicos_grid"
             //path: "ventanilla_radicado_grid",
-            //path: "ventanilla_radicado_forma",
-            //path: "pantalla_expediente"
+            //path: "ventanilla_radicado_forma",            
             //path: "usuarios_grid"
 
             //path: "grid_pqrs_asigna_grid",

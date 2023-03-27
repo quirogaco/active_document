@@ -48,8 +48,17 @@
             <template #crearButton>
                 <DxButton
                     @click = "crear()"
-                    icon   = "fas fa-plus-square"
+                    icon   = "fa-solid fa-file"
                     text   = "Agregar Documento"
+                    type   = "success"  
+                />
+            </template>
+
+            <template #crearAnexoButton>
+                <DxButton
+                    @click = "crearAnexo()"
+                    icon   = "fa-solid fa-paperclip"
+                    text   = "Agregar anexo a documento"
                     type   = "success"  
                 />
             </template>

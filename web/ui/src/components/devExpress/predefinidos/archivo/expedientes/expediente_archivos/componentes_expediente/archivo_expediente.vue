@@ -30,7 +30,7 @@
                     :col-count = "columnas"
                 >
 
-                    <DxGroupItem>
+                    <DxGroupItem>                        
                         <DxSimpleItem     
                             ref             = "carpeta_nro"           
                             data-field      = "carpeta_nro"
@@ -56,7 +56,13 @@
                             :visible        = false
                             data-field      = "id"
                         >                                     
-                        </DxSimpleItem>                        
+                        </DxSimpleItem>   
+                        
+                        <DxSimpleItem
+                            :visible        = false
+                            data-field      = "padre_id"
+                        >                                     
+                        </DxSimpleItem>
 
                         <DxSimpleItem                
                             data-field      = "tipo_id"
@@ -160,10 +166,10 @@ import {
 
 import DxToolbar, { DxItem } from 'devextreme-vue/toolbar'
 
-import fuenteDatos  from '../../../../../../../components/devExpress/remoto/fuenteDatos.js'
-import forma_definiciones from "../../../../comunes_vue/forma/forma.js"
-
-import pantalla_comunes      from './pantalla_comunes.js'
+import fuenteDatos from 
+'../../../../../../../components/devExpress/remoto/fuenteDatos.js'
+import forma_definiciones from '../../../../comunes_vue/forma/forma.js'
+import pantalla_comunes from './pantalla_comunes.js'
 
 // CARPETA
 let filtros = [];
@@ -230,7 +236,7 @@ let archivo_base_trd =  {
                 },
                 onOpened: function (e) {
                     let componente = e.component;
-                    let items      = componente.option("items");
+                    let items = componente.option("items");
                     if (items.length == 1){
                         componente.option("value", items[0].id)
                     }                    
@@ -307,7 +313,6 @@ let archivo_base_trd =  {
                     if ([null, ""].includes(window.$pantalla_expediente.subserie_id)) {
                         filtros = ["serie_id", "=", window.$pantalla_expediente.serie_id]
                     };
-                    console.log("FILTRO CAMBIA-0", componente, filtros);
                     let fuente_tipo = fuenteDatos.creaFuenteDatosConsulta(
                         'select', 
                         null, 
@@ -339,13 +344,20 @@ let archivo_base_trd =  {
         window.$ventana_emergente = this;
                 
         // Se maneja desde EXPEDIENTE
-        console.log("dddddddddarchivo_expediente MONTADO -->>>this.parametros->", this.parametros)
+        //console.log("archivo_expediente MONTADO -->>>this.parametros->", this.parametros)
         
         // CARPETA Crea fuente de datos
         if (this.parametros.datos.padre == "EXPEDIENTE") {
             filtros = ["expediente_id", "=", this.parametros.datos.padre_id]            
         } 
-        let fuente_carpeta = fuenteDatos.creaFuenteDatosConsulta('select', null, 'agn_carpetas_trd', 'agn_carpetas_trd', filtros, []);
+        let fuente_carpeta = fuenteDatos.creaFuenteDatosConsulta(
+            'select', 
+            null, 
+            'agn_carpetas_trd', 
+            'agn_carpetas_trd', 
+            filtros, 
+            []
+        );
         let carpeta_nro    = this.forma.instance().getEditor("carpeta_nro");
         carpeta_nro.option("dataSource", fuente_carpeta);
 
@@ -354,7 +366,7 @@ let archivo_base_trd =  {
         if ([null, ""].includes(window.$pantalla_expediente.subserie_id)) {
             filtros = ["serie_id", "=", window.$pantalla_expediente.serie_id]
         }     
-        console.log("FILTROS TIPO:", filtros);
+        //console.log("FILTROS TIPO:", filtros);
         let fuente_tipo = fuenteDatos.creaFuenteDatosConsulta(
             'select', 
             null, 
