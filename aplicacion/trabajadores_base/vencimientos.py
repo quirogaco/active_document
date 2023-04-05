@@ -27,7 +27,7 @@ def vencimientos_peticion(**parametros):
     estructura = "peticiones"
     modelo = globales.lee_modelo_elastic(estructura)
     total = sqalchemy_leer.contar_registros("base", estructura)
-    paso = 5
+    paso = 250
     for posicion in range(0, total, paso):
         print("")
         print("INDEXAR:", posicion, (posicion+paso), total, end=' - ')

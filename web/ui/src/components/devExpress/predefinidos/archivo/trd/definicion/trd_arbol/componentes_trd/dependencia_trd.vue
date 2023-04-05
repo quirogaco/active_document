@@ -70,7 +70,7 @@
 
                 <DxSimpleItem                
                     data-field      = "dependencias_gestion"
-                    editor-type     = "dxTagBox"
+                    editor-type     = "dxSelectBox"
                     :editor-options = "opciones_dependencias"
                 >
                     <DxLabel text="Dependencias de gestion"/>
@@ -155,6 +155,7 @@ let dependencia_trd =  {
     
     data() {
         return {  
+            forma: null,
             // ESPEFICIFICOS Opciones editores
             opciones_padre_nombre: {
                 readOnly: true,
@@ -183,11 +184,22 @@ let dependencia_trd =  {
             },
 
             opciones_dependencias: {
-                dataSource  : $sistema["fuenteDatos"].creaFuenteDatosConsulta('select', null, 'dependencias', 'dependencias', [], []),
+                dataSource  : $sistema["fuenteDatos"].creaFuenteDatosConsulta(
+                    'select', 
+                    null, 
+                    'dependencias', 
+                    'dependencias', 
+                    [
+                        // [ "ubicacion_id", "contain", ["ubicaciones_gestion"]]
+                    ], 
+                    {}
+                ),
                 displayValue: "nombre_completo",
                 displayExpr : "nombre_completo",
                 searchExpr  : "nombre_completo",
-                valueExpr   : "id"
+                valueExpr   : "id",
+                searchEnabled: true,
+                showClearButton: true
             },
 
             opciones_estado: {

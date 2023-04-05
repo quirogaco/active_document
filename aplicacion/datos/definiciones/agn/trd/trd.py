@@ -48,6 +48,12 @@ def trd_arbol(_r):
 
     return arbol
 
+def ubicaciones_gestion(r_):
+    datos = r_.datos.get("ubicaciones_gestion", "")
+    
+    return datos
+
+
 campos = {
     "fondo_id": tipos.clave_obligatorio(propiedades={"titulo": "Fondo id", "longitud": 60}),
     "fondo_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Fondo documental", "longitud": 250}),   
@@ -57,7 +63,8 @@ campos = {
     "version": tipos.clave_obligatorio(propiedades={"titulo": "Versión", "longitud": 20}),    
     "territorial_codigo": tipos.clave_obligatorio(propiedades={"titulo": "Codigo Territorial/Sede", "longitud": 20}),    
     "territorial_nombre": tipos.clave_obligatorio(propiedades={"titulo": "Nombre Territorial/Sede", "longitud": 200}),    
-    
+    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion", "propiedad": ubicaciones_gestion}),
+    "datos": tipos.json(propiedades={"titulo": "Datos adicionales", "defecto": 'json'}), 
     # TRD COMPLETA
     "trd_arbol": tipos.texto(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd completa", "propiedad": trd_arbol}),   
 }

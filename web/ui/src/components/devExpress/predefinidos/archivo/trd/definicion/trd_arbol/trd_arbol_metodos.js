@@ -92,22 +92,22 @@ let metodos = {
         this.boton_visibilidad(this.boton_accesos, false)
     },
 
-    mostrar_ventana(parametros) {
-        this.emergente_key += 1;            
-        this.opciones_ventana.alto               = parametros.alto 
-        this.opciones_ventana.ancho              = parametros.ancho
+    mostrar_ventana(parametros) {                   
+        this.opciones_ventana.alto = parametros.alto 
+        this.opciones_ventana.ancho = parametros.ancho
         this.opciones_ventana.componente_visible = parametros.ventana  
-        this.opciones_ventana.titulo             = parametros.titulo   
-        this.opciones_ventana.visible            = true
-        this.opciones_ventana.modo               = this.seleccionado_modo        
+        this.opciones_ventana.titulo = parametros.titulo   
+        this.opciones_ventana.visible = true
+        this.opciones_ventana.modo = this.seleccionado_modo        
         // Información del registro
-        this.opciones_ventana.datos              = parametros.datos
+        this.opciones_ventana.datos = parametros.datos
         // No puede ser padre de si mismo
         if (parametros.datos.id != this.seleccionado_id) {
             this.opciones_ventana.datos["padre_id"]     = this.seleccionado_id
             this.opciones_ventana.datos["padre_tipo"]   = this.seleccionado_tipo
             this.opciones_ventana.datos["padre_nombre"] = this.seleccionado_nombre     
         }          
+        this.emergente_key += 1; 
     },
 
     llamar_ventana(tipo, datos={}, modo="crear") {
@@ -117,7 +117,7 @@ let metodos = {
             case 'dependencia': 
                 parametros = {
                     alto         : 400,
-                    ancho        : 600,
+                    ancho        : 1000,
                     ventana      : "dependencia_trd",
                     titulo       : "Dependencias TRD",
                     boton_mensaje: "Salvar Dependencia", 
@@ -129,7 +129,7 @@ let metodos = {
             case 'serie': 
                 parametros = {
                     alto         : 650,
-                    ancho        : 600,
+                    ancho        : 1000,
                     ventana      : "serie_trd",
                     titulo       : "Series TRD",
                     datos        : datos
@@ -140,7 +140,7 @@ let metodos = {
             case 'subserie':   
                 parametros = {
                     alto         : 650,
-                    ancho        : 600,
+                    ancho        : 1000,
                     ventana      : "subserie_trd",
                     titulo       : "SubSeries TRD",
                     datos        : datos
@@ -151,7 +151,7 @@ let metodos = {
             case 'tipo':   
                 parametros = {
                     alto         : 500,
-                    ancho        : 600,
+                    ancho        : 1000,
                     ventana      : "tipo_trd",
                     titulo       : "Tipos TRD",
                     datos        : datos
@@ -162,7 +162,7 @@ let metodos = {
             case 'acesso':   
                 parametros = {
                     alto         : 500,
-                    ancho        : 600,
+                    ancho        : 1000,
                     ventana      : "acceso_trd",
                     titulo       : "Accesos TRD",
                     datos        : datos
@@ -192,13 +192,14 @@ let metodos = {
     seleccione_elemento(e) {   
         this.limpiar_seleccion()
         this.boton_ocultar_todos() 
-        if  (e.selectedRowsData.length > 0) {  
-            let selecionado            = e.selectedRowsData[0]     
-            let hijos                  = this.arbol.getNodeByKey(selecionado.id).children;       
+        if  (e.selectedRowsData.length > 0) {             
+            let selecionado = e.selectedRowsData[0]   
+            console.log("@@@@@@@@@@@@@@", selecionado)   
+            let hijos = this.arbol.getNodeByKey(selecionado.id).children      
             this.seleccionado_padre_id = selecionado.padre_id       
-            this.seleccionado_tipo     = selecionado.tipo     
-            this.seleccionado_id       = selecionado.id    
-            this.seleccionado_nombre   = selecionado.nombre 
+            this.seleccionado_tipo = selecionado.tipo     
+            this.seleccionado_id = selecionado.id    
+            this.seleccionado_nombre = selecionado.nombre 
             this.boton_visibilidad(this.boton_limpia, true)    
             this.boton_visibilidad(this.boton_accesos, true)   
             switch (this.seleccionado_tipo) {

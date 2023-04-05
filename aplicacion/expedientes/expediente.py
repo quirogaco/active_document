@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 import pprint, datetime, random, base64, builtins, tempfile, os
 import requests
@@ -24,7 +24,6 @@ def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
     ubicacion_topografica = datos["datos"].get("ubicacion_topografica", "")  
     datos_expediente = {
         "tabla": "TRD", 
-        "ubicacion_id": datos["datos"].get("ubicacion_id", ""), 
         "serie_id": datos["datos"]["serie_id"], 
         "subserie_id": datos["datos"]["subserie_id"], 
         "nombre": datos["datos"]["nombre"],
@@ -71,7 +70,6 @@ def crear_expediente(accion, datos={}, archivo=[], id_tarea=""):
 def modificar_expediente(accion, datos={}, archivo=[], id_tarea=""):
     expediente_id = datos["datos"]["id"]
     datos_expediente = {
-        "ubicacion_id": datos["datos"].get("ubicacion_id", ""),
         "serie_id": datos["datos"]["serie_id"], 
         "subserie_id": datos["datos"]["subserie_id"], 
         "nombre": datos["datos"]["nombre"],

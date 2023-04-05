@@ -84,6 +84,20 @@ let items = [
     },
 
     {
+        "componente": "campo",
+        "tipo": "seleccion",
+        "id": "ubicaciones_gestion",
+        "titulo": "Territorial de gestion", 
+        "fuente": "ubicaciones", 
+        "filtros_fuente": ["estado_", "=", "ACTIVO"],
+        "muestra_expresion": "nombre",
+        "muestra_valor": "nombre",
+        "busqueda_expresion": "nombre",
+        "obligatorio": true,
+        "ancho": 720
+    },
+
+    {
         "tipo": 'archivo',
         "aceptar": ".xlsx",
         "extensiones": [".xlsx"],
@@ -94,9 +108,9 @@ let items = [
 ];
 
 let get_items = function(importar) {
-    items[8].visible = false;
+    items[9].visible = false;
     if  (importar == true) {
-        items[8].visible = true;
+        items[9].visible = true;
     }
 
     return [{

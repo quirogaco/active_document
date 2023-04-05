@@ -16,7 +16,13 @@
             width = "100%"
             height= "100%"
         >
-            <component v-bind:is="opciones.componente_visible" :opciones = "opciones"></component>     
+            <component 
+                v-bind:is="opciones.componente_visible" 
+                :opciones = "opciones"
+                :key = "emergente_componente"
+                
+            >
+            </component>     
         </DxScrollView>
     </DxPopup>
 </template>
@@ -57,13 +63,15 @@ let ventana =  {
     },
     
     mounted() {
+        //this.emergente_componente += 1
         setTimeout(() => {
-            window.$ventana_emergente_trd = this
+            window.$ventana_emergente_trd = this            
         })
     },
 
     data() {
         return {
+            emergente_componente: 0,
             popupAttributes: {
                 id: 'ventana_emergente_trd',
                 class: 'bg_tab_panel'

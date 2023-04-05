@@ -96,11 +96,15 @@ def traeDefinicionCampo(definicion, campo):
     return definicionCampo, nested
 
 # Crea filtro para un campo
-def crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusqueda):        
+def crear_filtro_campo(
+    definicion, 
+    campoBusqueda, 
+    operacionBusqueda, 
+    valorBusqueda
+):        
     # Informaciòn para filtro   
     elasticFiltro = None
     definicionCampo, nested  = traeDefinicionCampo(definicion, campoBusqueda)
-    
     # Tipo de campo
     # Campo no existe
     if definicionCampo is not None: 
@@ -160,7 +164,6 @@ def crear_filtro_campo(definicion, campoBusqueda, operacionBusqueda, valorBusque
 
 # Crea query booleano
 def filtroGrupo(agrupador, primerQuery, segundoQuery):
-    #print("filtroGrupo:", agrupador, primerQuery, segundoQuery)
     if agrupador == "and":
         query = Q_dsl( primerQuery & segundoQuery )
     else:
@@ -263,8 +266,6 @@ def lista_binarios(definicion, filtros):
         # Filtro elastic
         #elasticFiltro = elasticFiltroFuncion(campo, valor)
         elasticFiltro = crear_filtro_campo(definicion, campo, operacion, valor)
-        print("expresionFiltro -->", expresionFiltro, elasticFiltro)
-
         if (filtro_ultimo is not None) and (conector_anterior is not None):
             elasticFiltro = filtroGrupo(
                 conector_anterior, 
@@ -338,13 +339,6 @@ def lista_filtros(definicion, filtros):
     filtro_lista = []                    
     for filtro in filtros:
         tipo = tipoFiltro(filtro)
-        # print("") 
-        # print("")                           
-        # print("-------------")   
-        # print("filtro-1", tipo)
-        # pprint.pprint(filtro)  
-        # print("")                                                                 
-        
         if ( tipo == 'binario' ):            
             nuevo_filtro = crearFiltroBinario(definicion, filtro)
         
@@ -388,9 +382,8 @@ def crear_filtros(definicion, filtros):
                             else:
                                 query = Q_dsl( query | filtro )
                     filtroElastic = query                     
-                else:  
-                    #print("crear_filtros->LISTA:", tipoGlobal)                                      
-                    filtro_lista = lista_filtros(definicion, filtros)                    
+                else:                      
+                    filtro_lista = lista_filtros(definicion, filtros)                                    
                     query = filtro_lista.pop()
                     conector = "&"
                     for filtro in filtro_lista:

@@ -21,17 +21,21 @@ def preparacion_inicial(df):
     return mensajes
 
 # TRD
-def crear_trd(accion, datos={}, archivo=[], id_tarea=""):   
+def crear_trd(accion, datos={}, archivo=[], id_tarea=""): 
+    _datos = {
+        "ubicaciones_gestion": datos["datos"]["ubicaciones_gestion"],
+    }
+
     # crear TRD 
     datos_trd = {
-        "fondo_id"          : datos["datos"]["fondo_id"], 
-        "nombre"            : datos["datos"]["nombre"],   
-        "sigla"             : datos["datos"]["sigla"],        
-        "version"           : datos["datos"]["version"],
-        "version"           : datos["datos"]["version"],
+        "fondo_id": datos["datos"]["fondo_id"], 
+        "nombre": datos["datos"]["nombre"],   
+        "sigla": datos["datos"]["sigla"],        
+        "version": datos["datos"]["version"],
+        "version": datos["datos"]["version"],
         "territorial_codigo": datos["datos"]["territorial_codigo"],
-        "territorial_nombre": datos["datos"]["territorial_nombre"],
-        "estado_"           : datos["datos"]["estado_"]
+        "datos": _datos,        
+        "estado_": datos["datos"]["estado_"]
     }    
     resultado = sqalchemy_insertar.insertar_registro_estructura("agn_trd", datos_trd)
 
@@ -53,19 +57,37 @@ def crear_trd(accion, datos={}, archivo=[], id_tarea=""):
     return resultado
 
 def modificar_trd(accion, datos={}, archivo=[], id_tarea=""):
+    print("MODIFICAR:")
+    pprint.pprint(datos)
     trd_id = datos["datos"]["id"]
+    _datos = {
+        "ubicaciones_gestion": datos["datos"]["ubicaciones_gestion"]
+    }
     datos_trd = {
-        "fondo_id"          : datos["datos"]["fondo_id"], 
-        "nombre"            : datos["datos"]["nombre"],   
-        "sigla"             : datos["datos"]["sigla"],        
-        "version"           : datos["datos"]["version"],
+        "fondo_id": datos["datos"]["fondo_id"], 
+        "nombre": datos["datos"]["nombre"],   
+        "sigla": datos["datos"]["sigla"],        
+        "version": datos["datos"]["version"],
         "territorial_codigo": datos["datos"]["territorial_codigo"],
         "territorial_nombre": datos["datos"]["territorial_nombre"],
-        "estado_"           : datos["datos"]["estado_"]
+        "datos": _datos,
+        "estado_": datos["datos"]["estado_"]
     }
-    resultado = sqalchemy_modificar.modificar_un_registro("agn_trd", trd_id, datos_trd)
+    print("MODIFICAR datos_trd:")
+    pprint.pprint(datos_trd)
+    resultado = sqalchemy_modificar.modificar_un_registro(
+        "agn_trd", 
+        trd_id, 
+        datos_trd
+    )
     elastic_operaciones.indexar_registro("agn_trd", resultado["id"])
-    logs.log_trd("agn_trd", resultado["id"], "MODIFICACIÓN DE TRD", "MODIFICACION", id_tarea) 
+    logs.log_trd(
+        "agn_trd", 
+        resultado["id"], 
+        "MODIFICACIÓN DE TRD", 
+        "MODIFICACION", 
+        id_tarea
+    ) 
     
     resultado["accion"] = accion   
     #resultado = {}

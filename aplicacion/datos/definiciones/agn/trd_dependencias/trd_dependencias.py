@@ -56,6 +56,12 @@ def acceso(_r):
 
     return acceso
 
+
+def dependencias_gestion(r_):
+    datos = r_.datos.get("dependencias_gestion", "")
+    
+    return datos
+
 campos = {
     # TRD/TVD
     "tabla": tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),
@@ -74,6 +80,8 @@ campos = {
     "nombre": tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250}),
     "nombre_largo" : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250, "propiedad": nombre_largo}),
     "dependencia_arbol": tipos.texto(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd dependencia", "propiedad": trd_dependencia}),  
+    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
+    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion", "propiedad": dependencias_gestion}),
     "datos": tipos.json(propiedades={"titulo": "Datos adicionales", "defecto": 'json'}), 
     # Acceso
     "acceso": tipos.json(propiedades={"columna": "no", "tipoElastic": "objeto", "titulo": "Trd serie", "propiedad": acceso})
@@ -88,6 +96,7 @@ referencias = [
             "trd_nombre" : "nombre",
             "trd_version": "version",
             "trd_activa" : "estado_",
+            "ubicaciones_gestion": "ubicaciones_gestion"
         }],
         "estructuraDestino": "agn_trd",
         "campoDestino"     : "id",            

@@ -51,7 +51,9 @@ campos = {
     "serie_id"    : tipos.clave_obligatorio(propiedades={"titulo": "Dependencia padre id", "longitud": 60}),
     "serie_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia descripción", "longitud": 250}),
     "version"     : tipos.texto(propiedades={"columna": "no", "titulo": "Trd versión", "longitud": 250}),   
-    "activa"      : tipos.texto(propiedades={"columna": "no", "titulo": "Trd activadescripción", "longitud": 250}),      
+    "activa"      : tipos.texto(propiedades={"columna": "no", "titulo": "Trd activadescripción", "longitud": 250}),    
+    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
+    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}),  
 
     "codigo"            : tipos.clave_obligatorio(propiedades={"titulo": "Codigo", "longitud": 60}),  
     "nombre"            : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250}), 
@@ -77,6 +79,8 @@ referencias = [
         "campoReferencia"    : "serie_id",
         "atributosReferencia": [{
             "serie_nombre": "nombre",
+            "ubicaciones_gestion": "ubicaciones_gestion",
+            "dependencias_gestion": "dependencias_gestion",
             "version"     : "version",
             "activa"      : "estado",
         }],

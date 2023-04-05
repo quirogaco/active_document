@@ -1,0 +1,106 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">   
+
+    <div class="row"> 
+
+        <div :class="clase_elementos" v-if="muestra_elementos">   
+            
+            <br>
+            <br>
+
+            <div class="float-left"> 
+                <DxButtonGroup
+                    :items              = "campos_tipo"
+                    :on-content-ready   = "grupo_botones_listo"
+                    stylingMode         = "text"            
+                />
+            </div>  
+
+        </div>        
+
+        <div :class="clase_forma">   
+                
+            <DxForm
+                ref="forma_diseno"
+                :on-content-ready = "forma_lista"
+                :element-attr     = "forma_attributos"
+            
+                height = "90vh"
+                width  = "100%"
+
+                :items = "campos"
+            >         
+
+                <template #campo_texto="{ data, index }">       
+                    <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                        <DxTextBox
+                            :element-attr     = "data.editorOptions.elementAttr"
+                            :name             = "data.editorOptions.name"
+                            :mode             = "data.editorOptions.modo"
+                            :buttons          = "data.editorOptions.botones"
+                            :on-content-ready = "data.editorOptions.onContentReady"
+                            :on-focus-in      = "data.editorOptions.onFocusIn"
+                            :on-focus-out     = "data.editorOptions.onFocusOut"
+                        >
+                        </DxTextBox>
+
+                    </div> 
+                </template>
+
+                <template #campo_area="{ data, index }">       
+                    <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                        <DxTextArea
+                            :element-attr     = "data.editorOptions.elementAttr"
+                            :name             = "data.editorOptions.name"
+                            :buttons          = "data.editorOptions.botones"
+                            :on-content-ready = "data.editorOptions.onContentReady"
+                            :on-focus-in      = "data.editorOptions.onFocusIn"
+                            :on-focus-out     = "data.editorOptions.onFocusOut"
+                        >
+                        </DxTextArea>
+
+                    </div> 
+                </template>
+
+                <template #campo_numerico="{ data, index }">       
+                    <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                        <DxNumberBox
+                            :element-attr     = "data.editorOptions.elementAttr"
+                            :name             = "data.editorOptions.name"
+                            :buttons          = "data.editorOptions.botones"
+                            :on-content-ready = "data.editorOptions.onContentReady"
+                            :on-focus-in      = "data.editorOptions.onFocusIn"
+                            :on-focus-out     = "data.editorOptions.onFocusOut"
+                        >
+                        </DxNumberBox>
+
+                    </div> 
+                </template>
+
+                <template #campo_fecha="{ data, index }">       
+                    <div class="container-fluid border p-1 " v-bind="{ id: lista_ids(data) }" >   
+                        <DxDateBox
+                            :element-attr              = "data.editorOptions.elementAttr"
+                            :name                      = "data.editorOptions.name"
+                            :buttons                   = "data.editorOptions.botones"
+                            :on-content-ready          = "data.editorOptions.onContentReady"
+                            :on-focus-in               = "data.editorOptions.onFocusIn"
+                            :on-focus-out              = "data.editorOptions.onFocusOut"
+                            :type                      = "data.editorOptions.type"
+                            :open-on-field-click       = "data.editorOptions.openOnFieldClick"
+                            :date-serialization-format = "data.dateSerializationFormat"                              
+                        >
+                        </DxDateBox>
+
+                    </div> 
+                </template>
+
+            </DxForm>
+        
+        </div>   
+
+        <div :class="clase_atributos" v-if="muestra_atributos">               
+        </div>              
+
+    </div>            
+    
+</div> 

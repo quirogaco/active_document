@@ -344,7 +344,7 @@ let archivo_base_trd =  {
         window.$ventana_emergente = this;
                 
         // Se maneja desde EXPEDIENTE
-        //console.log("archivo_expediente MONTADO -->>>this.parametros->", this.parametros)
+        console.log("archivo_expediente MONTADO -->>>this.parametros->", this.parametros)
         
         // CARPETA Crea fuente de datos
         if (this.parametros.datos.padre == "EXPEDIENTE") {

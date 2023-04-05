@@ -21,17 +21,17 @@ let items_basicos = [
         "eventos"           : {
             "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 
                 let datos = campo.selectedItem   
-                console.log("ubicacion_id:", datos, window.$pantalla_expediente.consulta)                             
+                //console.log("ubicacion_id:", datos, window.$pantalla_expediente.consulta)                             
                 if (datos != null) {                        
-                    let filtros = ["ubicacion_id", "=", datos.id]                                  
+                    let filtros = ["ubicaciones_gestion", "=", datos.id]                                  
                     if (window.$pantalla_expediente.consulta == false) {  
-                        console.log("ubicacion_id:", filtros, datos)                                              
+                        //console.log("ubicacion_id:", filtros, datos)                                              
                         forma_definiciones.limpia_campos(forma, ["dependencia_id"]) 
                         forma_definiciones.asigna_fuente_datos(
                             forma, 
                             "dependencia_id", 
                             "select", 
-                            "dependencias", 
+                            "agn_dependencia_trd", 
                             filtros, 
                             {}
                         )        
@@ -47,11 +47,11 @@ let items_basicos = [
         "tipo": "seleccion",
         "id": "dependencia_id",
         "titulo": "Dependencia", 
-        "fuente": "dependencias", 
+        "fuente": "agn_dependencia_trd", 
         "filtros_fuente": ["estado_", "=", "ACTIVO"],
-        "muestra_expresion": "nombre",
-        "muestra_valor": "nombre",
-        "busqueda_expresion": "nombre",
+        "muestra_expresion": "nombre_largo",
+        "muestra_valor": "nombre_largo",
+        "busqueda_expresion": "nombre_largo",
         "obligatorio": true,
         "eventos"           : {
             "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 

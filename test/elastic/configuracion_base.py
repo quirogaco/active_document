@@ -4,7 +4,7 @@
 import pprint, datetime, sys
 import os, builtins
 
-sys.path.append('d:/active_document')
+sys.path.append('c:/active_document')
 print("******************************************")
 
 #########################
@@ -17,7 +17,7 @@ parser.add_argument('-host',     type=str, default="0.0.0.0", help='ip direccion
 parser.add_argument('-port',     type=int, default=9000,      help='puerto del servidor web')
 parser.add_argument('-services', type=str, default="0.0.0.0", help='ip de los servicio del sistema')
 parser.add_argument('-celery',   type=str, default="NO",      help='Si carga tareas celery workers')
-parser.add_argument('-nodo',     type=str, default="001",     help='Nodo de ejecuci�n')
+parser.add_argument('-nodo',     type=str, default="001",     help='Nodo de ejecucion')
 argumentos            = parser.parse_args()
 builtins._appAnfitrion = argumentos.host
 builtins._appPuerto    = argumentos.port

@@ -146,6 +146,10 @@ let metodos = {
         this.mostrar_ventana(parametros)      
     },    
 
+    'celda_click': async function(e) {
+        console.log("celda_click:", e)
+    },
+
     'celda_doble_click': async function(e) {
         if (e.column.dataField == "tipo_archivo") {
             let archivo = e.data.archivos[0]

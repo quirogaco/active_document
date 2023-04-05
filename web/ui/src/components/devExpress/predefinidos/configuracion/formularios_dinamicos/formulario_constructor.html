@@ -1,0 +1,154 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">   
+                
+    <DxToolbar>                
+        <DxItem
+            :options = "constructor_opciones"
+            location = "before"
+            widget   = "dxButton"
+        />
+
+        <DxItem
+            :options  = "formulario_opciones"
+            location  = "before"
+            widget    = "dxButton"
+        />
+    </DxToolbar>
+            
+    <div v-if="prevista_constructor" >
+        <div class="container-fluid"> 
+
+            <div class="row">  
+
+                <div class="col-8">  
+                    <DxScrollView
+                        class="scrollable-board"
+                        direction="horizontal"
+                        show-scrollbar="always"
+                    >
+
+                        <DxSortable
+                            class             = "list"
+                            item-orientation  = "horizontal"
+                            handle            = ".list-title"            
+                        >
+                            <div
+                                class="lista"
+                            >
+
+                                <div class="lista-titulo dx-theme-text-color">Componentes</div>
+
+                                <DxScrollView
+                                    class="scrollable-componente"
+                                    show-scrollbar="always"
+                                >
+
+                                    <DxSortable
+                                        :data         = "lista_componentes"
+                                        group         = "definicion_grupo"
+                                        @drag-start   = "comienza_arrastrar_constructor($event)"
+                                        @reorder      = "suelta_constructor($event)"
+                                        @add          = "suelta_constructor($event)"
+                                        :element-attr = "constructor_atributos"
+                                    >
+
+                                        <div
+                                            v-for="componente in lista_componentes"
+                                            :key="componente.id"
+                                            class="card-componente dx-card dx-theme-text-color dx-theme-background-color"
+                                        >
+
+                                        <div class="btn btn-secondary boton-componente"> <i :class="componente.icono"></i> {{ componente.titulo }}</div>                        
+
+                                        </div>
+
+                                    </DxSortable>
+
+                                </DxScrollView>
+
+                            </div>
+
+
+                            <div
+                                class="lista"
+                            >
+
+                                <div class="lista-titulo dx-theme-text-color">Formulario</div>
+
+                                <DxScrollView
+                                    class="scrollable-forma"
+                                    show-scrollbar="always"
+                                >
+
+                                    <DxSortable
+                                        :data         =  "campos_constructor"
+                                        class         =  "ordenable-forma"
+                                        group         =  "definicion_grupo"
+                                        @drag-start   =  "comienza_arrastrar_prevista($event)"
+                                        @reorder      =  "suelta_prevista($event)"
+                                        @add          =  "suelta_prevista($event)"
+                                        :element-attr = "prevista_atributos"
+                                    >
+
+                                        <div
+                                            v-for="campo in campos_constructor"
+                                            :key="campo.id"
+                                            class="card-forma dx-card dx-theme-text-color dx-theme-background-color"
+                                        >
+                                            <div>                                
+
+                                                <DxButton
+                                                    :width       = "250"
+                                                    :height      = "40"
+                                                    type         = "success"
+                                                    styling-mode = "contained"
+                                                    @click       = "click_campo(campo)"
+                                                >
+                                                    {{ campo.label }}
+                                                </DxButton>
+
+                                                {{ campo.titulo }}
+                                                
+                                            </div>
+                                            
+
+                                        </div>
+
+                                    </DxSortable>
+
+                                </DxScrollView>
+
+                            </div>
+
+                        </DxSortable>
+
+                    </DxScrollView>
+                </div>
+
+                <div class="col-4"> 
+                    <div class="lista_atributos" v-if= "opciones_atributo.visible"> 
+                        <div class="lista-titulo dx-theme-text-color">Atributos  -> Campo: {{opciones_atributo.datos.titulo}}</div>
+                        <br>
+                        <atributos_campos 
+                            :opciones = "opciones_atributo"
+                            :key      = "emergente_key"
+                        />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    
+    </div>
+
+    <div class="container-fluid shadow p-3 mb-5  rounded" v-if="prevista_forma" >  
+        <div class="col-12">            
+            <DxForm
+                ref              = "forma_prevista"
+                validation-group = "validacionDatos"
+                :items           = campos_formulario
+            >                                     
+            </DxForm>
+        </div>    
+    </div>
+</div> 

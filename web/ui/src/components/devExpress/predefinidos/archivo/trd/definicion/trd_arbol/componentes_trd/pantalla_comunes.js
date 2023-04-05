@@ -1,19 +1,45 @@
 import notify from 'devextreme/ui/notify'
 
 let montar_componente = function(componente) {
-    const montar = function() {
-        this.elemento              = componente
-        this.trd_id                = $forma.lee_propiedades(window.$pantalla_trd).datos["id"]
-        this.seleccionado_padre_id = window.$pantalla_trd.arbol.seleccionado_padre_id;
-        this.seleccionado_tipo     = window.$pantalla_trd.arbol.seleccionado_tipo;
-        this.seleccionado_id       = window.$pantalla_trd.arbol.seleccionado_id;
-        this.seleccionado_nombre   = window.$pantalla_trd.arbol.seleccionado_nombre;        
-        this.seleccionado_modo     = window.$pantalla_trd.arbol.seleccionado_modo;
-        this.forma                 = this.$refs.forma.instance;
-        this.barra                 = this.$refs.barra.instance;
-        this.notify                = notify;
-        this.mostrar_botones();
-    }
+    console.log("MONTAR>>>", this)
+
+    let montar = function() {
+        let trd_datos = $get_params("trd_datos")
+        setTimeout(
+            () => {
+                console.log("THIS>>", trd_datos["ubicaciones_gestion"])
+                let filtros = [[ 
+                    "ubicacion_id", 
+                    "contain", 
+                    trd_datos["ubicaciones_gestion"]
+                ]]
+                console.log("filtros", filtros)
+                let valor = this.opciones_dependencias
+                valor.dataSource = $sistema["fuenteDatos"].creaFuenteDatosConsulta(
+                    'select', 
+                    null, 
+                    'dependencias', 
+                    'dependencias', 
+                    filtros, 
+                    {}
+                )
+                this.opciones_dependencias = valor
+                this.forma.repaint()
+            },
+            2000
+        )
+        this.elemento = componente
+        this.trd_id = trd_datos["id"]
+        this.seleccionado_padre_id = window.$pantalla_trd.arbol.seleccionado_padre_id
+        this.seleccionado_tipo = window.$pantalla_trd.arbol.seleccionado_tipo
+        this.seleccionado_id = window.$pantalla_trd.arbol.seleccionado_id
+        this.seleccionado_nombre = window.$pantalla_trd.arbol.seleccionado_nombre
+        this.seleccionado_modo = window.$pantalla_trd.arbol.seleccionado_modo
+        this.forma = this.$refs.forma.instance
+        this.barra = this.$refs.barra.instance
+        this.notify = notify
+        this.mostrar_botones()
+    }    
 
     return  montar 
 }

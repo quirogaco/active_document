@@ -1,0 +1,209 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">    
+                            
+        <div class="container-fluid shadow p-3 mb-2  rounded"> 
+            
+            <DxForm
+                ref             = "forma"
+                col-count       = 4
+                id              = "reporte_diseno"
+                :form-data      = "parametros.datos"
+            >
+            
+                <DxSimpleItem
+                    data-field      = "codigo"
+                    editor-type     = "dxTextBox"
+                    :label          = "opciones_codigo.label"
+                    :editor-options = "opciones_codigo"
+                >
+                    <DxRequiredRule message="Codigo es obligatorio"/>   
+                    <DxStringLengthRule
+                        :max="50"
+                        message="Maximo 50 caracteres"
+                    />                 
+                </DxSimpleItem>
+            
+                <DxSimpleItem
+                    data-field      = "nombre"
+                    editor-type     = "dxTextBox"
+                    :label          = "opciones_nombre.label"
+                    :editor-options = "opciones_nombre"
+                >
+                    <DxRequiredRule message="Nombre es obligatorio"/>   
+                    <DxStringLengthRule
+                        :max="250"
+                        message="Maximo 250 caracteres"
+                    />                 
+                </DxSimpleItem>
+
+                <DxSimpleItem            
+                    data-field      = "fuentes"
+                    editor-type     = "dxSelectBox"
+                    :label          = "opciones_fuente.label"
+                    :editor-options = "opciones_fuente"
+                >
+                    <DxRequiredRule message="Fuente es obligatoria"/>
+                </DxSimpleItem>
+
+                <DxEmptyItem/>
+                <DxEmptyItem/>
+            
+            </DxForm>
+
+            <DxToolbar
+                ref = "barra"
+                :items = "barra_botones"
+            />
+                
+        
+        </div>
+
+        <div class="container-fluid"> 
+
+            <div class="row">                      
+                <div class="col-8">
+                    <div class="row"> 
+
+                        <div class="col-5 lista">
+
+                            <div class="lista-titulo ">Campos fuente</div>
+
+                            <DxScrollView
+                                class="scrollable-componente"
+                                show-scrollbar="always"
+                            >
+
+                                <DxSortable
+                                    :data         = "lista_campos"
+                                    group         = "definicion_grupo"
+                                    @drag-start   = "comienza_arrastrar_disenador($event)"
+                                    @reorder      = "suelta_disenador($event)"
+                                    @add          = "suelta_disenador($event)"
+                                    :element-attr = "disenador_atributos"
+                                >
+
+                                    <div
+                                        v-for="componente in lista_campos"
+                                        :key="componente.id"
+                                    >
+
+                                    <div class="campo-fuente"> {{ componente.nombre }}</div>                        
+
+                                    </div>
+
+                                </DxSortable>
+
+                            </DxScrollView>
+
+                        </div>                        
+
+                        <div class="col-6 lista">  
+                    
+                            <div class="lista-titulo">Campos reporte</div>
+
+                            <DxScrollView
+                                class="scrollable-componente"
+                                show-scrollbar="always"
+                            >
+
+                                <DxSortable
+                                    :data         =  "columnas_reporte"
+                                    class         =  "ordenable-forma"
+                                    group         =  "definicion_grupo"
+                                    @drag-start   =  "comienza_arrastrar_prevista($event)"
+                                    @reorder      =  "suelta_prevista($event)"
+                                    @add          =  "suelta_prevista($event)"
+                                    :element-attr = "reporte_atributos"
+                                >
+
+                                    <div
+                                        v-for="campo in columnas_reporte"
+                                        :key="campo.id"
+                                    >
+                                        <div class="campo-fuente">                                                  
+
+                                            <DxButton
+                                                :width       = "80"
+                                                :height      = "30"
+                                                type         = "success"
+                                                styling-mode = "contained"
+                                                @click       = "click_campo(campo)"
+                                            >
+                                                Atributos
+                                            </DxButton>   
+
+                                            {{ campo.titulo }}  
+
+                                        </div>
+                                        
+                                    </div>
+
+                                </DxSortable>
+
+                            </DxScrollView>
+                        </div>
+                                                
+                    </div>
+                </div>
+
+                <div class="col-4">  
+
+                    <div class="lista" v-if= "opciones_atributo.visible"> 
+                        <div class="titulo-atributo"> Atributos: {{opciones_atributo.datos.titulo}} </div>
+                        <br>
+                        <atributos_campos 
+                            :opciones = "opciones_atributo"
+                            :key      = "emergente_key"
+                        />
+                    </div>
+
+                </div>    
+
+            </div>    
+
+        </div>
+
+        <div class="container-fluid shadow p-3 mb-5  rounded"> 
+            <DxButton
+                id="exportButton"
+                icon="exportpdf"
+                text="Exportar a PDF"
+                @click="exportar_pdf()"
+            />
+
+            <div class="row">
+                <div>
+
+                    <DxDataGrid
+                        ref="grid_reporte"
+                        :data-source             = "fuente_datos_grid"
+                        :selection               = "{ mode: 'single' }"
+                        :remote-operations       = "true"
+                        :allow-column-reordering = "true"
+                        :allow-column-resizing   = "true"
+                        :row-alternation-enabled = "true"
+                        :word-wrap-enabled       = "true"
+                        :show-borders            = "true"
+                        :columns                 = "columnas_grid"
+                        width                    = "100%"
+                    >
+                        <DxSearchPanel
+                            :visible                  = "true"
+                            :highlight-case-sensitive = "true"
+                            :width                    = "300"
+                        />
+
+                        <DxFilterRow 
+                            :visible="true" 
+                        />      
+
+                        <DxExport
+                            :enabled="true"
+                        />                     
+                    
+                    </DxDataGrid>   
+                
+                </div>  
+            </div>
+        </div>
+    
+</div> 

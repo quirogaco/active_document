@@ -24,14 +24,6 @@ from . import accesos
 # Prestamos
 from . import prestamos
 
-def borrar_trd(accion, datos={}, archivo=[], id_tarea=""):
-    trd_id = datos["datos"]["id"]
-    resultado  = sqalchemy_borrar.borrar_un_registro("agn_trd", trd_id)
-    elastic_operaciones.eliminar_registro("agn_trd", trd_id)
-    resultado["accion"] = accion
-    
-    return resultado
-
 acciones_funcion = {
     # TRD
     "crear_trd"         : trd.crear_trd,

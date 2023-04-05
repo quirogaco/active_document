@@ -195,8 +195,8 @@ const tipo_firma = function(id=null, atributos={}) {
     let atributos_base = {
         "titulo": 'Firma', 
         "fuente": [
-            {"id": "FISICA", "nombre": "FISICA"},
-            {"id": "ELECTRONICA", "nombre": "ELECTRONICA"},
+            //{"id": "FISICA", "nombre": "FISICA"},
+            //{"id": "ELECTRONICA", "nombre": "ELECTRONICA"},
             {"id": "DIGITAL", "nombre": "DIGITAL"},
         ],  
         "obligatorio": true,

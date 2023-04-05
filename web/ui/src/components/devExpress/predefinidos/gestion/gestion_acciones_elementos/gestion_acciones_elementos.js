@@ -360,14 +360,16 @@ let items_gestion = function(componente, contexto, datos={}) {
                         if ( 
                             (borrador_existe) && 
                             (datos.origen_tipo == "SALIDA") 
-                        ) {                            
+                        ) {            
+                            items.push(enviar_a_visto_bueno);                 
                             items.push(radicar_borrador);                           
                         }
 
                         if ( 
                             (borrador_existe) && 
                             (datos.origen_tipo == "INTERNO") 
-                        ) {                            
+                        ) {           
+                            items.push(enviar_a_visto_bueno);                  
                             items.push(radicar_borrador);                           
                         }
                         

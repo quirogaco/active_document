@@ -81,6 +81,7 @@ window.$pantalla_trd = that;
 
 onMounted(() => {            
     atributos_forma.config.formData = attributes.registro;
+    $save_params("trd_datos", attributes.registro);
     that.registro = attributes.registro;
     if (attributes.mode == "modificar") {
         arbol_visible.value = true        

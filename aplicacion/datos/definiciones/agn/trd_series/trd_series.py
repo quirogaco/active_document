@@ -63,10 +63,12 @@ campos = {
     "tabla"              : tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),
 
     # Dependencia padre
+    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
+    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}),
     "dependencia_id"    : tipos.clave_obligatorio(propiedades={"titulo": "Dependencia padre id", "longitud": 60}),
     "dependencia_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia descripción"}),
     "dependencia_codigo": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia descripción"}),
-    "dependencia_datos": tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}),
+    #"dependencia_datos": tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}),
     "version"           : tipos.texto(propiedades={"columna": "no", "titulo": "Trd versión"}),   
     "activa"            : tipos.texto(propiedades={"columna": "no", "titulo": "Trd activadescripción"}),      
 
@@ -95,7 +97,8 @@ referencias = [
         "atributosReferencia": [{
             "dependencia_nombre": "nombre",
             "dependencia_codigo": "codigo",
-            "dependencia_datos": "datos",
+            "ubicaciones_gestion": "ubicaciones_gestion",
+            "dependencias_gestion": "dependencias_gestion",
             "version": "trd_version",
             "activa": "trd_estado",
         }],

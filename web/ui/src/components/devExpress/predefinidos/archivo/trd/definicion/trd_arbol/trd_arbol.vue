@@ -45,9 +45,9 @@ export default {
 
             // Registro padre seleccionado
             seleccionado_padre_id : "",
-            seleccionado_tipo     : "",
-            seleccionado_id       : "",
-            seleccionado_nombre   : "",
+            seleccionado_tipo: "",
+            seleccionado_id: "",
+            seleccionado_nombre: "",
 
             // Botones de acción
             barra_elementos: [                                  
@@ -64,19 +64,22 @@ export default {
     },
 
     mounted() {        
-        this.barra             = this.$refs.barra.instance 
-        this.arbol             = this.$refs.arbol.instance 
-        window.$trd_arbol      = this
-        this.botones_accion    = this.barra_elementos[0].options.items
+        this.barra = this.$refs.barra.instance 
+        this.arbol = this.$refs.arbol.instance 
+        window.$trd_arbol = this
+        this.botones_accion = this.barra_elementos[0].options.items
         this.boton_dependencia = 0
-        this.boton_serie       = 1
-        this.boton_subserie    = 2
-        this.boton_tipo        = 3
-        this.boton_limpia      = 4
-        this.boton_accesos     = 5
-        this.seleccionado_modo   = ""     
-        this.seleccionado_tipo   = ""
-        this.seleccionado_id     = ""
+        this.boton_serie = 1
+        this.boton_subserie = 2
+        this.boton_tipo = 3
+        this.boton_limpia = 4
+        this.boton_accesos = 5
+
+        //this.seleccionado_tipo = window.$pantalla_trd.arbol.seleccionado_tipo
+        this.seleccionado_padre_id = ""
+        this.seleccionado_modo = ""     
+        this.seleccionado_tipo = ""
+        this.seleccionado_id = ""
         this.seleccionado_nombre = ""  
         this.boton_ocultar_todos()
         this.boton_visibilidad(this.boton_dependencia, true)      

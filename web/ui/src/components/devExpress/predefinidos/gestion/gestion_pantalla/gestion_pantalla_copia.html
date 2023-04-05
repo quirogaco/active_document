@@ -1,0 +1,56 @@
+<div class="container-fluid shadow p-3 mb-5  rounded">
+    <DxLoadPanel
+        v-model:visible = "indicador_visible" 
+        message         = "Por favor espere"               
+        shading-color   = "rgba(0,0,0,0.4)"
+    />
+
+    <ventana_emergente                     
+        :opciones = "opciones_ventana"
+        :key      = "emergente_key"
+    />
+
+    <DxToolbar
+        :items = "barra_elementos"
+    />
+    
+    <DxResponsiveBox
+        :screen-by-width     = "screen"
+        single-column-screen = "sm"
+    >
+        <DxRow :ratio="1"/>  
+        <DxCol :ratio="2"/>  
+
+        <!-- Fila 1 - Editor ONLYOFFICE WORD -->
+        <DxItem>
+            <DxLocation
+                :row = "1"
+                :col = 0
+            />                     
+            <div class="container-fluid">
+                <div class="row">
+                    <div :class="clase_pdf"  v-show="verPdf">        
+                        <pdf_componente 
+                            :nombrePdf   = "opciones_pdf.nombrePdf" 
+                            :buscarTexto = "opciones_pdf.buscarTexto" 
+                            :operacion   = "opciones_pdf.operacion" 
+                            :clase       = "opciones_pdf.clase" 
+                            :descarga    = "opciones_pdf.descarga"
+                            :datos       = "opciones_pdf.datos" 
+                        ></pdf_componente>       
+                    </div>
+
+                    <div :class="clase_borrador"  v-show="verBorrador">        
+                        <onlyoffice_editor :opciones="opciones_editor"></onlyoffice_editor>      
+                    </div>
+
+                    
+
+                </div>  
+            </div> 
+
+        </DxItem>
+
+    </DxResponsiveBox>
+
+</div>

@@ -357,12 +357,12 @@ campos = {
     # DATOS HEREDADOS SERIE/SUBSERIE #
     ##################################
     "serie_subserie": tipos.texto(propiedades={"columna": "no", "titulo": "Serie/Subserie nombre", "propiedad": serie_subserie, "reporte": "SI"}),
-    "ubicacion_id": tipos.texto(propiedades={"titulo": "Ubicacion id", "reporte": "SI"}),
+    "ubicacion_id": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicacion id", "reporte": "SI"}),
     "ubicacion_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicacion nombre", "reporte": "SI"}),
     "dependencia_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia nombre", "reporte": "SI"}),    
     "dependencia_codigo": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia codigo", "reporte": "SI"}),          
     "dependencia_id": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia id", "reporte": "SI"}),     
-    "dependencia_datos": tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}), 
+    #"dependencia_datos": tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}), 
     "dependencia_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia datos", "propiedad": dependencias_gestion}), 
        
     # Serie padre
@@ -375,7 +375,9 @@ campos = {
     "serie_eliminacion": tipos.texto(propiedades={"columna": "no", "titulo": "Eliminación", "reporte": "SI"}), 
     "serie_seleccion": tipos.texto(propiedades={"columna": "no", "titulo": "Selección", "reporte": "SI"}), 
     "serie_conservacion": tipos.texto(propiedades={"columna": "no", "titulo": "Conservación", "reporte": "SI"}), 
-    "serie_micro_digitalizacion": tipos.texto(propiedades={"columna": "no", "titulo": "Micro digitalización", "reporte": "SI"}),         
+    "serie_micro_digitalizacion": tipos.texto(propiedades={"columna": "no", "titulo": "Micro digitalización", "reporte": "SI"}),    
+    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
+    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}),     
 
     # SubSerie padre
     "subserie_id": tipos.clave(propiedades={"titulo": "SubSerie id", "longitud": 60}),
@@ -396,8 +398,9 @@ referencias = [
         "atributosReferencia": [{
             "dependencia_codigo": "dependencia_codigo",
             "dependencia_nombre": "dependencia_nombre",
-            "dependencia_datos": "dependencia_datos",
             "dependencia_id": "dependencia_id",
+            "ubicaciones_gestion": "ubicaciones_gestion",
+            "dependencias_gestion": "dependencias_gestion",
 
             "serie_version"             : "version",
             "serie_codigo"              : "codigo",  
