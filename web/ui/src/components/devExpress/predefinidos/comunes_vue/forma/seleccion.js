@@ -1,17 +1,15 @@
-import basicos      from './basicos.js'
-import fuente       from './fuente.js'
-import eventos      from './eventos.js'
+import basicos from './basicos.js'
+import fuente from './fuente.js'
+import eventos from './eventos.js'
 import validaciones from './validaciones.js'
 
 const seleccion = function(id, atributos) {
     let titulo        = $librerias.cargaAtributo(atributos, 'titulo', "")
     let eventos_campo = eventos.eventos(atributos)
     let validadores   = validaciones.validaciones(atributos)
-
     let filtros_ds    = $librerias.cargaAtributo(atributos, 'filtros_fuente', [])
     let eventos_ds    = $librerias.cargaAtributo(atributos, 'eventos_fuente', {})
     let dataSource    = fuente.fuente_datos('select', atributos, filtros_ds, eventos_ds)
-    
     let editorOptions = {
         "dataSource"  : dataSource,
         "displayValue": $librerias.cargaAtributo(atributos, 'muestra_valor',"nombre"),
@@ -36,6 +34,7 @@ const seleccion = function(id, atributos) {
             "autocomplete": "off"
         }
     }
+
     let opciones_totales = Object.assign(editorOptions, eventos_campo)
 
     let campo = {

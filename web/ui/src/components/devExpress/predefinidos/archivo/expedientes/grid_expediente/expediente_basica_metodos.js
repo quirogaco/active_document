@@ -16,18 +16,21 @@ let metodos = {
     },
 
     'dobleClick':  function(e) {
-        let mostrar = true
+        let mostrar = true;
         if ( (e.data.acceso_modo == "RESERVADA") || (e.data.acceso_modo == "CLASIFICADA") ) {
-            mostrar = false
-        }
+            mostrar = false;
+        };
+
         if (mostrar == true) {
-            let urlCompleta = window.$direcciones.servidorDatos + '/expediente_acciones'  
-             let parametros = {
+            // Log de consulta
+            let urlCompleta = window.$direcciones.servidorDatos + '/expediente_acciones'; 
+            let parametros = {
                 datos : e.data,
                 accion: "consulta_expediente"
-            }
-            window.$f["http"].llamadoRestPost( urlCompleta, parametros, function(){}, "")
+            };
+            window.$f["http"].llamadoRestPost( urlCompleta, parametros, function(){}, "");
 
+            // Salva datos del expediente, almacenamiento local
             let datos = {
                 "expediente_id": e.data.id,
                 "expediente_datos": e.data,
@@ -36,10 +39,10 @@ let metodos = {
             $lib.call_component_storage(
                 "pantalla_expediente",   
                 {"datos": datos}
-            ) 
+            );
         }
         else {
-            this.notify(("Expediente con información " + e.data.acceso_modo), "warning") 
+            this.notify(("Expediente con información " + e.data.acceso_modo), "warning");
         }
     },
 

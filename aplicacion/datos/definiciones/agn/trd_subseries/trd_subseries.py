@@ -53,7 +53,8 @@ campos = {
     "version"     : tipos.texto(propiedades={"columna": "no", "titulo": "Trd versión", "longitud": 250}),   
     "activa"      : tipos.texto(propiedades={"columna": "no", "titulo": "Trd activadescripción", "longitud": 250}),    
     "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
-    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}),  
+    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}), 
+    "dependencia_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencia trd"}),   
 
     "codigo"            : tipos.clave_obligatorio(propiedades={"titulo": "Codigo", "longitud": 60}),  
     "nombre"            : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250}), 
@@ -81,6 +82,7 @@ referencias = [
             "serie_nombre": "nombre",
             "ubicaciones_gestion": "ubicaciones_gestion",
             "dependencias_gestion": "dependencias_gestion",
+            "dependencia_id": "dependencia_id",
             "version"     : "version",
             "activa"      : "estado",
         }],

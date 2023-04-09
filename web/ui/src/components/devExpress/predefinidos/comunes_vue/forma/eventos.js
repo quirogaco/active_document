@@ -1,15 +1,16 @@
 const eventos_generales = {
     //"inicializado"   : "onInitialized",
-    "contenido_listo"   : "onContentReady",
-    "desechar"          : "onDisposing",
-    "foco_entra"        : "onFocusIn",
-    "foco_sale"         : "onFocusOut",    
-    "opcion_cambiada"   : "onOptionChanged",
+    "contenido_listo": "onContentReady",
+    "desechar": "onDisposing",
+    "foco_entra": "onFocusIn",
+    "foco_sale": "onFocusOut",    
+    "opcion_cambiada": "onOptionChanged",
     "seleccion_cambiada": "onSelectionChanged",
-    "valor_cambiado"    : "onValueChanged", 
+    "cambiar": "onChange",
+    "valor_cambiado": "onValueChanged", 
     
     // data grid
-    "fila_doble_click"  : "onRowDblClick"
+    "fila_doble_click": "onRowDblClick"
 }
 
 // Funcion universal de eventos

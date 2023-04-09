@@ -62,6 +62,7 @@ def dependencias_gestion(r_):
     
     return datos
 
+
 campos = {
     # TRD/TVD
     "tabla": tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),

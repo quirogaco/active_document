@@ -138,12 +138,12 @@ def ejecutarBusqueda(estructura, parametros, definicion, id_tarea):
 
     # Ejecuta busqueda y procesa respuesta
     #"""
-    print("")
-    print("")
-    print("diccionario:")
-    pprint.pprint(busqueda.to_dict())
-    print("")
-    print("")
+    # print("")
+    # print("")
+    # print("diccionario:")
+    # pprint.pprint(busqueda.to_dict())
+    # print("")
+    # print("")
     #"""
 
     elementos = busqueda.execute().to_dict()["hits"] 
@@ -185,9 +185,9 @@ def ejecutar(estructura, parametros, definicion, id_tarea):
 
     resultado = ejecutarBusqueda(estructura, parametros, definicion, id_tarea)
     
-    # print("")
-    # print("")
-    # print("resultado:") 
-    # pprint.pprint(resultado)
+    print("")
+    print("")
+    print("resultado:") 
+    pprint.pprint(resultado)
     
     return resultado
