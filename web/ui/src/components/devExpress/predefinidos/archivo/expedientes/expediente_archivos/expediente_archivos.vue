@@ -67,7 +67,12 @@ export default {
             // Ventana formas DOCUMENTOS POR EXPEDIENTE
             opciones_ventana: {
                 visible: false,
-                datos: {}
+                datos: {                    
+                    "datos_archivo": {
+                        "padre_id": null,
+                        "padre_nombre": null
+                    }                    
+                }
             },
             emergente_key: 0,
             columnas: expediente_archivos_columnas.columnas, 
@@ -83,38 +88,41 @@ export default {
     },
 
     mounted() {
-        window.$grid_archivos_expediente = this.$refs.grid_archivos.instance
-        this.grid_archivos = this.$refs.grid_archivos.instance
+        window.$grid_archivos_expediente = this.$refs.grid_archivos.instance;
+        this.grid_archivos = this.$refs.grid_archivos.instance;
         window.$expediente_archivos = this
         //console.log("EXPEDIENTE MONTADO --> ARCHIVOS:", this.parametros)    
-        this.notify = notify        
-        let filtros = []
+        this.notify = notify;      
+        let filtros = [];
         if (this.parametros.padre == "EXPEDIENTE") {
-            filtros = [ ["expediente_id", "=", this.parametros.padre_id] ]
-            this.opciones_grilla.editable = true
-            this.opciones_grilla.borrable = true
-            this.columnas[4].editable     = true
+            filtros = [ ["expediente_id", "=", this.parametros.padre_id] ];
+            this.opciones_grilla.editable = true;
+            this.opciones_grilla.borrable = true;
+            this.columnas[4].editable     = true;
         }
         else {
             filtros = [ ["carpeta_id", "=", this.parametros.padre_id] ]
-            this.opciones_grilla.editable = false
-            this.opciones_grilla.borrable = false
-            this.columnas[4].editable     = false
-        }
+            this.opciones_grilla.editable = false;
+            this.opciones_grilla.borrable = false;
+            this.columnas[4].editable     = false;
+        };
 
         let eventos = {
             "cargar_datos_despues": function (resultado, idComponente) {
                 let total = 1;
                 let nuevosDatos = resultado.data.map(function(dato) {
-                    dato['consecutivo'] = total;
-                    total  += 1;
+                    console.log("datos>", dato);
+                    if (dato['padre_id'] == "") {
+                        dato['consecutivo'] = total;
+                        total += 1;
+                    };
                     return dato
                 });
                 resultado.data = nuevosDatos;
 
                 return resultado
             }
-        }
+        };
 
         this.fuente_datos = fuenteDatos.creaFuenteDatosConsulta(
             'grid', 
@@ -123,7 +131,8 @@ export default {
             'agn_documentos_trd', 
             filtros, 
             eventos
-        )        
+        );          
+        $save_params("archivo_expediente", null);  
     },
 
     methods: metodos
