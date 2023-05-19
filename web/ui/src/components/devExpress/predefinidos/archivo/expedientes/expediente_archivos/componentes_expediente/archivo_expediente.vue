@@ -378,7 +378,7 @@ let archivo_base_trd =  {
         let tipo_id = this.forma.instance().getEditor("tipo_id");
         tipo_id.option("dataSource", fuente_tipo);
 
-        this.mostrar_botones()
+        this.mostrar_botones() // fkfkfkf
     },
 }
 
