@@ -1,14 +1,14 @@
 <template >
 
     <DxPopup
-        ref                     = "popup"    
-        v-model:visible         = "parametros.visible"        
-        :drag-enabled           = "false"
+        ref = "popup"    
+        v-model:visible = "parametros.visible"        
+        :drag-enabled = "false"
         :close-on-outside-click = "true"
-        :show-title             = "true"                   
-        title                   = "Documento del expediente"
-        width                   = 800
-        height                  = 650            
+        :show-title = "true"                   
+        title = "Documento del expediente"
+        width = 800
+        height = 650            
     >        
 
         <div class="shadow-sm p-3 mb-3 bg-light rounded">
@@ -17,24 +17,35 @@
 
                 <DxLoadPanel
                     v-model:visible = "indicador_visible" 
-                    message         = "Por favor espere"               
-                    shading-color   = "rgba(0,0,0,0.4)"
-                />
-
-
+                    message = "Por favor espere"               
+                    shading-color = "rgba(0,0,0,0.4)"
+                />  
+                <div 
+                    v-if="parametros.datos.datos_archivo.padre_id" 
+                    class="fs-6 fw-bold centered mx-auto p-2"
+                >            
+                    Anexo de: {{ parametros.datos.datos_archivo.padre_nombre}}  
+                </div>                 
                 <DxForm                       
-                    ref        = "forma"
-                    id         = "documento_expediente_base"
+                    ref = "forma"
+                    id = "documento_expediente_base"
                     :form-data = "parametros.datos.datos_archivo"
-                    :key       = "forma_key"
+                    :key = "forma_key"
                     :col-count = "columnas"
-                >
+                >                    
 
-                    <DxGroupItem>                        
+                    <DxGroupItem>                          
+                        
+                        <DxSimpleItem
+                            :visible = true
+                            data-field = "padre_id"
+                        >                                     
+                        </DxSimpleItem>
+                        
                         <DxSimpleItem     
-                            ref             = "carpeta_nro"           
-                            data-field      = "carpeta_nro"
-                            editor-type     = "dxSelectBox"
+                            ref = "carpeta_nro"           
+                            data-field = "carpeta_nro"
+                            editor-type = "dxSelectBox"
                             :editor-options = "opciones_carpeta"
                         >
                             <DxLabel text="Carpeta"/>
@@ -42,7 +53,7 @@
                         </DxSimpleItem>  
 
                         <DxSimpleItem
-                            data-field  = "soporte"
+                            data-field = "soporte"
                             editor-type = "dxRadioGroup"
                             :editor-options = "opciones_soporte"
                         >
@@ -53,20 +64,14 @@
 
                     <DxGroupItem>
                         <DxSimpleItem
-                            :visible        = false
-                            data-field      = "id"
+                            :visible = false
+                            data-field = "id"
                         >                                     
-                        </DxSimpleItem>   
-                        
-                        <DxSimpleItem
-                            :visible        = false
-                            data-field      = "padre_id"
-                        >                                     
-                        </DxSimpleItem>
+                        </DxSimpleItem>                                           
 
                         <DxSimpleItem                
-                            data-field      = "tipo_id"
-                            editor-type     = "dxSelectBox"
+                            data-field = "tipo_id"
+                            editor-type = "dxSelectBox"
                             :editor-options = "opciones_tipo"
                         >
                             <DxLabel text="Tipo documental"/>
@@ -74,60 +79,60 @@
                         </DxSimpleItem>
 
                         <DxSimpleItem
-                            data-field  = "detalle"
+                            data-field = "detalle"
                             editor-type = "dxTextBox"
                         >
                             <DxLabel text="Descripción"/>
                             <DxRequiredRule message="Descripción es obligatorio"/> 
                             <DxStringLengthRule
-                                :max="200"
-                                message="Maximo 200 caracteres"
+                                :max = "200"
+                                message = "Maximo 200 caracteres"
                             />                      
                         </DxSimpleItem>
 
                         <DxSimpleItem
-                            data-field  = "folios_fisicos"                    
+                            data-field = "folios_fisicos"                    
                             editor-type = "dxNumberBox"
                             :isRequired = "opciones_folios.obligatorio"  
-                            :visible    = "opciones_folios.visible" 
+                            :visible = "opciones_folios.visible" 
                             :editor-options = "opciones_folios.editor"  
                         >
                             <DxLabel text="Folios fisicos"/> 
                             <DxRangeRule
-                                :min=1
-                                message="Valor mayor o igual a 1"
+                                :min = 1
+                                message = "Valor mayor o igual a 1"
                             />                                                
                         </DxSimpleItem>
 
                         <DxSimpleItem
-                            data-field  = "fecha_creacion"
+                            data-field = "fecha_creacion"
                             editor-type = "dxDateBox"
                             :editor-options = "opciones_fecha"                   
                         >
-                            <DxLabel text="Fecha creación"/>
-                            <DxRequiredRule message="Fecha es obligatoria"/>                                   
+                            <DxLabel text = "Fecha creación"/>
+                            <DxRequiredRule message = "Fecha es obligatoria"/>                                   
                         </DxSimpleItem>
 
                         <DxSimpleItem
-                            data-field  = "observacion"
+                            data-field = "observacion"
                             editor-type = "dxTextBox"
                         >
                             <DxLabel text="Observación"/>
                             <DxStringLengthRule
-                                :max="200"
-                                message="Maximo 200 caracteres"
+                                :max = "200"
+                                message = "Maximo 200 caracteres"
                             />                      
                         </DxSimpleItem>
 
                         <DxSimpleItem
-                            data-field  = "archivos" 
+                            data-field = "archivos" 
                             editor-type = "dxFileUploader"
                             :isRequired = "opciones_anexo.obligatorio"  
-                            :visible    = "opciones_anexo.visible" 
+                            :visible = "opciones_anexo.visible" 
                             :editor-options = "opciones_anexo.editor" 
                         >
-                            <DxLabel text="Archivo electrónico"/>
-                            <DxRequiredRule message="Archivo obligatorio"/>                                      
+                            <DxLabel text = "Archivo electrónico"/>
+                            <DxRequiredRule message = "Archivo obligatorio"/>                                      
                         </DxSimpleItem>
                     </DxGroupItem>
 
@@ -207,9 +212,14 @@ let archivo_base_trd =  {
         parametros: {
             type: Object,
             default: () => {
-                return {}
+                return {
+                    "visible": false,
+                    "datos": {
+                        "datos_archivo": {}
+                    }
+                }
             }
-        },  
+        } 
     },
 
     methods: pantalla_comunes.metodos, 
@@ -225,13 +235,13 @@ let archivo_base_trd =  {
             },
 
             opciones_carpeta: {
-                dataSource  : [],
+                dataSource: [],
                 displayValue: "nombre",
-                displayExpr : "nombre",
-                searchExpr  : "nombre",
-                valueExpr   : "id",
+                displayExpr: "nombre",
+                searchExpr: "nombre",
+                valueExpr: "id",
                 showClearButton: true,
-                elementAttr : {
+                elementAttr: {
                     id: "documento_carpeta",
                 },
                 onOpened: function (e) {
@@ -244,7 +254,7 @@ let archivo_base_trd =  {
             },
 
             opciones_tipo: {
-                dataSource  : fuenteDatos.creaFuenteDatosConsulta(
+                dataSource: fuenteDatos.creaFuenteDatosConsulta(
                     'select', 
                     null, 
                     'agn_tipo_documental_trd', 
@@ -253,60 +263,61 @@ let archivo_base_trd =  {
                     []
                 ),
                 displayValue: "nombre",
-                displayExpr : "nombre",
-                searchExpr  : "nombre",
-                valueExpr   : "id",
+                displayExpr: "nombre",
+                searchExpr: "nombre",
+                valueExpr: "id",
                 ShowClearButton: true,
             },
 
             opciones_folios: {
-                visible        : true,
-                value          : 1,
+                visible: true,
+                value: 1,
                 showSpinButtons: true,
                 ShowClearButton: true,
-                obligatorio    : true
+                obligatorio: true
             },
 
             opciones_fecha: {
                 dateSerializationFormat: "yyyy-MM-dd",
-                displayFormat          : "yyyy-MM-dd",
-                onFocusIn              : function(e) {
-                    e.component.open()
-                },
+                displayFormat: "yyyy-MM-dd",
+                // onFocusIn: function(e) {
+                //     e.component.open()
+                // },
                 ShowClearButton: true,
             },
 
             opciones_anexo: {
-                visible    : true,
+                visible: true,
                 obligatorio: true,
                 editor: {
                     selectButtonText: "Seleccione archivo",
-                    uploadMode      : "useForm"
+                    uploadMode: "useForm"
                 }
             },
 
             opciones_soporte: {
-                items : ["DIGITALIZADO", "ELECTRONICO", "FISICO"],
-                value : "DIGITALIZADO",
+                items: ["DIGITALIZADO", "ELECTRONICO", "FISICO"],
+                value: "DIGITALIZADO",
                 layout: "horizontal",
                 required: true,
                 onValueChanged: function(obj) {
                     // Este mismo componente
-                    let componente = _APLICACION_.component("archivo_base_trd");                      
+                    let componente = _APLICACION_.component("archivo_base_trd");      
+                    console.log("componente:", componente)                
                     switch (obj.value) {
                         case "FISICO":
                             componente.opciones_folios.visible = true;
-                            componente.opciones_anexo.visible  = false;
+                            componente.opciones_anexo.visible = false;
                             break  
 
                         case "ELECTRONICO":
                             componente.opciones_folios.visible = false;
-                            componente.opciones_anexo.visible  = true;
+                            componente.opciones_anexo.visible = true;
                             break 
 
                         default:
                             componente.opciones_folios.visible = true;
-                            componente.opciones_anexo.visible  = true;
+                            componente.opciones_anexo.visible = true;
                             break  
                     }; 
                     filtros = ["subserie_id", "=", window.$pantalla_expediente.subserie_id];                    
@@ -321,9 +332,8 @@ let archivo_base_trd =  {
                         filtros,
                         []
                     );
-                    componente.opciones_tipo.dataSource = fuente_tipo;
-                    
-                },                  
+                    componente.opciones_tipo.dataSource = fuente_tipo;                    
+                }                  
             },            
             
             // GENERALES
@@ -339,6 +349,9 @@ let archivo_base_trd =  {
         // Forma especifica
         this.forma = this.$refs.forma.instance;
         this.barra = this.$refs.barra.instance;
+        let datos_expediente = $save_params("datos_expediente"); 
+        let datos_expediente = $save_params("datos_expediente"); 
+
         // Registra componentes
         window._APLICACION_.component("archivo_base_trd", this);
         window.$ventana_emergente = this;
@@ -347,25 +360,40 @@ let archivo_base_trd =  {
         console.log("archivo_expediente MONTADO -->>>this.parametros->", this.parametros)
         
         // CARPETA Crea fuente de datos
-        if (this.parametros.datos.padre == "EXPEDIENTE") {
-            filtros = ["expediente_id", "=", this.parametros.datos.padre_id]            
-        } 
-        let fuente_carpeta = fuenteDatos.creaFuenteDatosConsulta(
-            'select', 
-            null, 
-            'agn_carpetas_trd', 
-            'agn_carpetas_trd', 
-            filtros, 
-            []
-        );
-        let carpeta_nro    = this.forma.instance().getEditor("carpeta_nro");
-        carpeta_nro.option("dataSource", fuente_carpeta);
+        // if (this.parametros.datos.padre == "EXPEDIENTE") {
+        //     filtros = ["expediente_id", "=", this.parametros.datos.expediente_id]            
+        // } 
+        // let fuente_carpeta = fuenteDatos.creaFuenteDatosConsulta(
+        //     'select', 
+        //     null, 
+        //     'agn_carpetas_trd', 
+        //     'agn_carpetas_trd', 
+        //     filtros, 
+        //     []
+        // );
+        // let carpeta_nro  = this.forma.instance().getEditor("carpeta_nro");
+        // carpeta_nro.option("dataSource", fuente_carpeta);
 
         // TIPO DOCUMENTAL
-        filtros = ["subserie_id", "=", window.$pantalla_expediente.subserie_id]
-        if ([null, ""].includes(window.$pantalla_expediente.subserie_id)) {
-            filtros = ["serie_id", "=", window.$pantalla_expediente.serie_id]
-        }     
+        // filtros = ["subserie_id", "=", window.$pantalla_expediente.subserie_id]
+        if (this.parametros.datos.expediente_id) {
+            filtros = [
+                "subserie_id", 
+                "=", 
+                this.parametros.datos.datos_archivo.subserie_id
+            ]
+        }
+        else {
+            filtros = [
+                "serie_id", 
+                "=", 
+                this.parametros.datos.datos_archivo.serie_id
+            ]
+        }
+        // if ([null, ""].includes(window.$pantalla_expediente.subserie_id)) {
+        //     //filtros = ["serie_id", "=", window.$pantalla_expediente.serie_id]
+        //     filtros = ["serie_id", "=", window.$pantalla_expediente.serie_id]
+        // }     
         //console.log("FILTROS TIPO:", filtros);
         let fuente_tipo = fuenteDatos.creaFuenteDatosConsulta(
             'select', 

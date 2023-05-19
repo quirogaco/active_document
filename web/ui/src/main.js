@@ -17,10 +17,12 @@ import '@fortawesome/fontawesome-free/js/all.js';
 import '../gestor/css/estilos.css';
 
 // store
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 
 // Necesario para que funciones Handlebars
 window.global = window;
+
+/*global $lib*/
 
 // ######################################
 // # ALMACENAMIENTO DE DATOS Y OPCIONES #
@@ -197,13 +199,13 @@ if ( (ruta == "formulario") && (formularios.indexOf(formulario) > -1) ) {
 }
 else {   
     // // CARGA APLICATIVO    
-    window.$componentesRutas = rutas_predefinidos.rutas_componentes
-    //window.$ns['aplicacion'].crea_enrutador();
-    await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
-    window.$ns['aplicacion'].asignaComponente('login_forma');
+    // window.$componentesRutas = rutas_predefinidos.rutas_componentes
+    // //window.$ns['aplicacion'].crea_enrutador();
+    // await window.$ns['aplicacion'].asignaRuta('login_forma', 'components/devExpress/login/login_forma.vue');  
+    // window.$ns['aplicacion'].asignaComponente('login_forma');
     
     
-    /* Especificos ára ruebas        
+    ///* Especificos ára ruebas        
     window.sessionStorage.setItem("usuario", JSON.stringify({
         //"id": "0a83bbe0-cddd-11eb-bc8f-acfdce646f0d",
         "id": "46de06e8-d5f5-11ec-ba28-005056862cfc",
@@ -316,5 +318,5 @@ else {
             //path: "grid_pqrs_asigna_grid",
         })
     }, 1000);  
-    */
+    //*/
 }

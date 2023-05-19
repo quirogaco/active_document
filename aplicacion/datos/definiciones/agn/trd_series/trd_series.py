@@ -58,6 +58,7 @@ def acceso(_r):
 
     return acceso
     
+    
 campos = {
     # TRD/TVD
     "tabla"              : tipos.clave(propiedades={"titulo": "TRD/TVD", "longitud": 60}),
@@ -76,8 +77,8 @@ campos = {
     "nombre"            : tipos.texto_obligatorio(propiedades={"titulo": "Nombre", "longitud": 250}), 
 
     # Retención
-    "gestion"           : tipos.entero(propiedades={"titulo": "Aóos en archivo de gestion"}), 
-    "central"           : tipos.entero(propiedades={"titulo": "Aóos en archivo central"}), 
+    "gestion"           : tipos.entero(propiedades={"titulo": "Años en archivo de gestion"}), 
+    "central"           : tipos.entero(propiedades={"titulo": "Años en archivo central"}), 
 
     # Disposición
     "eliminacion"         : tipos.texto(propiedades={"titulo": "Eliminación", "defecto": "NO"}),    

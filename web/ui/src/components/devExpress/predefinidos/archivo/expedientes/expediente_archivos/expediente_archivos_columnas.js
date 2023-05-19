@@ -2,7 +2,7 @@ let columnas = [
     {
         caption       : "#",
         dataField     : "consecutivo",
-        dataType      : "integer",         
+        dataType      : "string",         
         width         : "40px"
     },
     

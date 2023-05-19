@@ -21,16 +21,17 @@ let items_basicos = [
         "eventos": {
             //"seleccion_cambiada": function(campo, definicion, forma, forma_id) {    
             "foco_sale": function(campo, definicion, forma, forma_id) {               
+                let counter_safety = window[("$"+forma_id)].parametros.counter_safety;  
+                console.log("ubicaciones_gestion - foco_sale:", counter_safety)                    
                 let value = campo.component.option("value")
+                console.log("ubicaciones_gestion - value:", value)
                 forma_definiciones.limpia_campos(forma, ["dependencia_id"]);
                 forma_definiciones.limpia_campos(forma, ["serie_id"]); 
-                forma_definiciones.limpia_campos(forma, ["subserie_id"]);                 
-                forma_definiciones.asigna_fuente_datos(forma, "dependencia_id", "select", [], {});
-                forma_definiciones.asigna_fuente_datos(forma, "serie_id", "select", [], {});
-                forma_definiciones.asigna_fuente_datos(forma, "subserie_id", "select", [], {});
+                forma_definiciones.limpia_campos(forma, ["subserie_id"]);                        
                 if (value != null) {                        
                     let filtros = ["ubicaciones_gestion", "=", value]                                  
                     if (window.$pantalla_expediente.consulta == false) {
+                        console.log("ubicacion_id:", filtros, value)                                                                      
                         forma_definiciones.asigna_fuente_datos(
                             forma, 
                             "dependencia_id", 
@@ -56,30 +57,28 @@ let items_basicos = [
         "muestra_valor": "nombre_largo",
         "busqueda_expresion": "nombre_largo",
         "obligatorio": true,
-        "eventos": {
-            "foco_sale": function(campo, definicion, forma, forma_id) {                 
-                let value = campo.component.option("value")
-                forma_definiciones.limpia_campos(forma, ["serie_id"]);   
-                forma_definiciones.limpia_campos(forma, ["subserie_id"]);      
-                forma_definiciones.asigna_fuente_datos(forma, "serie_id", "select", [], {});     
-                forma_definiciones.asigna_fuente_datos(forma, "subserie_id", "select", [], {});          
-                if (value != null) {                        
-                    let filtros = ["dependencia_id", "=", value];
-                    window.$pantalla_expediente.dependencia_id = value;                                  
+        "eventos"           : {
+            "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 
+                let datos = campo.selectedItem                
+                if (datos != null) {                        
+                    let filtros = ["dependencia_id", "=", datos.id]                                  
                     if (window.$pantalla_expediente.consulta == false) { 
-                        forma_definiciones.limpia_campos(forma, ["serie_id"]) 
-                        forma_definiciones.asigna_fuente_datos(
-                            forma, 
-                            "serie_id", 
-                            "select", 
-                            "agn_serie_trd", 
-                            filtros, 
-                            {}
-                        )        
+                        // console.log("seleccion_cambiada->dependencia_id");
+                        // console.log("dependencia_id:", filtros, datos)                                              
+                        // forma_definiciones.limpia_campos(forma, ["serie_id"]) 
+                        // forma_definiciones.asigna_fuente_datos(
+                        //     forma, 
+                        //     "serie_id", 
+                        //     "select", 
+                        //     "agn_serie_trd", 
+                        //     filtros, 
+                        //     {}
+                        // )        
                     }      
                 };                   
             }
         }
+
     },
 
     {
@@ -93,31 +92,33 @@ let items_basicos = [
         "muestra_valor": "nombre",
         "busqueda_expresion": "nombre",
         "obligatorio": true,
-        "eventos": {
+        "eventos"           : {
             "foco_entra": function(campo, definicion, forma, forma_id) {                 
-                // let filtros = ["serie_id", "=", ".."];
-                // let dependencia_id = forma_definiciones.lee_valor(forma, "dependencia_id")
-                // console.log("FOCO->dependencia_id:", dependencia_id);                           
+                let filtros = ["serie_id", "=", ".."];
+                let dependencia_id = forma_definiciones.lee_valor(forma, "dependencia_id")
+                console.log("FOCO->dependencia_id:", dependencia_id);                           
             },
-            "foco_sale": function(campo, definicion, forma, forma_id) {                 
-                let value = campo.component.option("value")
-                console.log("serie_id - value:", value)
-                forma_definiciones.limpia_campos(forma, ["subserie_id"]);
-                forma_definiciones.asigna_fuente_datos(forma, "subserie_id", "select", [], {});      
-                if (value != null) {                        
-                    let filtros = ["serie_id", "=", value];
-                    window.$pantalla_expediente.serie_id = value;                    
-                    if (window.$pantalla_expediente.consulta == false) { 
-                        forma_definiciones.limpia_campos(forma, ["subserie_id"])                                                                                            
-                        forma_definiciones.asigna_fuente_datos(
-                            forma, 
-                            "subserie_id", 
-                            "select", 
-                            "agn_subserie_trd", 
-                            filtros, 
-                            {}
-                        )        
-                    }    
+
+            "seleccion_cambiada": function(campo, definicion, forma, forma_id) {                 
+                let filtros = ["serie_id", "=", ".."]    
+                let datos = campo.selectedItem                  
+                window.$pantalla_expediente.serie_id = null
+                if (datos != null) {                        
+                    // filtros = ["serie_id", "=", datos.id]
+                    // window.$pantalla_expediente.serie_id = datos.id                    
+                    // if (window.$pantalla_expediente.consulta == false) { 
+                    //     console.log("seleccion_cambiada->serie_id"); 
+                    //     console.log("serie_id:", filtros, datos)   
+                    //     forma_definiciones.limpia_campos(forma, ["subserie_id"])                                                                                            
+                    //     forma_definiciones.asigna_fuente_datos(
+                    //         forma, 
+                    //         "subserie_id", 
+                    //         "select", 
+                    //         "agn_subserie_trd", 
+                    //         filtros, 
+                    //         {}
+                    //     )        
+                    // }    
                 }                
             }
         }
@@ -135,7 +136,7 @@ let items_basicos = [
         "muestra_valor": "nombre",
         "busqueda_expresion": "nombre",
        // "obligatorio": true,
-        "eventos": {
+        "eventos"           : {
             "seleccion_cambiada": function(campo, definicion, forma, forma_id) {
                 let datos = campo.selectedItem;
                 window.$pantalla_expediente.subserie_id = null;

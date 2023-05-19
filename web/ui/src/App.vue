@@ -7,10 +7,10 @@
 
         <DxLoadPanel
             v-model:visible = "indicador_visible" 
-            :message        = "mensaje_carga_muestra()"  
-            :width          = 500
-            :height         = 400            
-            shading-color   = "rgba(0,0,0,0.4)"
+            :message = "mensaje_carga_muestra()"  
+            :width = 500
+            :height = 400            
+            shading-color = "rgba(0,0,0,0.4)"
         />
 
         <div>
@@ -20,7 +20,7 @@
         <div>
             <popup_onlyoffice 
                 :opciones = "opciones_onlyoffice"
-                :key      = "emergente_onlyoffice"
+                :key = "emergente_onlyoffice"
             />
         </div>
 
@@ -46,13 +46,13 @@ import {
 
 import { defineStore } from 'pinia';
 
-import { DxLoadPanel }  from 'devextreme-vue/load-panel';
-import { alert }        from "devextreme/ui/dialog";
-import http             from './librerias/http.js';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
+import { alert } from "devextreme/ui/dialog";
+import http from './librerias/http.js';
 
 import crear_rutas_navegacion from './librerias/crear_rutas_navegacion.js';
 import popup_onlyoffice from './components/onlyOffice/popup_onlyoffice.vue';
-import popup_pdf        from './components/pdfjs/popup_pdf.vue';
+import popup_pdf from './components/pdfjs/popup_pdf.vue';
 let componentes = {};
 
 export default {
@@ -114,15 +114,15 @@ export default {
             // Visor onlyoffice
             opciones_onlyoffice: {
                 visible: false,
-                editor : {}
+                editor: {}
             },
             emergente_onlyoffice: 0,
 
             // Panel de carga general
             indicador_visible: false,
-            mensaje_carga    : "Por favor esperar....",
-            mensaje_temporal : null,
-            rutas            : []         
+            mensaje_carga: "Por favor esperar....",
+            mensaje_temporal: null,
+            rutas: []         
         }
     },
 
@@ -135,10 +135,10 @@ export default {
             let ruta = {};
             await import( ("./" + rutaComponente) ).then((modulo) => {                
                 ruta = {
-                    path     : ("/" + nombreComponente),
-                    name     : nombreComponente,
+                    path: ("/" + nombreComponente),
+                    name: nombreComponente,
                     component: modulo.default, 
-                    props    : true     
+                    props: true     
                 }   
                  this.$.components[nombreComponente] = modulo.default               
             })
@@ -158,7 +158,7 @@ export default {
         crea_enrutador() {
             let routes = this.rutas; 
             window.$rutasNavegacion = {
-                ruta        : crear_rutas_navegacion.creaEnrutador(routes),
+                ruta: crear_rutas_navegacion.creaEnrutador(routes),
                 navegaciones: routes
             };
             window._APLICACION_.use(window.$rutasNavegacion.ruta);

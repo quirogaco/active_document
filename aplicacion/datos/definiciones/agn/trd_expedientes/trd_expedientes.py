@@ -29,20 +29,21 @@ def trd_documentos(_r):
     documentos       = sesion.query(DOCUMENTOS_CLASE).filter( filtros ).all()        
     for documento in documentos:
         datos = {
-            "id"                 : documento.id,
-            "tipo"               : documento.tipo_nombre,
-            "tipo_detalle"       : documento.tipo_nombre + ' / ' + documento.detalle,
-            "detalle"            : documento.detalle,
-            "fecha_creacion"     : documento.fecha_creacion,
-            "fecha_incorporado"  : documento.fecha_incorporado,
-            "soporte"            : documento.soporte,
-            "folios_fisicos"     : documento.folios_fisicos,
+            "id": documento.id,
+            "padre_id": documento.padre_id,
+            "tipo": documento.tipo_nombre,
+            "tipo_detalle": documento.tipo_nombre + ' / ' + documento.detalle,
+            "detalle": documento.detalle,
+            "fecha_creacion": documento.fecha_creacion,
+            "fecha_incorporado": documento.fecha_incorporado,
+            "soporte": documento.soporte,
+            "folios_fisicos": documento.folios_fisicos,
             "folios_electronicos": documento.folios_electronicos,
-            "tipo_archivo"       : documento.tipo_archivo,
-            "tamano"             : documento.tamano,
-            "fecha_funcion"      : documento.fecha_funcion,
-            "observacion"        : documento.observacion,
-            "valor_huella"       : str(random.getrandbits(random.randint(10, 99)))
+            "tipo_archivo": documento.tipo_archivo,
+            "tamano": documento.tamano,
+            "fecha_funcion": documento.fecha_funcion,
+            "observacion": documento.observacion,
+            "valor_huella": str(random.getrandbits(random.randint(10, 99)))
         }
         lista.append(datos)
     sesion.close()
@@ -215,10 +216,15 @@ def tipo_expediente(_r):
 
     return tipo
 
-def dependencias_gestion(_r):
-    dependencias = _r.dependencia_datos.get("dependencias_gestion", [])
+# def dependencias_gestion(_r):
+#     dependencias = _r.dependencia_datos.get("dependencias_gestion", [])
 
-    return dependencias
+#     return dependencias
+
+# def ubicaciones_gestion(r_):
+#     datos = r_.datos.get("ubicaciones_gestion", "")
+    
+#     return datos
 
 #################
 # TRANSFERENCIA #
@@ -361,9 +367,7 @@ campos = {
     "ubicacion_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicacion nombre", "reporte": "SI"}),
     "dependencia_nombre": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia nombre", "reporte": "SI"}),    
     "dependencia_codigo": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia codigo", "reporte": "SI"}),          
-    "dependencia_id": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia id", "reporte": "SI"}),     
-    #"dependencia_datos": tipos.json(propiedades={"columna": "no", "titulo": "Dependencia datos"}), 
-    "dependencia_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia datos", "propiedad": dependencias_gestion}), 
+    "dependencia_id": tipos.texto(propiedades={"columna": "no", "titulo": "Dependencia id", "reporte": "SI"}), 
        
     # Serie padre
     "serie_id": tipos.clave(propiedades={"titulo": "Serie id", "longitud": 60}),
@@ -376,8 +380,10 @@ campos = {
     "serie_seleccion": tipos.texto(propiedades={"columna": "no", "titulo": "Selección", "reporte": "SI"}), 
     "serie_conservacion": tipos.texto(propiedades={"columna": "no", "titulo": "Conservación", "reporte": "SI"}), 
     "serie_micro_digitalizacion": tipos.texto(propiedades={"columna": "no", "titulo": "Micro digitalización", "reporte": "SI"}),    
-    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
-    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}),     
+    "ubicaciones_gestion": tipos.texto(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),    
+    "ubicaciones_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Ubicaciones gestion"}),
+    "dependencias_gestion": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencias gestion"}),  
+    "dependencia_id": tipos.clave(propiedades={"columna": "no", "titulo": "Dependencia trd"}),    
 
     # SubSerie padre
     "subserie_id": tipos.clave(propiedades={"titulo": "SubSerie id", "longitud": 60}),
@@ -427,7 +433,8 @@ referencias = [
             "subserie_eliminacion"         : "eliminacion",
             "subserie_seleccion"           : "seleccion",
             "subserie_conservacion"        : "conservacion",
-            "subserie_micro_digitalizacion": "micro_digitalizacion"
+            "subserie_micro_digitalizacion": "micro_digitalizacion",
+            "dependencia_id": "dependencia_id"
         }],
         "estructuraDestino": "agn_subserie_trd",
         "campoDestino"     : "id",            

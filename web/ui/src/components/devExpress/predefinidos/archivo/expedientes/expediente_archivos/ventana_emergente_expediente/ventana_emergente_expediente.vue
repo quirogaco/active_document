@@ -46,7 +46,10 @@ let ventana =  {
         opciones: {
             type: Object,
             default: () => {
-                return {}
+                return {
+                    "componente_visible": true,
+                    "datos_archivo": {}
+                }
             }
         }        
     },
