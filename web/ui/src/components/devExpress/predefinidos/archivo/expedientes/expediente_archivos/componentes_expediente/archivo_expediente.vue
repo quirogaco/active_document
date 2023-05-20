@@ -350,7 +350,6 @@ let archivo_base_trd =  {
         this.forma = this.$refs.forma.instance;
         this.barra = this.$refs.barra.instance;
         let datos_expediente = $save_params("datos_expediente"); 
-        let datos_expediente = $save_params("datos_expediente"); 
 
         // Registra componentes
         window._APLICACION_.component("archivo_base_trd", this);
