@@ -3,9 +3,9 @@ let columnas = [
     {
         caption       : "Fecha correo",
         dataField     : "fecha_correo",
-        dataType      : "date",
-        width         : 120,
-        format        : 'y-MM-dd'
+        dataType      : "datetime",          
+        width         : 150,
+        format        : 'y-MM-dd hh:mm:ss'
     },
 
     // Correo

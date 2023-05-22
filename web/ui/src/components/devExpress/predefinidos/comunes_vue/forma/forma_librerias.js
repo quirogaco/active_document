@@ -61,7 +61,7 @@ const busca_campo = function(forma, campo) {
 };
 
 const asigna_opcion_forma = function(forma=null, campos=[], opcion="", valor) {
-    let nombre     = null;
+    let nombre = null;
     let ruta_texto = "";
     for (const indice in campos) {        
         nombre = campos[indice]
@@ -72,7 +72,7 @@ const asigna_opcion_forma = function(forma=null, campos=[], opcion="", valor) {
             let buscar = nombre.substring(nombre.indexOf(".")+1);
             ruta_texto = busca_campo(forma, buscar);
         }
-        let items = forma.forma.option("items"); 
+        //let items = forma.forma.option("items"); 
         forma.forma.itemOption(ruta_texto, opcion, valor);
     }
 };

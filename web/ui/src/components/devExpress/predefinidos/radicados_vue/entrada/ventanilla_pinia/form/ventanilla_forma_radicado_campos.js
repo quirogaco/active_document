@@ -265,7 +265,8 @@ let archivo_grupo = function(forma) {
             "titulo"   : "Anexos",
             'columna'  : 1,
             "elementos": [
-                archivo_definiciones.mensaje_archivo(null, {forma: forma}),
+                archivo_definiciones.anexos_radicado(null, {forma: forma}),
+                archivo_definiciones.mensaje_archivo(null, {forma: forma}),                
                 archivo_definiciones.archivos_anexos(null, {forma: forma})                
             ]
         }

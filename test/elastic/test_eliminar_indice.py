@@ -43,19 +43,19 @@ from librerias.datos.elastic import elastic_operaciones
 # resultado = elastic_operaciones.eliminaIndice("radicados_interno", "base")
 # resultado = elastic_operaciones.eliminaIndice("peticiones", "base")
 # resultado = elastic_operaciones.eliminaIndice("copias", "base")
-# resultado = elastic_operaciones.eliminaIndice("correos_descargados", "base")
+resultado = elastic_operaciones.eliminaIndice("correos_descargados", "base")
 #"""
 
 
 # ARCHIVO
-resultado = elastic_operaciones.eliminaIndice("agn_fondo_documental", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_trd", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_dependencia_trd", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_serie_trd", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_subserie_trd", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_tipo_documental_trd", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_expedientes_trd", "base")
-resultado = elastic_operaciones.eliminaIndice("agn_documentos_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_fondo_documental", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_dependencia_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_serie_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_subserie_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_tipo_documental_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_expedientes_trd", "base")
+# resultado = elastic_operaciones.eliminaIndice("agn_documentos_trd", "base")
 
 # resultado = elastic_operaciones.eliminaIndice("agn_prestamos_trd", "base")
 

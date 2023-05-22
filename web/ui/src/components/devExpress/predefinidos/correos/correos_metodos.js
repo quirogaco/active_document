@@ -1,13 +1,15 @@
+import estructuras from '../../../../librerias/estructuras.js';
 
 let metodos = {
-    'dobleClick':  function(e) {
-        console.log("e.data CORRESO:", e.data)
+    'dobleClick':  async function(e) {        
+        let record = await estructuras.leer_registro_id("correos_descargados", e.data.id)
+        //console.log("record CORRESO:", record)
         let datos = {
             "_modo_": "CORREO",
-            "tercero_correo_electronico": e.data["correo_origen"],
-            "asunto": e.data["asunto"],
-            "fecha_documento": e.data["fecha_correo"],
-            "archivos_anexos": e.data["archivos"]
+            "tercero_correo_electronico": record["correo_origen"],
+            "asunto": record["asunto"],
+            "fecha_documento": record["fecha_correo"],
+            "archivos_anexos": record["archivos"]
         }
 
         $lib.call_component_storage(

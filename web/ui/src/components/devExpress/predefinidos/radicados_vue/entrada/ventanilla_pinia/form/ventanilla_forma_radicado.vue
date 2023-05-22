@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, ref, onMounted, onBeforeMount } from "vue";
+import { getCurrentInstance, ref, reactive, onMounted, onBeforeMount } from "vue";
 
 // that <- this
 let that = getCurrentInstance().ctx;
@@ -58,18 +58,15 @@ that.basicas = {
 }
 // elementos ya viene en formato devexpress
 let campos = forma_campos.campos_forma(that, that.basicas);
-// parametros para dataforma
+// no funciona enmounted no es reactiva
+let params = $get_params("ventanilla_radicado_forma")?.datos;  
 let atributos_forma = {
     config: {
         id: component_name,
         name: component_name,
         colCount: 2,
         items: campos["elementos"],
-        fields_format: "devexpress",
-        // formData: ref({
-        //     numero_guia: "NUEVO ASUNTO-000",
-        //     tercero_clase: "NATURAL"
-        // })
+        fields_format: "devexpress"
     }                  
 }; 
 
@@ -92,14 +89,13 @@ let opciones_pdf = ref({});
 // funcion llamada por evento mounted DataForma
 async function form_mounted(DataForma) {
     that.forma = DataForma.instance;
-    that.retorna = "ventanilla_radicado_grid";
-    let datos = $get_params("ventanilla_radicado_forma")?.datos;    
-    if (datos._modo_ == "CORREO") {
+    that.retorna = "ventanilla_radicado_grid";   
+    if (params._modo_ == "CORREO") {
         that.retorna = "correos_grid";
-        datos["tercero_clase"] = "JURIDICA";
-        datos["es_pqrs"] = "DOCUMENTO";
+        params["tercero_clase"] = "JURIDICA";
+        params["es_pqrs"] = "DOCUMENTO";
         setTimeout(() => {
-            that.forma_datos(datos);
+            that.forma_datos(params);
         }, 1500);
     }
     else {
@@ -112,6 +108,9 @@ onMounted(() => {});
 onBeforeMount(() => {
     $save_params("_radica_dependencia_", {"responsable": "correspondencia_id"});
     $save_params("pqrs_filtro", "DOCUMENTO");
+    if (params._modo_ != "CORREO") {
+        campos["elementos"][3].items[0].visible = false;
+    }
 });
 </script>
 
