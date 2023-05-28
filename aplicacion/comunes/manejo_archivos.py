@@ -12,7 +12,8 @@ def manejo(
     archivos, 
     id_tarea, 
     tipo_relacion = "anexos", 
-    cubeta = "contenedor.general"
+    cubeta = "contenedor.general",
+    retardo=0
 ):
     secuencia = [
         {
@@ -31,7 +32,8 @@ def manejo(
     ]
     llamados.ejecutar_secuencia(
         secuencia=secuencia, 
-        ubicacion="comunes manejo archivos"
+        ubicacion="comunes manejo archivos",
+        retardo=retardo
     )  
 
 # MANEJO ANEXOS

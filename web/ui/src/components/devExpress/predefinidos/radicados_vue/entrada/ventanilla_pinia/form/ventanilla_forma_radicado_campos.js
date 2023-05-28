@@ -54,6 +54,7 @@ let basicos_grupo = function(forma) {
             "titulo"   : "Información Basica",
             'columna'  : 1,
             "elementos": [
+                archivo_definiciones.anexos_radicado(null, {forma: forma}),
                 basicos_definiciones.canal_radicado_id(null, {forma: forma}),
                 respuesta_definiciones.medio_notificacion(null, {
                     forma: forma, 
@@ -264,8 +265,7 @@ let archivo_grupo = function(forma) {
         {
             "titulo"   : "Anexos",
             'columna'  : 1,
-            "elementos": [
-                archivo_definiciones.anexos_radicado(null, {forma: forma}),
+            "elementos": [                
                 archivo_definiciones.mensaje_archivo(null, {forma: forma}),                
                 archivo_definiciones.archivos_anexos(null, {forma: forma})                
             ]

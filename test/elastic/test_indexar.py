@@ -26,6 +26,7 @@ def recuperar(conexion, estructura):
 
     total = sqalchemy_leer.contar_registros("base", estructura)
     paso = 100
+    resultado = []
     for posicion in range(0, total, paso):
         print("")
         print(estructura, posicion, (posicion+paso), total, end=' - ')

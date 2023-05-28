@@ -46,8 +46,10 @@ let that = getCurrentInstance().ctx;
 // Atributos del componente //
 //**************************//
 import forma_general from "../../../../comunes_vue/forma/forma.js";
+import fuente from "../../../../comunes_vue/forma/fuente.js";
 import forma_definiciones from "./ventanilla_forma_radicado_definiciones.js";
 import forma_campos from "./ventanilla_forma_radicado_campos.js";
+import pdf_componente from "../../../../../../pdfjs/pdf_componente.vue"
 
 let component_name = "ventanilla_radicado_forma";
 let dataForma = ref(null);  // DataForma
@@ -59,7 +61,8 @@ that.basicas = {
 // elementos ya viene en formato devexpress
 let campos = forma_campos.campos_forma(that, that.basicas);
 // no funciona enmounted no es reactiva
-let params = $get_params("ventanilla_radicado_forma")?.datos;  
+let params = $get_params("ventanilla_radicado_forma")?.datos; 
+console.log("params:", params) 
 let atributos_forma = {
     config: {
         id: component_name,
@@ -78,9 +81,9 @@ let atributos_barra = {
 // Pdf
 let verPdf = ref(true); 
 let repintar_pdf = ref(0);
-let pdf_existe = ref(false);
-let pdf_ancho = ref("100%");
-let pdf_alto = ref("100%");
+//let pdf_existe = ref(false);
+let pdf_ancho = ref("800px");
+let pdf_alto = ref("200px");
 //let clase_pdf = ref("col-12 shadow-sm p-3 mb-3 bg-body rounded");
 let clase_pdf = ref("shadow-sm p-3 mb-3 bg-body rounded");
 // Opciones visor PDF
@@ -95,7 +98,34 @@ async function form_mounted(DataForma) {
         params["tercero_clase"] = "JURIDICA";
         params["es_pqrs"] = "DOCUMENTO";
         setTimeout(() => {
+            let anexos = params["archivos_anexos"];
+            let fuente_anexos = fuente.fuente_arreglo(anexos) 
+            forma_general.asigna_fuente(
+                that, 
+                "anexos_radicado", 
+                fuente_anexos
+            )   
             that.forma_datos(params);
+            //nombre:"5293_correo_datos___roahhkmroys8ftvxnyeczw.pdf"
+            const result = anexos.filter(archivo => archivo.nombre.includes("_correo_datos"));
+            console.log("result:", result)
+            that.verPdf= true; 
+            let pdf_parametros = {
+                titulo_general: "Pdf del Correo",
+                archivo_id    : result[0].id, //"fd778b8e-fd7e-11ed-92d7-086266b539c1", 
+                tipo_documento: "pdf",
+                titulo        : "Pdf del Correo",
+                modo          : "leer",
+                descarga      : 'no'
+            };     
+            let parametros = window.$lib.prepara_parametros_archivo(pdf_parametros); 
+            opciones_pdf.value.nombrePdf = parametros.datos.idArchivo;
+            opciones_pdf.value.buscarTexto = parametros.datos.buscarTexto;
+            opciones_pdf.value.operacion = parametros.datos.operacion;           
+            opciones_pdf.clase = parametros.datos.clase;
+            opciones_pdf.value.descarga = parametros.datos.descarga;
+            opciones_pdf.value.titulo = parametros.datos.titulo_general; 
+            repintar_pdf.value += 1;
         }, 1500);
     }
     else {
@@ -109,7 +139,10 @@ onBeforeMount(() => {
     $save_params("_radica_dependencia_", {"responsable": "correspondencia_id"});
     $save_params("pqrs_filtro", "DOCUMENTO");
     if (params._modo_ != "CORREO") {
-        campos["elementos"][3].items[0].visible = false;
+        campos["elementos"][0].items[0].visible = false
+    }
+    else {
+        campos["elementos"][0].items[0].visible = true
     }
 });
 </script>

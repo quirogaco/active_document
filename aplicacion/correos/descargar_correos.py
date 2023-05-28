@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys, pprint, builtins
+import threading 
 
 #########################
 # Variables de ambiente #
@@ -36,16 +37,17 @@ from email.header import Header, decode_header, make_header
 
 from librerias.datos.sql import sqalchemy_insertar
 from librerias.datos.elastic import elastic_operaciones
-from aplicacion.comunes import manejo_archivos
+from aplicacion.comunes import manejo_archivos, indexar_datos
 
 #####################
 # Manejo de correos #  
 #####################
 from subprocess import *
+
 def jarWrapper(*args):
   #process = Popen(['java', '-jar']+list(args), stdout=PIPE, stderr=PIPE)
   parametros = ['java', '-jar'] + args[0]
-  print(">>>>>>>>> list(args)", parametros)
+  #print(">>>>>>>>> list(args)", parametros)
   process = Popen(parametros)
   ret = []
   return ret
@@ -66,8 +68,8 @@ def conectarCorreo( data ):
 def buscarCorreos( mailserver, cuales='(UNSEEN)' ):
   #status, response = mailserver.status('INBOX', "(UNSEEN)")
   #status, response = mailserver.status('INBOX', "(UNSEEN)")
-  print( 'buscarCorreos:') #, status, response )  
-  typ, data = mailserver.search(None, 'ALL') #cuales)
+  #print( 'buscarCorreos:') #, status, response )  
+  typ, data = mailserver.search(None, cuales)#'ALL')
     
   return data
 
@@ -81,7 +83,7 @@ def descargaCorreo( mailserver, ruta, numCorreo ):
     parse.feed( data[0][1] )
     correo = parse.close()
     texto = correo.as_string().strip()
-    nombreEml = str( '%s/%s.eml' %( ruta, str( int(numCorreo) ) ) )
+    nombreEml = str( '%s/%s_correo_datos.eml' %( ruta, str( int(numCorreo) ) ) )
     f = open( nombreEml, 'w' )
     f.write( texto  )
     f.close()
@@ -96,13 +98,14 @@ def extraeAnexos( nombreEml, ruta, numCorreo, cual ):
   correo = None
   if nombreEml != None:
     correo = email.message_from_file( open( nombreEml ) )
-    print( 'extraeAnexos-nombreEml:', nombreEml )
+    #print( 'extraeAnexos-nombreEml:', nombreEml )
     imagenes = ["jpg", "jpeg", "png", "gif"]  
     for anexo in correo.get_payload():
       if ( type( anexo) != str ):
-        filename = anexo.get_filename()          
+        filename = anexo.get_filename()      
         if filename != None:
-          if ( anexo.get_content_disposition() != "inline" ):                
+          if ( anexo.get_content_disposition() != "inline" ):   
+            filename = filename.replace("\\", "/").replace("//", "/")                  
             maintype = anexo.get_content_maintype()
             subtype = anexo.get_content_subtype()
             es_imagen = ( subtype in imagenes )
@@ -179,6 +182,7 @@ def descargarCorreos( cuantos = 1, cual="email" ):
       count += 1
       nombreEml = descargaCorreo( mailserver, ruta_basica, numCorreo )   
       anexos, message = extraeAnexos( nombreEml, ruta_basica, numCorreo, cual )
+      print("ANEXOS:", anexos)
       if message != None:
         # Conviente EML to PDF
         parametros = [(
@@ -187,8 +191,10 @@ def descargarCorreos( cuantos = 1, cual="email" ):
         #parametros.append("-o " + nombreEml.replace(".eml", ".pdf"))
         parametros.append(nombreEml)
         jarWrapper(parametros)
+        pdf_principal = nombreEml.replace(".eml", ".pdf").replace("\\", "/")
         From = message['From']
         print( count, numCorreo, From )
+
         if From != None:
           fromCorreo = re.findall( r'[\w\.-]+@[\w\.-]+', From )            
           if fromCorreo != None:
@@ -214,9 +220,9 @@ def descargarCorreos( cuantos = 1, cual="email" ):
             dataTemporal['fecha_correo'] = dt
             dataTemporal['estado'] = u'PENDIENTE'
             dataTemporal['radicado'] = u''
-            print("")
-            print("datos correo:", count)
-            pprint.pprint(dataTemporal)
+            # print("")
+            # print("datos correo:", count)
+            # pprint.pprint(dataTemporal)
             resultado = sqalchemy_insertar.insertar_registro_estructura(
               "correos_descargados", 
               dataTemporal
@@ -225,23 +231,49 @@ def descargarCorreos( cuantos = 1, cual="email" ):
               "correos_descargados", 
               resultado["id"]
             )
+
+            archivos.append({
+                "nombre_completo": pdf_principal,
+                "nombre": os.path.basename( pdf_principal )
+            })
+
             print("")
             print("ANEXOS:")
             pprint.pprint(archivos)
             print("")
             print("")          
             manejo_archivos.manejo(
-              "correos", 
-              "insertar", 
-              {"id":resultado["id"]}, 
-              archivos, 
-              "", 
-              cubeta = "correos",
-              tipo_relacion = "anexos"
+                "correos", 
+                "insertar", 
+                {"id":resultado["id"]}, 
+                archivos, 
+                "", 
+                cubeta = "correos",
+                tipo_relacion = "anexos",
+                retardo=120
+            ) 
+            # print("PDF PRINCIPAL:", pdf_principal)
+
+            # manejo_archivos.manejo(
+            #     "correos", 
+            #     "insertar", 
+            #     {"id":resultado["id"]}, 
+            #     [pdf_principal], 
+            #     "", 
+            #     cubeta = "correos",
+            #     tipo_relacion = "principal"
+            # )
+
+            indexar_datos.indexar_estructura(
+              "correos_descargados", 
+              resultado["id"],
+              retardo=180
             )
-            
-            print("")
-            print("")
+
+            # elastic_operaciones.indexar_registro(
+            #   "correos_descargados", 
+            #   resultado["id"]
+            # )
             
       if count > cuantos:
           break

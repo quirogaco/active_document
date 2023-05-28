@@ -3,7 +3,7 @@
 
 import pprint
 
-from aplicacion.comunes       import manejo_archivos
+from aplicacion.comunes  import manejo_archivos
 
 # ARCHIVOS 
 def gestion_pdf_principal(accion, datos={}, archivos=[], acciones={}, id_tarea=""):
@@ -11,10 +11,10 @@ def gestion_pdf_principal(accion, datos={}, archivos=[], acciones={}, id_tarea="
         "pdf_informacion": ""
     }
     datos = datos['datos']
-    print("")
-    print("************************")
-    print("gestion_pdf_principal:")
-    pprint.pprint(datos)
+    # print("")
+    # print("************************")
+    # print("gestion_pdf_principal:")
+    # pprint.pprint(datos)
     archivos = manejo_archivos.buca_anexo_especifico_id(datos["origen_id"], "principal")   
     if len(archivos) > 0:
         pprint.pprint(archivos)
@@ -22,7 +22,7 @@ def gestion_pdf_principal(accion, datos={}, archivos=[], acciones={}, id_tarea="
             "pdf_informacion": archivos[0]
         }
     
-    print("************************")
-    print("")
+    # print("************************")
+    # print("")
 
     return resultado

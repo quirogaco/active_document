@@ -39,7 +39,6 @@ let metodos = {
 
     // Invoca validación remota
     'valida_mostrar_pdf': function(origen_id, tipo_documento) {
-        console.log("valida_mostrar_pdf>>>", tipo_documento)
         let estructura = "radicados_entrada";
         if (tipo_documento == "INTERNO") {
             estructura = "radicados_interno";
@@ -53,7 +52,6 @@ let metodos = {
             accion: "gestion_pdf_principal"
         };
         
-        console.log("parametros>>>", parametros)       
         let urlCompleta = (
             window.$direcciones.servidorDatos + '/especifico_acciones'
         );   

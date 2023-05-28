@@ -13,7 +13,7 @@ trabajadores = {
     'generales': [
         'celery', '-A', 'aplicacion.trabajadores_base.generales_celery',  
         'worker',  '-Q', 'generales',         
-        '--concurrency=4', 
+        '--concurrency=1', 
         '-Ofair', 
         '-n', 'worker1.%h',
         '--loglevel', 'info'
@@ -22,7 +22,7 @@ trabajadores = {
     'radicados': [
         'celery', '-A', 'aplicacion.trabajadores_base.radicados_celery',  
         'worker',  '-Q', 'radicados',         
-        '--concurrency=4', 
+        '--concurrency=1', 
         '-Ofair', 
         '-n', 'worker2.%h',
         '--loglevel', 'info'

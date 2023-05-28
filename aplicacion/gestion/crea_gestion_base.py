@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
@@ -53,21 +53,21 @@ def actualiza_radicado(radicado_id, clase_radicado, id_tarea):
     }
     sqalchemy_modificar.modificar_registro("base", CLASE_RADICADO, nuevos_datos)
 
-# Crea regitro de gestión
+# Crea regitro de gestiï¿½n
 def crea_registro_gestion(datos, archivos, id_tarea):
     # Dependencia y responsable
     dependencia_id = datos['gestion_dependencia_id']
     dependencia    = sqalchemy_leer.leer_un_registro("dependencias", dependencia_id)
     responsable_id = dependencia["pqrs_id"]
-    detalle        = "ASIGNACIÓN POR COMPETENCIA A " + dependencia["pqrs_nombre"] + ", DE " + dependencia["nombre_completo"]
+    detalle        = "ASIGNACIï¿½N POR COMPETENCIA A " + dependencia["pqrs_nombre"] + ", DE " + dependencia["nombre_completo"]
     
-    # Petición
+    # Peticiï¿½n
     horas_dias   = datos.get("gestion_horas_dias", None)
     total_tiempo = datos.get("gestion_total_tiempo", None)
     peticion_id  = datos["gestion_peticion_id"]
     peticion     = sqalchemy_leer.leer_un_registro("peticiones", peticion_id) 
     
-    # Información del radicado
+    # Informaciï¿½n del radicado
     radicado_id  = datos["id"]
 
     # Valores definitivos
@@ -79,7 +79,7 @@ def crea_registro_gestion(datos, archivos, id_tarea):
 
     clase_radicado = datos.get("clase_radicado", "PQRS")
     
-    # Crear registro GESTIÓN    
+    # Crear registro GESTIï¿½N    
     data_registro = {
         'creado_por_id'  : "*",
         'fuente'         : clase_radicado,
@@ -102,7 +102,7 @@ def crea_registro_gestion(datos, archivos, id_tarea):
     manejo_archivos.manejo("radicados_entrada", "insertar", {"id": radicado_id}, archivos, id_tarea ) #, cubeta = "plantillas")
     indexar_datos.indexar_estructura("radicados_entrada", radicado_id)
 
-    # Log de creación registro gestión
+    # Log de creaciï¿½n registro gestiï¿½n
     datos_log = {
         "accion"         : "ASIGNAR_DEPENDENCIA",
         "destinatario_id": responsable_id,     
