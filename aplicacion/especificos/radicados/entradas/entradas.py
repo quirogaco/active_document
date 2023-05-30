@@ -23,7 +23,6 @@ def crear_radicado(datos_basicos, datos):
 # RADICACIóN 
 def radicar(accion, datos={}, archivos=[], id_tarea=""):  
     datos_radicado = datos["datos"]
-    
     datos_basicos = datos_radicados.datos_basicos(
         "ENTRADA", 
         "ENTRADA", 
@@ -73,17 +72,20 @@ def radicar(accion, datos={}, archivos=[], id_tarea=""):
     
     # Tarea celery general
     datos_cola = {
-        "tarea_id"         : id_tarea,
-        "radicado_tipo"    : "ENTRADA",
-        "radicado_id"      : radicado_id,
-        "tercero_datos"    : tercero,
-        "tercero_id"       : tercero["id"],
-        "archivos"         : archivos,
-        "radicado"         : radicado,
-        "nro_radicado"     : datos_basicos["nro_radicado"],
-        "asunto"           : datos_radicado["asunto"],
+        "tarea_id": id_tarea,
+        "radicado_tipo": "ENTRADA",
+        "origen_correo_electronico": (
+            datos_radicado.get("origen_correo_electronico", "")
+        ),
+        "radicado_id": radicado_id,
+        "tercero_datos": tercero,
+        "tercero_id": tercero["id"],
+        "archivos": archivos,
+        "radicado": radicado,
+        "nro_radicado": datos_basicos["nro_radicado"],
+        "asunto": datos_radicado["asunto"],
         "copia_usuarios_id": datos_copia["copia_usuarios_id"],  
-        "copia_grupos_id"  : datos_copia["copia_grupos_id"],  
+        "copia_grupos_id": datos_copia["copia_grupos_id"],  
         "copia_terceros_id": datos_copia["copia_terceros_id"],   
     }
     radicado_global.invoca_tercero_log_anexos_copias(datos_cola)

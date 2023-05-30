@@ -97,7 +97,7 @@ def recuperar(conexion, estructura):
 # recuperar(conexion, "grupo_usuarios")
 # recuperar(conexion, "festivos")
 # recuperar(conexion, "reportes_dinamicos")
-# recuperar(conexion, "plantillas")
+recuperar(conexion, "plantillas")
 # recuperar(conexion, "consecutivos")cls
 # recuperar(conexion, "tipo_identificaciones")
 # recuperar(conexion, "genero")

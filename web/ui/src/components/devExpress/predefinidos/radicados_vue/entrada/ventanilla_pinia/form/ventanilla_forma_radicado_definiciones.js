@@ -48,7 +48,8 @@ let metodos_forma = function(that) {
             let valida = that.forma_validacion();
             let datos = that.forma_datos();
             datos["clase_radicado"] = datos["es_pqrs"];
-            datos["formulario_web"] = null;            
+            datos["formulario_web"] = null;  
+            datos["origen_correo_electronico"] = that.origen_correo_electronico;          
             // OJO CON CORREOS//
             switch (accion) {
                 case 'radicar_ventanilla':
@@ -59,7 +60,7 @@ let metodos_forma = function(that) {
                     // Datos OK
                     if (valida == true) {  
                         // Envio de datos
-                        let urlCompleta = acciones_especificas.ruta_remota                            
+                        let urlCompleta = acciones_especificas.ruta_remota;              
                         window.$f["http"].llamadoRestPost( 
                             urlCompleta, 
                             parametros, 

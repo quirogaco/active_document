@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 import pprint
 
-from fastapi.responses        import FileResponse
+from fastapi.responses import FileResponse
 
-from librerias.datos.base    import globales 
-from librerias.datos.sql     import sqalchemy_modificar, sqalchemy_comunes, sqalchemy_leer, sqalchemy_insertar, sqalchemy_borrar
+from librerias.datos.base import globales 
+from librerias.datos.sql import sqalchemy_modificar, sqalchemy_comunes, sqalchemy_leer, sqalchemy_insertar, sqalchemy_borrar
 from librerias.datos.elastic import elastic_operaciones
 
 def crear_registro_envio(accion, datos={}):
@@ -148,7 +148,7 @@ def enviar_correo(accion, datos={}):
     clave     = "sreojrjewsjkxnml"
     #para      = ["quirogaco@gmail.com", "fabigonz@esap.edu.co", "viveros.60@gmail.com"]
     para      = [correo, "fabigonz@esap.edu.co", "carmlago@esap.edu.co"]
-    asunto    = "Notificación de radicado "     
+    asunto    = "Notificaciï¿½n de radicado "     
     archivos  = ["D:/gestor_2021_vite/temporal/S-2021-4010.pdf"]
 
     direccion_smtp = "smtp.gmail.com"

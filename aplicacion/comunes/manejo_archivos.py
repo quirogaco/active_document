@@ -40,7 +40,6 @@ def manejo(
 from librerias.datos.archivos import leer_archivo
 from librerias.datos.sql import sqalchemy_filtrar
 
-
 def buca_anexo_especifico_id(origen_id, tipo_anexo="notificacion"):
     archivos   = []
     # Relaciones

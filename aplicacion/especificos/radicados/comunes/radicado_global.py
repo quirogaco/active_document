@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 import pprint
 
+from librerias.datos.base import globales
 from aplicacion.trabajadores import utilidades
 from aplicacion.trabajadores_base import radicados_celery
-
+from librerias.datos.sql import sqalchemy_modificar, sqalchemy_comunes
 from aplicacion.comunes import indexar_datos
 from aplicacion.comunes import manejo_archivos
 from aplicacion.especificos.radicados.comunes import manejo_terceros
@@ -20,6 +21,7 @@ def invoca_tercero_log_anexos_copias(datos):
         }
     ))
 
+
 # Crea informacion de radicados en una sola tarea de cola
 def crea_tercero_log_anexos_copias(datos={}):
     # Id de la tarea
@@ -33,6 +35,9 @@ def crea_tercero_log_anexos_copias(datos={}):
     # Manejo de archivos #
     ###################### 
     archivos = datos["archivos"]
+    print("")
+    print("....ARCHIVOS....")
+    pprint.pprint(archivos)
     # Estructura
     if radicado_tipo == "SALIDA":
         estructura = "radicados_salida"
@@ -40,10 +45,30 @@ def crea_tercero_log_anexos_copias(datos={}):
         estructura = "radicados_interno"
     else:
         estructura = "radicados_entrada"
+
+    origen_correo_electronico = datos["origen_correo_electronico"]
+    if (origen_correo_electronico not in ["", None]):
+        #definicion = globales.lee_clase("global_base_relacion_estructura")
+        CLASE = globales.lee_clase("global_base_relacion_archivo")
+        print("CORREOS_DESCARGADOS:", CLASE)
+        print(origen_correo_electronico)
+        sesion = sqalchemy_comunes.nuevaSesion("base")   
+        registros = sesion.query(CLASE).filter( 
+            CLASE.origen_id == origen_correo_electronico 
+        )
+        elementos = []
+        for registro in registros: 
+            normalizado = sqalchemy_comunes.retornar_datos(registro, "diccionario") 
+            print(normalizado)
+            elementos.append( normalizado )
+        print("**********************************************")
+        print("")
+        sesion.close()
+
     manejo_archivos.manejo(
         estructura, 
         "insertar", 
-        {"id": radicado_id}, 
+        {"id": radicado_id},
         archivos, 
         tarea_id
     )

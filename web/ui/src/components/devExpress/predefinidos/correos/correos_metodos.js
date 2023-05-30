@@ -9,7 +9,8 @@ let metodos = {
             "tercero_correo_electronico": record["correo_origen"],
             "asunto": record["asunto"],
             "fecha_documento": record["fecha_correo"],
-            "archivos_anexos": record["archivos"]
+            "archivos_anexos": record["archivos"],
+            "correo_id": record["id"]
         }
 
         $lib.call_component_storage(

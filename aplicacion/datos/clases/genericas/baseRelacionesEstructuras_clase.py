@@ -1,11 +1,11 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 # Definiciones sql
-from librerias.datos.sql                 import sqalchemy_declarativa_base as dbase
+from librerias.datos.sql import sqalchemy_declarativa_base as dbase
 
 # Clases
-from librerias.datos.base                import globales 
+from librerias.datos.base import globales 
 
 # Base general con atributos basicos
 from aplicacion.datos.clases.clases_base import base_general
@@ -40,7 +40,7 @@ class GLOBAL_ESTRUCTURAS_RELACION(base_general.DB_BASE_GENERAL, globales.CLASE_B
 
     detalle       = dbase.Column( dbase.Unicode(512), nullable=True)
 
-    # Información de la relación
+    # Informaciï¿½n de la relaciï¿½n
     tipo_relacion = dbase.Column( dbase.Unicode(128), index=True, nullable=False)
     cardinalidad  = dbase.Column( dbase.Unicode(30),  index=True, default="UNO")
     

@@ -19,7 +19,7 @@ from librerias.datos.elastic import elastic_operaciones
 # resultado = elastic_operaciones.eliminaIndice("grupo_usuarios", "base")
 # resultado = elastic_operaciones.eliminaIndice("festivos", "base")
 # resultado = elastic_operaciones.eliminaIndice("reportes_dinamicos", "base")
-# resultado = elastic_operaciones.eliminaIndice("plantillas", "base")
+resultado = elastic_operaciones.eliminaIndice("plantillas", "base")
 # resultado = elastic_operaciones.eliminaIndice("consecutivos", "base")
 # resultado = elastic_operaciones.eliminaIndice("tipo_identificaciones", "base")
 # resultado = elastic_operaciones.eliminaIndice("genero", "base")

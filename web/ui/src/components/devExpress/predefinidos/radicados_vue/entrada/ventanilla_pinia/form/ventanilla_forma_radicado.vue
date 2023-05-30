@@ -62,6 +62,7 @@ that.basicas = {
 let campos = forma_campos.campos_forma(that, that.basicas);
 // no funciona enmounted no es reactiva
 let params = $get_params("ventanilla_radicado_forma")?.datos; 
+that.origen_correo_electronico = "";
 console.log("params:", params) 
 let atributos_forma = {
     config: {
@@ -81,10 +82,8 @@ let atributos_barra = {
 // Pdf
 let verPdf = ref(true); 
 let repintar_pdf = ref(0);
-//let pdf_existe = ref(false);
 let pdf_ancho = ref("800px");
 let pdf_alto = ref("200px");
-//let clase_pdf = ref("col-12 shadow-sm p-3 mb-3 bg-body rounded");
 let clase_pdf = ref("shadow-sm p-3 mb-3 bg-body rounded");
 // Opciones visor PDF
 let opciones_pdf = ref({});
@@ -95,6 +94,7 @@ async function form_mounted(DataForma) {
     that.retorna = "ventanilla_radicado_grid";   
     if (params._modo_ == "CORREO") {
         that.retorna = "correos_grid";
+        that.origen_correo_electronico = params.correo_id;
         params["tercero_clase"] = "JURIDICA";
         params["es_pqrs"] = "DOCUMENTO";
         setTimeout(() => {
@@ -106,13 +106,11 @@ async function form_mounted(DataForma) {
                 fuente_anexos
             )   
             that.forma_datos(params);
-            //nombre:"5293_correo_datos___roahhkmroys8ftvxnyeczw.pdf"
             const result = anexos.filter(archivo => archivo.nombre.includes("_correo_datos"));
-            console.log("result:", result)
             that.verPdf= true; 
             let pdf_parametros = {
                 titulo_general: "Pdf del Correo",
-                archivo_id    : result[0].id, //"fd778b8e-fd7e-11ed-92d7-086266b539c1", 
+                archivo_id    : result[0].id,
                 tipo_documento: "pdf",
                 titulo        : "Pdf del Correo",
                 modo          : "leer",

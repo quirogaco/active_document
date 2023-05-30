@@ -7,10 +7,9 @@ from typing import List
 import rapidjson
 from rapidjson import DM_ISO8601, DM_SHIFT_TO_UTC, DM_NAIVE_IS_UTC, DM_IGNORE_TZ
 from fastapi.responses import ORJSONResponse
-from fastapi           import Form, Request
-from fastapi           import File, UploadFile
+from fastapi import Form
+from fastapi import File, UploadFile
 
-from librerias.datos.sql  import sqalchemy_filtrar 
 from librerias.utilidades import basicas 
 from librerias.datos.base import globales 
 
